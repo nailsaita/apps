@@ -623,8 +623,14 @@ function EncuentroSection() {
               año: '2007',
               hito: 'Edición 22, segundo encuentro en Córdoba'
             }, {
+              año: '2015',
+              hito: 'Primer Ni Una Menos'
+            }, {
               año: '2019',
               hito: 'Se incorporan identidades trans y travestis al nombre'
+            }, {
+              año: '2020',
+              hito: 'Aborto Legal, Seguro y Gratuito'
             }, {
               año: '2021',
               hito: 'Primer Encuentro Plurinacional, San Luis'
