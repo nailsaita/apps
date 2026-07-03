@@ -2,6 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import HomePage from '@/pages/HomePage.jsx';
 import GaleriaPrensaPage from '@/pages/GaleriaPrensaPage.jsx';
+import TalleresPage from '@/pages/TalleresPage.jsx';
+import GacetillasPage from '@/pages/GacetillasPage.jsx';
+import GaleriaEncuentrosPage from '@/pages/GaleriaEncuentrosPage.jsx';
+import KitPrensaPage from '@/pages/KitPrensaPage.jsx';
+import PilaresPage from '@/pages/PilaresPage.jsx';
 
 function ScrollToHash() {
   const location = useLocation();
@@ -31,6 +36,11 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/Prensa" element={<GaleriaPrensaPage />} />
+        <Route path="/Talleres" element={<TalleresPage />} />
+        <Route path="/Gacetillas" element={<GacetillasPage />} />
+        <Route path="/GaleriaEncuentros" element={<GaleriaEncuentrosPage />} />
+        <Route path="/KitPrensa" element={<KitPrensaPage />} />
+        <Route path="/Pilares" element={<PilaresPage />} />
         
         {/* Catch-all route for 404s */}
         <Route path="*" element={

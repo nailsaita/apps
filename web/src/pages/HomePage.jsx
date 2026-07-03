@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, MapPin, ChevronDown, ChevronRight, ChevronLeft, Download, ExternalLink, Mail, Instagram, Facebook, Heart, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Clock, Users, Star, Menu, Phone, Search } from 'lucide-react';
+import { HiddenMail } from '@/components/HiddenMail';
 import EJES from '@/data/ejes.js';
-import FAQ from '@/data/faq.js';
+import FAQ from '@/data/faq.jsx';
 import ACTIVIDADES_CULTURALES from '@/data/actividadesCulturales.js';
 import CRONOGRAMA from '@/data/cronograma.js';
 import CANCIONES from '@/data/canciones.js';
+
 
 // ─── DATOS PLACEHOLDER ───────────────────────────────────────────────────────
 
@@ -215,7 +217,7 @@ const INDICE_BUSQUEDA = [
     titulo: 'Kit de prensa',
     subtitulo: 'Logos, imágenes y materiales para medios',
     tipo: 'Prensa',
-    href: '/#prensa',
+    href: '/KitPrensa',
     color: '#7c3aed',
     emoji: '📦'
   }, {
@@ -223,7 +225,7 @@ const INDICE_BUSQUEDA = [
     titulo: 'Gacetillas',
     subtitulo: 'Comunicados oficiales del Encuentro',
     tipo: 'Prensa',
-    href: '/#prensa',
+    href: '/Gacetillas',
     color: '#16a34a',
     emoji: '📄'
   }, {
@@ -501,11 +503,11 @@ function HeroSection() {
       <div className="flex flex-wrap items-center justify-center gap-6 mb-10 text-white/80">
         <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
           <Calendar size={16} className="text-yellow-300" />
-          <span className="font-semibold text-sm">{EVENTO.fecha}</span>
+          <a href="/#cronograma" className="font-semibold text-sm">{EVENTO.fecha}</a>
         </div>
         <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
           <MapPin size={16} className="text-green-300" />
-          <span className="font-semibold text-sm">{EVENTO.sede}</span>
+          <a href="/#sede" className="font-semibold text-sm">{EVENTO.sede}</a>
         </div>
       </div>
 
@@ -552,20 +554,26 @@ function EncuentroSection() {
             </div> */}
           <h2 className="text-purple-900 mb-6">¿Qué es el Encuentro?</h2>
           <p className="text-gray-600 text-lg leading-relaxed mb-6">
-            El Encuentro Plurinacional es el espacio autoconvocado más grande del movimiento feminista y de mujeres en Argentina y América Latina. Cada año, miles de compañeras se reúnen durante tres días para debatir, construir y movilizarse en torno a los problemas que nos atraviesan.
-          </p>
+            El Encuentro es un espacio en el que se tejen redes colectivas de solidaridad, reparación y organización, y en el que se gestan herramientas de lucha diversas, entre ellas campañas locales, plurinacionales y regionales, proyectos de ley históricos e iniciativas activistas que buscan transformar cada ámbito de nuestras vidas. <br/>
+            Cada año, cientos de miles de mujeres, lesbianas, travestis, trans, bisexuales, intersex y no binaries viajan de todos los rincones del país para debatir sobre las distintas violencias patriarcales que nos atraviesan y pensar soluciones posibles y alternativas de futuro. En 40 años de encuentros militantes y masivos, fuimos construyendo miradas e intervenciones políticas y culturales que se nutren en nuestras diferencias y se potencian en nuestra unidad. <br/>
+            Sabemos que sobre nosotras y nosotres recaen las tareas de cuidado y los empleos peores pagos o en condiciones de informalidad absoluta, agudizando la sobrecarga laboral y la precarización de nuestras vidas golpeadas especialmente por la pobreza y la crisis actual. Los recortes del gobierno nacional a los programas de prevención, sanción y erradicación de la violencia de género así como los discursos de odio agravan este contexto de cada vez mayor ataques a mujeres y disidencias. <br/>
+            Nos necesitamos pensando esas herramientas de resistencia y todas las acciones colectivas que deseamos para vidas verdaderamente libres, sin violencias ni opresiones.</p>
           <p className="text-gray-600 mb-8">
-            El 39° Encuentro se realizará en Córdoba Capital, con talleres, actividades culturales, feria y la histórica marcha de cierre. Es un espacio horizontal, autónomo y sin restricciones partidarias.
+            ¡Les esperamos el 10, 11 y 12 de Octubre en Córdoba para construir juntas y juntes!
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a href="https://drive.proton.me/urls/P72ZQR5MMW#QG3dtj9Vys46" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-purple-700 font-bold border-2 border-purple-200 px-5 py-3 rounded-full hover:bg-purple-50 transition-colors">
               <ExternalLink size={16} />
               Leer la semblanza
             </a>
-            <a href="/#linea-tiempo" className="flex items-center gap-2 text-green-700 font-bold border-2 border-green-200 px-5 py-3 rounded-full hover:bg-green-50 transition-colors">
+            <a href="/Pilares" className="flex items-center gap-2 text-green-700 font-bold border-2 border-green-200 px-5 py-3 rounded-full hover:bg-green-50 transition-colors">
+              <ExternalLink size={16} />
+              Pilares del Encuentro
+            </a>
+            {/* <a href="/#linea-tiempo" className="flex items-center gap-2 text-green-700 font-bold border-2 border-green-200 px-5 py-3 rounded-full hover:bg-green-50 transition-colors">
               <Clock size={16} />
               Línea del tiempo
-            </a>
+            </a> */}
           </div>
         </motion.div>
 
@@ -663,7 +671,7 @@ function EjesSection() {
         <p className="text-gray-500 max-w-xl mx-auto">
           Los talleres son el corazón del Encuentro. Son espacios horizontales de debate donde se construyen los documentos colectivos. Hacé clic en cada eje para ver los talleres.
         </p>
-        <a href="#" className="inline-flex items-center gap-1 text-green-600 font-bold mt-4 hover:underline">
+        <a href="/Talleres" className="inline-flex items-center gap-1 text-green-600 font-bold mt-4 hover:underline">
           Ver listado completo <ArrowRight size={14} />
         </a>
       </div>
@@ -830,7 +838,7 @@ function CancioneroSection() {
         <Music size={32} className="mx-auto mb-4 text-pink-500" />
         <h3 className="text-gray-800 font-bold mb-2">¿Tenés una canción para agregar?</h3>
         <p className="text-gray-600 text-sm mb-4">
-          Enviala a <a href="mailto:39encuentropluri.cba@proton.me" className="text-pink-600 font-bold hover:underline">39encuentropluri.cba@proton.me</a>
+          Enviala a <strong><HiddenMail text1="39encuentropluri.cba" text2="proton.me" /></strong>
         </p>
       </div>
     </div>
@@ -984,14 +992,14 @@ function PrensaSection() {
           icono: <Download size={28} />,
           titulo: 'Kit de prensa',
           desc: 'Logos, imágenes y materiales institucionales para medios.',
-          link: '#',
+          link: '/KitPrensa',
           cta: 'Descargar kit',
           color: 'from-purple-500 to-purple-700'
         }, {
           icono: <ExternalLink size={28} />,
           titulo: 'Gacetillas',
           desc: 'Comunicados oficiales y novedades del Encuentro.',
-          link: '#',
+          link: '/Gacetillas',
           cta: 'Ver gacetillas',
           color: 'from-green-500 to-green-700'
         }, {
@@ -1067,12 +1075,15 @@ export function FooterSection() {
           <div>
             <h4 className="text-yellow-300 font-bold mb-4 uppercase tracking-wider text-sm">Contacto general</h4>
             <div className="flex items-center gap-2 text-white/70 mb-2">
-              <Mail size={14} />
-              <a href="39encuentropluri.cba@proton.me" className="hover:text-white transition-colors text-sm"></a>
-            </div>
-            <div className="flex items-center gap-3 mt-4">
-              <a href="https://www.instagram.com/39encuentropluri.cba/" target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors"><Instagram size={20} /></a>
-              <a href="https://www.facebook.com/people/39-Encuentro-Plurinacional-C%C3%B3rdoba-2026/61584355586326/#" target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors"><Facebook size={20} /></a>
+              <div>
+              <a href="mailto:39encuentropluri.cba%40proton.me" className="text-white/60 hover:text-white transition-colors"> <Mail size={20} /></a>
+              </div>
+              <div>
+                <a href="https://www.instagram.com/39encuentropluri.cba/" target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors"><Instagram size={20} /></a>
+              </div>
+              <div>
+                <a href="https://www.facebook.com/people/39-Encuentro-Plurinacional-C%C3%B3rdoba-2026/61584355586326/#" target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors"><Facebook size={20} /></a>
+              </div>
             </div>
           </div>
           <div>

@@ -1,6 +1,6 @@
 
 const CRONOGRAMA = {
-  'Sábado 11': [{
+  'Sábado 10': [{
     hora: '09:00',
     actividad: 'Acreditación y bienvenida'
   }, {
@@ -22,7 +22,7 @@ const CRONOGRAMA = {
     hora: '20:00',
     actividad: 'Grilla cultural nocturna'
   }],
-  'Domingo 12': [{
+  'Domingo 11': [{
     hora: '09:00',
     actividad: 'Apertura de talleres'
   }, {
@@ -44,7 +44,7 @@ const CRONOGRAMA = {
     hora: '21:00',
     actividad: 'Festival cultural'
   }],
-  'Lunes 13': [{
+  'Lunes 12': [{
     hora: '09:00',
     actividad: 'Quinta ronda de talleres'
   }, {
