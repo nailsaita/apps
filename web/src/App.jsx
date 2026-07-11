@@ -9,6 +9,7 @@ import KitPrensaPage from '@/pages/KitPrensaPage.jsx';
 import PilaresPage from '@/pages/PilaresPage.jsx';
 import SemblanzaPage from '@/pages/Semblanza.jsx';
 import CancioneroPage from '@/pages/CancioneroPage.jsx';
+import PreventaPage from '@/pages/PreventaPage.jsx';
 
 function ScrollToHash() {
   const location = useLocation();
@@ -44,8 +45,7 @@ function App() {
         <Route path="/KitPrensa" element={<KitPrensaPage />} />
         <Route path="/Pilares" element={<PilaresPage />} />
         <Route path="/Semblanza" element={<SemblanzaPage />} />
-
-        {/* CORREGIDO: Se cambió CancioneroPagePage por CancioneroPage */}
+        <Route path="/Preventa" element={<PreventaPage />} />
         <Route path="/Cancionero" element={<CancioneroPage />} />
 
         {/* Catch-all route for 404s */}

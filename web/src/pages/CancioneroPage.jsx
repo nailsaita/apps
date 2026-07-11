@@ -4,16 +4,8 @@ import TitleSection from '@/components/TitleSection.jsx';
 
 const CANCIONES = [
   {
-    titulo: "Mujer que se organiza",
-    letra: "Mujer que se organiza, no plancha más camisas\nMujer, escucha, únete a la lucha"
-  },
-  {
     titulo: "Alerta que camina",
     letra: "Alerta, alerta, alerta que camina la lucha feminista por América latina\nSe cuidan se cuidan se cuidan los machistas, América latina va a ser toda feminista"
-  },
-  {
-    titulo: "Saquen sus rosarios",
-    letra: "Saquen sus rosarios de nuestros ovarios\nSaquen sus sermones de nuestros colchones\nSaquen sus estampitas de nuestras conchitas"
   },
   {
     titulo: "Poder popular",
@@ -29,7 +21,7 @@ const CANCIONES = [
   },
   {
     titulo: "Hay un machista suelto",
-    letra: "Hay un machista suelto en la Rosada\nQue quiere a las mujeres todas calladas\nNo queremos mas femicidio, trata ni explotación\nQueremos en la farmacia Misoprostol\nPelula botón, Peluca botón\nLegaliza el aborto"
+    letra: "Hay un machista suelto en la Rosada\nQue quiere a las mujeres todas calladas\nNo queremos mas femicidio, trata ni explotación\nQueremos en la farmacia Misoprostol\nPeluca botón, Peluca botón\nLegaliza el aborto"
   },
   {
     titulo: "Revolución y feminismo",
@@ -69,11 +61,11 @@ const CANCIONES = [
   },
   {
     titulo: "Alegría tortillera",
-    letra: "“Dalea tu cuerpo alegría tortillera\nque tu cuerpo es pa darle alegría y cosa buena\ndale a tu cuerpo alegría tortillera eeeh con tijera aaaja”"
+    letra: "Dalea tu cuerpo alegría tortillera\nque tu cuerpo es pa darle alegría y cosa buena\ndale a tu cuerpo alegría tortillera eeeh con tijera aaaja"
   },
   {
     titulo: "Tengo todo lo que quieren las wachas",
-    letra: "“Tengo todo lo que quieren las wachas\naborto lucha y cumbia en las marchas\ntengo todo lo que a vos te incomoda\nsos feminista aunque te joda\nWhere are the feminists?\nY piden, abortototo abortoto aborto to to to to to\nmisoprostol, misoprostol misoprostol tol tol tol tol”"
+    letra: "Tengo todo lo que quieren las wachas\naborto lucha y cumbia en las marchas\ntengo todo lo que a vos te incomoda\nsos feminista aunque te joda\nWhere are the feminists?\nY piden, abortototo abortoto aborto to to to to to\nmisoprostol, misoprostol misoprostol tol tol tol tol"
   },
   {
     titulo: "Me quiero así soltera",

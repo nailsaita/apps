@@ -1,67 +1,45 @@
-
 const CRONOGRAMA = {
   'Sábado 10': [{
-    hora: '09:00',
-    actividad: 'Acreditación y bienvenida'
+    hora: '08:00 Hs',
+    actividad: 'Acreditación de inscripciones'
   }, {
-    hora: '10:00',
-    actividad: 'Apertura oficial del Encuentro'
+    hora: '08:00 Hs',
+    actividad: 'Acreditación de prensa'
   }, {
-    hora: '11:00',
+    hora: '10:00 Hs',
+    actividad: 'Acto de apertura del Encuentro'
+  }, {
+    hora: '13:00 Hs',
+    actividad: 'Almuerzo'
+  }, {
+    hora: '15 Hs',
     actividad: 'Primera ronda de talleres'
   }, {
-    hora: '13:00',
-    actividad: 'Almuerzo'
+    hora: '18:30 Hs',
+    actividad: 'Pañuelazo aborto legal'
   }, {
-    hora: '15:00',
-    actividad: 'Segunda ronda de talleres'
+    hora: '19:00 Hs',
+    actividad: 'Marcha contra los travesticidios, lesbicidios y transfemicidios'
   }, {
-    hora: '17:30',
-    actividad: 'Plenario de comisiones'
-  }, {
-    hora: '20:00',
-    actividad: 'Grilla cultural nocturna'
+    hora: '21:00 Hs',
+    actividad: 'Fiesta torta'
   }],
   'Domingo 11': [{
-    hora: '09:00',
-    actividad: 'Apertura de talleres'
+    hora: '09:00 Hs',
+    actividad: 'Segunda ronda de talleres'
   }, {
-    hora: '10:00',
+    hora: '15:00 Hs',
     actividad: 'Tercera ronda de talleres'
   }, {
-    hora: '12:00',
-    actividad: 'Feria del encuentro'
+    hora: '18:30 Hs',
+    actividad: 'Marcha del 39 Encuentro'
   }, {
-    hora: '14:00',
-    actividad: 'Almuerzo colectivo'
-  }, {
-    hora: '15:30',
-    actividad: 'Cuarta ronda de talleres'
-  }, {
-    hora: '18:00',
-    actividad: 'Plenario general'
-  }, {
-    hora: '21:00',
-    actividad: 'Festival cultural'
+    hora: '20 Hs',
+    actividad: 'Festival del Encuentro'
   }],
   'Lunes 12': [{
-    hora: '09:00',
-    actividad: 'Quinta ronda de talleres'
-  }, {
-    hora: '11:00',
-    actividad: 'Debate y conclusiones'
-  }, {
-    hora: '13:00',
-    actividad: 'Almuerzo'
-  }, {
-    hora: '15:00',
-    actividad: 'Lectura de documentos finales'
-  }, {
-    hora: '17:00',
-    actividad: 'Marcha de cierre'
-  }, {
-    hora: '19:30',
-    actividad: 'Cierre festivo'
+    hora: '09 Hs',
+    actividad: 'Acto de cierre'
   }]
 };
 export default CRONOGRAMA;

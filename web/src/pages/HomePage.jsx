@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check } from 'lucide-react';
+import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag } from 'lucide-react';
 import { HiddenMail } from '@/components/HiddenMail';
 import EJES from '@/data/ejes.js';
 import FAQ from '@/data/faq.jsx';
@@ -252,6 +252,16 @@ const INDICE_BUSQUEDA = [
     href: '/Prensa',
     color: '#ea580c',
     emoji: '📰'
+  },
+  // Preventa
+  {
+    id: 'preventa-merch',
+    titulo: 'Preventa de remeras y tote bags',
+    subtitulo: 'Cómo reservar tu remera o tote bag oficial del Encuentro',
+    tipo: 'Preventa',
+    href: '/Preventa',
+    color: '#db2777',
+    emoji: '🛍️'
   }];
 
 // ─── BUSCADOR GLOBAL ──────────────────────────────────────────────────────────
@@ -279,7 +289,8 @@ function BuscadorGlobal({
     'Cine': 'bg-pink-100 text-pink-700',
     'Arte': 'bg-red-100 text-red-700',
     'Feria': 'bg-amber-100 text-amber-700',
-    'Teatro': 'bg-indigo-100 text-indigo-700'
+    'Teatro': 'bg-indigo-100 text-indigo-700',
+    'Preventa': 'bg-pink-100 text-pink-700'
   };
   return <motion.div initial={{
     opacity: 0
@@ -486,7 +497,7 @@ export function Navbar() {
 // ─── SECCIONES ────────────────────────────────────────────────────────────────
 
 function HeroSection() {
-  return <section id="hero" className="min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-16 relative overflow-hidden bg-gradient-to-br from-purple-950 via-purple-800 to-green-900">
+  return <section id="hero" className="min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-16 relative overflow-hidden">
     {/* Fondo decorativo */}
     <div className="absolute inset-0 pointer-events-none">
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
@@ -619,7 +630,7 @@ function DonacionesModal({
           <div className="bg-yellow-400 text-purple-950 w-10 h-10 rounded-full flex items-center justify-center shrink-0">
             <Heart size={18} fill="currentColor" />
           </div>
-          <h3 className="font-bold text-gray-800 text-lg m-0">Donar al Encuentro</h3>
+          <h3 className="font-bold text-gray-800 text-lg m-0">Aportá al Encuentro</h3>
         </div>
         <button onClick={onClose} className="text-gray-400 hover:text-gray-600 shrink-0">
           <X size={20} />
@@ -628,7 +639,7 @@ function DonacionesModal({
 
       <div className="p-6">
         <p className="text-sm text-gray-500 mb-5">
-          Transferí desde tu banca online o billetera virtual a cualquiera de estos datos. ¡Gracias por tu aporte!
+          Transferí desde tu cuenta bancaria o billetera virtual a cualquiera de estos datos. ¡Gracias por tu aporte!
         </p>
         <div className="space-y-3">
           {DATOS_DONACION.map(campo => <CampoDonacion key={campo.label} label={campo.label} valor={campo.valor} />)}
@@ -638,35 +649,93 @@ function DonacionesModal({
   </motion.div>;
 }
 
-function DonacionesBanner() {
+// ─── SECCIÓN DE APOYO (DONACIONES + PREVENTA) ─────────────────────────────────
+
+function ApoyoSection() {
   const [modalAbierto, setModalAbierto] = useState(false);
-  return <section className="py-12 px-4 bg-yellow-50 border-y-2 border-yellow-200">
-    <motion.div initial={{
-      opacity: 0,
-      y: 20
-    }} whileInView={{
-      opacity: 1,
-      y: 0
-    }} viewport={{
-      once: true
-    }} transition={{
-      duration: 0.5
-    }} className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-8">
-      <div className="bg-yellow-400 text-purple-950 w-14 h-14 rounded-full flex items-center justify-center shrink-0">
-        <Heart size={26} fill="currentColor" />
-      </div>
-      <div className="flex-1 text-center md:text-left">
-        <h4 className="font-bold text-gray-800 text-lg mb-1">
-          El Encuentro se sostiene entre todes
-        </h4>
-        <p className="text-sm text-gray-600">
-          No tiene sponsors ni financiamiento estatal. Si podés, tu aporte ayuda a cubrir sede, materiales y logística.
+  return <section className="py-20 px-4 relative overflow-hidden">
+    {/* Fondo decorativo */}
+    <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute -top-20 -left-20 w-80 h-80 bg-yellow-400/10 rounded-full blur-3xl" />
+      <div className="absolute -bottom-24 -right-16 w-96 h-96 bg-pink-500/15 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-3xl" />
+    </div>
+
+    <div className="max-w-5xl mx-auto relative z-10">
+      <div className="text-center mb-12">
+        <h2 className="text-white mb-3">Sumate a sostener el Encuentro</h2>
+        <p className="text-white/60 max-w-xl mx-auto">
+          Dos formas de aportar a la organización colectiva, sin sponsors ni financiamiento estatal.
         </p>
       </div>
-      <button onClick={() => setModalAbierto(true)} className="bg-purple-700 text-white font-bold px-6 py-3 rounded-full hover:bg-purple-800 transition-colors whitespace-nowrap shrink-0">
-        Quiero donar
-      </button>
-    </motion.div>
+
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* Card de donaciones */}
+        <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.5
+        }} whileHover={{
+          y: -4
+        }} className="relative overflow-hidden rounded-3xl p-8 border-2 border-yellow-400/30 bg-gradient-to-br from-yellow-400/10 to-purple-900/40 flex flex-col">
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-yellow-400/10 rounded-full blur-2xl" />
+          <span className="absolute top-5 right-5 bg-yellow-400 text-purple-950 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
+            Solidario
+          </span>
+          <div className="bg-yellow-400 text-purple-950 w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10">
+            <Heart size={26} fill="currentColor" />
+          </div>
+          <h4 className="font-bold text-white text-xl mb-2 relative z-10">
+            El Encuentro se sostiene entre todes
+          </h4>
+          <p className="text-sm text-white/70 mb-6 flex-1 relative z-10">
+            Tu aporte ayuda a cubrir sede, materiales y logística.
+          </p>
+          <button onClick={() => setModalAbierto(true)} className="relative z-10 bg-purple-700 text-white font-bold px-6 py-3 rounded-full hover:bg-purple-600 transition-colors self-start">
+            Quiero aportar
+          </button>
+        </motion.div>
+
+        {/* Card de preventa */}
+        <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          duration: 0.5,
+          delay: 0.1
+        }} whileHover={{
+          y: -4
+        }} className="relative overflow-hidden rounded-3xl p-8 border-2 border-pink-400/30 bg-gradient-to-br from-pink-500/10 to-purple-900/40 flex flex-col">
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-pink-500/10 rounded-full blur-2xl" />
+          <span className="absolute top-5 right-5 bg-pink-500 text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
+            Edición limitada
+          </span>
+          <div className="bg-pink-500 text-white w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10">
+            <ShoppingBag size={26} />
+          </div>
+          <h4 className="font-bold text-white text-xl mb-2 relative z-10">
+            Preventa: remeras y tote bags
+          </h4>
+          <p className="text-sm text-white/70 mb-6 flex-1 relative z-10">
+            Reservá tu remera o tote bag oficial del 39° Encuentro.
+          </p>
+          <Link to="/Preventa" className="relative z-10 bg-pink-600 text-white font-bold px-6 py-3 rounded-full hover:bg-pink-500 transition-colors self-start inline-flex items-center gap-2">
+            Ver preventa <ArrowRight size={16} />
+          </Link>
+        </motion.div>
+      </div>
+    </div>
 
     <AnimatePresence>
       {modalAbierto && <DonacionesModal onClose={() => setModalAbierto(false)} />}
@@ -812,7 +881,7 @@ function EjesSection() {
           Los talleres son el corazón del Encuentro. Son espacios horizontales de debate donde se construyen los documentos colectivos. Hacé clic en cada eje para ver los talleres.
         </p>
         <a href="/Talleres" className="inline-flex items-center gap-1 text-green-600 font-bold mt-4 hover:underline">
-          Ver listado completo <ArrowRight size={14} />
+          Pronto subiremos el listado completo <ArrowRight size={14} />
         </a>
       </div>
 
@@ -926,7 +995,6 @@ function CancioneroSection() {
           Canciones sugeridas para este 39 encuentro en Córdoba
         </p>
 
-        {/* Cambiado <a> por <Link> apuntando a tu nueva ruta */}
         <Link
           to="/cancionero"
           className="inline-flex items-center gap-2 bg-pink-500 text-white font-bold px-6 py-3 rounded-full hover:bg-pink-600 transition-colors"
@@ -1310,8 +1378,12 @@ export default function HomePage() {
     <CountdownBanner />
     <Navbar />
     <BackToTop />
-    <HeroSection />
-    <DonacionesBanner />
+    <div style={{
+      background: 'linear-gradient(180deg, #3b0764 0%, #6b21a8 25%, #14532d 45%, #2e1065 70%, #4a044e 100%)'
+    }}>
+      <HeroSection />
+      <ApoyoSection />
+    </div>
     <EncuentroSection />
     <EjesSection />
     <CronogramaSection />
