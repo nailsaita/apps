@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import Lottie from 'lottie-react';
 import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag } from 'lucide-react';
 import { HiddenMail } from '@/components/HiddenMail';
 import EJES from '@/data/ejes.js';
@@ -21,8 +22,6 @@ const EVENTO = {
 };
 
 
-
-// Reemplazá estos datos por los reales de la comisión de finanzas
 const DATOS_DONACION = [{
   label: 'Alias',
   valor: 'ENCUENTRO.PLURI.CBA'
@@ -51,9 +50,9 @@ export function CountdownBanner() {
     y: -60
   }} animate={{
     y: 0
-  }} className="fixed top-0 left-0 right-0 z-50 bg-[#9333ea] text-white text-center py-2 text-sm font-semibold tracking-wide">
+  }} className="fixed top-0 left-0 right-0 z-50 bg-[#813893] text-white text-center py-2 text-sm font-semibold tracking-wide">
     <span className="opacity-80">Faltan </span>
-    <span className="text-[#fbbf24] text-lg font-black mx-1">{dias}</span>
+    <span className="text-[#fdb10c] text-lg font-black mx-1">{dias}</span>
     <span className="opacity-80"> días para el Encuentro!</span>
   </motion.div>;
 }
@@ -113,7 +112,7 @@ function ScrollProgressBar() {
   return <div className="fixed top-0 left-0 right-0 z-[60] h-[3px] bg-transparent pointer-events-none">
     <motion.div className="h-full origin-left" style={{
       width: `${progress}%`,
-      background: 'linear-gradient(90deg, #9333ea, #16a34a, #fbbf24)'
+      background: 'linear-gradient(90deg, #813893, #2a823c, #fdb10c)'
     }} transition={{
       ease: 'linear',
       duration: 0
@@ -138,7 +137,7 @@ function BackToTop() {
     }} onClick={() => window.scrollTo({
       top: 0,
       behavior: 'smooth'
-    })} className="fixed bottom-24 left-6 z-50 bg-purple-700 text-white w-11 h-11 rounded-full shadow-lg flex items-center justify-center hover:bg-purple-800 transition-colors" title="Volver arriba">
+    })} className="fixed bottom-24 left-6 z-50 bg-[#813893] text-white w-11 h-11 rounded-full shadow-lg flex items-center justify-center hover:bg-[#662c74] transition-colors" title="Volver arriba">
       <ChevronDown size={20} className="rotate-180" />
     </motion.button>}
   </AnimatePresence>;
@@ -172,7 +171,7 @@ const INDICE_BUSQUEDA = [
     subtitulo: act.descripcion,
     tipo: act.tipo,
     href1: '/#cultural',
-    color: '#ea580c',
+    color: '#fdb10c',
     emoji: act.emoji
   })),
   // Logística
@@ -182,7 +181,7 @@ const INDICE_BUSQUEDA = [
     subtitulo: 'Lista de alojamientos amigables y contacto',
     tipo: 'Logística',
     href: '/#sede',
-    color: '#2563eb',
+    color: '#813893',
     emoji: '🏠'
   }, {
     id: 'log-trans',
@@ -190,7 +189,7 @@ const INDICE_BUSQUEDA = [
     subtitulo: 'Cómo llegar, SUBE, transporte urbano',
     tipo: 'Logística',
     href: '/#sede',
-    color: '#16a34a',
+    color: '#2a823c',
     emoji: '🚌'
   }, {
     id: 'log-aux',
@@ -206,7 +205,7 @@ const INDICE_BUSQUEDA = [
     subtitulo: 'Comida vegana, sin TACC, economía popular',
     tipo: 'Logística',
     href: '/#sede',
-    color: '#d97706',
+    color: '#fdb10c',
     emoji: '🛍️'
   }, {
     id: 'log-prov',
@@ -214,7 +213,7 @@ const INDICE_BUSQUEDA = [
     subtitulo: 'Colectivos desde distintos puntos del país',
     tipo: 'Logística',
     href: '/#sede',
-    color: '#7c3aed',
+    color: '#813893',
     emoji: '🚌'
   },
   // Cronograma
@@ -224,7 +223,7 @@ const INDICE_BUSQUEDA = [
     subtitulo: `${dia} · ${act.hora}`,
     tipo: 'Cronograma',
     href: '/#cronograma',
-    color: '#7c3aed',
+    color: '#813893',
     emoji: '🕐'
   }))),
   // Prensa
@@ -234,7 +233,7 @@ const INDICE_BUSQUEDA = [
     subtitulo: 'Logos, imágenes, materiales e instrucciones para medios / Información para la prensa y acreditación',
     tipo: 'Prensa',
     href: '/KitPrensa',
-    color: '#7c3aed',
+    color: '#813893',
     emoji: '📦'
   }, {
     id: 'prensa-gac',
@@ -242,7 +241,7 @@ const INDICE_BUSQUEDA = [
     subtitulo: 'Comunicados oficiales del Encuentro',
     tipo: 'Prensa',
     href: '/Gacetillas',
-    color: '#16a34a',
+    color: '#2a823c',
     emoji: '📄'
   }, {
     id: 'prensa-art',
@@ -250,7 +249,7 @@ const INDICE_BUSQUEDA = [
     subtitulo: 'Coberturas y notas de prensa',
     tipo: 'Prensa',
     href: '/Prensa',
-    color: '#ea580c',
+    color: '#fdb10c',
     emoji: '📰'
   },
   // Preventa
@@ -260,7 +259,7 @@ const INDICE_BUSQUEDA = [
     subtitulo: 'Cómo reservar tu remera o tote bag oficial del Encuentro',
     tipo: 'Preventa',
     href: '/Preventa',
-    color: '#db2777',
+    color: '#fdb10c',
     emoji: '🛍️'
   }];
 
@@ -281,16 +280,16 @@ function BuscadorGlobal({
   }, [onClose]);
   const resultados = query.trim().length < 2 ? [] : INDICE_BUSQUEDA.filter(item => [item.titulo, item.subtitulo, item.tipo].join(' ').toLowerCase().includes(query.toLowerCase())).slice(0, 8);
   const tiposColor = {
-    'Taller': 'bg-purple-100 text-purple-700',
+    'Taller': 'bg-[#eadeed] text-[#662c74]',
     'Logística': 'bg-blue-100 text-blue-700',
-    'Cronograma': 'bg-yellow-100 text-yellow-700',
-    'Prensa': 'bg-green-100 text-green-700',
-    'Música': 'bg-orange-100 text-orange-700',
-    'Cine': 'bg-pink-100 text-pink-700',
+    'Cronograma': 'bg-[#feecc2] text-[#6e4d05]',
+    'Prensa': 'bg-[#dceade] text-[#21662f]',
+    'Música': 'bg-[#feecc2] text-[#6e4d05]',
+    'Cine': 'bg-[#eadeed] text-[#662c74]',
     'Arte': 'bg-red-100 text-red-700',
-    'Feria': 'bg-amber-100 text-amber-700',
+    'Feria': 'bg-[#feecc2] text-[#6e4d05]',
     'Teatro': 'bg-indigo-100 text-indigo-700',
-    'Preventa': 'bg-pink-100 text-pink-700'
+    'Preventa': 'bg-[#feecc2] text-[#6e4d05]'
   };
   return <motion.div initial={{
     opacity: 0
@@ -313,11 +312,11 @@ function BuscadorGlobal({
       scale: 0.97
     }} transition={{
       duration: 0.2
-    }} className="bg-white rounded-2xl shadow-2xl w-full max-w-xl overflow-hidden" onClick={e => e.stopPropagation()}>
+    }} className="bg-[#FFF1E3] rounded-2xl shadow-2xl w-full max-w-xl overflow-hidden" onClick={e => e.stopPropagation()}>
       {/* Input */}
-      <div className="flex items-center gap-3 px-4 py-4 border-b border-gray-100">
-        <Search size={20} className="text-purple-400 shrink-0" />
-        <input ref={inputRef} type="text" value={query} onChange={e => setQuery(e.target.value)} placeholder="Buscá talleres, actividades, logística..." className="flex-1 text-gray-800 text-base outline-none placeholder-gray-400 bg-transparent" />
+      <div className="flex items-center gap-3 px-4 py-4 border-b border-[#eadeed]">
+        <Search size={20} className="text-[#ab7ab7] shrink-0" />
+        <input ref={inputRef} type="text" value={query} onChange={e => setQuery(e.target.value)} placeholder="Buscá talleres, actividades, logística..." className="flex-1 text-[#343230] text-base outline-none placeholder-gray-400 bg-transparent" style={{ fontFamily: "'degular', sans-serif" }} />
         {query && <button onClick={() => setQuery('')} className="text-gray-400 hover:text-gray-600">
           <X size={18} />
         </button>}
@@ -344,10 +343,10 @@ function BuscadorGlobal({
           }} transition={{
             delay: i * 0.04
           }}>
-            <a href={item.href} onClick={onClose} className="flex items-center gap-4 px-4 py-3 hover:bg-purple-50 transition-colors group">
+            <a href={item.href} onClick={onClose} className="flex items-center gap-4 px-4 py-3 hover:bg-[#faf7fb] transition-colors group">
               <span className="text-2xl w-8 text-center shrink-0">{item.emoji}</span>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-gray-800 truncate group-hover:text-purple-700 transition-colors">
+                <p className="text-sm font-semibold text-[#343230] truncate group-hover:text-[#662c74] transition-colors">
                   {item.titulo}
                 </p>
                 <p className="text-xs text-gray-400 truncate mt-0.5">{item.subtitulo}</p>
@@ -361,7 +360,7 @@ function BuscadorGlobal({
       </div>
 
       {/* Footer del buscador */}
-      {resultados.length > 0 && <div className="px-4 py-2 border-t border-gray-100 text-xs text-gray-400 flex justify-between">
+      {resultados.length > 0 && <div className="px-4 py-2 border-t border-[#eadeed] text-xs text-gray-400 flex justify-between">
         <span>{resultados.length} resultado{resultados.length !== 1 ? 's' : ''}</span>
         <span>↵ para ir a la sección</span>
       </div>}
@@ -421,12 +420,12 @@ export function Navbar() {
 
     <motion.nav animate={{
       top: scrolled ? -16 : 44,
-      backgroundColor: scrolled ? 'rgba(255,255,255,0.97)' : 'rgba(255,255,255,0.92)',
-      boxShadow: scrolled ? '0 2px 16px rgba(147,51,234,0.10)' : '0 1px 0 rgba(147,51,234,0.07)'
+      backgroundColor: scrolled ? 'rgba(255,241,227,0.97)' : 'rgba(255,241,227,0.92)',
+      boxShadow: scrolled ? '0 2px 16px rgba(129,56,147,0.10)' : '0 1px 0 rgba(129,56,147,0.07)'
     }} transition={{
       duration: 0.25,
       ease: 'easeInOut'
-    }} className="fixed left-0 right-0 z-40 backdrop-blur border-b border-purple-100">
+    }} className="fixed left-0 right-0 z-40 backdrop-blur border-b border-[#eadeed]">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between transition-all duration-300" style={{
         height: scrolled ? '52px' : '56px'
       }}>
@@ -435,9 +434,10 @@ export function Navbar() {
           {links.map(l => {
             const isActive = activeSection === l.id;
             return <a key={l.href} href={l.href} className="relative text-sm font-medium px-3 py-1.5 rounded-full transition-colors duration-200" style={{
-              color: isActive ? '#9333ea' : '#4b5563'
+              color: isActive ? '#813893' : '#4b5563',
+              fontFamily: "'degular', sans-serif"
             }}>
-              {isActive && <motion.span layoutId="nav-pill" className="absolute inset-0 bg-purple-100 rounded-full" transition={{
+              {isActive && <motion.span layoutId="nav-pill" className="absolute inset-0 bg-[#eadeed] rounded-full" transition={{
                 type: 'spring',
                 stiffness: 400,
                 damping: 30
@@ -449,23 +449,23 @@ export function Navbar() {
 
         {/* Derecha: lupa + inscribirse — desktop */}
         <div className="hidden md:flex items-center gap-2">
-          <button onClick={() => setBuscadorAbierto(true)} className="flex items-center gap-2 text-sm text-gray-400 border border-gray-200 rounded-full px-3 py-1.5 hover:border-purple-300 hover:text-purple-600 transition-colors bg-gray-50" title="Buscar (Ctrl+K)">
+          <button onClick={() => setBuscadorAbierto(true)} className="flex items-center gap-2 text-sm text-gray-400 border border-gray-200 rounded-full px-3 py-1.5 hover:border-[#c09cc9] hover:text-[#813893] transition-colors bg-gray-50" title="Buscar (Ctrl+K)">
             <Search size={14} />
             <span className="text-xs">Buscar</span>
             <span className="text-xs bg-gray-200 text-gray-500 rounded px-1.5 py-0.5 ml-1 font-mono">⌘K</span>
           </button>
-          <a href="/#inscripcion" className="bg-[#16a34a] text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-green-700 transition-colors flex items-center">
+          <a href="/#inscripcion" className="bg-[#2a823c] text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-[#21662f] transition-colors flex items-center" style={{ fontFamily: "'degular', sans-serif" }}>
             Inscribite acá
           </a>
         </div>
 
         {/* Mobile: lupa + hamburguesa */}
         <div className="md:hidden flex items-center gap-2 w-full justify-between">
-          <button onClick={() => setBuscadorAbierto(true)} className="text-purple-600">
+          <button onClick={() => setBuscadorAbierto(true)} className="text-[#813893]">
             <Search size={20} />
           </button>
           <button onClick={() => setOpen(!open)}>
-            <Menu size={24} className="text-[#9333ea]" />
+            <Menu size={24} className="text-[#813893]" />
           </button>
         </div>
       </div>
@@ -480,12 +480,12 @@ export function Navbar() {
         }} exit={{
           height: 0,
           opacity: 0
-        }} className="md:hidden bg-white border-t border-purple-100 px-4 pb-4 overflow-hidden">
-          {links.map(l => <a key={l.href} href={l.href} onClick={() => setOpen(false)} className={`block py-2 text-sm font-medium transition-colors ${activeSection === l.id ? 'text-[#9333ea] font-bold' : 'text-gray-700 hover:text-[#9333ea]'}`}>
-            {activeSection === l.id && <span className="mr-2 text-[#9333ea]">›</span>}
+        }} className="md:hidden bg-[#FFF1E3] border-t border-[#eadeed] px-4 pb-4 overflow-hidden">
+          {links.map(l => <a key={l.href} href={l.href} onClick={() => setOpen(false)} className={`block py-2 text-sm font-medium transition-colors ${activeSection === l.id ? 'text-[#813893] font-bold' : 'text-gray-700 hover:text-[#813893]'}`} style={{ fontFamily: "'degular', sans-serif" }}>
+            {activeSection === l.id && <span className="mr-2 text-[#813893]">›</span>}
             {l.label}
           </a>)}
-          <a href="/#inscripcion" onClick={() => setOpen(false)} className="block mt-2 bg-[#16a34a] text-white text-sm font-bold px-4 py-2 rounded-full text-center">
+          <a href="/#inscripcion" onClick={() => setOpen(false)} className="block mt-2 bg-[#2a823c] text-white text-sm font-bold px-4 py-2 rounded-full text-center">
             Inscribirse
           </a>
         </motion.div>}
@@ -496,13 +496,19 @@ export function Navbar() {
 
 // ─── SECCIONES ────────────────────────────────────────────────────────────────
 
+function HeroLottie({ className = '' }) {
+  return <div className={className}>
+    <Lottie path="/lottie/Logo.json" loop autoplay style={{ width: '100%', height: '100%' }} />
+  </div>;
+}
+
 function HeroSection() {
-  return <section id="hero" className="min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-16 relative overflow-hidden">
+  return <section id="hero" className="min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-16 relative overflow-hidden">
     {/* Fondo decorativo */}
     <div className="absolute inset-0 pointer-events-none">
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-green-500/20 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#813893]/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[#2a823c]/20 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#fdb10c]/10 rounded-full blur-3xl" />
     </div>
 
     <motion.div initial={{
@@ -513,40 +519,61 @@ function HeroSection() {
       y: 0
     }} transition={{
       duration: 0.8
-    }} className="relative z-10 max-w-5xl">
-      <h1 className="text-white font-black leading-[1.05] mb-6 text-3xl md:text-5xl lg:text-6xl" style={{
-        fontFamily: 'Rubik, sans-serif'
-      }}>
-        39° Encuentro Plurinacional<br />
-        <span className="text-yellow-300">de Mujeres, Lesbianas, Trans,</span><br />
-        Travestis, Bisexuales,<br />
-        <span className="text-green-300">Intersex y No Binaries</span>
-      </h1>
+    }} className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center">
 
-      <p className="text-white/75 text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
-        {EVENTO.frase}
-      </p>
-
-      <div className="flex flex-wrap items-center justify-center gap-6 mb-10 text-white/80">
-        <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
-          <Calendar size={16} className="text-yellow-300" />
-          <a href="/#cronograma" className="font-semibold text-sm">{EVENTO.fecha}</a>
+      {/* Bloque: Lottie + Título/Subtítulo — todo centrado (logo y título alineados entre sí) */}
+      <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12 w-full">
+        {/* Animación Lottie: centrada */}
+        <div className="order-1 flex items-center justify-center shrink-0">
+          <HeroLottie className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-full lg:scale-110" />
         </div>
-        <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
-          <MapPin size={16} className="text-green-300" />
-          <a href="/#sede" className="font-semibold text-sm">{EVENTO.sede}</a>
+
+        {/* Título (3 líneas) + subtítulo, centrados igual que el logo */}
+        <div className="order-2 flex-1 text-center">
+          <h1 className="font-display text-white font-black mb-6 flex flex-col items-center leading-[1.05]">
+            {/* Tamaños calculados en proporción a la cantidad de caracteres de cada línea,
+                para que las tres se perciban con un ancho visual similar. Son aproximados:
+                ajustalos a ojo si con la tipografía real (Thunderhouse) no cierran perfecto. */}
+            <span style={{
+              fontSize: 'clamp(1.6rem, 5.5vw, 3.2rem)'
+            }}>39 ENCUENTRO PLURINACIONAL</span>
+            <span className="text-[#fec449]" style={{
+              fontSize: 'clamp(1.05rem, 3.6vw, 2.1rem)'
+            }}>DE MUJERES, LESBIANAS, TRAVESTIS, TRANS,</span>
+            <span className="text-[#94c09e]" style={{
+              fontSize: 'clamp(1.1rem, 3.7vw, 2.15rem)'
+            }}>BISEXUALES, INTERSEXUALES Y NO BINARIES</span>
+          </h1>
+
+          <p className="text-white/75 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: "'degular', sans-serif" }}>
+            {EVENTO.frase}
+          </p>
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/#cronograma" className="bg-white text-purple-900 font-bold px-8 py-4 rounded-full hover:bg-yellow-300 transition-colors flex items-center justify-center gap-2 shadow-lg">
-          <Calendar size={18} />
-          Ver programa completo
-        </a>
-        <a href="/#inscripcion" id="inscripcion" className="bg-[#16a34a] text-white font-bold px-8 py-4 rounded-full hover:bg-green-600 transition-colors flex items-center justify-center gap-2 shadow-lg">
-          <Users size={18} />
-          Inscripción
-        </a>
+      {/* Fecha/Sede y botones: centrados respecto del bloque Lottie + título de arriba */}
+      <div className="w-full flex flex-col items-center mt-10">
+        <div className="flex flex-wrap items-center justify-center gap-6 mb-10 text-white/80">
+          <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
+            <Calendar size={16} className="text-[#fec449]" />
+            <a href="/#cronograma" className="font-semibold text-sm">{EVENTO.fecha}</a>
+          </div>
+          <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
+            <MapPin size={16} className="text-[#94c09e]" />
+            <a href="/#sede" className="font-semibold text-sm">{EVENTO.sede}</a>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/#cronograma" className="bg-[#FFF1E3] text-[#4a2055] font-bold px-8 py-4 rounded-full hover:bg-[#fec449] transition-colors flex items-center justify-center gap-2 shadow-lg">
+            <Calendar size={18} />
+            Ver programa completo
+          </a>
+          <a href="/#inscripcion" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-8 py-4 rounded-full hover:bg-[#21662f] transition-colors flex items-center justify-center gap-2 shadow-lg">
+            <Users size={18} />
+            Inscripción
+          </a>
+        </div>
       </div>
     </motion.div>
 
@@ -578,14 +605,14 @@ function CampoDonacion({
       // Si el navegador bloquea el clipboard, no rompemos nada
     }
   };
-  return <div className="flex items-center justify-between gap-3 bg-gray-50 rounded-xl px-4 py-3 border border-gray-100">
+  return <div className="flex items-center justify-between gap-3 bg-[#faf7fb] rounded-xl px-4 py-3 border border-[#eadeed]">
     <div className="min-w-0">
       <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">{label}</p>
-      <p className="text-sm font-semibold text-gray-800 truncate">{valor}</p>
+      <p className="text-sm font-semibold text-[#343230] truncate">{valor}</p>
     </div>
     <button onClick={copiar} className="shrink-0 flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-full transition-colors" style={{
-      backgroundColor: copiado ? '#dcfce7' : '#f3e8ff',
-      color: copiado ? '#16a34a' : '#7c3aed'
+      backgroundColor: copiado ? '#dceade' : '#eadeed',
+      color: copiado ? '#21662f' : '#662c74'
     }}>
       {copiado ? <Check size={14} /> : <Copy size={14} />}
       {copiado ? 'Copiado' : 'Copiar'}
@@ -624,13 +651,13 @@ function DonacionesModal({
       scale: 0.97
     }} transition={{
       duration: 0.2
-    }} className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden" onClick={e => e.stopPropagation()}>
-      <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+    }} className="bg-[#FFF1E3] rounded-2xl shadow-2xl w-full max-w-md overflow-hidden" onClick={e => e.stopPropagation()}>
+      <div className="flex items-center justify-between px-6 py-5 border-b border-[#eadeed]">
         <div className="flex items-center gap-3">
-          <div className="bg-yellow-400 text-purple-950 w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+          <div className="bg-[#fdb10c] text-[#4a2055] w-10 h-10 rounded-full flex items-center justify-center shrink-0">
             <Heart size={18} fill="currentColor" />
           </div>
-          <h3 className="font-bold text-gray-800 text-lg m-0">Aportá al Encuentro</h3>
+          <h3 className="font-bold text-[#343230] text-lg m-0">Aportá al Encuentro</h3>
         </div>
         <button onClick={onClose} className="text-gray-400 hover:text-gray-600 shrink-0">
           <X size={20} />
@@ -656,9 +683,9 @@ function ApoyoSection() {
   return <section className="py-20 px-4 relative overflow-hidden">
     {/* Fondo decorativo */}
     <div className="absolute inset-0 pointer-events-none">
-      <div className="absolute -top-20 -left-20 w-80 h-80 bg-yellow-400/10 rounded-full blur-3xl" />
-      <div className="absolute -bottom-24 -right-16 w-96 h-96 bg-pink-500/15 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-3xl" />
+      <div className="absolute -top-20 -left-20 w-80 h-80 bg-[#fdb10c]/10 rounded-full blur-3xl" />
+      <div className="absolute -bottom-24 -right-16 w-96 h-96 bg-[#fdb10c]/15 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#813893]/10 rounded-full blur-3xl" />
     </div>
 
     <div className="max-w-5xl mx-auto relative z-10">
@@ -683,12 +710,12 @@ function ApoyoSection() {
           duration: 0.5
         }} whileHover={{
           y: -4
-        }} className="relative overflow-hidden rounded-3xl p-8 border-2 border-yellow-400/30 bg-gradient-to-br from-yellow-400/10 to-purple-900/40 flex flex-col">
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-yellow-400/10 rounded-full blur-2xl" />
-          <span className="absolute top-5 right-5 bg-yellow-400 text-purple-950 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
+        }} className="relative overflow-hidden rounded-3xl p-8 border-2 border-[#fdb10c]/30 bg-gradient-to-br from-[#fdb10c]/10 to-[#2f1435]/40 flex flex-col">
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#fdb10c]/10 rounded-full blur-2xl" />
+          <span className="absolute top-5 right-5 bg-[#fdb10c] text-[#4a2055] text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
             Solidario
           </span>
-          <div className="bg-yellow-400 text-purple-950 w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10">
+          <div className="bg-[#fdb10c] text-[#4a2055] w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10">
             <Heart size={26} fill="currentColor" />
           </div>
           <h4 className="font-bold text-white text-xl mb-2 relative z-10">
@@ -697,7 +724,7 @@ function ApoyoSection() {
           <p className="text-sm text-white/70 mb-6 flex-1 relative z-10">
             Tu aporte ayuda a cubrir sede, materiales y logística.
           </p>
-          <button onClick={() => setModalAbierto(true)} className="relative z-10 bg-purple-700 text-white font-bold px-6 py-3 rounded-full hover:bg-purple-600 transition-colors self-start">
+          <button onClick={() => setModalAbierto(true)} className="relative z-10 bg-[#813893] text-white font-bold px-6 py-3 rounded-full hover:bg-[#9659a5] transition-colors self-start">
             Quiero aportar
           </button>
         </motion.div>
@@ -716,12 +743,12 @@ function ApoyoSection() {
           delay: 0.1
         }} whileHover={{
           y: -4
-        }} className="relative overflow-hidden rounded-3xl p-8 border-2 border-pink-400/30 bg-gradient-to-br from-pink-500/10 to-purple-900/40 flex flex-col">
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-pink-500/10 rounded-full blur-2xl" />
-          <span className="absolute top-5 right-5 bg-pink-500 text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
+        }} className="relative overflow-hidden rounded-3xl p-8 border-2 border-[#2a823c]/30 bg-gradient-to-br from-[#2a823c]/10 to-[#2f1435]/40 flex flex-col">
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#2a823c]/10 rounded-full blur-2xl" />
+          <span className="absolute top-5 right-5 bg-[#2a823c] text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
             Edición limitada
           </span>
-          <div className="bg-pink-500 text-white w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10">
+          <div className="bg-[#2a823c] text-white w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10">
             <ShoppingBag size={26} />
           </div>
           <h4 className="font-bold text-white text-xl mb-2 relative z-10">
@@ -730,7 +757,7 @@ function ApoyoSection() {
           <p className="text-sm text-white/70 mb-6 flex-1 relative z-10">
             Reservá tu remera o tote bag oficial del 39° Encuentro.
           </p>
-          <Link to="/Preventa" className="relative z-10 bg-pink-600 text-white font-bold px-6 py-3 rounded-full hover:bg-pink-500 transition-colors self-start inline-flex items-center gap-2">
+          <Link to="/Preventa" className="relative z-10 bg-[#21662f] text-white font-bold px-6 py-3 rounded-full hover:bg-[#184b22] transition-colors self-start inline-flex items-center gap-2">
             Ver preventa <ArrowRight size={16} />
           </Link>
         </motion.div>
@@ -744,7 +771,7 @@ function ApoyoSection() {
 }
 
 function EncuentroSection() {
-  return <section id="encuentro" className="py-24 px-4 bg-white">
+  return <section id="encuentro" className="py-24 px-4 bg-[#FFF1E3]">
     <div className="max-w-6xl mx-auto">
       <div className="grid md:grid-cols-2 gap-16 items-center">
         <motion.div initial={{
@@ -758,31 +785,24 @@ function EncuentroSection() {
         }} transition={{
           duration: 0.6
         }}>
-          {/* <div className="inline-block bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-widest">
-              Sección 1
-            </div> */}
-          <h2 className="text-purple-900 mb-6">¿Qué es el Encuentro?</h2>
-          <p className="text-gray-600 text-lg leading-relaxed mb-6">
+          <h2 className="text-[#4a2055] mb-6">¿Qué es el Encuentro?</h2>
+          <p className="text-[#343230]/80 text-lg leading-relaxed mb-6">
             El Encuentro es un espacio en el que se tejen redes colectivas de solidaridad, reparación y organización, y en el que se gestan herramientas de lucha diversas, entre ellas campañas locales, plurinacionales y regionales, proyectos de ley históricos e iniciativas activistas que buscan transformar cada ámbito de nuestras vidas. <br />
             Cada año, cientos de miles de mujeres, lesbianas, travestis, trans, bisexuales, intersex y no binaries viajan de todos los rincones del país para debatir sobre las distintas violencias patriarcales que nos atraviesan y pensar soluciones posibles y alternativas de futuro. En 40 años de encuentros militantes y masivos, fuimos construyendo miradas e intervenciones políticas y culturales que se nutren en nuestras diferencias y se potencian en nuestra unidad. <br />
             Sabemos que sobre nosotras y nosotres recaen las tareas de cuidado y los empleos peores pagos o en condiciones de informalidad absoluta, agudizando la sobrecarga laboral y la precarización de nuestras vidas golpeadas especialmente por la pobreza y la crisis actual. Los recortes del gobierno nacional a los programas de prevención, sanción y erradicación de la violencia de género así como los discursos de odio agravan este contexto de cada vez mayor ataques a mujeres y disidencias. <br />
             Nos necesitamos pensando esas herramientas de resistencia y todas las acciones colectivas que deseamos para vidas verdaderamente libres, sin violencias ni opresiones.</p>
-          <p className="text-gray-600 mb-8">
+          <p className="text-[#343230]/80 mb-8">
             ¡Les esperamos el 10, 11 y 12 de Octubre en Córdoba para construir juntas y juntes!
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href="/Semblanza" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-purple-700 font-bold border-2 border-purple-200 px-5 py-3 rounded-full hover:bg-purple-50 transition-colors">
+            <a href="/Semblanza" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-[#662c74] font-bold border-2 border-[#d5bddb] px-5 py-3 rounded-full hover:bg-[#faf7fb] transition-colors">
               <ExternalLink size={16} />
               Leer la semblanza
             </a>
-            <a href="/Pilares" className="flex items-center gap-2 text-green-700 font-bold border-2 border-green-200 px-5 py-3 rounded-full hover:bg-green-50 transition-colors">
+            <a href="/Pilares" className="flex items-center gap-2 text-[#21662f] font-bold border-2 border-[#b8d5be] px-5 py-3 rounded-full hover:bg-[#f6faf7] transition-colors">
               <ExternalLink size={16} />
               Pilares del Encuentro
             </a>
-            {/* <a href="/#linea-tiempo" className="flex items-center gap-2 text-green-700 font-bold border-2 border-green-200 px-5 py-3 rounded-full hover:bg-green-50 transition-colors">
-              <Clock size={16} />
-              Línea del tiempo
-            </a> */}
           </div>
         </motion.div>
 
@@ -801,19 +821,19 @@ function EncuentroSection() {
           {[{
             num: '39°',
             label: 'Edición del Encuentro',
-            color: 'bg-purple-600'
+            color: 'bg-[#813893]'
           }, {
             num: '+100k',
             label: 'Participantes esperadxs',
-            color: 'bg-green-600'
+            color: 'bg-[#2a823c]'
           }, {
             num: '3',
             label: 'Días de construcción colectiva',
-            color: 'bg-orange-500'
+            color: 'bg-[#b57f09]'
           }, {
             num: '100+',
             label: 'Talleres y comisiones',
-            color: 'bg-blue-600'
+            color: 'bg-[#4a2055]'
           }].map((stat, i) => <div key={i} className={`${stat.color} text-white rounded-2xl p-6 flex flex-col justify-between`}>
             <span className="text-4xl font-black">{stat.num}</span>
             <span className="text-sm font-medium opacity-80 mt-2">{stat.label}</span>
@@ -823,9 +843,9 @@ function EncuentroSection() {
 
       {/* Línea del tiempo placeholder */}
       <div id="linea-tiempo" className="mt-20">
-        <h3 className="text-center text-purple-900 mb-10">Hitos del Encuentro</h3>
+        <h3 className="text-center text-[#4a2055] mb-10">Hitos del Encuentro</h3>
         <div className="relative">
-          <div className="absolute top-5 left-0 right-0 h-0.5 bg-purple-100" />
+          <div className="absolute top-5 left-0 right-0 h-0.5 bg-[#eadeed]" />
           <div className="flex overflow-x-auto gap-8 pb-4">
             {[{
               año: '1986',
@@ -856,10 +876,10 @@ function EncuentroSection() {
               hito: '39° Encuentro, Córdoba Capital',
               highlight: true
             }].map((item, i) => <div key={i} className="flex flex-col items-center min-w-[160px]">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center z-10 mb-3 ${item.highlight ? 'bg-yellow-400 border-4 border-yellow-200' : 'bg-purple-200 border-4 border-white'}`}>
-                <span className="text-xs font-black text-purple-900">{item.año.slice(2)}</span>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center z-10 mb-3 ${item.highlight ? 'bg-[#fdb10c] border-4 border-[#fec449]/50' : 'bg-[#d5bddb] border-4 border-[#FFF1E3]'}`}>
+                <span className="text-xs font-black text-[#4a2055]">{item.año.slice(2)}</span>
               </div>
-              <span className={`text-xs font-bold ${item.highlight ? 'text-purple-700' : 'text-gray-500'} text-center leading-tight`}>{item.año}</span>
+              <span className={`text-xs font-bold ${item.highlight ? 'text-[#662c74]' : 'text-gray-500'} text-center leading-tight`}>{item.año}</span>
               <p className="text-xs text-gray-500 text-center mt-1">{item.hito}</p>
             </div>)}
           </div>
@@ -870,23 +890,20 @@ function EncuentroSection() {
 }
 function EjesSection() {
   const [ejeAbierto, setEjeAbierto] = useState(null);
-  return <section id="ejes" className="py-24 px-4 bg-gray-50">
+  return <section id="ejes" className="py-24 px-4 bg-[#faf7fb]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12">
-        {/* <div className="inline-block bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-widest">
-            Sección 2
-          </div> */}
-        <h2 className="text-gray-900 mb-4">Ejes temáticos y talleres</h2>
+        <h2 className="text-[#343230] mb-4">Ejes temáticos y talleres</h2>
         <p className="text-gray-500 max-w-xl mx-auto">
           Los talleres son el corazón del Encuentro. Son espacios horizontales de debate donde se construyen los documentos colectivos. Hacé clic en cada eje para ver los talleres.
         </p>
-        <a href="/Talleres" className="inline-flex items-center gap-1 text-green-600 font-bold mt-4 hover:underline">
+        <a href="/Talleres" className="inline-flex items-center gap-1 text-[#21662f] font-bold mt-4 hover:underline">
           Pronto subiremos el listado completo <ArrowRight size={14} />
         </a>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-        {EJES.map(eje => <motion.div key={eje.id} layout onClick={() => setEjeAbierto(ejeAbierto === eje.id ? null : eje.id)} className="bg-white rounded-2xl p-6 cursor-pointer border-2 transition-all hover:shadow-md" style={{
+        {EJES.map(eje => <motion.div key={eje.id} layout onClick={() => setEjeAbierto(ejeAbierto === eje.id ? null : eje.id)} className="bg-[#FFF1E3] rounded-2xl p-6 cursor-pointer border-2 transition-all hover:shadow-md" style={{
           borderColor: ejeAbierto === eje.id ? eje.color : 'transparent'
         }} whileHover={{
           y: -2
@@ -899,7 +916,7 @@ function EjesSection() {
               transform: ejeAbierto === eje.id ? 'rotate(180deg)' : 'rotate(0deg)'
             }} />
           </div>
-          <h4 className="font-bold text-gray-800 leading-snug mb-3" style={{
+          <h4 className="font-bold text-[#343230] leading-snug mb-3" style={{
             color: ejeAbierto === eje.id ? eje.color : undefined
           }}>
             {eje.titulo}
@@ -924,7 +941,7 @@ function EjesSection() {
       </div>
 
       {/* Mapa placeholder */}
-      <div className="bg-white rounded-3xl border-2 border-dashed border-gray-200 h-72 flex flex-col items-center justify-center text-gray-400">
+      <div className="bg-[#FFF1E3] rounded-3xl border-2 border-dashed border-gray-200 h-72 flex flex-col items-center justify-center text-gray-400">
         <MapPin size={40} className="mb-3 opacity-40" />
         <p className="font-semibold">Mapa de ubicaciones de talleres</p>
         <p className="text-sm mt-1">Se cargará cuando se confirmen las sedes</p>
@@ -935,19 +952,16 @@ function EjesSection() {
 function CronogramaSection() {
   const dias = Object.keys(CRONOGRAMA);
   const [diaActivo, setDiaActivo] = useState(dias[0]);
-  return <section id="cronograma" className="py-24 px-4 bg-purple-950 text-white">
+  return <section id="cronograma" className="py-24 px-4 bg-[#2f1435] text-white">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12">
-        {/* <div className="inline-block bg-yellow-400/20 text-yellow-300 text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-widest">
-            Sección 3
-          </div> */}
         <h2 className="text-white mb-4">Cronograma</h2>
         <p className="text-white/60">Tocá cada día para ver las actividades</p>
       </div>
 
       {/* Tabs de días - mobile */}
       <div className="flex justify-center gap-3 mb-8 md:hidden">
-        {dias.map(dia => <button key={dia} onClick={() => setDiaActivo(dia)} className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${diaActivo === dia ? 'bg-yellow-400 text-purple-950' : 'bg-white/10 text-white/60'}`}>
+        {dias.map(dia => <button key={dia} onClick={() => setDiaActivo(dia)} className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${diaActivo === dia ? 'bg-[#fdb10c] text-[#2f1435]' : 'bg-white/10 text-white/60'}`}>
           {dia.split(' ')[1]}
         </button>)}
       </div>
@@ -955,12 +969,12 @@ function CronogramaSection() {
       {/* Grid 3 columnas - desktop */}
       <div className="hidden md:grid md:grid-cols-3 gap-6">
         {dias.map(dia => <div key={dia} className="bg-white/5 rounded-2xl overflow-hidden border border-white/10">
-          <div className="bg-yellow-400 text-purple-950 px-5 py-3">
+          <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
             <h3 className="text-lg font-black m-0">{dia}</h3>
           </div>
           <div className="p-4">
             {CRONOGRAMA[dia].map((item, i) => <div key={i} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
-              <span className="text-yellow-400 text-sm font-mono font-bold w-12 shrink-0">{item.hora}</span>
+              <span className="text-[#fdb10c] text-sm font-mono font-bold w-12 shrink-0">{item.hora}</span>
               <span className="text-white/80 text-sm">{item.actividad}</span>
             </div>)}
           </div>
@@ -969,12 +983,12 @@ function CronogramaSection() {
 
       {/* Vista mobile - columna activa */}
       <div className="md:hidden bg-white/5 rounded-2xl overflow-hidden border border-white/10">
-        <div className="bg-yellow-400 text-purple-950 px-5 py-3">
+        <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
           <h3 className="text-lg font-black m-0">{diaActivo}</h3>
         </div>
         <div className="p-4">
           {CRONOGRAMA[diaActivo].map((item, i) => <div key={i} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
-            <span className="text-yellow-400 text-sm font-mono font-bold w-12 shrink-0">{item.hora}</span>
+            <span className="text-[#fdb10c] text-sm font-mono font-bold w-12 shrink-0">{item.hora}</span>
             <span className="text-white/80 text-sm">{item.actividad}</span>
           </div>)}
         </div>
@@ -984,20 +998,17 @@ function CronogramaSection() {
 }
 function CancioneroSection() {
   const [cancionAbierta, setCancionAbierta] = useState(null);
-  return <section id="cancionero" className="py-24 px-4 bg-gray-50">
+  return <section id="cancionero" className="py-24 px-4 bg-[#faf7fb]">
     <div className="max-w-4xl mx-auto">
       <div className="text-center mb-12">
-        {/* <div className="inline-block bg-pink-100 text-pink-700 text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-widest">
-      Sección 4
-    </div> */}
-        <h2 className="text-gray-900 mb-4">Cancionero</h2>
+        <h2 className="text-[#343230] mb-4">Cancionero</h2>
         <p className="text-gray-500 max-w-xl mx-auto mb-6">
           Canciones sugeridas para este 39 encuentro en Córdoba
         </p>
 
         <Link
           to="/cancionero"
-          className="inline-flex items-center gap-2 bg-pink-500 text-white font-bold px-6 py-3 rounded-full hover:bg-pink-600 transition-colors"
+          className="inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold px-6 py-3 rounded-full hover:bg-[#fec449] transition-colors"
         >
           Ver el cancionero sugerido
         </Link>
@@ -1014,13 +1025,13 @@ function CancioneroSection() {
           once: true
         }} transition={{
           delay: i * 0.05
-        }} className="bg-white rounded-2xl border-2 border-gray-200 overflow-hidden">
-          <button onClick={() => setCancionAbierta(cancionAbierta === cancion.id ? null : cancion.id)} className="w-full text-left p-6 flex justify-between items-start gap-4 hover:bg-gray-50 transition-colors">
+        }} className="bg-[#FFF1E3] rounded-2xl border-2 border-gray-200 overflow-hidden">
+          <button onClick={() => setCancionAbierta(cancionAbierta === cancion.id ? null : cancion.id)} className="w-full text-left p-6 flex justify-between items-start gap-4 hover:bg-[#faf7fb] transition-colors">
             <div className="flex-1">
-              <h3 className="text-lg font-bold text-gray-800 mb-1">{cancion.titulo}</h3>
+              <h3 className="text-lg font-bold text-[#343230] mb-1">{cancion.titulo}</h3>
               <p className="text-sm text-gray-500 italic">{cancion.artista}</p>
             </div>
-            <ChevronDown size={20} className="text-pink-500 shrink-0 transition-transform" style={{
+            <ChevronDown size={20} className="text-[#fdb10c] shrink-0 transition-transform" style={{
               transform: cancionAbierta === cancion.id ? 'rotate(180deg)' : 'rotate(0deg)'
             }} />
           </button>
@@ -1036,8 +1047,8 @@ function CancioneroSection() {
               height: 0,
               opacity: 0
             }} className="overflow-hidden border-t border-gray-200">
-              <div className="p-6 bg-gray-50">
-                <pre className="text-sm text-gray-700 leading-relaxed font-sans whitespace-pre-wrap break-words">
+              <div className="p-6 bg-[#faf7fb]">
+                <pre className="text-sm text-[#343230]/90 leading-relaxed font-sans whitespace-pre-wrap break-words">
                   {cancion.letra}
                 </pre>
               </div>
@@ -1046,9 +1057,9 @@ function CancioneroSection() {
         </motion.div>)}
       </div>
 
-      <div className="mt-12 bg-white rounded-2xl border-2 border-pink-200 p-8 text-center">
-        <Music size={32} className="mx-auto mb-4 text-pink-500" />
-        <h3 className="text-gray-800 font-bold mb-2">¿Tenés una canción para agregar?</h3>
+      <div className="mt-12 bg-[#FFF1E3] rounded-2xl border-2 border-[#fec449]/60 p-8 text-center">
+        <Music size={32} className="mx-auto mb-4 text-[#fdb10c]" />
+        <h3 className="text-[#343230] font-bold mb-2">¿Tenés una canción para agregar?</h3>
         <p className="text-gray-600 text-sm mb-4">
           Enviala a <strong><HiddenMail text1="39encuentropluri.cba" text2="proton.me" /></strong>
         </p>
@@ -1057,17 +1068,14 @@ function CancioneroSection() {
   </section>;
 }
 function CulturalSection() {
-  return <section id="cultural" className="py-24 px-4 bg-white">
+  return <section id="cultural" className="py-24 px-4 bg-[#FFF1E3]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12">
-        {/* <div className="inline-block bg-orange-100 text-orange-600 text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-widest">
-            Sección 5
-          </div> */}
-        <h2 className="text-gray-900 mb-4">Grilla Cultural</h2>
+        <h2 className="text-[#343230] mb-4">Grilla Cultural</h2>
         <p className="text-gray-500 max-w-xl mx-auto mb-4">
           Arte, música, teatro y más. El Encuentro también es fiesta y celebración colectiva.
         </p>
-        <a href="#" className="inline-flex items-center gap-2 bg-orange-500 text-white font-bold px-6 py-3 rounded-full hover:bg-orange-600 transition-colors">
+        <a href="#" className="inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold px-6 py-3 rounded-full hover:bg-[#fec449] transition-colors">
           <ExternalLink size={16} />
           Inscribir una actividad cultural
         </a>
@@ -1084,15 +1092,15 @@ function CulturalSection() {
           once: true
         }} transition={{
           delay: i * 0.08
-        }} className="bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow cursor-pointer group">
-          <div className="h-36 bg-gradient-to-br from-orange-100 to-pink-100 flex items-center justify-center text-6xl group-hover:scale-105 transition-transform">
+        }} className="bg-[#faf7fb] rounded-2xl overflow-hidden border border-[#eadeed] hover:shadow-lg transition-shadow cursor-pointer group">
+          <div className="h-36 bg-gradient-to-br from-[#feecc2] to-[#eadeed] flex items-center justify-center text-6xl group-hover:scale-105 transition-transform">
             {act.emoji}
           </div>
           <div className="p-5">
-            <span className="text-xs font-bold text-orange-500 uppercase tracking-wider">{act.tipo}</span>
-            <h4 className="font-bold text-gray-800 mt-1 mb-2">{act.nombre}</h4>
+            <span className="text-xs font-bold text-[#b57f09] uppercase tracking-wider">{act.tipo}</span>
+            <h4 className="font-bold text-[#343230] mt-1 mb-2">{act.nombre}</h4>
             <p className="text-sm text-gray-500">{act.descripcion}</p>
-            <a href="#" className="inline-flex items-center gap-1 text-orange-500 text-sm font-bold mt-3 hover:underline">
+            <a href="#" className="inline-flex items-center gap-1 text-[#b57f09] text-sm font-bold mt-3 hover:underline">
               Ver más <ArrowRight size={12} />
             </a>
           </div>
@@ -1106,16 +1114,16 @@ function SedeSection() {
     icono: <Home size={24} />,
     titulo: 'Alojamiento',
     desc: 'Lista de alojamientos amigables y contacto de la comisión.',
-    color: 'bg-blue-50 border-blue-200',
-    iconColor: 'text-blue-600',
+    color: 'bg-[#faf7fb] border-[#d5bddb]',
+    iconColor: 'text-[#662c74]',
     link: '#',
     linkText: 'Ver alojamientos'
   }, {
     icono: <Bus size={24} />,
     titulo: 'Transporte',
     desc: 'Info de transporte urbano, SUBE, y cómo llegar al Encuentro.',
-    color: 'bg-green-50 border-green-200',
-    iconColor: 'text-green-600',
+    color: 'bg-[#f6faf7] border-[#b8d5be]',
+    iconColor: 'text-[#21662f]',
     link: '#',
     linkText: 'Ver opciones'
   }, {
@@ -1130,25 +1138,22 @@ function SedeSection() {
     icono: <Utensils size={24} />,
     titulo: 'Feria y Alimentación',
     desc: 'Espacios de feria, comida vegana, sin TACC y economía popular.',
-    color: 'bg-yellow-50 border-yellow-200',
-    iconColor: 'text-yellow-600',
+    color: 'bg-[#fffcf5] border-[#fed886]',
+    iconColor: 'text-[#916607]',
     link: '#',
     linkText: 'Ver espacios'
   }];
-  return <section id="sede" className="py-24 px-4 bg-gray-50">
+  return <section id="sede" className="py-24 px-4 bg-[#faf7fb]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12">
-        {/* <div className="inline-block bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-widest">
-            Sección 6
-          </div> */}
-        <h2 className="text-gray-900 mb-4">Sede y Logística</h2>
+        <h2 className="text-[#343230] mb-4">Sede y Logística</h2>
         <p className="text-gray-500 max-w-xl mx-auto">
           Todo lo que necesitás saber para llegar, quedarte y moverte durante el Encuentro.
         </p>
       </div>
 
       {/* Mapa placeholder */}
-      <div className="bg-white rounded-3xl border-2 border-dashed border-gray-200 h-72 flex flex-col items-center justify-center text-gray-400 mb-10">
+      <div className="bg-[#FFF1E3] rounded-3xl border-2 border-dashed border-gray-200 h-72 flex flex-col items-center justify-center text-gray-400 mb-10">
         <MapPin size={40} className="mb-3 opacity-40" />
         <p className="font-semibold">Mapa central de la sede</p>
         <p className="text-sm mt-1">Córdoba Capital · Mapa interactivo próximamente</p>
@@ -1167,7 +1172,7 @@ function SedeSection() {
           delay: i * 0.1
         }} className={`${card.color} border-2 rounded-2xl p-6 flex flex-col`}>
           <div className={`${card.iconColor} mb-4`}>{card.icono}</div>
-          <h4 className="font-bold text-gray-800 mb-2">{card.titulo}</h4>
+          <h4 className="font-bold text-[#343230] mb-2">{card.titulo}</h4>
           <p className="text-sm text-gray-500 flex-1">{card.desc}</p>
           <a href={card.link} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 hover:underline`}>
             {card.linkText} <ArrowRight size={12} />
@@ -1176,13 +1181,13 @@ function SedeSection() {
       </div>
 
       {/* Card opcional: venir desde tu provincia */}
-      <div className="bg-purple-900 text-white rounded-3xl p-8 flex flex-col md:flex-row items-center gap-6">
+      <div className="bg-[#2f1435] text-white rounded-3xl p-8 flex flex-col md:flex-row items-center gap-6">
         <div className="text-5xl">🚌</div>
         <div className="flex-1">
           <h3 className="text-white mb-2">¿Venís desde otra provincia?</h3>
           <p className="text-white/70">Contactos de organizaciones que ofrecen colectivos desde distintos puntos del país para venir al Encuentro.</p>
         </div>
-        <a href="#" className="bg-yellow-400 text-purple-950 font-bold px-6 py-3 rounded-full hover:bg-yellow-300 transition-colors whitespace-nowrap shrink-0">
+        <a href="#" className="bg-[#fdb10c] text-[#4a2055] font-bold px-6 py-3 rounded-full hover:bg-[#fec449] transition-colors whitespace-nowrap shrink-0">
           Ver contactos
         </a>
       </div>
@@ -1190,13 +1195,10 @@ function SedeSection() {
   </section>;
 }
 function PrensaSection() {
-  return <section id="prensa" className="py-24 px-4 bg-white">
+  return <section id="prensa" className="py-24 px-4 bg-[#FFF1E3]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12">
-        {/* <div className="inline-block bg-pink-100 text-pink-700 text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-widest">
-            Sección 7
-          </div> */}
-        <h2 className="text-gray-900 mb-4">Prensa y Comunicación</h2>
+        <h2 className="text-[#343230] mb-4">Prensa y Comunicación</h2>
       </div>
 
       <div className="grid md:grid-cols-3 gap-6">
@@ -1206,21 +1208,21 @@ function PrensaSection() {
           desc: 'Logos, imágenes, materiales e instrucciones para medios. / Información para la prensa y acreditación.',
           link: '/KitPrensa',
           cta: 'Ver más',
-          color: 'from-purple-500 to-purple-700'
+          color: 'from-[#813893] to-[#662c74]'
         }, {
           icono: <ExternalLink size={28} />,
           titulo: 'Gacetillas',
           desc: 'Comunicados oficiales y novedades del Encuentro.',
           link: '/Gacetillas',
           cta: 'Ver gacetillas',
-          color: 'from-green-500 to-green-700'
+          color: 'from-[#2a823c] to-[#21662f]'
         }, {
           icono: <Star size={28} />,
           titulo: 'Artículos periodísticos',
           desc: 'Coberturas y notas de prensa sobre el Encuentro.',
           link: '/Prensa',
           cta: 'Ver artículos',
-          color: 'from-orange-500 to-orange-700'
+          color: 'from-[#b57f09] to-[#916607]'
         }].map((item, i) => <motion.div key={i} initial={{
           opacity: 0,
           y: 20
@@ -1248,13 +1250,13 @@ function FaqSection() {
   const [faqAbierta, setFaqAbierta] = useState(null);
   return <>
     {/* FAQ */}
-    <div className="py-20 px-4 border-b border-white/10 bg-purple-950 text-white">
+    <div className="py-20 px-4 border-b border-white/10 bg-[#2f1435] text-white">
       <div className="max-w-3xl mx-auto">
         <h2 className="text-white text-center mb-10">Preguntas frecuentes</h2>
         {FAQ.map((item, i) => <div key={i} className="border-b border-white/10">
           <button onClick={() => setFaqAbierta(faqAbierta === i ? null : i)} className="w-full text-left py-5 flex justify-between items-center gap-4">
             <span className="font-semibold text-white/90">{item.pregunta}</span>
-            <ChevronDown size={18} className="text-yellow-400 shrink-0 transition-transform" style={{
+            <ChevronDown size={18} className="text-[#fdb10c] shrink-0 transition-transform" style={{
               transform: faqAbierta === i ? 'rotate(180deg)' : 'rotate(0deg)'
             }} />
           </button>
@@ -1279,13 +1281,13 @@ function FaqSection() {
 }
 
 export function FooterSection() {
-  return <footer className="bg-purple-950 text-white">
+  return <footer className="bg-[#2f1435] text-white">
     {/* Contacto */}
     <div className="py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-3 gap-10 mb-12">
           <div>
-            <h4 className="text-yellow-300 font-bold mb-4 uppercase tracking-wider text-sm">Contacto general</h4>
+            <h4 className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">Contacto general</h4>
             <div className="flex items-center gap-2 text-white/70 mb-2">
               <div>
                 <a href="mailto:39encuentropluri.cba%40proton.me" className="text-white/60 hover:text-white transition-colors"> <Mail size={20} /></a>
@@ -1299,14 +1301,14 @@ export function FooterSection() {
             </div>
           </div>
           <div>
-            <h4 className="text-yellow-300 font-bold mb-4 uppercase tracking-wider text-sm">Comisiones</h4>
+            <h4 className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">Comisiones</h4>
             {['Organización', 'Prensa', 'Alojamiento', 'Cultural', 'Finanzas'].map(com => <div key={com} className="flex items-center gap-2 text-white/60 mb-1.5">
               <Mail size={12} />
               <span className="text-sm">{com.toLowerCase()}@encuentro.org</span>
             </div>)}
           </div>
           <div>
-            <h4 className="text-yellow-300 font-bold mb-4 uppercase tracking-wider text-sm">El Encuentro</h4>
+            <h4 className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">El Encuentro</h4>
             <p className="text-white/60 text-sm leading-relaxed">
               39° Encuentro Plurinacional de Mujeres, Lesbianas, Trans, Travestis, Bisexuales, Intersex y No Binaries.<br />
               Córdoba Capital · 10, 11 y 12 de octubre de 2026.
@@ -1344,11 +1346,11 @@ function PopupPrimerosAuxilios() {
       }} exit={{
         opacity: 0,
         scale: 0.9
-      }} className="fixed bottom-24 right-6 z-50 bg-white rounded-2xl shadow-2xl border-2 border-red-200 p-5 max-w-xs w-full">
+      }} className="fixed bottom-24 right-6 z-50 bg-[#FFF1E3] rounded-2xl shadow-2xl border-2 border-red-200 p-5 max-w-xs w-full">
         <div className="flex justify-between items-start mb-3">
           <div className="flex items-center gap-2">
             <div className="bg-red-100 text-red-600 p-1.5 rounded-lg"><AlertCircle size={18} /></div>
-            <h4 className="font-bold text-gray-800 text-sm">Primeros Auxilios</h4>
+            <h4 className="font-bold text-[#343230] text-sm">Primeros Auxilios</h4>
           </div>
           <button onClick={() => setVisible(false)} className="text-gray-400 hover:text-gray-600">
             <X size={18} />
@@ -1373,16 +1375,42 @@ function PopupPrimerosAuxilios() {
 // ─── PÁGINA PRINCIPAL ─────────────────────────────────────────────────────────
 
 export default function HomePage() {
-  return <div className="relative">
+  useEffect(() => {
+    if (!document.getElementById('encuentro-typography')) {
+      const style = document.createElement('style');
+      style.id = 'encuentro-typography';
+      style.innerHTML = `
+        body {
+          font-family: 'degular', sans-serif !important;
+        }
+        h1, h2, h3, h4, h5, h6,
+        h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
+          font-family: 'thunderhouse-pro', sans-serif !important;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }, []);
+  return <div className="relative font-body">
     <ScrollProgressBar />
     <CountdownBanner />
     <Navbar />
     <BackToTop />
-    <div style={{
-      background: 'linear-gradient(180deg, #3b0764 0%, #6b21a8 25%, #14532d 45%, #2e1065 70%, #4a044e 100%)'
+    <div className="relative" style={{
+      background: 'linear-gradient(180deg, #2f1435 0%, #662c74 25%, #184b22 45%, #2f1435 70%, #4a2055 100%)'
     }}>
-      <HeroSection />
-      <ApoyoSection />
+      {/* Patrón tileado de fondo: 35% de opacidad, modo de fusión Multiplicar. Archivo en /public/images/bg-tile.png */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: 'url(/images/bg-tile.png)',
+        backgroundRepeat: 'repeat',
+        backgroundSize: '340px',
+        mixBlendMode: 'multiply',
+        opacity: 0.35
+      }} />
+      <div className="relative">
+        <HeroSection />
+        <ApoyoSection />
+      </div>
     </div>
     <EncuentroSection />
     <EjesSection />

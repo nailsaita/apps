@@ -150,13 +150,11 @@ export default function CancioneroPage() {
                 className="border-b border-white/5 pb-6 last:border-none last:pb-0"
               >
                 <h3 className="text-xl font-bold text-fuchsia-400 mb-3 flex gap-2">
-                  {/* CORREGIDO: Mayor contraste cambiando el color y agregando drop-shadow */}
                   <span className="text-fuchsia-300 font-extrabold drop-shadow-sm">
                     {index + 1}.
                   </span>
                   {cancion.titulo}
                 </h3>
-                {/* whitespace-pre-line respeta los saltos de línea del texto de la letra */}
                 <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-line bg-slate-900/40 p-4 rounded-xl border border-slate-800/60 font-mono">
                   {cancion.letra}
                 </p>
