@@ -189,7 +189,7 @@ const INDICE_BUSQUEDA = [
     subtitulo: 'Cómo llegar, SUBE, transporte urbano',
     tipo: 'Logística',
     href: '/#sede',
-    color: '#2a823c',
+    color: '#16a34a',
     emoji: '🚌'
   }, {
     id: 'log-aux',
@@ -1122,8 +1122,8 @@ function SedeSection() {
     icono: <Bus size={24} />,
     titulo: 'Transporte',
     desc: 'Info de transporte urbano, SUBE, y cómo llegar al Encuentro.',
-    color: 'bg-[#f6faf7] border-[#b8d5be]',
-    iconColor: 'text-[#21662f]',
+    color: 'bg-green-50 border-green-200',
+    iconColor: 'text-green-600',
     link: '#',
     linkText: 'Ver opciones'
   }, {
@@ -1271,7 +1271,7 @@ function FaqSection() {
               height: 0,
               opacity: 0
             }} className="overflow-hidden">
-              <p className="text-white/60 pb-5 text-sm leading-relaxed">{item.respuesta}</p>
+              <div className="text-white/60 pb-5 text-sm leading-relaxed">{item.respuesta}</div>
             </motion.div>}
           </AnimatePresence>
         </div>)}

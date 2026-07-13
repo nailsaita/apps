@@ -7,9 +7,11 @@ import GacetillasPage from '@/pages/GacetillasPage.jsx';
 import GaleriaEncuentrosPage from '@/pages/GaleriaEncuentrosPage.jsx';
 import KitPrensaPage from '@/pages/KitPrensaPage.jsx';
 import PilaresPage from '@/pages/PilaresPage.jsx';
-import SemblanzaPage from '@/pages/Semblanza.jsx';
+import SemblanzaPage from '@/pages/SemblanzaPage.jsx';
 import CancioneroPage from '@/pages/CancioneroPage.jsx';
 import PreventaPage from '@/pages/PreventaPage.jsx';
+import TransportePage from '@/pages/TransportePage.jsx';
+
 
 function ScrollToHash() {
   const location = useLocation();
@@ -47,6 +49,7 @@ function App() {
         <Route path="/Semblanza" element={<SemblanzaPage />} />
         <Route path="/Preventa" element={<PreventaPage />} />
         <Route path="/Cancionero" element={<CancioneroPage />} />
+        <Route path="/Transporte" element={<TransportePage />} />
 
         {/* Catch-all route for 404s */}
         <Route path="*" element={
