@@ -34,9 +34,32 @@ function ScrollToHash() {
   return null;
 }
 
+// Inyecta la tipografía global del sitio (degular / thunderhouse-pro)
+// una sola vez, sin importar por qué ruta entre la persona al sitio.
+function GlobalTypography() {
+  React.useEffect(() => {
+    if (!document.getElementById('encuentro-typography')) {
+      const style = document.createElement('style');
+      style.id = 'encuentro-typography';
+      style.innerHTML = `
+        body {
+          font-family: 'degular', sans-serif !important;
+        }
+        h1, h2, h3, h4, h5, h6,
+        h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
+          font-family: 'thunderhouse-pro', sans-serif !important;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }, []);
+  return null;
+}
+
 function App() {
   return (
     <Router>
+      <GlobalTypography />
       <ScrollToHash />
       <Routes>
         <Route path="/" element={<HomePage />} />

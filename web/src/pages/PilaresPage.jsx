@@ -12,7 +12,7 @@ export default function PilaresPage() {
       <main className="relative z-10 mx-auto max-w-7xl px-4 pb-32 pt-32 sm:px-6 lg:px-8">
         <section className="rounded-2xl border border-white/10 bg-slate-950/60 p-6 shadow-xl shadow-black/20">
 
-          {/* Frase agregada con margen inferior para separar de la lista */}
+
           <p className="mb-6 text-lg font-medium text-slate-200">
             Los encuentros son:
           </p>

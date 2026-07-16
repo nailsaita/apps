@@ -8,7 +8,7 @@ import galeriaNotas from '@/data/galeriaNotas.js';
 export default function GacetillasPage() {
 
   return (
-    <div className="relative bg-background text-slate-100">
+    <div className="relative bg-[#FFF1E3] text-[#343230] min-h-screen">
       <CountdownBanner />
       <Navbar />
       <TitleSection

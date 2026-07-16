@@ -131,15 +131,15 @@ const CANCIONES = [
 
 export default function CancioneroPage() {
   return (
-    <div className="relative bg-background text-slate-100 min-h-screen">
+    <div className="relative bg-[#FFF1E3] text-[#343230] min-h-screen">
       <CountdownBanner />
       <Navbar />
 
       <TitleSection title="Cancionero Sugerido" />
 
       <main className="relative z-10 mx-auto max-w-4xl px-4 pb-32 pt-32 sm:px-6 lg:px-8">
-        <section className="rounded-2xl border border-white/10 bg-slate-950/60 p-6 md:p-8 shadow-xl shadow-black/20">
-          <p className="text-slate-300 mb-8 text-center text-lg">
+        <section className="rounded-3xl border border-[#eadeed] bg-white/70 p-6 md:p-8 shadow-xl shadow-[#813893]/5 backdrop-blur-sm">
+          <p className="text-[#343230]/80 mb-8 text-center text-lg">
             Letras y canciones sugeridas para cantar en este 39° Encuentro en Córdoba.
           </p>
 
@@ -147,15 +147,18 @@ export default function CancioneroPage() {
             {CANCIONES && CANCIONES.map((cancion, index) => (
               <div
                 key={cancion.titulo || index}
-                className="border-b border-white/5 pb-6 last:border-none last:pb-0"
+                className="border-b border-[#eadeed] pb-6 last:border-none last:pb-0"
               >
-                <h3 className="text-xl font-bold text-fuchsia-400 mb-3 flex gap-2">
-                  <span className="text-fuchsia-300 font-extrabold drop-shadow-sm">
+                <h3
+                  className="text-xl font-bold text-[#813893] mb-3 flex gap-2"
+                  style={{ fontFamily: "'thunderhouse-pro', sans-serif" }}
+                >
+                  <span className="text-[#fdb10c] font-extrabold drop-shadow-sm">
                     {index + 1}.
                   </span>
                   {cancion.titulo}
                 </h3>
-                <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-line bg-slate-900/40 p-4 rounded-xl border border-slate-800/60 font-mono">
+                <p className="text-[#343230]/80 text-sm leading-relaxed whitespace-pre-line bg-[#faf7fb] p-4 rounded-xl border border-[#eadeed] font-mono">
                   {cancion.letra}
                 </p>
               </div>

@@ -771,6 +771,25 @@ function ApoyoSection() {
 }
 
 function EncuentroSection() {
+  const timelineRef = useRef(null);
+  const [mostrarFlecha, setMostrarFlecha] = useState(true);
+
+  useEffect(() => {
+    const el = timelineRef.current;
+    if (!el) return;
+    const chequearScroll = () => {
+      const cercaDelFinal = el.scrollWidth - el.clientWidth - el.scrollLeft < 24;
+      setMostrarFlecha(!cercaDelFinal);
+    };
+    chequearScroll();
+    el.addEventListener('scroll', chequearScroll, { passive: true });
+    window.addEventListener('resize', chequearScroll);
+    return () => {
+      el.removeEventListener('scroll', chequearScroll);
+      window.removeEventListener('resize', chequearScroll);
+    };
+  }, []);
+
   return <section id="encuentro" className="py-24 px-4 bg-[#FFF1E3]">
     <div className="max-w-6xl mx-auto">
       <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -799,10 +818,13 @@ function EncuentroSection() {
               <ExternalLink size={16} />
               Leer la semblanza
             </a>
-            <a href="/Pilares" className="flex items-center gap-2 text-[#21662f] font-bold border-2 border-[#b8d5be] px-5 py-3 rounded-full hover:bg-[#f6faf7] transition-colors">
+            <Link
+              to="/Pilares"
+              className="flex items-center gap-2 text-[#21662f] font-bold border-2 border-[#b8d5be] px-5 py-3 rounded-full hover:bg-[#f6faf7] transition-colors"
+            >
               <ExternalLink size={16} />
               Pilares del Encuentro
-            </a>
+            </Link>
           </div>
         </motion.div>
 
@@ -846,7 +868,7 @@ function EncuentroSection() {
         <h3 className="text-center text-[#4a2055] mb-10">Hitos del Encuentro</h3>
         <div className="relative">
           <div className="absolute top-5 left-0 right-0 h-0.5 bg-[#eadeed]" />
-          <div className="flex overflow-x-auto gap-8 pb-4">
+          <div ref={timelineRef} className="flex overflow-x-auto gap-8 pb-4 scroll-smooth">
             {[{
               año: '1986',
               hito: 'Primer Encuentro Nacional de Mujeres, Buenos Aires'
@@ -883,6 +905,29 @@ function EncuentroSection() {
               <p className="text-xs text-gray-500 text-center mt-1">{item.hito}</p>
             </div>)}
           </div>
+
+          {/* Indicador de scroll: degradé + flecha que "respira" hacia la derecha */}
+          <AnimatePresence>
+            {mostrarFlecha && <>
+              <motion.div
+                key="fade-timeline"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute top-0 right-0 bottom-4 w-16 bg-gradient-to-l from-[#FFF1E3] to-transparent pointer-events-none"
+              />
+              <motion.div
+                key="flecha-timeline"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, x: [0, 6, 0] }}
+                exit={{ opacity: 0 }}
+                transition={{ x: { duration: 1.3, repeat: Infinity, ease: 'easeInOut' }, opacity: { duration: 0.3 } }}
+                className="absolute top-1 right-0 bg-[#fdb10c] text-[#4a2055] w-8 h-8 rounded-full flex items-center justify-center shadow-md pointer-events-none"
+              >
+                <ArrowRight size={16} />
+              </motion.div>
+            </>}
+          </AnimatePresence>
         </div>
       </div>
     </div>
@@ -956,7 +1001,7 @@ function CronogramaSection() {
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12">
         <h2 className="text-white mb-4">Cronograma</h2>
-        <p className="text-white/60">Tocá cada día para ver las actividades</p>
+        <p className="text-white/60">Quedá atentx para ver las actividades que iremos sumando</p>
       </div>
 
       {/* Tabs de días - mobile */}
@@ -1075,7 +1120,11 @@ function CulturalSection() {
         <p className="text-gray-500 max-w-xl mx-auto mb-4">
           Arte, música, teatro y más. El Encuentro también es fiesta y celebración colectiva.
         </p>
-        <a href="#" className="inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold px-6 py-3 rounded-full hover:bg-[#fec449] transition-colors">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSewjHAlFM65SW-sI0f7gpFlPjYy1lhTGwv30DsRcZcTVCuAeA/viewform"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold px-6 py-3 rounded-full hover:bg-[#fec449] transition-colors"
+        >
           <ExternalLink size={16} />
           Inscribir una actividad cultural
         </a>
