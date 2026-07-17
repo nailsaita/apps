@@ -498,7 +498,7 @@ export function Navbar() {
 
 function HeroLottie({ className = '' }) {
   return <div className={className}>
-    <Lottie path="/lottie/Logo.json" loop autoplay style={{ width: '100%', height: '100%' }} />
+    <Lottie path="/lottie/Logo.json" loop={false} autoplay style={{ width: '100%', height: '100%' }} />
   </div>;
 }
 
@@ -522,7 +522,7 @@ function HeroSection() {
     }} className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center">
 
       {/* Bloque: Lottie + Título/Subtítulo — todo centrado (logo y título alineados entre sí) */}
-      <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12 w-full">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:gap-12 w-full">
         {/* Animación Lottie: centrada */}
         <div className="order-1 flex items-center justify-center shrink-0">
           <HeroLottie className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-full lg:scale-110" />
@@ -530,18 +530,20 @@ function HeroSection() {
 
         {/* Título (3 líneas) + subtítulo, centrados igual que el logo */}
         <div className="order-2 flex-1 text-center">
-          <h1 className="font-display text-white font-black mb-6 flex flex-col items-center leading-[1.05]">
+          <h1 className="font-display text-white font-black mb-6 flex flex-col items-center leading-[1.05]"
+            style={{ "marginLeft":"auto","marginRight":"auto","width":"60vw","maxWidth":"580px", "lineHeight":"0.8" }}
+          >
             {/* Tamaños calculados en proporción a la cantidad de caracteres de cada línea,
                 para que las tres se perciban con un ancho visual similar. Son aproximados:
                 ajustalos a ojo si con la tipografía real (Thunderhouse) no cierran perfecto. */}
             <span style={{
-              fontSize: 'clamp(1.6rem, 5.5vw, 3.2rem)'
+              "fontSize":"clamp(1.6rem, 7vw, 4.6rem)","width":"100%","textAlign":"justify","textAlignLast":"justify"
             }}>39 ENCUENTRO PLURINACIONAL</span>
             <span className="text-[#fec449]" style={{
-              fontSize: 'clamp(1.05rem, 3.6vw, 2.1rem)'
+              "fontSize":"clamp(1.05rem, 3.6vw, 2.6rem)","textAlign":"justify","textAlignLast":"justify","width":"100%"
             }}>DE MUJERES, LESBIANAS, TRAVESTIS, TRANS,</span>
             <span className="text-[#94c09e]" style={{
-              fontSize: 'clamp(1.1rem, 3.7vw, 2.15rem)'
+              "fontSize":"clamp(1.1rem, 3.7vw, 3.1rem)","textAlign":"justify","textAlignLast":"justify","width":"100%"
             }}>BISEXUALES, INTERSEXUALES Y NO BINARIES</span>
           </h1>
 

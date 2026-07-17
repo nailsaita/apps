@@ -45,10 +45,14 @@ function GlobalTypography() {
         body {
           font-family: 'degular', sans-serif !important;
         }
-        h1, h2, h3, h4, h5, h6,
-        h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
+        h1, h1 * {
           font-family: 'thunderhouse-pro', sans-serif !important;
+          font-weight: 500 !important;
         }
+        h1, h1 *, h2, h2 * {
+          text-transform: uppercase !important;
+        }
+
       `;
       document.head.appendChild(style);
     }
