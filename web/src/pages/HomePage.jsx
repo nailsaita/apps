@@ -388,7 +388,12 @@ export function Navbar() {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);
-  const links = [{
+  const links = [
+  {
+    href: '/#',
+    id: 'inicio',
+    label: 'Inicio'
+  },{
     href: '/#encuentro',
     id: 'encuentro',
     label: '¿Qué es?'
@@ -401,10 +406,10 @@ export function Navbar() {
     id: 'cronograma',
     label: 'Cronograma'
   }, {
-    href: '/#cultural',
-    id: 'cultural',
-    label: 'Cultural'
-  }, {
+  //   href: '/#cultural',
+  //   id: 'cultural',
+  //   label: 'Cultural'
+  // }, {
     href: '/#sede',
     id: 'sede',
     label: 'Sede'
@@ -498,7 +503,7 @@ export function Navbar() {
 
 function HeroLottie({ className = '' }) {
   return <div className={className}>
-    <Lottie path="/lottie/Logo.json" loop={false} autoplay style={{ width: '100%', height: '100%' }} />
+    <Lottie path="/lottie/Logo.json" loop={true} autoplay style={{ width: '100%', height: '100%' }} />
   </div>;
 }
 
@@ -577,16 +582,6 @@ function HeroSection() {
           </a>
         </div>
       </div>
-    </motion.div>
-
-    <motion.div initial={{
-      opacity: 0
-    }} animate={{
-      opacity: 1
-    }} transition={{
-      delay: 1.2
-    }} className="absolute bottom-8 left-1/2 -translate-x-1/2">
-      <ChevronDown size={28} className="text-white/40 animate-bounce" />
     </motion.div>
   </section>;
 }
@@ -949,7 +944,7 @@ function EjesSection() {
         </a>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+      {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
         {EJES.map(eje => <motion.div key={eje.id} layout onClick={() => setEjeAbierto(ejeAbierto === eje.id ? null : eje.id)} className="bg-[#FFF1E3] rounded-2xl p-6 cursor-pointer border-2 transition-all hover:shadow-md" style={{
           borderColor: ejeAbierto === eje.id ? eje.color : 'transparent'
         }} whileHover={{
@@ -985,7 +980,7 @@ function EjesSection() {
             </motion.ul>}
           </AnimatePresence>
         </motion.div>)}
-      </div>
+      </div> */}
 
       {/* Mapa placeholder */}
       <div className="bg-[#FFF1E3] rounded-3xl border-2 border-dashed border-gray-200 h-72 flex flex-col items-center justify-center text-gray-400">
@@ -1452,11 +1447,11 @@ export default function HomePage() {
     }}>
       {/* Patrón tileado de fondo: 35% de opacidad, modo de fusión Multiplicar. Archivo en /public/images/bg-tile.png */}
       <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: 'url(/images/bg-tile.png)',
-        backgroundRepeat: 'repeat',
-        backgroundSize: '340px',
-        mixBlendMode: 'multiply',
-        opacity: 0.35
+        // backgroundImage: 'url(/images/bg-tile.png)',
+        // backgroundRepeat: 'repeat',
+        // backgroundSize: '340px',
+        // mixBlendMode: 'multiply',
+        // opacity: 0.35
       }} />
       <div className="relative">
         <HeroSection />
@@ -1467,7 +1462,7 @@ export default function HomePage() {
     <EjesSection />
     <CronogramaSection />
     <CancioneroSection />
-    <CulturalSection />
+    {/* <CulturalSection /> */}
     <SedeSection />
     <PrensaSection />
     <FaqSection />

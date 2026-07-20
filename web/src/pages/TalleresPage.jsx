@@ -1,5 +1,6 @@
 import React from 'react';
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
+import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag } from 'lucide-react';
 import TitleSection from '@/components/TitleSection.jsx';
 import EJES from '@/data/ejes';
 
@@ -10,7 +11,16 @@ export default function TalleresPage() {
       <Navbar />
       <TitleSection title="Talleres" />
       <main className="relative z-10 mx-auto max-w-7xl px-4 pb-24 pt-32 sm:px-6 lg:px-8">
-        <section className="rounded-3xl border border-[#eadeed] bg-white/70 p-6 shadow-xl shadow-[#813893]/5 backdrop-blur-sm">
+        <div className="text-center mb-12">
+          <h2 className="text-[#343230] mb-4">Ejes temáticos y talleres</h2>
+          <p className="text-gray-500 max-w-xl mx-auto">
+            Los talleres son el corazón del Encuentro. Son espacios horizontales de debate donde se construyen los documentos colectivos. Hacé clic en cada eje para ver los talleres.
+          </p>
+          <p className="inline-flex items-center gap-1 text-[#21662f]">
+            Pronto subiremos el listado completo           </p>
+        </div>
+
+        {/* <section className="rounded-3xl border border-[#eadeed] bg-white/70 p-6 shadow-xl shadow-[#813893]/5 backdrop-blur-sm">
           <div className="mb-6">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#813893]">Programación</p>
             <h2 className="mt-2 text-2xl font-semibold text-[#343230]">Ejes de trabajo</h2>
@@ -74,7 +84,7 @@ export default function TalleresPage() {
               </tbody>
             </table>
           </div>
-        </section>
+        </section> */}
       </main>
 
       <FooterSection />
