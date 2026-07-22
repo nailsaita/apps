@@ -1123,11 +1123,11 @@ function CulturalSection() {
           className="inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold px-6 py-3 rounded-full hover:bg-[#fec449] transition-colors"
         >
           <ExternalLink size={16} />
-          Inscribir una actividad cultural
+          Para Inscribir tu actividad cultural para el Encuentro, llená este formulario
         </a>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {/* <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {ACTIVIDADES_CULTURALES.map((act, i) => <motion.div key={act.id} initial={{
           opacity: 0,
           y: 20
@@ -1151,7 +1151,7 @@ function CulturalSection() {
             </a>
           </div>
         </motion.div>)}
-      </div>
+      </div> */}
     </div>
   </section>;
 }
@@ -1159,18 +1159,18 @@ function SedeSection() {
   const cards = [{
     icono: <Home size={24} />,
     titulo: 'Alojamiento',
-    desc: 'Lista de alojamientos amigables y contacto de la comisión.',
+    desc: 'Para pedir alojamiento, escribinos un mail.',
     color: 'bg-[#faf7fb] border-[#d5bddb]',
     iconColor: 'text-[#662c74]',
-    link: '#',
-    linkText: 'Ver alojamientos'
+    link: 'mailto:alojamiento.39encuentropluri.cba%40proton.me',
+    linkText: 'Pedir alojamiento por mail'
   }, {
     icono: <Bus size={24} />,
     titulo: 'Transporte',
     desc: 'Info de transporte urbano, SUBE, y cómo llegar al Encuentro.',
     color: 'bg-green-50 border-green-200',
     iconColor: 'text-green-600',
-    link: '#',
+    link: '/Transporte',
     linkText: 'Ver opciones'
   }, {
     icono: <AlertCircle size={24} />,
@@ -1227,7 +1227,7 @@ function SedeSection() {
       </div>
 
       {/* Card opcional: venir desde tu provincia */}
-      <div className="bg-[#2f1435] text-white rounded-3xl p-8 flex flex-col md:flex-row items-center gap-6">
+      {/* <div className="bg-[#2f1435] text-white rounded-3xl p-8 flex flex-col md:flex-row items-center gap-6">
         <div className="text-5xl">🚌</div>
         <div className="flex-1">
           <h3 className="text-white mb-2">¿Venís desde otra provincia?</h3>
@@ -1236,7 +1236,7 @@ function SedeSection() {
         <a href="#" className="bg-[#fdb10c] text-[#4a2055] font-bold px-6 py-3 rounded-full hover:bg-[#fec449] transition-colors whitespace-nowrap shrink-0">
           Ver contactos
         </a>
-      </div>
+      </div> */}
     </div>
   </section>;
 }
@@ -1462,7 +1462,7 @@ export default function HomePage() {
     <EjesSection />
     <CronogramaSection />
     <CancioneroSection />
-    {/* <CulturalSection /> */}
+    <CulturalSection />
     <SedeSection />
     <PrensaSection />
     <FaqSection />

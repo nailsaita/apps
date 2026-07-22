@@ -23,7 +23,7 @@ function TitleSection({ title, subtitle }) {
       duration: 0.8
     }} className="relative z-10 max-w-5xl">
         <h1 className="text-white font-black leading-[1.05] mb-6 text-3xl md:text-5xl lg:text-6xl" style={{
-        fontFamily: 'Rubik, sans-serif'
+        
       }}>
           {title}
         </h1>
