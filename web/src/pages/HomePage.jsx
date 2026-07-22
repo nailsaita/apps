@@ -536,7 +536,7 @@ function HeroSection() {
         {/* Título (3 líneas) + subtítulo, centrados igual que el logo */}
         <div className="order-2 flex-1 text-center">
           <h1 className="font-display text-white font-black mb-6 flex flex-col items-center leading-[1.05]"
-            style={{ "marginLeft":"auto","marginRight":"auto","width":"60vw","maxWidth":"580px", "lineHeight":"0.8" }}
+            style={{ "marginLeft":"auto","marginRight":"auto","width":"60vw","maxWidth":"580px", "lineHeight":"0.8", "fontFamily": "'thunderhouse-pro'", "fontWeight": 500}}
           >
             {/* Tamaños calculados en proporción a la cantidad de caracteres de cada línea,
                 para que las tres se perciban con un ancho visual similar. Son aproximados:

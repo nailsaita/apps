@@ -25,7 +25,9 @@ export default function KitPrensaPage() {
           variants={fadeInVariant}
           className="mb-16 bg-white/70 rounded-3xl p-6 md:p-8 border border-[#eadeed] shadow-xl shadow-[#813893]/5 backdrop-blur-sm"
         >
-          <h2 className="text-2xl font-bold tracking-tight text-[#813893] mb-4 uppercase" style={{ fontFamily: "'thunderhouse-pro', sans-serif" }}>
+          <h2 className="text-2xl font-bold tracking-tight text-[#813893] mb-4 uppercase"
+          //  style={{ fontFamily: "'thunderhouse-pro', sans-serif" }}
+           >
             Información para la Prensa y Acreditación
           </h2>
           <h3 className="text-xl font-semibold text-[#343230] mb-4">
@@ -121,7 +123,9 @@ export default function KitPrensaPage() {
           variants={fadeInVariant}
           className="bg-white/50 rounded-3xl p-6 md:p-8 border border-[#eadeed] shadow-xl shadow-[#813893]/5"
         >
-          <h2 className="text-2xl font-bold tracking-tight text-[#813893] mb-1 uppercase" style={{ fontFamily: "'thunderhouse-pro', sans-serif" }}>
+          <h2 className="text-2xl font-bold tracking-tight text-[#813893] mb-1 uppercase" 
+          // style={{ fontFamily: "'thunderhouse-pro', sans-serif" }}
+          >
             Nuestro Kit de Prensa
           </h2>
           <p className="text-gray-500 text-sm mb-6 font-medium">Recursos Digitales y Contenido</p>

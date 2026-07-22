@@ -11,7 +11,7 @@ import SemblanzaPage from '@/pages/SemblanzaPage.jsx';
 import CancioneroPage from '@/pages/CancioneroPage.jsx';
 import PreventaPage from '@/pages/PreventaPage.jsx';
 import TransportePage from '@/pages/TransportePage.jsx';
-
+import Galeria2007Page from '@/pages/Galeria2007Page.jsx';
 
 function ScrollToHash() {
   const location = useLocation();
@@ -45,10 +45,10 @@ function GlobalTypography() {
         body {
           font-family: 'degular', sans-serif !important;
         }
-        h1, h1 * {
-          font-family: 'thunderhouse-pro', sans-serif !important;
-          font-weight: 500 !important;
-        }
+        // h1, h1 * {
+        //   font-family: 'thunderhouse-pro', sans-serif !important;
+        //   font-weight: 500 !important;
+        // }
         h1, h1 *, h2, h2 * {
           text-transform: uppercase !important;
         }
@@ -71,6 +71,7 @@ function App() {
         <Route path="/Talleres" element={<TalleresPage />} />
         <Route path="/Gacetillas" element={<GacetillasPage />} />
         <Route path="/GaleriaEncuentros" element={<GaleriaEncuentrosPage />} />
+        <Route path="/Galeria2007" element={<Galeria2007Page />} />
         <Route path="/KitPrensa" element={<KitPrensaPage />} />
         <Route path="/Pilares" element={<PilaresPage />} />
         <Route path="/Semblanza" element={<SemblanzaPage />} />
