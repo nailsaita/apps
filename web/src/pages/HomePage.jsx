@@ -192,14 +192,14 @@ const INDICE_BUSQUEDA = [
     color: '#16a34a',
     emoji: '🚌'
   }, {
-    id: 'log-aux',
-    titulo: 'Primeros Auxilios',
-    subtitulo: 'Puestos sanitarios y emergencias',
-    tipo: 'Logística',
-    href: '/#sede',
-    color: '#dc2626',
-    emoji: '🏥'
-  }, {
+  icono: <AlertCircle size={24} />,
+  titulo: 'Primeros Auxilios',
+  desc: 'Puestos sanitarios y datos de emergencia durante el Encuentro.',
+  color: 'bg-red-50 border-red-200',
+  iconColor: 'text-red-600',
+  link: '#',
+  linkText: 'Pronto más información'
+}, {
     id: 'log-feria',
     titulo: 'Feria y Alimentación',
     subtitulo: 'Comida vegana, sin TACC, economía popular',
@@ -811,18 +811,25 @@ function EncuentroSection() {
             ¡Les esperamos el 10, 11 y 12 de Octubre en Córdoba para construir juntas y juntes!
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href="/Semblanza" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-[#662c74] font-bold border-2 border-[#d5bddb] px-5 py-3 rounded-full hover:bg-[#faf7fb] transition-colors">
-              <ExternalLink size={16} />
-              Leer la semblanza
-            </a>
-            <Link
-              to="/Pilares"
-              className="flex items-center gap-2 text-[#21662f] font-bold border-2 border-[#b8d5be] px-5 py-3 rounded-full hover:bg-[#f6faf7] transition-colors"
-            >
-              <ExternalLink size={16} />
-              Pilares del Encuentro
-            </Link>
-          </div>
+  <a href="/Semblanza" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-[#662c74] font-bold border-2 border-[#d5bddb] px-5 py-3 rounded-full hover:bg-[#faf7fb] transition-colors">
+    <ExternalLink size={16} />
+    Leer la semblanza
+  </a>
+  <Link
+    to="/Pilares"
+    className="flex items-center gap-2 text-[#21662f] font-bold border-2 border-[#b8d5be] px-5 py-3 rounded-full hover:bg-[#f6faf7] transition-colors"
+  >
+    <ExternalLink size={16} />
+    Pilares del Encuentro
+  </Link>
+  <Link
+    to="/Galeria2007"
+    className="flex items-center gap-2 text-[#916607] font-bold border-2 border-[#fed886] px-5 py-3 rounded-full hover:bg-[#fffcf5] transition-colors"
+  >
+    <ExternalLink size={16} />
+    Galería de fotos Encuentro 2007 Cba
+  </Link>
+</div>
         </motion.div>
 
         <motion.div initial={{
@@ -865,42 +872,54 @@ function EncuentroSection() {
         <h3 className="text-center text-[#4a2055] mb-10">Hitos del Encuentro</h3>
         <div className="relative">
           <div className="absolute top-5 left-0 right-0 h-0.5 bg-[#eadeed]" />
-          <div ref={timelineRef} className="flex overflow-x-auto gap-8 pb-4 scroll-smooth">
+          <div ref={timelineRef} className="flex overflow-x-auto overflow-y-visible gap-8 pt-3 pb-4 scroll-smooth">
             {[{
-              año: '1986',
-              hito: 'Primer Encuentro Nacional de Mujeres, Buenos Aires'
-            }, {
-              año: '1987',
-              hito: 'Segunda edición, primer encuentro en Córdoba'
-            }, {
-              año: '2003',
-              hito: 'Primera marcha de cierre'
-            }, {
-              año: '2007',
-              hito: 'Edición 22, segundo encuentro en Córdoba'
-            }, {
-              año: '2015',
-              hito: 'Primer Ni Una Menos'
-            }, {
-              año: '2019',
-              hito: 'Se incorporan identidades trans y travestis al nombre'
-            }, {
-              año: '2020',
-              hito: 'Aborto Legal, Seguro y Gratuito'
-            }, {
-              año: '2021',
-              hito: 'Primer Encuentro Plurinacional, San Luis'
-            }, {
-              año: '2026',
-              hito: '39° Encuentro, Córdoba Capital',
-              highlight: true
-            }].map((item, i) => <div key={i} className="flex flex-col items-center min-w-[160px]">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center z-10 mb-3 ${item.highlight ? 'bg-[#fdb10c] border-4 border-[#fec449]/50' : 'bg-[#d5bddb] border-4 border-[#FFF1E3]'}`}>
-                <span className="text-xs font-black text-[#4a2055]">{item.año.slice(2)}</span>
-              </div>
-              <span className={`text-xs font-bold ${item.highlight ? 'text-[#662c74]' : 'text-gray-500'} text-center leading-tight`}>{item.año}</span>
-              <p className="text-xs text-gray-500 text-center mt-1">{item.hito}</p>
-            </div>)}
+  año: '1986',
+  hito: 'Primer Encuentro Nacional de Mujeres, Buenos Aires'
+}, {
+  año: '1987',
+  hito: 'Segunda edición, primer encuentro en Córdoba'
+}, {
+  año: '2003',
+  hito: 'Primera marcha de cierre'
+}, {
+  año: '2007',
+  hito: 'Edición 22, segundo encuentro en Córdoba',
+  link: '/Galeria2007'
+}, {
+  año: '2015',
+  hito: 'Primer Ni Una Menos'
+}, {
+  año: '2019',
+  hito: 'Se incorporan identidades trans y travestis al nombre'
+}, {
+  año: '2020',
+  hito: 'Aborto Legal, Seguro y Gratuito'
+}, {
+  año: '2021',
+  hito: 'Primer Encuentro Plurinacional, San Luis'
+}, {
+  año: '2026',
+  hito: '39° Encuentro, Córdoba Capital',
+  highlight: true
+}].map((item, i) => {
+  const contenido = <>
+    <div className={`w-10 h-10 rounded-full flex items-center justify-center z-10 mb-3 relative transition-transform ${item.highlight ? 'bg-[#fdb10c] border-4 border-[#fec449]/50' : 'bg-[#d5bddb] border-4 border-[#FFF1E3]'} ${item.link ? 'group-hover:scale-110' : ''}`}>
+      <span className="text-xs font-black text-[#4a2055]">{item.año.slice(2)}</span>
+      {item.link && <span className="absolute -top-1 -right-1 bg-[#662c74] text-white rounded-full w-4 h-4 flex items-center justify-center shadow-sm">
+        <Search size={9} strokeWidth={3} />
+      </span>}
+    </div>
+    <span className={`text-xs font-bold ${item.highlight ? 'text-[#662c74]' : item.link ? 'text-[#662c74] group-hover:underline' : 'text-gray-500'} text-center leading-tight`}>{item.año}</span>
+    <p className="text-xs text-gray-500 text-center mt-1">{item.hito}</p>
+  </>;
+
+  return item.link ? <Link key={i} to={item.link} className="group flex flex-col items-center min-w-[160px] cursor-pointer">
+    {contenido}
+  </Link> : <div key={i} className="flex flex-col items-center min-w-[160px]">
+    {contenido}
+  </div>;
+})}
           </div>
 
           {/* Indicador de scroll: degradé + flecha que "respira" hacia la derecha */}
@@ -1156,15 +1175,16 @@ function CulturalSection() {
   </section>;
 }
 function SedeSection() {
+  const [cardAbierta, setCardAbierta] = useState(null);
   const cards = [{
-    icono: <Home size={24} />,
-    titulo: 'Alojamiento',
-    desc: 'Para pedir alojamiento, escribinos un mail.',
-    color: 'bg-[#faf7fb] border-[#d5bddb]',
-    iconColor: 'text-[#662c74]',
-    link: 'mailto:alojamiento.39encuentropluri.cba%40proton.me',
-    linkText: 'Pedir alojamiento por mail'
-  }, {
+  icono: <Home size={24} />,
+  titulo: 'Alojamiento',
+  desc: '¡Largamos preinscripción para el alojamiento!',
+  color: 'bg-[#faf7fb] border-[#d5bddb]',
+  iconColor: 'text-[#662c74]',
+  expandible: true,
+  contenido: `🏫¡Largamos preinscripción para el alojamiento!\n\nSi estás en una organización, colectiva, grupalidad o viajás sola o sole y querés ir inscribiéndote, necesitamos que te comuniques a través de este mail alojamiento.39encuentropluri.cba@proton.me\n\n👉🏽 Por ese medio te especificaremos qué información necesitamos y cómo compartirla de manera más segura.\n\n🧡 ¡Nos vamos preparando para recibir a todas y todes!`
+}, {
     icono: <Bus size={24} />,
     titulo: 'Transporte',
     desc: 'Info de transporte urbano, SUBE, y cómo llegar al Encuentro.',
@@ -1181,14 +1201,14 @@ function SedeSection() {
     link: '#',
     linkText: 'Ver información'
   }, {
-    icono: <Utensils size={24} />,
-    titulo: 'Feria y Alimentación',
-    desc: 'Espacios de feria, comida vegana, sin TACC y economía popular.',
-    color: 'bg-[#fffcf5] border-[#fed886]',
-    iconColor: 'text-[#916607]',
-    link: '#',
-    linkText: 'Ver espacios'
-  }];
+  icono: <Utensils size={24} />,
+  titulo: 'Feria y Alimentación',
+  desc: 'Espacios de feria, comida vegana, sin TACC y economía popular.',
+  color: 'bg-[#fffcf5] border-[#fed886]',
+  iconColor: 'text-[#916607]',
+  expandible: true,
+  contenido: '👉🏽 Estamos trabajando para ofrecer opciones de la economía popular, accesibles y con propuestas sin TACC y veganas para habitar el encuentro entre todxs.'
+}];
   return <section id="sede" className="py-24 px-4 bg-[#faf7fb]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12">
@@ -1205,26 +1225,72 @@ function SedeSection() {
         <p className="text-sm mt-1">Córdoba Capital · Mapa interactivo próximamente</p>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-        {cards.map((card, i) => <motion.div key={i} initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          delay: i * 0.1
-        }} className={`${card.color} border-2 rounded-2xl p-6 flex flex-col`}>
-          <div className={`${card.iconColor} mb-4`}>{card.icono}</div>
-          <h4 className="font-bold text-[#343230] mb-2">{card.titulo}</h4>
-          <p className="text-sm text-gray-500 flex-1">{card.desc}</p>
-          <a href={card.link} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 hover:underline`}>
-            {card.linkText} <ArrowRight size={12} />
-          </a>
-        </motion.div>)}
-      </div>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 items-stretch">
+  {cards.map((card, i) => card.expandible ? <motion.div key={i} initial={{
+    opacity: 0,
+    y: 20
+  }} whileInView={{
+    opacity: 1,
+    y: 0
+  }} viewport={{
+    once: true
+  }} transition={{
+    delay: i * 0.1
+  }} className={`${card.color} border-2 rounded-2xl overflow-hidden flex flex-col`}>
+    <div className="p-6 flex flex-col flex-1">
+      <div className={`${card.iconColor} mb-4`}>{card.icono}</div>
+      <h4 className="font-bold text-[#343230] mb-2">{card.titulo}</h4>
+      <p className="text-sm text-gray-500 flex-1">{card.desc}</p>
+      <button onClick={() => setCardAbierta(cardAbierta === card.titulo ? null : card.titulo)} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 self-start hover:underline`}>
+        {cardAbierta === card.titulo ? 'Ver menos' : 'Ver más'}
+        <ChevronDown size={14} className="transition-transform" style={{
+          transform: cardAbierta === card.titulo ? 'rotate(180deg)' : 'rotate(0deg)'
+        }} />
+      </button>
+    </div>
+    <AnimatePresence>
+      {cardAbierta === card.titulo && <motion.div initial={{
+        height: 0,
+        opacity: 0
+      }} animate={{
+        height: 'auto',
+        opacity: 1
+      }} exit={{
+        height: 0,
+        opacity: 0
+      }} className="overflow-hidden border-t border-[#eadeed]">
+        <div className="p-6 bg-white/40 text-sm text-[#343230]/90 leading-relaxed whitespace-pre-line break-words">
+          {card.titulo === 'Alojamiento' ? <>
+            🏫¡Largamos preinscripción para el alojamiento!{"\n\n"}
+            Si estás en una organización, colectiva, grupalidad o viajás sola o sole y querés ir inscribiéndote, necesitamos que te comuniques a través de este mail{' '}
+            <a href="mailto:alojamiento.39encuentropluri.cba@proton.me" className="font-bold underline hover:text-[#662c74] break-all">
+              alojamiento.39encuentropluri.cba@proton.me
+            </a>
+            {"\n\n"}👉🏽 Por ese medio te especificaremos qué información necesitamos y cómo compartirla de manera más segura.{"\n\n"}
+            🧡 ¡Nos vamos preparando para recibir a todas y todes!
+          </> : card.contenido}
+        </div>
+      </motion.div>}
+    </AnimatePresence>
+  </motion.div> : <motion.div key={i} initial={{
+    opacity: 0,
+    y: 20
+  }} whileInView={{
+    opacity: 1,
+    y: 0
+  }} viewport={{
+    once: true
+  }} transition={{
+    delay: i * 0.1
+  }} className={`${card.color} border-2 rounded-2xl p-6 flex flex-col`}>
+    <div className={`${card.iconColor} mb-4`}>{card.icono}</div>
+    <h4 className="font-bold text-[#343230] mb-2">{card.titulo}</h4>
+    <p className="text-sm text-gray-500 flex-1">{card.desc}</p>
+    <a href={card.link} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 hover:underline`}>
+  {card.linkText} {card.link !== '#' && <ArrowRight size={12} />}
+</a>
+  </motion.div>)}
+</div>
 
       {/* Card opcional: venir desde tu provincia */}
       {/* <div className="bg-[#2f1435] text-white rounded-3xl p-8 flex flex-col md:flex-row items-center gap-6">
@@ -1402,7 +1468,7 @@ function PopupPrimerosAuxilios() {
             <X size={18} />
           </button>
         </div>
-        <p className="text-sm text-gray-500 mb-3">Durante el Encuentro hay puestos de primeros auxilios.</p>
+        <p className="text-sm text-gray-500 mb-3">Durante el Encuentro habrá puestos de primeros auxilios.</p>
         <div className="bg-red-50 rounded-xl p-3">
           <p className="text-xs font-bold text-red-700 mb-1">Emergencias</p>
           <div className="flex items-center gap-2 text-red-600">
@@ -1411,7 +1477,7 @@ function PopupPrimerosAuxilios() {
           </div>
         </div>
         <a href="/#sede" onClick={() => setVisible(false)} className="block text-center text-red-600 text-xs font-bold mt-3 hover:underline">
-          Ver info completa →
+          Pronto mas info →
         </a>
       </motion.div>}
     </AnimatePresence>
