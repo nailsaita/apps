@@ -51,6 +51,7 @@ function GlobalTypography() {
         // }
         h1, h1 *, h2, h2 * {
           text-transform: uppercase !important;
+          font-weight: 800;
         }
 
       `;

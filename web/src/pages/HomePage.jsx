@@ -535,20 +535,20 @@ function HeroSection() {
 
         {/* Título (3 líneas) + subtítulo, centrados igual que el logo */}
         <div className="order-2 flex-1 text-center">
-          <h1 className="font-display text-white font-black mb-6 flex flex-col items-center leading-[1.05]"
-            style={{ "marginLeft":"auto","marginRight":"auto","width":"60vw","maxWidth":"580px", "lineHeight":"0.8", "fontFamily": "'thunderhouse-pro'", "fontWeight": 500}}
+          <h1 className="titulo39 font-display text-white font-black mb-6 flex flex-col items-center leading-[1.05]"
+            style={{ "marginLeft":"auto","marginRight":"auto","width":"60vw","maxWidth":"580px", "lineHeight":"0.8", "fontFamily": "'thunderhouse-pro'", "fontWeight": "500" }}
           >
             {/* Tamaños calculados en proporción a la cantidad de caracteres de cada línea,
                 para que las tres se perciban con un ancho visual similar. Son aproximados:
                 ajustalos a ojo si con la tipografía real (Thunderhouse) no cierran perfecto. */}
             <span style={{
-              "fontSize":"clamp(1.6rem, 7vw, 4.6rem)","width":"100%","textAlign":"justify","textAlignLast":"justify"
+              "fontSize":"clamp(1.6rem, 7vw, 4.6rem)","width":"100%","textAlign":"justify","textAlignLast":"justify", "fontWeight": "500"
             }}>39 ENCUENTRO PLURINACIONAL</span>
             <span className="text-[#fec449]" style={{
-              "fontSize":"clamp(1.05rem, 3.6vw, 2.6rem)","textAlign":"justify","textAlignLast":"justify","width":"100%"
+              "fontSize":"clamp(1.05rem, 3.6vw, 2.6rem)","textAlign":"justify","textAlignLast":"justify","width":"100%", "fontWeight": "500"
             }}>DE MUJERES, LESBIANAS, TRAVESTIS, TRANS,</span>
             <span className="text-[#94c09e]" style={{
-              "fontSize":"clamp(1.1rem, 3.7vw, 3.1rem)","textAlign":"justify","textAlignLast":"justify","width":"100%"
+              "fontSize":"clamp(1.1rem, 3.7vw, 3.1rem)","textAlign":"justify","textAlignLast":"justify","width":"100%", "fontWeight": "500"
             }}>BISEXUALES, INTERSEXUALES Y NO BINARIES</span>
           </h1>
 
@@ -1527,9 +1527,9 @@ export default function HomePage() {
     <EncuentroSection />
     <EjesSection />
     <CronogramaSection />
-    <CancioneroSection />
-    <CulturalSection />
     <SedeSection />
+    <CulturalSection />
+    <CancioneroSection />
     <PrensaSection />
     <FaqSection />
     <FooterSection />
