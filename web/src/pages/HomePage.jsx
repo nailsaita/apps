@@ -508,7 +508,7 @@ function HeroLottie({ className = '' }) {
 }
 
 function HeroSection() {
-  return <section id="hero" className="min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-16 relative overflow-hidden">
+  return <section id="hero" className="min-h-[85vh] flex flex-col items-center justify-center px-4 pt-24 pb-16 relative overflow-hidden">
     {/* Fondo decorativo */}
     <div className="absolute inset-0 pointer-events-none">
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#813893]/20 rounded-full blur-3xl" />
@@ -677,7 +677,7 @@ function DonacionesModal({
 
 function ApoyoSection() {
   const [modalAbierto, setModalAbierto] = useState(false);
-  return <section className="py-20 px-4 relative overflow-hidden">
+  return <section className="py-12 px-4 relative overflow-hidden">
     {/* Fondo decorativo */}
     <div className="absolute inset-0 pointer-events-none">
       <div className="absolute -top-20 -left-20 w-80 h-80 bg-[#fdb10c]/10 rounded-full blur-3xl" />
@@ -686,8 +686,14 @@ function ApoyoSection() {
     </div>
 
     <div className="max-w-5xl mx-auto relative z-10">
-      <div className="text-center mb-12">
-        <h2 className="text-white mb-3">Sumate a sostener el Encuentro</h2>
+      <div className="text-center mb-12 relative">
+  <IlustracionSticker
+  src="/images/ilustraciones/solidaria.svg"
+  size="w-20 md:w-28"
+  rotate={5}
+  className="hidden md:block absolute left-0 md:right-8 lg:right-10 -top-6"
+/>
+  <h2 className="text-white mb-3">Sumate a sostener el Encuentro</h2>
         <p className="text-white/60 max-w-xl mx-auto">
           Dos formas de aportar a la organización colectiva, sin sponsors ni financiamiento estatal.
         </p>
@@ -765,6 +771,108 @@ function ApoyoSection() {
       {modalAbierto && <DonacionesModal onClose={() => setModalAbierto(false)} />}
     </AnimatePresence>
   </section>;
+}
+function ConsignaSection() {
+  const [casoAbierto, setCasoAbierto] = useState(null);
+
+  const casos = [
+  {
+    id: 'delicia',
+    nombre: 'Delicia Mamani Mamani',
+    contenido: `Inmediata aparición con vida de Delicia Mamani Mamani | Desmantelamiento de las redes de trata sostenida con complicidad del poder político, el sistema judicial y las fuerzas de seguridad.`,
+    ruta: '/Delicia'
+  },
+  {
+    id: 'paola',
+    nombre: 'Paola Ortiz',
+    contenido: `¡Libertad para Paola ya! Abajo la justicia patriarcal y sus funcionarios judiciales que reproducen, avalan y sostienen las violencias machistas.`,
+    ruta: '/Paola'
+  }
+];
+
+  return (
+    <section id="consigna" className="relative py-12 px-4 overflow-hidden">
+      {/* Blobs decorativos, mismo lenguaje visual que el resto del sitio */}
+      <div className="absolute -top-24 -left-16 w-80 h-80 bg-[#fdb10c]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-24 -right-16 w-96 h-96 bg-[#2a823c]/20 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-4xl mx-auto text-center relative z-10">
+        <motion.span
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0, scale: [1, 1.04, 1] }}
+          viewport={{ once: true }}
+          transition={{
+            opacity: { duration: 0.5 },
+            y: { duration: 0.5 },
+            scale: { duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }
+          }}
+          className="inline-block bg-[#fdb10c] text-[#4a2055] text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-6"
+        >
+          En Córdoba exigimos
+        </motion.span>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-white leading-tight mb-6 text-3xl sm:text-4xl md:text-5xl"
+        >
+          ¡QUE DELICIA Y PAOLA<br className="hidden sm:block" /> ESTÉN EN EL ENCUENTRO!
+        </motion.h2>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+        >
+          {casos.map(caso => (
+            <button
+              key={caso.id}
+              onClick={() => setCasoAbierto(casoAbierto === caso.id ? null : caso.id)}
+              className="flex items-center justify-center gap-2 bg-white/10 border-2 border-white/25 text-white font-bold px-6 py-3 rounded-full hover:bg-white/20 transition-colors backdrop-blur-sm"
+            >
+              {caso.nombre}
+              <ChevronDown
+                size={16}
+                className="transition-transform"
+                style={{ transform: casoAbierto === caso.id ? 'rotate(180deg)' : 'rotate(0deg)' }}
+              />
+            </button>
+          ))}
+        </motion.div>
+
+        <AnimatePresence mode="wait">
+          {casoAbierto && (
+            <motion.div
+              key={casoAbierto}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="overflow-hidden"
+            >
+              <div className="mt-6 bg-white/10 border border-white/20 rounded-2xl p-6 text-left backdrop-blur-sm">
+  <h4 className="text-[#fdb10c] font-bold mb-2">
+    {casos.find(c => c.id === casoAbierto).nombre}
+  </h4>
+  <p className="text-white/85 text-sm leading-relaxed whitespace-pre-line mb-4">
+    {casos.find(c => c.id === casoAbierto).contenido}
+  </p>
+  <Link
+    to={casos.find(c => c.id === casoAbierto).ruta}
+    className="inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#fec449] transition-colors"
+  >
+    Ver más sobre el caso <ArrowRight size={14} />
+  </Link>
+</div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </section>
+  );
 }
 
 function EncuentroSection() {
@@ -949,6 +1057,18 @@ function EncuentroSection() {
     </div>
   </section>;
 }
+function IlustracionSticker({ src, size = 'w-24', height, rotate = -4, className = '' }) {
+  return (
+    <img
+      src={src}
+      alt=""
+      aria-hidden="true"
+      className={`${height ? height : size} w-auto object-contain opacity-90 drop-shadow-lg select-none pointer-events-none ${className}`}
+      style={{ transform: `rotate(${rotate}deg)` }}
+    />
+  );
+}
+
 function EjesSection() {
   const [ejeAbierto, setEjeAbierto] = useState(null);
   return <section id="ejes" className="py-24 px-4 bg-[#faf7fb]">
@@ -956,10 +1076,10 @@ function EjesSection() {
       <div className="text-center mb-12">
         <h2 className="text-[#343230] mb-4">Ejes temáticos y talleres</h2>
         <p className="text-gray-500 max-w-xl mx-auto">
-          Los talleres son el corazón del Encuentro. Son espacios horizontales de debate donde se construyen los documentos colectivos. Hacé clic en cada eje para ver los talleres.
+          Los talleres son espacios de diálogo y debate que funcionan durante el Encuentro, reuniendo a sus participantes alrededor de una temática. Son abiertos y horizontales, sin inscripción obligatoria.
         </p>
         <a href="/Talleres" className="inline-flex items-center gap-1 text-[#21662f] font-bold mt-4 hover:underline">
-          Pronto subiremos el listado completo <ArrowRight size={14} />
+          Hacé click para ver mas <ArrowRight size={14} />
         </a>
       </div>
 
@@ -1016,16 +1136,17 @@ function CronogramaSection() {
   return <section id="cronograma" className="py-24 px-4 bg-[#2f1435] text-white">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12">
-        <h2 className="text-white mb-4">Cronograma</h2>
-        <p className="text-white/60">Quedá atentx para ver las actividades que iremos sumando</p>
-      </div>
-
-      {/* Tabs de días - mobile */}
-      <div className="flex justify-center gap-3 mb-8 md:hidden">
-        {dias.map(dia => <button key={dia} onClick={() => setDiaActivo(dia)} className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${diaActivo === dia ? 'bg-[#fdb10c] text-[#2f1435]' : 'bg-white/10 text-white/60'}`}>
-          {dia.split(' ')[1]}
-        </button>)}
-      </div>
+  <div className="flex items-center justify-center gap-4 md:gap-6 mb-4">
+    <h2 className="text-white mb-0">Cronograma</h2>
+    <IlustracionSticker
+      src="/images/ilustraciones/activista-casco.svg"
+      size="w-14 md:w-20"
+      rotate={-4}
+      className="hidden md:block"
+    />
+  </div>
+  <p className="text-white/60">Quedá atentx para ver las actividades que iremos sumando</p>
+</div>
 
       {/* Grid 3 columnas - desktop */}
       <div className="hidden md:grid md:grid-cols-3 gap-6">
@@ -1061,8 +1182,14 @@ function CancioneroSection() {
   const [cancionAbierta, setCancionAbierta] = useState(null);
   return <section id="cancionero" className="py-24 px-4 bg-[#faf7fb]">
     <div className="max-w-4xl mx-auto">
-      <div className="text-center mb-12">
-        <h2 className="text-[#343230] mb-4">Cancionero</h2>
+      <div className="text-center mb-12 relative">
+  <IlustracionSticker
+  src="/images/ilustraciones/abrazo-1.svg"
+  size="w-40 md:w-60"
+  rotate={-0}
+  className="hidden md:block absolute left-1/2 md:right-auto md:-right-4 lg:left-4 -top20"
+/>
+  <h2 className="text-[#343230] mb-4">Cancionero</h2>
         <p className="text-gray-500 max-w-xl mx-auto mb-6">
           Canciones sugeridas para este 39 encuentro en Córdoba
         </p>
@@ -1131,8 +1258,14 @@ function CancioneroSection() {
 function CulturalSection() {
   return <section id="cultural" className="py-24 px-4 bg-[#FFF1E3]">
     <div className="max-w-6xl mx-auto">
-      <div className="text-center mb-12">
-        <h2 className="text-[#343230] mb-4">Grilla Cultural</h2>
+      <div className="text-center mb-12 relative">
+  <IlustracionSticker
+  src="/images/ilustraciones/retratos.svg"
+  size="w-32 md:w-44"
+  rotate={4}
+  className="hidden md:block absolute left-0 md:left-20 lg:right-3 -top-10"
+/>
+  <h2 className="text-[#343230] mb-4">Grilla Cultural</h2>
         <p className="text-gray-500 max-w-xl mx-auto mb-4">
           Arte, música, teatro y más. El Encuentro también es fiesta y celebración colectiva.
         </p>
@@ -1174,6 +1307,127 @@ function CulturalSection() {
     </div>
   </section>;
 }
+function MapaEncuentro() {
+  const zonas = [
+    {
+      id: 'sede',
+      label: 'Sede central',
+      color: '#4a2055',
+      bg: '#eadeed',
+      top: '40%',
+      left: '50%',
+      big: true,
+      icon: <MapPin size={20} />
+    },
+    {
+      id: 'alojamiento',
+      label: 'Alojamiento',
+      color: '#662c74',
+      bg: '#eadeed',
+      top: '14%',
+      left: '22%',
+      icon: <Home size={15} />
+    },
+    {
+      id: 'feria',
+      label: 'Feria y alimentación',
+      color: '#916607',
+      bg: '#feecc2',
+      top: '14%',
+      left: '78%',
+      icon: <Utensils size={15} />
+    },
+    {
+      id: 'transporte',
+      label: 'Transporte',
+      color: '#21662f',
+      bg: '#dceade',
+      top: '68%',
+      left: '22%',
+      icon: <Bus size={15} />
+    },
+    {
+      id: 'auxilios',
+      label: 'Primeros auxilios',
+      color: '#b91c1c',
+      bg: '#fee2e2',
+      top: '68%',
+      left: '78%',
+      icon: <AlertCircle size={15} />
+    }
+  ];
+
+  return (
+    <div
+      className="relative rounded-3xl overflow-hidden border-2 border-[#eadeed] mb-10"
+      style={{
+        background: 'linear-gradient(135deg, #FFF1E3 0%, #faf7fb 55%, #f3e9f5 100%)'
+      }}
+    >
+      {/* Blobs decorativos */}
+      <div className="absolute -top-16 -left-10 w-64 h-64 rounded-full bg-[#813893]/10 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-20 -right-10 w-72 h-72 rounded-full bg-[#2a823c]/10 blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-56 h-56 rounded-full bg-[#fdb10c]/10 blur-3xl pointer-events-none" />
+
+      {/* Trazo tipo "río" */}
+      <svg viewBox="0 0 800 400" className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+        <motion.path
+          d="M 160 100 C 260 160, 300 220, 400 200 C 500 180, 560 260, 640 320"
+          fill="none"
+          stroke="#d5bddb"
+          strokeWidth="3"
+          strokeDasharray="2 10"
+          strokeLinecap="round"
+          initial={{ pathLength: 0, opacity: 0 }}
+          whileInView={{ pathLength: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.6, ease: 'easeInOut' }}
+        />
+      </svg>
+
+      <div className="relative h-80 sm:h-96 md:h-[28rem] px-2">
+        {zonas.map((z, i) => (
+          <motion.div
+            key={z.id}
+            initial={{ opacity: 0, scale: 0.6 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.25 + i * 0.12, type: 'spring', stiffness: 260, damping: 18 }}
+            className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
+            style={{ top: z.top, left: z.left }}
+          >
+            <span
+              className="absolute rounded-full animate-ping opacity-30"
+              style={{
+                backgroundColor: z.color,
+                width: z.big ? '2.75rem' : '2rem',
+                height: z.big ? '2.75rem' : '2rem'
+              }}
+            />
+            <span
+              className={`relative flex items-center justify-center rounded-full shadow-md text-white shrink-0 ${z.big ? 'w-11 h-11' : 'w-8 h-8'}`}
+              style={{ backgroundColor: z.color }}
+            >
+              {z.icon}
+            </span>
+            <span
+              className="mt-2 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm text-center leading-tight max-w-[86px] sm:max-w-none sm:whitespace-nowrap"
+              style={{ backgroundColor: z.bg, color: z.color }}
+            >
+              {z.label}
+            </span>
+          </motion.div>
+        ))}
+
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-center px-4 w-full">
+          <p className="text-[11px] sm:text-xs text-gray-400 font-medium">
+            Córdoba Capital · Mapa interactivo próximamente
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 function SedeSection() {
   const [cardAbierta, setCardAbierta] = useState(null);
   const cards = [{
@@ -1211,7 +1465,13 @@ function SedeSection() {
 }];
   return <section id="sede" className="py-24 px-4 bg-[#faf7fb]">
     <div className="max-w-6xl mx-auto">
-      <div className="text-center mb-12">
+      <div className="text-center mb-12 relative">
+        <IlustracionSticker
+          src="/images/ilustraciones/ramas-doradas.svg"
+          size="w-32 md:w-40"
+          rotate={0}
+          className="hidden md:block absolute left-10 md:left-20 lg:right-3 -top-10"
+        />
         <h2 className="text-[#343230] mb-4">Sede y Logística</h2>
         <p className="text-gray-500 max-w-xl mx-auto">
           Todo lo que necesitás saber para llegar, quedarte y moverte durante el Encuentro.
@@ -1219,10 +1479,8 @@ function SedeSection() {
       </div>
 
       {/* Mapa placeholder */}
-      <div className="bg-[#FFF1E3] rounded-3xl border-2 border-dashed border-gray-200 h-72 flex flex-col items-center justify-center text-gray-400 mb-10">
-        <MapPin size={40} className="mb-3 opacity-40" />
-        <p className="font-semibold">Mapa central de la sede</p>
-        <p className="text-sm mt-1">Córdoba Capital · Mapa interactivo próximamente</p>
+      <div>
+        <MapaEncuentro />
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 items-stretch">
@@ -1362,7 +1620,7 @@ function FaqSection() {
   const [faqAbierta, setFaqAbierta] = useState(null);
   return <>
     {/* FAQ */}
-    <div className="py-20 px-4 border-b border-white/10 bg-[#2f1435] text-white">
+    <div className="py-12 px-4 border-b border-white/10 bg-[#2f1435] text-white">
       <div className="max-w-3xl mx-auto">
         <h2 className="text-white text-center mb-10">Preguntas frecuentes</h2>
         {FAQ.map((item, i) => <div key={i} className="border-b border-white/10">
@@ -1412,13 +1670,37 @@ export function FooterSection() {
               </div>
             </div>
           </div>
+
           <div>
             <h4 className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">Comisiones</h4>
-            {['Organización', 'Prensa', 'Alojamiento', 'Cultural', 'Finanzas'].map(com => <div key={com} className="flex items-center gap-2 text-white/60 mb-1.5">
-              <Mail size={12} />
-              <span className="text-sm">{com.toLowerCase()}@encuentro.org</span>
-            </div>)}
+            {[
+              { label: 'Organización y logística', mail: 'orgylogistica.39encuentro@gmail.com' },
+              { label: 'Finanzas', mail: 'finanzas39encuentro@gmail.com' },
+              { label: 'Comunicación', mail: '39encuentropluri.cba@proton.me' },
+              { label: 'Alojamiento', mail: 'alojamiento.39encuentropluri.cba@proton.me' },
+              { label: 'Cultura', mail: '39encuentro.cultura@gmail.com' },
+              { label: 'Accesibilidad', mail: 'accesibilidad.39encuentro@gmail.com' },
+
+            ].map(com => (
+              <div key={com.label} className="flex items-start gap-2 text-white/60 mb-2">
+                <Mail size={12} className="mt-1 shrink-0" />
+                <div>
+                  <p className="text-sm leading-tight">{com.label}</p>
+                  {com.mail ? (
+                    
+                      <a href={'mailto:' + com.mail}
+                      className="text-xs text-white/40 hover:text-white transition-colors break-all"
+                    >
+                      {com.mail}
+                    </a>
+                  ) : (
+                    <span className="text-xs text-white/30 italic">Próximamente</span>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
+
           <div>
             <h4 className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">El Encuentro</h4>
             <p className="text-white/60 text-sm leading-relaxed">
@@ -1433,55 +1715,6 @@ export function FooterSection() {
       </div>
     </div>
   </footer>;
-}
-
-// Pop-up Primeros Auxilios
-function PopupPrimerosAuxilios() {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const t = setTimeout(() => setVisible(true), 3000);
-    return () => clearTimeout(t);
-  }, []);
-  return <>
-    {/* Botón flotante */}
-    <button onClick={() => setVisible(!visible)} className="fixed bottom-6 right-6 z-50 bg-red-500 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:bg-red-600 transition-colors" title="Primeros Auxilios">
-      <AlertCircle size={24} />
-    </button>
-
-    <AnimatePresence>
-      {visible && <motion.div initial={{
-        opacity: 0,
-        scale: 0.9
-      }} animate={{
-        opacity: 1,
-        scale: 1
-      }} exit={{
-        opacity: 0,
-        scale: 0.9
-      }} className="fixed bottom-24 right-6 z-50 bg-[#FFF1E3] rounded-2xl shadow-2xl border-2 border-red-200 p-5 max-w-xs w-full">
-        <div className="flex justify-between items-start mb-3">
-          <div className="flex items-center gap-2">
-            <div className="bg-red-100 text-red-600 p-1.5 rounded-lg"><AlertCircle size={18} /></div>
-            <h4 className="font-bold text-[#343230] text-sm">Primeros Auxilios</h4>
-          </div>
-          <button onClick={() => setVisible(false)} className="text-gray-400 hover:text-gray-600">
-            <X size={18} />
-          </button>
-        </div>
-        <p className="text-sm text-gray-500 mb-3">Durante el Encuentro habrá puestos de primeros auxilios.</p>
-        <div className="bg-red-50 rounded-xl p-3">
-          <p className="text-xs font-bold text-red-700 mb-1">Emergencias</p>
-          <div className="flex items-center gap-2 text-red-600">
-            <Phone size={14} />
-            <span className="font-mono font-bold text-sm">107 / 911</span>
-          </div>
-        </div>
-        <a href="/#sede" onClick={() => setVisible(false)} className="block text-center text-red-600 text-xs font-bold mt-3 hover:underline">
-          Pronto mas info →
-        </a>
-      </motion.div>}
-    </AnimatePresence>
-  </>;
 }
 
 // ─── PÁGINA PRINCIPAL ─────────────────────────────────────────────────────────
@@ -1522,6 +1755,7 @@ export default function HomePage() {
       <div className="relative">
         <HeroSection />
         <ApoyoSection />
+        <ConsignaSection />
       </div>
     </div>
     <EncuentroSection />
@@ -1533,6 +1767,5 @@ export default function HomePage() {
     <PrensaSection />
     <FaqSection />
     <FooterSection />
-    <PopupPrimerosAuxilios />
   </div>;
 }

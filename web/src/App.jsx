@@ -12,6 +12,8 @@ import CancioneroPage from '@/pages/CancioneroPage.jsx';
 import PreventaPage from '@/pages/PreventaPage.jsx';
 import TransportePage from '@/pages/TransportePage.jsx';
 import Galeria2007Page from '@/pages/Galeria2007Page.jsx';
+import PaolaPage from '@/pages/PaolaPage.jsx';
+import DeliciaPage from '@/pages/DeliciaPage.jsx';
 
 function ScrollToHash() {
   const location = useLocation();
@@ -79,6 +81,8 @@ function App() {
         <Route path="/Preventa" element={<PreventaPage />} />
         <Route path="/Cancionero" element={<CancioneroPage />} />
         <Route path="/Transporte" element={<TransportePage />} />
+        <Route path="/Paola" element={<PaolaPage />} />
+        <Route path="/Delicia" element={<DeliciaPage />} />
 
         {/* Catch-all route for 404s */}
         <Route path="*" element={
