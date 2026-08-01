@@ -37,7 +37,7 @@ const FAQ = [{
   respuesta: <>El Encuentro es autogestivo, autónomo y autofinanciado. Su organización es posible gracias al trabajo voluntario de cientos de compañeras y compañeres, los aportes solidarios de organizaciones, actividades de recaudación y contribuciones realizadas por quienes participan. Esta forma de organización garantiza la independencia política del Encuentro y fortalece una construcción colectiva sostenida por la participación de miles de personas de todo el país. Si querés colaborar con la organización, podés sumarte a las comisiones de trabajo o realizar un aporte solidario. </>
 }, {
   pregunta: '¿Dónde consulto para alojarme gratuitamente?',
-  respuesta: <>La Comisión de Alojamiento coordina espacios de hospedaje solidario para quienes viajan desde otras localidades, provincias o barrios alejados del casco céntrico y necesitan alojamiento durante los días del Encuentro. Si estás en una organización, colectiva, grupalidad o viajás sola o sole, inscribirte para solicitar alojamiento, comunicate este mail <strong><HiddenMail text1="alojamiento.39encuentropluri.cba" text2="proton.me" /></strong> <br/>
+  respuesta: <>La Comisión de Alojamiento coordina espacios de hospedaje solidario para quienes viajan desde otras localidades, provincias o barrios alejados del casco céntrico y necesitan alojamiento durante los días del Encuentro. Si estás en una organización, colectiva, grupalidad o viajás sola o sole, inscribirte para solicitar alojamiento, comunicate este mail <strong><HiddenMail mail="alojamiento.39encuentropluri.cba@proton.me" /></strong> <br/>
   Por ese medio te especificaremos qué información necesitamos y cómo compartirla de manera más segura.</>
 }, {
   pregunta: '¿Cómo será el transporte los días del Encuentro?',

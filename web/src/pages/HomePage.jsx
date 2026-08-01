@@ -508,7 +508,7 @@ function HeroLottie({ className = '' }) {
 }
 
 function HeroSection() {
-  return <section id="hero" className="min-h-[85vh] flex flex-col items-center justify-center px-4 pt-24 pb-16 relative overflow-hidden">
+  return <section id="hero" className="min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-16 relative overflow-hidden">
     {/* Fondo decorativo */}
     <div className="absolute inset-0 pointer-events-none">
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#813893]/20 rounded-full blur-3xl" />
@@ -895,7 +895,7 @@ function EncuentroSection() {
     };
   }, []);
 
-  return <section id="encuentro" className="py-24 px-4 bg-[#FFF1E3]">
+  return <section id="encuentro" className="py-24 px-4 overflow-x-hidden bg-[#FFF1E3]">
     <div className="max-w-6xl mx-auto">
       <div className="grid md:grid-cols-2 gap-16 items-center">
         <motion.div initial={{
@@ -951,7 +951,7 @@ function EncuentroSection() {
         }} transition={{
           duration: 0.6,
           delay: 0.2
-        }} className="grid grid-cols-2 gap-4">
+        }} className="grid grid-cols-2 gap-4 min-w-0">
           {[{
             num: '39°',
             label: 'Edición del Encuentro',
@@ -980,7 +980,7 @@ function EncuentroSection() {
         <h3 className="text-center text-[#4a2055] mb-10">Hitos del Encuentro</h3>
         <div className="relative">
           <div className="absolute top-5 left-0 right-0 h-0.5 bg-[#eadeed]" />
-          <div ref={timelineRef} className="flex overflow-x-auto overflow-y-visible gap-8 pt-3 pb-4 scroll-smooth">
+          <div ref={timelineRef} className="flex overflow-x-auto overflow-y-visible gap-8 pb-4 scroll-smooth">
             {[{
   año: '1986',
   hito: 'Primer Encuentro Nacional de Mujeres, Buenos Aires'
@@ -1249,7 +1249,7 @@ function CancioneroSection() {
         <Music size={32} className="mx-auto mb-4 text-[#fdb10c]" />
         <h3 className="text-[#343230] font-bold mb-2">¿Tenés una canción para agregar?</h3>
         <p className="text-gray-600 text-sm mb-4">
-          Enviala a <strong><HiddenMail text1="39encuentropluri.cba" text2="proton.me" /></strong>
+          Enviala a <strong><HiddenMail mail="39encuentropluri.cba@proton.me" /></strong>
         </p>
       </div>
     </div>
@@ -1521,9 +1521,7 @@ function SedeSection() {
           {card.titulo === 'Alojamiento' ? <>
             🏫¡Largamos preinscripción para el alojamiento!{"\n\n"}
             Si estás en una organización, colectiva, grupalidad o viajás sola o sole y querés ir inscribiéndote, necesitamos que te comuniques a través de este mail{' '}
-            <a href="mailto:alojamiento.39encuentropluri.cba@proton.me" className="font-bold underline hover:text-[#662c74] break-all">
-              alojamiento.39encuentropluri.cba@proton.me
-            </a>
+            <HiddenMail mail="alojamiento.39encuentropluri.cba@proton.me" className="font-bold underline hover:text-[#662c74] break-all" />
             {"\n\n"}👉🏽 Por ese medio te especificaremos qué información necesitamos y cómo compartirla de manera más segura.{"\n\n"}
             🧡 ¡Nos vamos preparando para recibir a todas y todes!
           </> : card.contenido}
@@ -1660,7 +1658,7 @@ export function FooterSection() {
             <h4 className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">Contacto general</h4>
             <div className="flex items-center gap-2 text-white/70 mb-2">
               <div>
-                <a href="mailto:39encuentropluri.cba%40proton.me" className="text-white/60 hover:text-white transition-colors"> <Mail size={20} /></a>
+                <HiddenMail mail="39encuentropluri.cba%40proton.me" className="text-white/60 hover:text-white transition-colors"><Mail size={20} /></HiddenMail>
               </div>
               <div>
                 <a href="https://www.instagram.com/39encuentropluri.cba/" target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors"><Instagram size={20} /></a>
@@ -1687,12 +1685,7 @@ export function FooterSection() {
                 <div>
                   <p className="text-sm leading-tight">{com.label}</p>
                   {com.mail ? (
-                    
-                      <a href={'mailto:' + com.mail}
-                      className="text-xs text-white/40 hover:text-white transition-colors break-all"
-                    >
-                      {com.mail}
-                    </a>
+                      <HiddenMail mail={com.mail} className="text-xs text-white/40 hover:text-white transition-colors break-all" />
                   ) : (
                     <span className="text-xs text-white/30 italic">Próximamente</span>
                   )}

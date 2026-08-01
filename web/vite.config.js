@@ -1,6 +1,7 @@
 import path from 'node:path';
 import react from '@vitejs/plugin-react';
 import { createLogger, defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
 import inlineEditPlugin from './plugins/visual-editor/vite-plugin-react-inline-editor.js';
 import editModeDevPlugin from './plugins/visual-editor/vite-plugin-edit-mode.js';
 import selectionModePlugin from './plugins/selection-mode/vite-plugin-selection-mode.js';
@@ -215,6 +216,30 @@ if (window.navigation && window.self !== window.top) {
 }
 `;
 
+const pwaPlugin = VitePWA({
+	disable: isDev,
+	registerType: 'autoUpdate',
+	injectRegister: 'inline',
+	includeAssets: ['favicon.ico', 'favicon-96x96.png'],
+	manifest: {
+		name: 'Encuentro 39',
+		short_name: 'Encuentro39',
+		description: 'PWA shell for Encuentro 39',
+		theme_color: '#ffffff',
+		background_color: '#ffffff',
+		display: 'standalone',
+		start_url: '/',
+		icons: [
+			{ src: 'favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+			{ src: 'favicon-96x96.png', sizes: '192x192', type: 'image/png' },
+			{ src: 'favicon-96x96.png', sizes: '512x512', type: 'image/png' }
+		]
+	},
+	workbox: {
+		cleanupOutdatedCaches: true,
+	},
+});
+
 const addTransformIndexHtml = {
 	name: 'add-transform-index-html',
 	transformIndexHtml(html) {
@@ -291,6 +316,7 @@ export default defineConfig({
 	customLogger: logger,
 	plugins: [
 		...(isDev ? [inlineEditPlugin(), editModeDevPlugin(), selectionModePlugin(), iframeRouteRestorationPlugin(), pocketbaseAuthPlugin()] : []),
+		pwaPlugin,
 		react(),
 		addTransformIndexHtml
 	],
