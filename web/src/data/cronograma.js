@@ -12,7 +12,7 @@ const CRONOGRAMA = {
     hora: '13:00 Hs',
     actividad: 'Almuerzo'
   }, {
-    hora: '15 Hs',
+    hora: '15:00 Hs',
     actividad: 'Primera ronda de talleres'
   }, {
     hora: '18:30 Hs',
@@ -34,11 +34,11 @@ const CRONOGRAMA = {
     hora: '18:30 Hs',
     actividad: 'Marcha del 39 Encuentro'
   }, {
-    hora: '20 Hs',
+    hora: '20:00 Hs',
     actividad: 'Festival del Encuentro'
   }],
   'Lunes 12': [{
-    hora: '09 Hs',
+    hora: '09:00 Hs',
     actividad: 'Acto de cierre'
   }]
 };

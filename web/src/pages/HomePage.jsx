@@ -192,14 +192,14 @@ const INDICE_BUSQUEDA = [
     color: '#16a34a',
     emoji: '🚌'
   }, {
-  icono: <AlertCircle size={24} />,
-  titulo: 'Primeros Auxilios',
-  desc: 'Puestos sanitarios y datos de emergencia durante el Encuentro.',
-  color: 'bg-red-50 border-red-200',
-  iconColor: 'text-red-600',
-  link: '#',
-  linkText: 'Pronto más información'
-}, {
+    icono: <AlertCircle size={24} />,
+    titulo: 'Primeros Auxilios',
+    desc: 'Puestos sanitarios y datos de emergencia durante el Encuentro.',
+    color: 'bg-red-50 border-red-200',
+    iconColor: 'text-red-600',
+    link: '#',
+    linkText: 'Pronto más información'
+  }, {
     id: 'log-feria',
     titulo: 'Feria y Alimentación',
     subtitulo: 'Comida vegana, sin TACC, economía popular',
@@ -389,35 +389,35 @@ export function Navbar() {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
   const links = [
-  {
-    href: '/#',
-    id: 'inicio',
-    label: 'Inicio'
-  },{
-    href: '/#encuentro',
-    id: 'encuentro',
-    label: '¿Qué es?'
-  }, {
-    href: '/#ejes',
-    id: 'ejes',
-    label: 'Talleres'
-  }, {
-    href: '/#cronograma',
-    id: 'cronograma',
-    label: 'Cronograma'
-  }, {
-  //   href: '/#cultural',
-  //   id: 'cultural',
-  //   label: 'Cultural'
-  // }, {
-    href: '/#sede',
-    id: 'sede',
-    label: 'Sede'
-  }, {
-    href: '/#prensa',
-    id: 'prensa',
-    label: 'Prensa'
-  }];
+    {
+      href: '/#',
+      id: 'inicio',
+      label: 'Inicio'
+    }, {
+      href: '/#encuentro',
+      id: 'encuentro',
+      label: '¿Qué es?'
+    }, {
+      href: '/#ejes',
+      id: 'ejes',
+      label: 'Talleres'
+    }, {
+      href: '/#cronograma',
+      id: 'cronograma',
+      label: 'Cronograma'
+    }, {
+      //   href: '/#cultural',
+      //   id: 'cultural',
+      //   label: 'Cultural'
+      // }, {
+      href: '/#sede',
+      id: 'sede',
+      label: 'Sede'
+    }, {
+      href: '/#prensa',
+      id: 'prensa',
+      label: 'Prensa'
+    }];
   return <>
     <AnimatePresence>
       {buscadorAbierto && <BuscadorGlobal onClose={() => setBuscadorAbierto(false)} />}
@@ -536,19 +536,19 @@ function HeroSection() {
         {/* Título (3 líneas) + subtítulo, centrados igual que el logo */}
         <div className="order-2 flex-1 text-center">
           <h1 className="titulo39 font-display text-white font-black mb-6 flex flex-col items-center leading-[1.05]"
-            style={{ "marginLeft":"auto","marginRight":"auto","width":"60vw","maxWidth":"580px", "lineHeight":"0.8", "fontFamily": "'thunderhouse-pro'", "fontWeight": "500" }}
+            style={{ "marginLeft": "auto", "marginRight": "auto", "width": "60vw", "maxWidth": "580px", "lineHeight": "0.8", "fontFamily": "'thunderhouse-pro'", "fontWeight": "500" }}
           >
             {/* Tamaños calculados en proporción a la cantidad de caracteres de cada línea,
                 para que las tres se perciban con un ancho visual similar. Son aproximados:
                 ajustalos a ojo si con la tipografía real (Thunderhouse) no cierran perfecto. */}
             <span style={{
-              "fontSize":"clamp(1.6rem, 7vw, 4.6rem)","width":"100%","textAlign":"justify","textAlignLast":"justify", "fontWeight": "500"
+              "fontSize": "clamp(1.6rem, 7vw, 4.6rem)", "width": "100%", "textAlign": "justify", "textAlignLast": "justify", "fontWeight": "500"
             }}>39 ENCUENTRO PLURINACIONAL</span>
             <span className="text-[#fec449]" style={{
-              "fontSize":"clamp(1.05rem, 3.6vw, 2.6rem)","textAlign":"justify","textAlignLast":"justify","width":"100%", "fontWeight": "500"
+              "fontSize": "clamp(1.05rem, 3.6vw, 2.6rem)", "textAlign": "justify", "textAlignLast": "justify", "width": "100%", "fontWeight": "500"
             }}>DE MUJERES, LESBIANAS, TRAVESTIS, TRANS,</span>
             <span className="text-[#94c09e]" style={{
-              "fontSize":"clamp(1.1rem, 3.7vw, 3.1rem)","textAlign":"justify","textAlignLast":"justify","width":"100%", "fontWeight": "500"
+              "fontSize": "clamp(1.1rem, 3.7vw, 3.1rem)", "textAlign": "justify", "textAlignLast": "justify", "width": "100%", "fontWeight": "500"
             }}>BISEXUALES, INTERSEXUALES Y NO BINARIES</span>
           </h1>
 
@@ -687,13 +687,13 @@ function ApoyoSection() {
 
     <div className="max-w-5xl mx-auto relative z-10">
       <div className="text-center mb-12 relative">
-  <IlustracionSticker
-  src="/images/ilustraciones/solidaria.svg"
-  size="w-20 md:w-28"
-  rotate={5}
-  className="hidden md:block absolute left-0 md:right-8 lg:right-10 -top-6"
-/>
-  <h2 className="text-white mb-3">Sumate a sostener el Encuentro</h2>
+        <IlustracionSticker
+          src="/images/ilustraciones/solidaria.svg"
+          size="w-20 md:w-28"
+          rotate={5}
+          className="hidden md:block absolute left-0 md:right-8 lg:right-10 -top-6"
+        />
+        <h2 className="text-white mb-3">Sumate a sostener el Encuentro</h2>
         <p className="text-white/60 max-w-xl mx-auto">
           Dos formas de aportar a la organización colectiva, sin sponsors ni financiamiento estatal.
         </p>
@@ -776,19 +776,19 @@ function ConsignaSection() {
   const [casoAbierto, setCasoAbierto] = useState(null);
 
   const casos = [
-  {
-    id: 'delicia',
-    nombre: 'Delicia Mamani Mamani',
-    contenido: `Inmediata aparición con vida de Delicia Mamani Mamani | Desmantelamiento de las redes de trata sostenida con complicidad del poder político, el sistema judicial y las fuerzas de seguridad.`,
-    ruta: '/Delicia'
-  },
-  {
-    id: 'paola',
-    nombre: 'Paola Ortiz',
-    contenido: `¡Libertad para Paola ya! Abajo la justicia patriarcal y sus funcionarios judiciales que reproducen, avalan y sostienen las violencias machistas.`,
-    ruta: '/Paola'
-  }
-];
+    {
+      id: 'delicia',
+      nombre: 'Delicia Mamani Mamani',
+      contenido: `Inmediata aparición con vida de Delicia Mamani Mamani | Desmantelamiento de las redes de trata sostenida con complicidad del poder político, el sistema judicial y las fuerzas de seguridad.`,
+      ruta: '/Delicia'
+    },
+    {
+      id: 'paola',
+      nombre: 'Paola Ortiz',
+      contenido: `¡Libertad para Paola ya! Abajo la justicia patriarcal y sus funcionarios judiciales que reproducen, avalan y sostienen las violencias machistas.`,
+      ruta: '/Paola'
+    }
+  ];
 
   return (
     <section id="consigna" className="relative py-12 px-4 overflow-hidden">
@@ -854,19 +854,19 @@ function ConsignaSection() {
               className="overflow-hidden"
             >
               <div className="mt-6 bg-white/10 border border-white/20 rounded-2xl p-6 text-left backdrop-blur-sm">
-  <h4 className="text-[#fdb10c] font-bold mb-2">
-    {casos.find(c => c.id === casoAbierto).nombre}
-  </h4>
-  <p className="text-white/85 text-sm leading-relaxed whitespace-pre-line mb-4">
-    {casos.find(c => c.id === casoAbierto).contenido}
-  </p>
-  <Link
-    to={casos.find(c => c.id === casoAbierto).ruta}
-    className="inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#fec449] transition-colors"
-  >
-    Ver más sobre el caso <ArrowRight size={14} />
-  </Link>
-</div>
+                <h4 className="text-[#fdb10c] font-bold mb-2">
+                  {casos.find(c => c.id === casoAbierto).nombre}
+                </h4>
+                <p className="text-white/85 text-sm leading-relaxed whitespace-pre-line mb-4">
+                  {casos.find(c => c.id === casoAbierto).contenido}
+                </p>
+                <Link
+                  to={casos.find(c => c.id === casoAbierto).ruta}
+                  className="inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#fec449] transition-colors"
+                >
+                  Ver más sobre el caso <ArrowRight size={14} />
+                </Link>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -919,25 +919,25 @@ function EncuentroSection() {
             ¡Les esperamos el 10, 11 y 12 de Octubre en Córdoba para construir juntas y juntes!
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-  <a href="/Semblanza" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-[#662c74] font-bold border-2 border-[#d5bddb] px-5 py-3 rounded-full hover:bg-[#faf7fb] transition-colors">
-    <ExternalLink size={16} />
-    Leer la semblanza
-  </a>
-  <Link
-    to="/Pilares"
-    className="flex items-center gap-2 text-[#21662f] font-bold border-2 border-[#b8d5be] px-5 py-3 rounded-full hover:bg-[#f6faf7] transition-colors"
-  >
-    <ExternalLink size={16} />
-    Pilares del Encuentro
-  </Link>
-  <Link
-    to="/Galeria2007"
-    className="flex items-center gap-2 text-[#916607] font-bold border-2 border-[#fed886] px-5 py-3 rounded-full hover:bg-[#fffcf5] transition-colors"
-  >
-    <ExternalLink size={16} />
-    Galería de fotos Encuentro 2007 Cba
-  </Link>
-</div>
+            <a href="/Semblanza" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-[#662c74] font-bold border-2 border-[#d5bddb] px-5 py-3 rounded-full hover:bg-[#faf7fb] transition-colors">
+              <ExternalLink size={16} />
+              Leer la semblanza
+            </a>
+            <Link
+              to="/Pilares"
+              className="flex items-center gap-2 text-[#21662f] font-bold border-2 border-[#b8d5be] px-5 py-3 rounded-full hover:bg-[#f6faf7] transition-colors"
+            >
+              <ExternalLink size={16} />
+              Pilares del Encuentro
+            </Link>
+            <Link
+              to="/Galeria2007"
+              className="flex items-center gap-2 text-[#916607] font-bold border-2 border-[#fed886] px-5 py-3 rounded-full hover:bg-[#fffcf5] transition-colors"
+            >
+              <ExternalLink size={16} />
+              Galería de fotos Encuentro 2007 Cba
+            </Link>
+          </div>
         </motion.div>
 
         <motion.div initial={{
@@ -982,52 +982,52 @@ function EncuentroSection() {
           <div className="absolute top-5 left-0 right-0 h-0.5 bg-[#eadeed]" />
           <div ref={timelineRef} className="flex overflow-x-auto overflow-y-visible gap-8 pb-4 scroll-smooth">
             {[{
-  año: '1986',
-  hito: 'Primer Encuentro Nacional de Mujeres, Buenos Aires'
-}, {
-  año: '1987',
-  hito: 'Segunda edición, primer encuentro en Córdoba'
-}, {
-  año: '2003',
-  hito: 'Primera marcha de cierre'
-}, {
-  año: '2007',
-  hito: 'Edición 22, segundo encuentro en Córdoba',
-  link: '/Galeria2007'
-}, {
-  año: '2015',
-  hito: 'Primer Ni Una Menos'
-}, {
-  año: '2019',
-  hito: 'Se incorporan identidades trans y travestis al nombre'
-}, {
-  año: '2020',
-  hito: 'Aborto Legal, Seguro y Gratuito'
-}, {
-  año: '2021',
-  hito: 'Primer Encuentro Plurinacional, San Luis'
-}, {
-  año: '2026',
-  hito: '39° Encuentro, Córdoba Capital',
-  highlight: true
-}].map((item, i) => {
-  const contenido = <>
-    <div className={`w-10 h-10 rounded-full flex items-center justify-center z-10 mb-3 relative transition-transform ${item.highlight ? 'bg-[#fdb10c] border-4 border-[#fec449]/50' : 'bg-[#d5bddb] border-4 border-[#FFF1E3]'} ${item.link ? 'group-hover:scale-110' : ''}`}>
-      <span className="text-xs font-black text-[#4a2055]">{item.año.slice(2)}</span>
-      {item.link && <span className="absolute -top-1 -right-1 bg-[#662c74] text-white rounded-full w-4 h-4 flex items-center justify-center shadow-sm">
-        <Search size={9} strokeWidth={3} />
-      </span>}
-    </div>
-    <span className={`text-xs font-bold ${item.highlight ? 'text-[#662c74]' : item.link ? 'text-[#662c74] group-hover:underline' : 'text-gray-500'} text-center leading-tight`}>{item.año}</span>
-    <p className="text-xs text-gray-500 text-center mt-1">{item.hito}</p>
-  </>;
+              año: '1986',
+              hito: 'Primer Encuentro Nacional de Mujeres, Buenos Aires'
+            }, {
+              año: '1987',
+              hito: 'Segunda edición, primer encuentro en Córdoba'
+            }, {
+              año: '2003',
+              hito: 'Primera marcha de cierre'
+            }, {
+              año: '2007',
+              hito: 'Edición 22, segundo encuentro en Córdoba',
+              link: '/Galeria2007'
+            }, {
+              año: '2015',
+              hito: 'Primer Ni Una Menos'
+            }, {
+              año: '2019',
+              hito: 'Se incorporan identidades trans y travestis al nombre'
+            }, {
+              año: '2020',
+              hito: 'Aborto Legal, Seguro y Gratuito'
+            }, {
+              año: '2021',
+              hito: 'Primer Encuentro Plurinacional, San Luis'
+            }, {
+              año: '2026',
+              hito: '39° Encuentro, Córdoba Capital',
+              highlight: true
+            }].map((item, i) => {
+              const contenido = <>
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center z-10 mb-3 relative transition-transform ${item.highlight ? 'bg-[#fdb10c] border-4 border-[#fec449]/50' : 'bg-[#d5bddb] border-4 border-[#FFF1E3]'} ${item.link ? 'group-hover:scale-110' : ''}`}>
+                  <span className="text-xs font-black text-[#4a2055]">{item.año.slice(2)}</span>
+                  {item.link && <span className="absolute -top-1 -right-1 bg-[#662c74] text-white rounded-full w-4 h-4 flex items-center justify-center shadow-sm">
+                    <Search size={9} strokeWidth={3} />
+                  </span>}
+                </div>
+                <span className={`text-xs font-bold ${item.highlight ? 'text-[#662c74]' : item.link ? 'text-[#662c74] group-hover:underline' : 'text-gray-500'} text-center leading-tight`}>{item.año}</span>
+                <p className="text-xs text-gray-500 text-center mt-1">{item.hito}</p>
+              </>;
 
-  return item.link ? <Link key={i} to={item.link} className="group flex flex-col items-center min-w-[160px] cursor-pointer">
-    {contenido}
-  </Link> : <div key={i} className="flex flex-col items-center min-w-[160px]">
-    {contenido}
-  </div>;
-})}
+              return item.link ? <Link key={i} to={item.link} className="group flex flex-col items-center min-w-[160px] cursor-pointer">
+                {contenido}
+              </Link> : <div key={i} className="flex flex-col items-center min-w-[160px]">
+                {contenido}
+              </div>;
+            })}
           </div>
 
           {/* Indicador de scroll: degradé + flecha que "respira" hacia la derecha */}
@@ -1136,18 +1136,23 @@ function CronogramaSection() {
   return <section id="cronograma" className="py-24 px-4 bg-[#2f1435] text-white">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12">
-  <div className="flex items-center justify-center gap-4 md:gap-6 mb-4">
-    <h2 className="text-white mb-0">Cronograma</h2>
-    <IlustracionSticker
-      src="/images/ilustraciones/activista-casco.svg"
-      size="w-14 md:w-20"
-      rotate={-4}
-      className="hidden md:block"
-    />
-  </div>
-  <p className="text-white/60">Quedá atentx para ver las actividades que iremos sumando</p>
-</div>
-
+        <div className="flex items-center justify-center gap-4 md:gap-6 mb-4">
+          <h2 className="text-white mb-0">Cronograma</h2>
+          <IlustracionSticker
+            src="/images/ilustraciones/activista-casco.svg"
+            size="w-14 md:w-20"
+            rotate={-4}
+            className="hidden md:block"
+          />
+        </div>
+        <p className="text-white/60">Quedá atentx para ver las actividades que iremos sumando</p>
+      </div>
+      {/* Tabs de días - mobile */}
+      <div className="flex justify-center gap-3 mb-8 md:hidden">
+        {dias.map(dia => <button key={dia} onClick={() => setDiaActivo(dia)} className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${diaActivo === dia ? 'bg-[#fdb10c] text-[#2f1435]' : 'bg-white/10 text-white/60'}`}>
+          {dia.split(' ')[1]}
+        </button>)}
+      </div>
       {/* Grid 3 columnas - desktop */}
       <div className="hidden md:grid md:grid-cols-3 gap-6">
         {dias.map(dia => <div key={dia} className="bg-white/5 rounded-2xl overflow-hidden border border-white/10">
@@ -1156,7 +1161,7 @@ function CronogramaSection() {
           </div>
           <div className="p-4">
             {CRONOGRAMA[dia].map((item, i) => <div key={i} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
-              <span className="text-[#fdb10c] text-sm font-mono font-bold w-12 shrink-0">{item.hora}</span>
+              <span className="text-[#fdb10c] text-sm font-mono font-bold w-16 shrink-0">{item.hora}</span>
               <span className="text-white/80 text-sm">{item.actividad}</span>
             </div>)}
           </div>
@@ -1170,7 +1175,7 @@ function CronogramaSection() {
         </div>
         <div className="p-4">
           {CRONOGRAMA[diaActivo].map((item, i) => <div key={i} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
-            <span className="text-[#fdb10c] text-sm font-mono font-bold w-12 shrink-0">{item.hora}</span>
+            <span className="text-[#fdb10c] text-sm font-mono font-bold w-16 shrink-0">{item.hora}</span>
             <span className="text-white/80 text-sm">{item.actividad}</span>
           </div>)}
         </div>
@@ -1183,13 +1188,13 @@ function CancioneroSection() {
   return <section id="cancionero" className="py-24 px-4 bg-[#faf7fb]">
     <div className="max-w-4xl mx-auto">
       <div className="text-center mb-12 relative">
-  <IlustracionSticker
-  src="/images/ilustraciones/abrazo-1.svg"
-  size="w-40 md:w-60"
-  rotate={-0}
-  className="hidden md:block absolute left-1/2 md:right-auto md:-right-4 lg:left-4 -top20"
-/>
-  <h2 className="text-[#343230] mb-4">Cancionero</h2>
+        <IlustracionSticker
+          src="/images/ilustraciones/abrazo-1.svg"
+          size="w-40 md:w-60"
+          rotate={-0}
+          className="hidden md:block absolute left-1/2 md:right-auto md:-right-4 lg:left-4 -top20"
+        />
+        <h2 className="text-[#343230] mb-4">Cancionero</h2>
         <p className="text-gray-500 max-w-xl mx-auto mb-6">
           Canciones sugeridas para este 39 encuentro en Córdoba
         </p>
@@ -1259,13 +1264,13 @@ function CulturalSection() {
   return <section id="cultural" className="py-24 px-4 bg-[#FFF1E3]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12 relative">
-  <IlustracionSticker
-  src="/images/ilustraciones/retratos.svg"
-  size="w-32 md:w-44"
-  rotate={4}
-  className="hidden md:block absolute left-0 md:left-20 lg:right-3 -top-10"
-/>
-  <h2 className="text-[#343230] mb-4">Grilla Cultural</h2>
+        <IlustracionSticker
+          src="/images/ilustraciones/retratos.svg"
+          size="w-32 md:w-44"
+          rotate={4}
+          className="hidden md:block absolute left-0 md:left-20 lg:right-3 -top-10"
+        />
+        <h2 className="text-[#343230] mb-4">Grilla Cultural</h2>
         <p className="text-gray-500 max-w-xl mx-auto mb-4">
           Arte, música, teatro y más. El Encuentro también es fiesta y celebración colectiva.
         </p>
@@ -1431,14 +1436,14 @@ function MapaEncuentro() {
 function SedeSection() {
   const [cardAbierta, setCardAbierta] = useState(null);
   const cards = [{
-  icono: <Home size={24} />,
-  titulo: 'Alojamiento',
-  desc: '¡Largamos preinscripción para el alojamiento!',
-  color: 'bg-[#faf7fb] border-[#d5bddb]',
-  iconColor: 'text-[#662c74]',
-  expandible: true,
-  contenido: `🏫¡Largamos preinscripción para el alojamiento!\n\nSi estás en una organización, colectiva, grupalidad o viajás sola o sole y querés ir inscribiéndote, necesitamos que te comuniques a través de este mail alojamiento.39encuentropluri.cba@proton.me\n\n👉🏽 Por ese medio te especificaremos qué información necesitamos y cómo compartirla de manera más segura.\n\n🧡 ¡Nos vamos preparando para recibir a todas y todes!`
-}, {
+    icono: <Home size={24} />,
+    titulo: 'Alojamiento',
+    desc: '¡Largamos preinscripción para el alojamiento!',
+    color: 'bg-[#faf7fb] border-[#d5bddb]',
+    iconColor: 'text-[#662c74]',
+    expandible: true,
+    contenido: `🏫¡Largamos preinscripción para el alojamiento!\n\nSi estás en una organización, colectiva, grupalidad o viajás sola o sole y querés ir inscribiéndote, necesitamos que te comuniques a través de este mail alojamiento.39encuentropluri.cba@proton.me\n\n👉🏽 Por ese medio te especificaremos qué información necesitamos y cómo compartirla de manera más segura.\n\n🧡 ¡Nos vamos preparando para recibir a todas y todes!`
+  }, {
     icono: <Bus size={24} />,
     titulo: 'Transporte',
     desc: 'Info de transporte urbano, SUBE, y cómo llegar al Encuentro.',
@@ -1455,14 +1460,14 @@ function SedeSection() {
     link: '#',
     linkText: 'Ver información'
   }, {
-  icono: <Utensils size={24} />,
-  titulo: 'Feria y Alimentación',
-  desc: 'Espacios de feria, comida vegana, sin TACC y economía popular.',
-  color: 'bg-[#fffcf5] border-[#fed886]',
-  iconColor: 'text-[#916607]',
-  expandible: true,
-  contenido: '👉🏽 Estamos trabajando para ofrecer opciones de la economía popular, accesibles y con propuestas sin TACC y veganas para habitar el encuentro entre todxs.'
-}];
+    icono: <Utensils size={24} />,
+    titulo: 'Feria y Alimentación',
+    desc: 'Espacios de feria, comida vegana, sin TACC y economía popular.',
+    color: 'bg-[#fffcf5] border-[#fed886]',
+    iconColor: 'text-[#916607]',
+    expandible: true,
+    contenido: '👉🏽 Estamos trabajando para ofrecer opciones de la economía popular, accesibles y con propuestas sin TACC y veganas para habitar el encuentro entre todxs.'
+  }];
   return <section id="sede" className="py-24 px-4 bg-[#faf7fb]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12 relative">
@@ -1484,69 +1489,69 @@ function SedeSection() {
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 items-stretch">
-  {cards.map((card, i) => card.expandible ? <motion.div key={i} initial={{
-    opacity: 0,
-    y: 20
-  }} whileInView={{
-    opacity: 1,
-    y: 0
-  }} viewport={{
-    once: true
-  }} transition={{
-    delay: i * 0.1
-  }} className={`${card.color} border-2 rounded-2xl overflow-hidden flex flex-col`}>
-    <div className="p-6 flex flex-col flex-1">
-      <div className={`${card.iconColor} mb-4`}>{card.icono}</div>
-      <h4 className="font-bold text-[#343230] mb-2">{card.titulo}</h4>
-      <p className="text-sm text-gray-500 flex-1">{card.desc}</p>
-      <button onClick={() => setCardAbierta(cardAbierta === card.titulo ? null : card.titulo)} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 self-start hover:underline`}>
-        {cardAbierta === card.titulo ? 'Ver menos' : 'Ver más'}
-        <ChevronDown size={14} className="transition-transform" style={{
-          transform: cardAbierta === card.titulo ? 'rotate(180deg)' : 'rotate(0deg)'
-        }} />
-      </button>
-    </div>
-    <AnimatePresence>
-      {cardAbierta === card.titulo && <motion.div initial={{
-        height: 0,
-        opacity: 0
-      }} animate={{
-        height: 'auto',
-        opacity: 1
-      }} exit={{
-        height: 0,
-        opacity: 0
-      }} className="overflow-hidden border-t border-[#eadeed]">
-        <div className="p-6 bg-white/40 text-sm text-[#343230]/90 leading-relaxed whitespace-pre-line break-words">
-          {card.titulo === 'Alojamiento' ? <>
-            🏫¡Largamos preinscripción para el alojamiento!{"\n\n"}
-            Si estás en una organización, colectiva, grupalidad o viajás sola o sole y querés ir inscribiéndote, necesitamos que te comuniques a través de este mail{' '}
-            <HiddenMail mail="alojamiento.39encuentropluri.cba@proton.me" className="font-bold underline hover:text-[#662c74] break-all" />
-            {"\n\n"}👉🏽 Por ese medio te especificaremos qué información necesitamos y cómo compartirla de manera más segura.{"\n\n"}
-            🧡 ¡Nos vamos preparando para recibir a todas y todes!
-          </> : card.contenido}
-        </div>
-      </motion.div>}
-    </AnimatePresence>
-  </motion.div> : <motion.div key={i} initial={{
-    opacity: 0,
-    y: 20
-  }} whileInView={{
-    opacity: 1,
-    y: 0
-  }} viewport={{
-    once: true
-  }} transition={{
-    delay: i * 0.1
-  }} className={`${card.color} border-2 rounded-2xl p-6 flex flex-col`}>
-    <div className={`${card.iconColor} mb-4`}>{card.icono}</div>
-    <h4 className="font-bold text-[#343230] mb-2">{card.titulo}</h4>
-    <p className="text-sm text-gray-500 flex-1">{card.desc}</p>
-    <a href={card.link} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 hover:underline`}>
-  {card.linkText} {card.link !== '#' && <ArrowRight size={12} />}
-</a>
-  </motion.div>)}
-</div>
+        {cards.map((card, i) => card.expandible ? <motion.div key={i} initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          delay: i * 0.1
+        }} className={`${card.color} border-2 rounded-2xl overflow-hidden flex flex-col`}>
+          <div className="p-6 flex flex-col flex-1">
+            <div className={`${card.iconColor} mb-4`}>{card.icono}</div>
+            <h4 className="font-bold text-[#343230] mb-2">{card.titulo}</h4>
+            <p className="text-sm text-gray-500 flex-1">{card.desc}</p>
+            <button onClick={() => setCardAbierta(cardAbierta === card.titulo ? null : card.titulo)} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 self-start hover:underline`}>
+              {cardAbierta === card.titulo ? 'Ver menos' : 'Ver más'}
+              <ChevronDown size={14} className="transition-transform" style={{
+                transform: cardAbierta === card.titulo ? 'rotate(180deg)' : 'rotate(0deg)'
+              }} />
+            </button>
+          </div>
+          <AnimatePresence>
+            {cardAbierta === card.titulo && <motion.div initial={{
+              height: 0,
+              opacity: 0
+            }} animate={{
+              height: 'auto',
+              opacity: 1
+            }} exit={{
+              height: 0,
+              opacity: 0
+            }} className="overflow-hidden border-t border-[#eadeed]">
+              <div className="p-6 bg-white/40 text-sm text-[#343230]/90 leading-relaxed whitespace-pre-line break-words">
+                {card.titulo === 'Alojamiento' ? <>
+                  🏫¡Largamos preinscripción para el alojamiento!{"\n\n"}
+                  Si estás en una organización, colectiva, grupalidad o viajás sola o sole y querés ir inscribiéndote, necesitamos que te comuniques a través de este mail{' '}
+                  <HiddenMail mail="alojamiento.39encuentropluri.cba@proton.me" className="font-bold underline hover:text-[#662c74] break-all" />
+                  {"\n\n"}👉🏽 Por ese medio te especificaremos qué información necesitamos y cómo compartirla de manera más segura.{"\n\n"}
+                  🧡 ¡Nos vamos preparando para recibir a todas y todes!
+                </> : card.contenido}
+              </div>
+            </motion.div>}
+          </AnimatePresence>
+        </motion.div> : <motion.div key={i} initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          delay: i * 0.1
+        }} className={`${card.color} border-2 rounded-2xl p-6 flex flex-col`}>
+          <div className={`${card.iconColor} mb-4`}>{card.icono}</div>
+          <h4 className="font-bold text-[#343230] mb-2">{card.titulo}</h4>
+          <p className="text-sm text-gray-500 flex-1">{card.desc}</p>
+          <a href={card.link} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 hover:underline`}>
+            {card.linkText} {card.link !== '#' && <ArrowRight size={12} />}
+          </a>
+        </motion.div>)}
+      </div>
 
       {/* Card opcional: venir desde tu provincia */}
       {/* <div className="bg-[#2f1435] text-white rounded-3xl p-8 flex flex-col md:flex-row items-center gap-6">
@@ -1685,7 +1690,7 @@ export function FooterSection() {
                 <div>
                   <p className="text-sm leading-tight">{com.label}</p>
                   {com.mail ? (
-                      <HiddenMail mail={com.mail} className="text-xs text-white/40 hover:text-white transition-colors break-all" />
+                    <HiddenMail mail={com.mail} className="text-xs text-white/40 hover:text-white transition-colors break-all" />
                   ) : (
                     <span className="text-xs text-white/30 italic">Próximamente</span>
                   )}
