@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Copy, Check, ShoppingBag, Ruler, MessageCircle, Clock, MapPin } from 'lucide-react';
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
+import TitleSectionTransparent from '@/components/TitleSectionTransparent.jsx';
+import {Helmet} from "react-helmet";
 
 // ─── DATOS DE PRODUCTOS ────────────────────────────────────────────────────
 
@@ -129,11 +131,14 @@ function ProductoCard({ producto }) {
 
 export default function PreventaPage() {
     return (
-        <div className="relative bg-background text-slate-100 min-h-screen">
+        <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-purple-950 via-purple-800 to-green-900 text-slate-100">
+            <Helmet>
+                <title>Preventa: remeras y tote bags</title>
+            </Helmet>
             <CountdownBanner />
             <Navbar />
 
-            <TitleSection title="Preventa: remeras y tote bags" />
+            <TitleSectionTransparent title="Preventa: remeras y tote bags" />
 
             <main className="relative z-10 mx-auto max-w-4xl px-4 pb-32 pt-32 sm:px-6 lg:px-8">
                 <section className="mb-16">

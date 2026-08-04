@@ -3,10 +3,15 @@ import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
 import EJES from '@/data/ejes';
 import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag, MessageCircle, Clock, Layers } from 'lucide-react';
+import {Helmet} from "react-helmet";
+
 
 export default function TalleresPage() {
   return (
     <div className="relative bg-[#FFF1E3] text-[#343230] min-h-screen">
+       <Helmet>
+          <title>Talleres</title>
+      </Helmet>
       <CountdownBanner />
       <Navbar />
       <TitleSection title="Talleres" />

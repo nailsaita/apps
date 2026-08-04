@@ -3,10 +3,15 @@ import { ExternalLink } from 'lucide-react';
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
 import gacetillas from '@/data/gacetillas.js';
+import Helmet from "react-helmet";
 
 export default function GacetillasPage() {
   return (
     <div className="relative bg-[#FFF1E3] text-[#343230] min-h-screen">
+      <Helmet>
+        <title>Gacetillas</title>
+      </Helmet>
+
       <CountdownBanner />
       <Navbar />
       <TitleSection title="Gacetillas" />

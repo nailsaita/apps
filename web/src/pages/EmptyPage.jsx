@@ -4,11 +4,16 @@ import { ExternalLink } from 'lucide-react';
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
 import galeriaNotas from '@/data/galeriaNotas.js';
+import Helmet from "react-helmet";
 
 export default function EmptyPage() {
 
   return (
     <div className="relative bg-background text-slate-100">
+      <Helmet>
+          <title>Página en construcción</title>
+      </Helmet>
+
       <CountdownBanner />
       <Navbar />
       <TitleSection

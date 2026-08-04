@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
+import {Helmet} from "react-helmet";
 
 export default function PaolaPage() {
   const fadeInVariant = {
@@ -11,6 +12,10 @@ export default function PaolaPage() {
 
   return (
     <div className="relative min-h-screen bg-[#FFF1E3] text-[#343230]">
+      <Helmet>
+          <title>Libertad Para Paola</title>
+      </Helmet>
+
       <CountdownBanner />
       <Navbar />
 

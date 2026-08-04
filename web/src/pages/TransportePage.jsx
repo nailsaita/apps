@@ -4,11 +4,16 @@ import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
 import galeriaNotas from '@/data/galeriaNotas.js';
 import { ExternalLink, Bus, Car, Smartphone, Bike, TrainFront, CreditCard, QrCode, MapPin, Clock } from 'lucide-react';
+import {Helmet} from "react-helmet";
+
 
 export default function TransportePage() {
 
   return (
     <div className="relative bg-background text-slate-100">
+      <Helmet>
+          <title>Transporte</title>
+      </Helmet>
       <CountdownBanner />
       <Navbar />
       <TitleSection

@@ -3,15 +3,19 @@ import { motion } from 'framer-motion';
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
 import galeria2007 from '@/data/galeria2007.js';
+import Helmet from "react-helmet";
 
 export default function Galeria2007Page() {
   const images = galeria2007.filter((item) => item?.Name && !['files.json', 'Set-Content'].includes(item.Name));
 
   return (
     <div className="relative min-h-screen bg-[#FFF1E3] text-[#343230]">
+      <Helmet>
+          <title>Fotos del Encuentro 2007</title>
+      </Helmet>
       <CountdownBanner />
       <Navbar />
-      <TitleSection title="Fotos Encuentro 2007" />
+      <TitleSection title="Fotos del Encuentro 2007" />
 
       <main className="relative z-10 mx-auto max-w-7xl px-4 pb-24 pt-8 sm:px-6 lg:px-8">
         <section className="rounded-3xl border border-[#D9C7A7] bg-white/80 p-6 shadow-sm backdrop-blur sm:p-8">

@@ -40,16 +40,36 @@ const DATOS_DONACION = [{
 
 export function CountdownBanner() {
   const [dias, setDias] = useState(EVENTO.diasRestantes);
+  const [visible, setVisible] = useState(true);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setDias(Math.ceil((new Date('2026-10-11') - new Date()) / (1000 * 60 * 60 * 24)));
     }, 60000);
-    return () => clearInterval(timer);
+
+    const onScroll = () => {
+      setVisible(window.scrollY < 80);
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
+
   return <motion.div initial={{
-    y: -60
+    y: -60,
+    opacity: 1
   }} animate={{
-    y: 0
+    y: visible ? 0 : -80,
+    opacity: visible ? 1 : 0,
+    pointerEvents: visible ? 'auto' : 'none'
+  }} transition={{
+    duration: 0.25,
+    ease: 'easeInOut'
   }} className="fixed top-0 left-0 right-0 z-50 bg-[#813893] text-white text-center py-2 text-sm font-semibold tracking-wide">
     <span className="opacity-80">Faltan </span>
     <span className="text-[#fdb10c] text-lg font-black mx-1">{dias}</span>
@@ -374,6 +394,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [buscadorAbierto, setBuscadorAbierto] = useState(false);
   const scrolled = useScrolled(80);
+  //const scrolled = false; // Desactivado temporalmente para que el navbar no se mueva al hacer scroll
   const sectionIds = ['encuentro', 'ejes', 'cronograma', 'cultural', 'sede', 'prensa'];
   const activeSection = useActiveSection(sectionIds);
 
@@ -424,7 +445,7 @@ export function Navbar() {
     </AnimatePresence>
 
     <motion.nav animate={{
-      top: scrolled ? -16 : 44,
+      top: scrolled ? 0 : 44,
       backgroundColor: scrolled ? 'rgba(255,241,227,0.97)' : 'rgba(255,241,227,0.92)',
       boxShadow: scrolled ? '0 2px 16px rgba(129,56,147,0.10)' : '0 1px 0 rgba(129,56,147,0.07)'
     }} transition={{
@@ -454,7 +475,7 @@ export function Navbar() {
 
         {/* Derecha: lupa + inscribirse — desktop */}
         <div className="hidden md:flex items-center gap-2">
-          <button onClick={() => setBuscadorAbierto(true)} className="flex items-center gap-2 text-sm text-gray-400 border border-gray-200 rounded-full px-3 py-1.5 hover:border-[#c09cc9] hover:text-[#813893] transition-colors bg-gray-50" title="Buscar (Ctrl+K)">
+          <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="flex items-center gap-2 text-sm text-gray-400 border border-gray-200 rounded-full px-3 py-1.5 hover:border-[#c09cc9] hover:text-[#813893] transition-colors bg-gray-50" title="Buscar (Ctrl+K)">
             <Search size={14} />
             <span className="text-xs">Buscar</span>
             <span className="text-xs bg-gray-200 text-gray-500 rounded px-1.5 py-0.5 ml-1 font-mono">⌘K</span>
@@ -466,10 +487,10 @@ export function Navbar() {
 
         {/* Mobile: lupa + hamburguesa */}
         <div className="md:hidden flex items-center gap-2 w-full justify-between">
-          <button onClick={() => setBuscadorAbierto(true)} className="text-[#813893]">
+          <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="text-[#813893]">
             <Search size={20} />
           </button>
-          <button onClick={() => setOpen(!open)}>
+          <button onClick={() => setOpen(!open)} aria-label="Menú">
             <Menu size={24} className="text-[#813893]" />
           </button>
         </div>
@@ -691,7 +712,7 @@ function ApoyoSection() {
           src="/images/ilustraciones/solidaria.svg"
           size="w-20 md:w-28"
           rotate={5}
-          className="hidden md:block absolute left-0 md:right-8 lg:right-10 -top-6"
+          className="hidden lg:block absolute left-0 md:right-8 lg:right-10 -top-6"
         />
         <h2 className="text-white mb-3">Sumate a sostener el Encuentro</h2>
         <p className="text-white/60 max-w-xl mx-auto">
@@ -1192,7 +1213,7 @@ function CancioneroSection() {
           src="/images/ilustraciones/abrazo-1.svg"
           size="w-40 md:w-60"
           rotate={-0}
-          className="hidden md:block absolute left-1/2 md:right-auto md:-right-4 lg:left-4 -top20"
+          className="hidden lg:block absolute left-1/2 md:right-auto md:-right-4 lg:left-4 -top20"
         />
         <h2 className="text-[#343230] mb-4">Cancionero</h2>
         <p className="text-gray-500 max-w-xl mx-auto mb-6">
@@ -1200,7 +1221,7 @@ function CancioneroSection() {
         </p>
 
         <Link
-          to="/cancionero"
+          to="/Cancionero"
           className="inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold px-6 py-3 rounded-full hover:bg-[#fec449] transition-colors"
         >
           Ver el cancionero sugerido
@@ -1268,7 +1289,7 @@ function CulturalSection() {
           src="/images/ilustraciones/retratos.svg"
           size="w-32 md:w-44"
           rotate={4}
-          className="hidden md:block absolute left-0 md:left-20 lg:right-3 -top-10"
+          className="hidden lg:block absolute left-0 md:left-20 lg:right-3 -top-10"
         />
         <h2 className="text-[#343230] mb-4">Grilla Cultural</h2>
         <p className="text-gray-500 max-w-xl mx-auto mb-4">
@@ -1475,7 +1496,7 @@ function SedeSection() {
           src="/images/ilustraciones/ramas-doradas.svg"
           size="w-32 md:w-40"
           rotate={0}
-          className="hidden md:block absolute left-10 md:left-20 lg:right-3 -top-10"
+          className="hidden lg:block absolute left-10 md:left-20 lg:right-3 -top-10"
         />
         <h2 className="text-[#343230] mb-4">Sede y Logística</h2>
         <p className="text-gray-500 max-w-xl mx-auto">
@@ -1663,7 +1684,7 @@ export function FooterSection() {
             <h4 className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">Contacto general</h4>
             <div className="flex items-center gap-2 text-white/70 mb-2">
               <div>
-                <HiddenMail mail="39encuentropluri.cba%40proton.me" className="text-white/60 hover:text-white transition-colors"><Mail size={20} /></HiddenMail>
+                <HiddenMail mail="39encuentropluri.cba@proton.me" className="text-white/60 hover:text-white transition-colors"><Mail size={20} /></HiddenMail>
               </div>
               <div>
                 <a href="https://www.instagram.com/39encuentropluri.cba/" target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors"><Instagram size={20} /></a>

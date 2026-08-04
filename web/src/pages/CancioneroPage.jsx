@@ -1,6 +1,7 @@
 import React from 'react';
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
+import Helmet from "react-helmet";
 
 const CANCIONES = [
   {
@@ -132,6 +133,9 @@ const CANCIONES = [
 export default function CancioneroPage() {
   return (
     <div className="relative bg-[#FFF1E3] text-[#343230] min-h-screen">
+      <Helmet>
+          <title>Cancionero</title>
+      </Helmet>
       <CountdownBanner />
       <Navbar />
 

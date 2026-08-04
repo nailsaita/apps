@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ExternalLink, CheckCircle, Wifi, BatteryCharging, Video, Coffee, MapPin, Download, MessageSquare } from 'lucide-react';
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
+import {Helmet} from "react-helmet";
 
 export default function KitPrensaPage() {
   const fadeInVariant = {
@@ -12,6 +13,9 @@ export default function KitPrensaPage() {
 
   return (
     <div className="relative min-h-screen bg-[#FFF1E3] text-[#343230]">
+      <Helmet>
+        <title>Kit de Prensa</title>
+      </Helmet>
       <CountdownBanner />
       <Navbar />
 

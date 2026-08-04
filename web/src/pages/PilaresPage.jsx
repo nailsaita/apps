@@ -2,10 +2,14 @@ import React from 'react';
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
 import pilares from '@/data/pilares.js';
+import {Helmet} from "react-helmet";
 
 export default function PilaresPage() {
   return (
     <div className="relative bg-background text-slate-100">
+      <Helmet>
+          <title>Pilares del Encuentro</title>
+      </Helmet>
       <CountdownBanner />
       <Navbar />
       <TitleSection title="Pilares del Encuentro" />
