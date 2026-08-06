@@ -410,35 +410,35 @@ export function Navbar() {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
   const links = [
-    {
-      href: '/#',
-      id: 'inicio',
-      label: 'Inicio'
-    }, {
-      href: '/#encuentro',
-      id: 'encuentro',
-      label: '¿Qué es?'
-    }, {
-      href: '/#ejes',
-      id: 'ejes',
-      label: 'Talleres'
-    }, {
-      href: '/#cronograma',
-      id: 'cronograma',
-      label: 'Cronograma'
-    }, {
-      //   href: '/#cultural',
-      //   id: 'cultural',
-      //   label: 'Cultural'
-      // }, {
-      href: '/#sede',
-      id: 'sede',
-      label: 'Sede'
-    }, {
-      href: '/#prensa',
-      id: 'prensa',
-      label: 'Prensa'
-    }];
+  {
+    href: '/#',
+    id: 'inicio',
+    label: 'Inicio'
+  },{
+    href: '/#encuentro',
+    id: 'encuentro',
+    label: '¿Qué es?'
+  }, {
+    href: '/#ejes',
+    id: 'ejes',
+    label: 'Talleres'
+  }, {
+    href: '/#cronograma',
+    id: 'cronograma',
+    label: 'Cronograma'
+  }, {
+  //   href: '/#cultural',
+  //   id: 'cultural',
+  //   label: 'Cultural'
+  // }, {
+    href: '/#sede',
+    id: 'sede',
+    label: 'Sede'
+  }, {
+    href: '/#prensa',
+    id: 'prensa',
+    label: 'Prensa'
+  }];
   return <>
     <AnimatePresence>
       {buscadorAbierto && <BuscadorGlobal onClose={() => setBuscadorAbierto(false)} />}
@@ -508,7 +508,6 @@ export function Navbar() {
           opacity: 0
         }} className="md:hidden bg-[#FFF1E3] border-t border-[#eadeed] px-4 pb-4 overflow-hidden">
           {links.map(l => <a key={l.href} href={l.href} onClick={() => setOpen(false)} className={`block py-2 text-sm font-medium transition-colors ${activeSection === l.id ? 'text-[#813893] font-bold' : 'text-gray-700 hover:text-[#813893]'}`} style={{ fontFamily: "'degular', sans-serif" }}>
-            {activeSection === l.id && <span className="mr-2 text-[#813893]">›</span>}
             {l.label}
           </a>)}
           <a href="/#inscripcion" onClick={() => setOpen(false)} className="block mt-2 bg-[#2a823c] text-white text-sm font-bold px-4 py-2 rounded-full text-center">
@@ -529,7 +528,7 @@ function HeroLottie({ className = '' }) {
 }
 
 function HeroSection() {
-  return <section id="hero" className="min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-16 relative overflow-hidden">
+  return <section id="hero" className="min-h-[85vh] flex flex-col items-center justify-center px-4 pt-24 pb-16 relative overflow-hidden">
     {/* Fondo decorativo */}
     <div className="absolute inset-0 pointer-events-none">
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#813893]/20 rounded-full blur-3xl" />
@@ -593,15 +592,16 @@ function HeroSection() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/#cronograma" className="bg-[#FFF1E3] text-[#4a2055] font-bold px-8 py-4 rounded-full hover:bg-[#fec449] transition-colors flex items-center justify-center gap-2 shadow-lg">
-            <Calendar size={18} />
-            Ver programa completo
-          </a>
-          <a href="/#inscripcion" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-8 py-4 rounded-full hover:bg-[#21662f] transition-colors flex items-center justify-center gap-2 shadow-lg">
-            <Users size={18} />
-            Inscripción
-          </a>
-        </div>
+  <a href="/#inscripcion" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-8 py-4 rounded-full hover:bg-[#21662f] transition-colors flex items-center justify-center gap-2 shadow-lg">
+    <Users size={18} />
+    Inscripción
+  </a>
+  <a href="/#cronograma" className="bg-[#FFF1E3] text-[#4a2055] font-bold px-8 py-4 rounded-full hover:bg-[#fec449] transition-colors flex items-center justify-center gap-2 shadow-lg">
+    <Calendar size={18} />
+    Ver programa completo
+  </a>
+  <AgregarCalendarioButton />
+</div>
       </div>
     </motion.div>
   </section>;
@@ -708,13 +708,13 @@ function ApoyoSection() {
 
     <div className="max-w-5xl mx-auto relative z-10">
       <div className="text-center mb-12 relative">
-        <IlustracionSticker
-          src="/images/ilustraciones/solidaria.svg"
-          size="w-20 md:w-28"
-          rotate={5}
-          className="hidden lg:block absolute left-0 md:right-8 lg:right-10 -top-6"
-        />
-        <h2 className="text-white mb-3">Sumate a sostener el Encuentro</h2>
+  <IlustracionSticker
+  src="/images/ilustraciones/solidaria.svg"
+  size="w-20 md:w-28"
+  rotate={5}
+  className="hidden md:block absolute left-0 md:right-8 lg:right-10 -top-6"
+/>
+  <h2 className="text-white mb-3">Sumate a sostener el Encuentro</h2>
         <p className="text-white/60 max-w-xl mx-auto">
           Dos formas de aportar a la organización colectiva, sin sponsors ni financiamiento estatal.
         </p>
@@ -793,6 +793,113 @@ function ApoyoSection() {
     </AnimatePresence>
   </section>;
 }
+// ─── BOTÓN AGREGAR AL CALENDARIO ──────────────────────────────────────────────
+
+function AgregarCalendarioButton() {
+  const [abierto, setAbierto] = useState(false);
+  const [coords, setCoords] = useState({ top: 0, left: 0 });
+  const btnRef = useRef(null);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const onClickFuera = e => {
+      if (
+        btnRef.current && !btnRef.current.contains(e.target) &&
+        menuRef.current && !menuRef.current.contains(e.target)
+      ) setAbierto(false);
+    };
+    document.addEventListener('mousedown', onClickFuera);
+    return () => document.removeEventListener('mousedown', onClickFuera);
+  }, []);
+
+  const ANCHO_MENU = 220;
+  const MARGEN = 16;
+
+  const toggle = () => {
+    if (!abierto && btnRef.current) {
+      const rect = btnRef.current.getBoundingClientRect();
+      let left = rect.left + rect.width / 2 - ANCHO_MENU / 2;
+      left = Math.max(MARGEN, Math.min(left, window.innerWidth - ANCHO_MENU - MARGEN));
+      setCoords({ top: rect.bottom + 8, left });
+    }
+    setAbierto(v => !v);
+  };
+
+  // Evento de todo el día, del 10 al 13 de octubre (el final en ICS/Google es exclusivo)
+  const FECHA_INICIO = '20261010';
+  const FECHA_FIN = '20261013';
+  const TITULO = '39° Encuentro Plurinacional';
+  const DESCRIPCION = 'Encuentro Plurinacional de Mujeres, Lesbianas, Trans, Travestis, Bisexuales, Intersex y No Binaries.';
+  const UBICACION = 'Córdoba Capital, Argentina';
+
+  const linkGoogle = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(TITULO)}&dates=${FECHA_INICIO}/${FECHA_FIN}&details=${encodeURIComponent(DESCRIPCION)}&location=${encodeURIComponent(UBICACION)}`;
+
+  const descargarICS = () => {
+    const contenido = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'BEGIN:VEVENT',
+      `DTSTART;VALUE=DATE:${FECHA_INICIO}`,
+      `DTEND;VALUE=DATE:${FECHA_FIN}`,
+      `SUMMARY:${TITULO}`,
+      `DESCRIPTION:${DESCRIPCION}`,
+      `LOCATION:${UBICACION}`,
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+    const blob = new Blob([contenido], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'encuentro-plurinacional-2026.ics';
+    a.click();
+    URL.revokeObjectURL(url);
+    setAbierto(false);
+  };
+
+  return <>
+    <button
+      ref={btnRef}
+      onClick={toggle}
+      className="bg-white/10 border-2 border-white/25 text-white font-bold px-8 py-4 rounded-full hover:bg-white/20 transition-colors flex items-center justify-center gap-2 shadow-lg backdrop-blur-sm"
+    >
+      <Calendar size={18} />
+      Agregar al calendario
+      <ChevronDown size={16} className="transition-transform" style={{ transform: abierto ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+    </button>
+
+    <AnimatePresence>
+      {abierto && <motion.div
+        ref={menuRef}
+        initial={{ opacity: 0, y: -8, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: -8, scale: 0.97 }}
+        transition={{ duration: 0.15 }}
+        style={{ position: 'fixed', top: coords.top, left: coords.left, width: ANCHO_MENU }}
+        className="bg-[#FFF1E3] rounded-2xl shadow-2xl overflow-hidden z-[100]"
+      >
+        <a
+          href={linkGoogle}
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => setAbierto(false)}
+          className="flex items-center gap-3 px-5 py-3 text-sm font-semibold text-[#343230] hover:bg-[#faf7fb] transition-colors"
+        >
+          <Calendar size={16} className="text-[#813893]" />
+          Google Calendar
+        </a>
+        <button
+          onClick={descargarICS}
+          className="w-full flex items-center gap-3 px-5 py-3 text-sm font-semibold text-[#343230] hover:bg-[#faf7fb] transition-colors text-left border-t border-[#eadeed]"
+        >
+          <Download size={16} className="text-[#813893]" />
+          Apple / Outlook (.ics)
+        </button>
+      </motion.div>}
+    </AnimatePresence>
+  </>;
+}
+
 function ConsignaSection() {
   const [casoAbierto, setCasoAbierto] = useState(null);
 
@@ -1157,23 +1264,18 @@ function CronogramaSection() {
   return <section id="cronograma" className="py-24 px-4 bg-[#2f1435] text-white">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12">
-        <div className="flex items-center justify-center gap-4 md:gap-6 mb-4">
-          <h2 className="text-white mb-0">Cronograma</h2>
-          <IlustracionSticker
-            src="/images/ilustraciones/activista-casco.svg"
-            size="w-14 md:w-20"
-            rotate={-4}
-            className="hidden md:block"
-          />
-        </div>
-        <p className="text-white/60">Quedá atentx para ver las actividades que iremos sumando</p>
-      </div>
-      {/* Tabs de días - mobile */}
-      <div className="flex justify-center gap-3 mb-8 md:hidden">
-        {dias.map(dia => <button key={dia} onClick={() => setDiaActivo(dia)} className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${diaActivo === dia ? 'bg-[#fdb10c] text-[#2f1435]' : 'bg-white/10 text-white/60'}`}>
-          {dia.split(' ')[1]}
-        </button>)}
-      </div>
+  <div className="flex items-center justify-center gap-4 md:gap-6 mb-4">
+    <h2 className="text-white mb-0">Cronograma</h2>
+    <IlustracionSticker
+      src="/images/ilustraciones/activista-casco.svg"
+      size="w-14 md:w-20"
+      rotate={-4}
+      className="hidden md:block"
+    />
+  </div>
+  <p className="text-white/60">Quedá atentx para ver las actividades que iremos sumando</p>
+</div>
+
       {/* Grid 3 columnas - desktop */}
       <div className="hidden md:grid md:grid-cols-3 gap-6">
         {dias.map(dia => <div key={dia} className="bg-white/5 rounded-2xl overflow-hidden border border-white/10">
@@ -1209,13 +1311,13 @@ function CancioneroSection() {
   return <section id="cancionero" className="py-24 px-4 bg-[#faf7fb]">
     <div className="max-w-4xl mx-auto">
       <div className="text-center mb-12 relative">
-        <IlustracionSticker
-          src="/images/ilustraciones/abrazo-1.svg"
-          size="w-40 md:w-60"
-          rotate={-0}
-          className="hidden lg:block absolute left-1/2 md:right-auto md:-right-4 lg:left-4 -top20"
-        />
-        <h2 className="text-[#343230] mb-4">Cancionero</h2>
+  <IlustracionSticker
+  src="/images/ilustraciones/abrazo-1.svg"
+  size="w-40 md:w-60"
+  rotate={-0}
+  className="hidden md:block absolute left-1/2 md:right-auto md:-right-4 lg:left-4 -top20"
+/>
+  <h2 className="text-[#343230] mb-4">Cancionero</h2>
         <p className="text-gray-500 max-w-xl mx-auto mb-6">
           Canciones sugeridas para este 39 encuentro en Córdoba
         </p>
@@ -1285,13 +1387,13 @@ function CulturalSection() {
   return <section id="cultural" className="py-24 px-4 bg-[#FFF1E3]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12 relative">
-        <IlustracionSticker
-          src="/images/ilustraciones/retratos.svg"
-          size="w-32 md:w-44"
-          rotate={4}
-          className="hidden lg:block absolute left-0 md:left-20 lg:right-3 -top-10"
-        />
-        <h2 className="text-[#343230] mb-4">Grilla Cultural</h2>
+  <IlustracionSticker
+  src="/images/ilustraciones/retratos.svg"
+  size="w-32 md:w-44"
+  rotate={4}
+  className="hidden md:block absolute left-0 md:left-20 lg:right-3 -top-10"
+/>
+  <h2 className="text-[#343230] mb-4">Grilla Cultural</h2>
         <p className="text-gray-500 max-w-xl mx-auto mb-4">
           Arte, música, teatro y más. El Encuentro también es fiesta y celebración colectiva.
         </p>
@@ -1510,69 +1612,69 @@ function SedeSection() {
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 items-stretch">
-        {cards.map((card, i) => card.expandible ? <motion.div key={i} initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          delay: i * 0.1
-        }} className={`${card.color} border-2 rounded-2xl overflow-hidden flex flex-col`}>
-          <div className="p-6 flex flex-col flex-1">
-            <div className={`${card.iconColor} mb-4`}>{card.icono}</div>
-            <h4 className="font-bold text-[#343230] mb-2">{card.titulo}</h4>
-            <p className="text-sm text-gray-500 flex-1">{card.desc}</p>
-            <button onClick={() => setCardAbierta(cardAbierta === card.titulo ? null : card.titulo)} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 self-start hover:underline`}>
-              {cardAbierta === card.titulo ? 'Ver menos' : 'Ver más'}
-              <ChevronDown size={14} className="transition-transform" style={{
-                transform: cardAbierta === card.titulo ? 'rotate(180deg)' : 'rotate(0deg)'
-              }} />
-            </button>
-          </div>
-          <AnimatePresence>
-            {cardAbierta === card.titulo && <motion.div initial={{
-              height: 0,
-              opacity: 0
-            }} animate={{
-              height: 'auto',
-              opacity: 1
-            }} exit={{
-              height: 0,
-              opacity: 0
-            }} className="overflow-hidden border-t border-[#eadeed]">
-              <div className="p-6 bg-white/40 text-sm text-[#343230]/90 leading-relaxed whitespace-pre-line break-words">
-                {card.titulo === 'Alojamiento' ? <>
-                  🏫¡Largamos preinscripción para el alojamiento!{"\n\n"}
-                  Si estás en una organización, colectiva, grupalidad o viajás sola o sole y querés ir inscribiéndote, necesitamos que te comuniques a través de este mail{' '}
-                  <HiddenMail mail="alojamiento.39encuentropluri.cba@proton.me" className="font-bold underline hover:text-[#662c74] break-all" />
-                  {"\n\n"}👉🏽 Por ese medio te especificaremos qué información necesitamos y cómo compartirla de manera más segura.{"\n\n"}
-                  🧡 ¡Nos vamos preparando para recibir a todas y todes!
-                </> : card.contenido}
-              </div>
-            </motion.div>}
-          </AnimatePresence>
-        </motion.div> : <motion.div key={i} initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          delay: i * 0.1
-        }} className={`${card.color} border-2 rounded-2xl p-6 flex flex-col`}>
-          <div className={`${card.iconColor} mb-4`}>{card.icono}</div>
-          <h4 className="font-bold text-[#343230] mb-2">{card.titulo}</h4>
-          <p className="text-sm text-gray-500 flex-1">{card.desc}</p>
-          <a href={card.link} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 hover:underline`}>
-            {card.linkText} {card.link !== '#' && <ArrowRight size={12} />}
-          </a>
-        </motion.div>)}
-      </div>
+  {cards.map((card, i) => card.expandible ? <motion.div key={i} initial={{
+    opacity: 0,
+    y: 20
+  }} whileInView={{
+    opacity: 1,
+    y: 0
+  }} viewport={{
+    once: true
+  }} transition={{
+    delay: i * 0.1
+  }} className={`${card.color} border-2 rounded-2xl overflow-hidden flex flex-col`}>
+    <div className="p-6 flex flex-col flex-1">
+      <div className={`${card.iconColor} mb-4`}>{card.icono}</div>
+      <h4 className="font-bold text-[#343230] mb-2">{card.titulo}</h4>
+      <p className="text-sm text-gray-500 flex-1">{card.desc}</p>
+      <button onClick={() => setCardAbierta(cardAbierta === card.titulo ? null : card.titulo)} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 self-start hover:underline`}>
+        {cardAbierta === card.titulo ? 'Ver menos' : 'Ver más'}
+        <ChevronDown size={14} className="transition-transform" style={{
+          transform: cardAbierta === card.titulo ? 'rotate(180deg)' : 'rotate(0deg)'
+        }} />
+      </button>
+    </div>
+    <AnimatePresence>
+      {cardAbierta === card.titulo && <motion.div initial={{
+        height: 0,
+        opacity: 0
+      }} animate={{
+        height: 'auto',
+        opacity: 1
+      }} exit={{
+        height: 0,
+        opacity: 0
+      }} className="overflow-hidden border-t border-[#eadeed]">
+        <div className="p-6 bg-white/40 text-sm text-[#343230]/90 leading-relaxed whitespace-pre-line break-words">
+          {card.titulo === 'Alojamiento' ? <>
+            🏫¡Largamos preinscripción para el alojamiento!{"\n\n"}
+            Si estás en una organización, colectiva, grupalidad o viajás sola o sole y querés ir inscribiéndote, necesitamos que te comuniques a través de este mail{' '}
+            <HiddenMail mail="alojamiento.39encuentropluri.cba@proton.me" className="font-bold underline hover:text-[#662c74] break-all" />
+            {"\n\n"}👉🏽 Por ese medio te especificaremos qué información necesitamos y cómo compartirla de manera más segura.{"\n\n"}
+            🧡 ¡Nos vamos preparando para recibir a todas y todes!
+          </> : card.contenido}
+        </div>
+      </motion.div>}
+    </AnimatePresence>
+  </motion.div> : <motion.div key={i} initial={{
+    opacity: 0,
+    y: 20
+  }} whileInView={{
+    opacity: 1,
+    y: 0
+  }} viewport={{
+    once: true
+  }} transition={{
+    delay: i * 0.1
+  }} className={`${card.color} border-2 rounded-2xl p-6 flex flex-col`}>
+    <div className={`${card.iconColor} mb-4`}>{card.icono}</div>
+    <h4 className="font-bold text-[#343230] mb-2">{card.titulo}</h4>
+    <p className="text-sm text-gray-500 flex-1">{card.desc}</p>
+    <a href={card.link} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 hover:underline`}>
+  {card.linkText} {card.link !== '#' && <ArrowRight size={12} />}
+</a>
+  </motion.div>)}
+</div>
 
       {/* Card opcional: venir desde tu provincia */}
       {/* <div className="bg-[#2f1435] text-white rounded-3xl p-8 flex flex-col md:flex-row items-center gap-6">
@@ -1677,7 +1779,7 @@ function FaqSection() {
 export function FooterSection() {
   return <footer className="bg-[#2f1435] text-white">
     {/* Contacto */}
-    <div className="py-16 px-4">
+    <div className="pt-16 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-3 gap-10 mb-12">
           <div>
@@ -1704,7 +1806,6 @@ export function FooterSection() {
               { label: 'Alojamiento', mail: 'alojamiento.39encuentropluri.cba@proton.me' },
               { label: 'Cultura', mail: '39encuentro.cultura@gmail.com' },
               { label: 'Accesibilidad', mail: 'accesibilidad.39encuentro@gmail.com' },
-
             ].map(com => (
               <div key={com.label} className="flex items-start gap-2 text-white/60 mb-2">
                 <Mail size={12} className="mt-1 shrink-0" />
@@ -1728,13 +1829,24 @@ export function FooterSection() {
             </p>
           </div>
         </div>
-        <div className="border-t border-white/10 pt-6 text-center text-white/30 text-xs">
-          Sitio web del 39° Encuentro Plurinacional · Hecho por Mica, Nai y Pili 💜
-        </div>
       </div>
+    </div>
+
+    {/* Ilustración de cierre — full width, fuera del contenedor */}
+    <div className="w-full overflow-hidden leading-none">
+      <img
+        src="/images/ilustraciones/Footer.png"
+        alt="Ilustración colectiva de la marcha del Encuentro"
+        className="w-full h-auto object-cover"
+      />
+    </div>
+
+    {/* Copyright */}
+    <div className="py-6 px-4">
     </div>
   </footer>;
 }
+
 
 // ─── PÁGINA PRINCIPAL ─────────────────────────────────────────────────────────
 
