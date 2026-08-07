@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Lottie from 'lottie-react';
-import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag } from 'lucide-react';
+import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag, FileText, Droplet, ShieldCheck, Moon, Sparkles, Backpack } from 'lucide-react';
 import { HiddenMail } from '@/components/HiddenMail';
 import EJES from '@/data/ejes.js';
 import FAQ from '@/data/faq.jsx';
@@ -211,14 +211,6 @@ const INDICE_BUSQUEDA = [
     href: '/#sede',
     color: '#16a34a',
     emoji: '🚌'
-  }, {
-    icono: <AlertCircle size={24} />,
-    titulo: 'Primeros Auxilios',
-    desc: 'Puestos sanitarios y datos de emergencia durante el Encuentro.',
-    color: 'bg-red-50 border-red-200',
-    iconColor: 'text-red-600',
-    link: '#',
-    linkText: 'Pronto más información'
   }, {
     id: 'log-feria',
     titulo: 'Feria y Alimentación',
@@ -812,6 +804,13 @@ function AgregarCalendarioButton() {
     return () => document.removeEventListener('mousedown', onClickFuera);
   }, []);
 
+  useEffect(() => {
+    if (!abierto) return;
+    const cerrarPorScroll = () => setAbierto(false);
+    window.addEventListener('scroll', cerrarPorScroll, { passive: true });
+    return () => window.removeEventListener('scroll', cerrarPorScroll);
+  }, [abierto]);
+
   const ANCHO_MENU = 220;
   const MARGEN = 16;
 
@@ -1261,51 +1260,81 @@ function EjesSection() {
 function CronogramaSection() {
   const dias = Object.keys(CRONOGRAMA);
   const [diaActivo, setDiaActivo] = useState(dias[0]);
-  return <section id="cronograma" className="py-24 px-4 bg-[#2f1435] text-white">
-    <div className="max-w-6xl mx-auto">
-      <div className="text-center mb-12">
-  <div className="flex items-center justify-center gap-4 md:gap-6 mb-4">
-    <h2 className="text-white mb-0">Cronograma</h2>
-    <IlustracionSticker
-      src="/images/ilustraciones/activista-casco.svg"
-      size="w-14 md:w-20"
-      rotate={-4}
-      className="hidden md:block"
-    />
-  </div>
-  <p className="text-white/60">Quedá atentx para ver las actividades que iremos sumando</p>
-</div>
 
-      {/* Grid 3 columnas - desktop */}
-      <div className="hidden md:grid md:grid-cols-3 gap-6">
-        {dias.map(dia => <div key={dia} className="bg-white/5 rounded-2xl overflow-hidden border border-white/10">
-          <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
-            <h3 className="text-lg font-black m-0">{dia}</h3>
+  return (
+    <section id="cronograma" className="py-24 px-4 bg-[#2f1435] text-white">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-4 md:gap-6 mb-4">
+            <h2 className="text-white mb-0">Cronograma</h2>
+            <IlustracionSticker
+              src="/images/ilustraciones/activista-casco.svg"
+              size="w-14 md:w-20"
+              rotate={-4}
+              className="hidden md:block"
+            />
           </div>
-          <div className="p-4">
-            {CRONOGRAMA[dia].map((item, i) => <div key={i} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
-              <span className="text-[#fdb10c] text-sm font-mono font-bold w-16 shrink-0">{item.hora}</span>
-              <span className="text-white/80 text-sm">{item.actividad}</span>
-            </div>)}
-          </div>
-        </div>)}
-      </div>
+          <p className="text-white/60">Quedá atentx para ver las actividades que iremos sumando</p>
+        </div>
 
-      {/* Vista mobile - columna activa */}
-      <div className="md:hidden bg-white/5 rounded-2xl overflow-hidden border border-white/10">
-        <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
-          <h3 className="text-lg font-black m-0">{diaActivo}</h3>
+        {/* Grid 3 columnas - desktop */}
+        <div className="hidden md:grid md:grid-cols-3 gap-6">
+          {dias.map(dia => (
+            <div key={dia} className="bg-white/5 rounded-2xl overflow-hidden border border-white/10">
+              <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
+                <h3 className="text-lg font-black m-0">{dia}</h3>
+              </div>
+              <div className="p-4">
+                {CRONOGRAMA[dia]?.map((item, i) => (
+                  <div key={i} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
+                    <span className="text-[#fdb10c] text-sm font-mono font-bold w-16 shrink-0">{item.hora}</span>
+                    <span className="text-white/80 text-sm">{item.actividad}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="p-4">
-          {CRONOGRAMA[diaActivo].map((item, i) => <div key={i} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
-            <span className="text-[#fdb10c] text-sm font-mono font-bold w-16 shrink-0">{item.hora}</span>
-            <span className="text-white/80 text-sm">{item.actividad}</span>
-          </div>)}
+
+        {/* Vista mobile */}
+        <div className="md:hidden">
+          {/* Selector de días para mobile */}
+          <div className="flex gap-2 mb-4 overflow-x-auto pb-2">
+            {dias.map(dia => (
+              <button
+                key={dia}
+                onClick={() => setDiaActivo(dia)}
+                className={`flex-1 py-2 px-4 rounded-xl text-sm font-bold transition-colors whitespace-nowrap ${
+                  diaActivo === dia
+                    ? 'bg-[#fdb10c] text-[#2f1435]'
+                    : 'bg-white/10 text-white/70 hover:bg-white/20'
+                }`}
+              >
+                {dia}
+              </button>
+            ))}
+          </div>
+
+          {/* Tarjeta del día activo */}
+          <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10">
+            <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
+              <h3 className="text-lg font-black m-0">{diaActivo}</h3>
+            </div>
+            <div className="p-4">
+              {CRONOGRAMA[diaActivo]?.map((item, i) => (
+                <div key={i} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
+                  <span className="text-[#fdb10c] text-sm font-mono font-bold w-16 shrink-0">{item.hora}</span>
+                  <span className="text-white/80 text-sm">{item.actividad}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>;
+    </section>
+  );
 }
+
 function CancioneroSection() {
   const [cancionAbierta, setCancionAbierta] = useState(null);
   return <section id="cancionero" className="py-24 px-4 bg-[#faf7fb]">
@@ -1434,6 +1463,147 @@ function CulturalSection() {
       </div> */}
     </div>
   </section>;
+}
+function QueLlevarSection() {
+  const [categoriaAbierta, setCategoriaAbierta] = useState(null);
+
+  const categorias = [
+    {
+      id: 'documentacion',
+      icono: <FileText size={24} />,
+      titulo: 'Documentación y Dinero',
+      color: 'bg-[#faf7fb] border-[#d5bddb]',
+      iconColor: 'text-[#662c74]',
+      items: [
+        'DNI físico y una fotocopia (guardar la fotocopia en otra parte de la mochila o en bolsa hermética).',
+        'Carnet de obra social / prepaga (si tenés).',
+        'Dinero en efectivo (útil en zonas con poca señal o puestos) y tarjetas guardadas por separado.',
+        'Anotador en papel con números de contacto clave (por si te quedás sin batería).'
+      ]
+    },
+    {
+      id: 'hidratacion',
+      icono: <Droplet size={24} />,
+      titulo: 'Hidratación y Nutrición',
+      color: 'bg-[#f6faf7] border-[#b8d5be]',
+      iconColor: 'text-[#21662f]',
+      items: [
+        'Botella de agua.',
+        'Snacks de marcha: frutos secos, barras de cereal, fruta o galletitas para los talleres y movilizaciones.',
+        'Vasos/cubiertos reutilizables.'
+      ]
+    },
+    {
+      id: 'seguridad',
+      icono: <ShieldCheck size={24} />,
+      titulo: 'Seguridad y Cuidado Personal',
+      color: 'bg-[#fffcf5] border-[#fed886]',
+      iconColor: 'text-[#916607]',
+      items: [
+        'Silbato (para alertas o emergencias en la marcha o traslados).',
+        'Batería portátil y cable cargador.',
+        'Botiquín básico: ibuprofeno/paracetamol, curitas, antiséptico, antialérgicos, gasas y tu medicación personal habitual.',
+        'Mochila chica o riñonera cruzada que puedas cerrar bien para llevar lo imprescindible a los talleres.',
+        'Kit de autocuidado grupal: acordar previamente puntos de encuentro con compañeres, referentes con tu delegación o grupo.'
+      ]
+    },
+    {
+      id: 'descanso',
+      icono: <Moon size={24} />,
+      titulo: 'Comodidad y Descanso',
+      color: 'bg-[#faf7fb] border-[#d5bddb]',
+      iconColor: 'text-[#662c74]',
+      items: [
+        'Calzado muy cómodo/zapatillas usadas (evitá estrenar calzado).',
+        'Ropa en capas: remeras livianas para el día y abrigo (campera/buzo) para la noche.',
+        'Protección solar: protector solar, gorro/sombrero y lentes de sol.',
+        'Piloto o capa impermeable (por si llueve).',
+        'Para el hospedaje/escuela: bolsa de dormir, aislante o colchoneta, manta y tapones para oídos/antifaz.'
+      ]
+    },
+    {
+      id: 'higiene',
+      icono: <Sparkles size={24} />,
+      titulo: 'Higiene Personal',
+      color: 'bg-[#f6faf7] border-[#b8d5be]',
+      iconColor: 'text-[#21662f]',
+      items: [
+        'Alcohol en gel o sanitizante.',
+        'Papel higiénico y pañuelos desechables.',
+        'Toallitas, tampones o copa menstrual.',
+        'Toalla de secado rápido y elementos básicos de aseo (cepillo de dientes, pasta, desodorante).'
+      ]
+    }
+  ];
+
+  return (
+  <section id="que-llevar" className="py-24 px-4 bg-[#f6faf7]">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12 relative">
+          <IlustracionSticker
+            src="/images/ilustraciones/activista-casco.svg"
+            size="w-16 md:w-24"
+            rotate={-5}
+            className="hidden lg:block absolute right-4 lg:right-10 -top-8"
+          />
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <h2 className="text-[#343230] mb-0">Qué traer al Encuentro</h2>
+          </div>
+          <p className="text-gray-500 max-w-xl mx-auto">
+            Una guía práctica para armar tu mochila y vivir el Encuentro con comodidad y cuidado colectivo.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+          {categorias.map((cat, i) => (
+            <motion.div
+              key={cat.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className={`${cat.color} border-2 rounded-2xl overflow-hidden flex flex-col`}
+            >
+              <button
+  onClick={() => setCategoriaAbierta(categoriaAbierta === cat.id ? null : cat.id)}
+  className="p-6 flex flex-col items-start text-left w-full"
+>
+  <div className={`${cat.iconColor} mb-4`}>{cat.icono}</div>
+  <div className="flex items-center justify-between w-full gap-3">
+    <h4 className="font-bold text-[#343230]">{cat.titulo}</h4>
+    <ChevronDown
+      size={16}
+      className={`${cat.iconColor} shrink-0 transition-transform`}
+      style={{ transform: categoriaAbierta === cat.id ? 'rotate(180deg)' : 'rotate(0deg)' }}
+    />
+  </div>
+</button>
+
+              <AnimatePresence>
+                {categoriaAbierta === cat.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="overflow-hidden border-t border-black/5"
+                  >
+                    <ul className="p-6 pt-4 space-y-3">
+                      {cat.items.map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-[#343230]/80 leading-relaxed">
+                          <Check size={14} className={`${cat.iconColor} mt-1 shrink-0`} />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
 function MapaEncuentro() {
   const zonas = [
@@ -1577,11 +1747,11 @@ function SedeSection() {
   }, {
     icono: <AlertCircle size={24} />,
     titulo: 'Primeros Auxilios',
-    desc: 'Puestos sanitarios y datos de emergencia durante el Encuentro.',
+    desc: 'Puestos sanitarios, datos de emergencia y protocolo ante situaciones de violencia.',
     color: 'bg-red-50 border-red-200',
     iconColor: 'text-red-600',
-    link: '#',
-    linkText: 'Ver información'
+    expandible: true,
+    contenido: `🚑 Vamos a contar con puestos sanitarios y datos de emergencia de las compañeras de la subcomisión de Cuidados Colectivos durante todo el Encuentro.\n\n🛡️ Estamos trabajando en un protocolo claro de actuación ante situaciones de acoso o violencia durante el Encuentro, con referentes, grupo de abogades y vías de contacto para pedir contención o acompañamiento en el momento.\n`
   }, {
     icono: <Utensils size={24} />,
     titulo: 'Feria y Alimentación',
@@ -1611,7 +1781,7 @@ function SedeSection() {
         <MapaEncuentro />
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 items-stretch">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 items-start">
   {cards.map((card, i) => card.expandible ? <motion.div key={i} initial={{
     opacity: 0,
     y: 20
@@ -1894,6 +2064,7 @@ export default function HomePage() {
     <CronogramaSection />
     <SedeSection />
     <CulturalSection />
+    <QueLlevarSection />
     <CancioneroSection />
     <PrensaSection />
     <FaqSection />
