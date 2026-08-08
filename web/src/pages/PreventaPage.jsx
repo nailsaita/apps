@@ -4,7 +4,7 @@ import { ExternalLink, Copy, Check, ShoppingBag, Ruler, MessageCircle, Clock, Ma
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
 import TitleSectionTransparent from '@/components/TitleSectionTransparent.jsx';
-import {Helmet} from "react-helmet";
+import Helmet from "react-helmet";
 
 // ─── DATOS DE PRODUCTOS ────────────────────────────────────────────────────
 
@@ -12,7 +12,7 @@ const PRODUCTOS = [
     {
         id: 'remera',
         nombre: 'Remera estampada',
-        descripcion: 'Remera oficial del 39° Encuentro, algodón 100%.',
+        descripcion: 'Remera oficial del 39° Encuentro.',
         precio: 'A confirmar',
         link: 'https://forms.gle/3H8ZkRNT7kUJD11h9',
         tieneTalles: true,
@@ -156,7 +156,7 @@ function ProductoCard({ producto, index }) {
                     rel="noopener noreferrer"
                     className="text-sm font-bold text-[#662c74] hover:underline"
                 >
-                    Para reservar, llená este formulario de Google <ExternalLink size={14} style={{ display: 'inline' }} /> 
+                    Para reservar, llená este formulario de Google <ExternalLink size={14} style={{ display: 'inline' }} />
                 </a>
             </div>
         </motion.div>
@@ -168,6 +168,9 @@ function ProductoCard({ producto, index }) {
 export default function PreventaPage() {
     return (
         <div className="relative bg-background text-slate-100 min-h-screen">
+            <Helmet>
+                <title>Preventa: Remeras y Totebags</title>
+            </Helmet>
             <CountdownBanner />
             <Navbar />
 
@@ -185,7 +188,7 @@ export default function PreventaPage() {
                 </section>
 
                 <div className="grid md:grid-cols-2 gap-6">
-{/*
+                    {/*
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
