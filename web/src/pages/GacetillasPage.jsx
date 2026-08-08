@@ -1,11 +1,17 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
 import gacetillas from '@/data/gacetillas.js';
 import Helmet from "react-helmet";
 
+
 export default function GacetillasPage() {
+  const fadeInVariant = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
   return (
     <div className="relative bg-[#FFF1E3] text-[#343230] min-h-screen">
       <Helmet>
@@ -16,6 +22,12 @@ export default function GacetillasPage() {
       <Navbar />
       <TitleSection title="Gacetillas" />
       <main className="relative z-10 mx-auto max-w-7xl px-4 pb-24 pt-8 sm:px-6 lg:px-8">
+                <motion.section
+          initial="hidden"
+          animate="visible"
+          variants={fadeInVariant}
+          className="mb-16 bg-white/70 rounded-3xl p-6 md:p-8 border border-[#eadeed] shadow-xl shadow-[#813893]/5 backdrop-blur-sm"
+        >
         <ul className="space-y-4">
           {gacetillas.map((item) => (
             <li key={item.archivo}>
@@ -31,6 +43,7 @@ export default function GacetillasPage() {
             </li>
           ))}
         </ul>
+        </motion.section>
       </main>
 
       <FooterSection />

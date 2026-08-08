@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Copy, Check, ShoppingBag, Ruler, MessageCircle, Clock, MapPin } from 'lucide-react';
+import { ExternalLink, Copy, Check, ShoppingBag, Ruler, MessageCircle, Clock, MapPin } from 'lucide-react';
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
 import TitleSectionTransparent from '@/components/TitleSectionTransparent.jsx';
@@ -14,6 +14,7 @@ const PRODUCTOS = [
         nombre: 'Remera estampada',
         descripcion: 'Remera oficial del 39° Encuentro, algodón 100%.',
         precio: 'A confirmar',
+        link: 'https://forms.gle/3H8ZkRNT7kUJD11h9',
         tieneTalles: true,
         colores: [
             { nombre: 'Negra', hex: '#111111', imagen: '/images/remeras/Negra.png' },
@@ -148,7 +149,15 @@ function ProductoCard({ producto, index }) {
             <div className="p-6">
                 <h3 className="text-[#343230] mb-1">{producto.nombre}</h3>
                 <p className="text-sm text-gray-500 mb-3">{producto.descripcion}</p>
-                <p className="text-sm font-bold text-[#662c74]">{producto.precio}</p>
+                {/* <p className="text-sm font-bold text-[#662c74]">{producto.precio}</p> */}
+                <a
+                    href={producto.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-bold text-[#662c74] hover:underline"
+                >
+                    Para reservar, llená este formulario de Google <ExternalLink size={14} style={{ display: 'inline' }} /> 
+                </a>
             </div>
         </motion.div>
     );
@@ -176,8 +185,7 @@ export default function PreventaPage() {
                 </section>
 
                 <div className="grid md:grid-cols-2 gap-6">
-
-                    {/* Tabla de talles */}
+{/*
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -214,7 +222,6 @@ export default function PreventaPage() {
                         </p>
                     </motion.div>
 
-                    {/* Datos de pago */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -233,7 +240,6 @@ export default function PreventaPage() {
                         </div>
                     </motion.div>
 
-                    {/* Cómo reservar */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -260,7 +266,6 @@ export default function PreventaPage() {
                         </div>
                     </motion.div>
 
-                    {/* Fecha límite */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -275,7 +280,6 @@ export default function PreventaPage() {
                         <p className="text-sm text-gray-500">A confirmar.</p>
                     </motion.div>
 
-                    {/* Retiro */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -289,6 +293,7 @@ export default function PreventaPage() {
                         <h4 className="text-[#343230] mb-1">Retiro</h4>
                         <p className="text-sm text-gray-500">Durante el Encuentro, en un punto a confirmar.</p>
                     </motion.div>
+ */}
                 </div>
 
                 {/* Contacto */}

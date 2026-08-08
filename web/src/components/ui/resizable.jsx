@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 
 import { createContext, useContext } from "react";
 import { GripVertical } from "lucide-react";
@@ -49,4 +49,4 @@ const ResizableHandle = ({ withHandle, className, ...props }) => {
   );
 };
 
-export { ResizablePanelGroup, ResizablePanel, ResizableHandle };
+export { ResizablePanelGroup, ResizablePanel, ResizableHandle };*/

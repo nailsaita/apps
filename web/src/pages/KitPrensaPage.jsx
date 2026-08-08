@@ -21,7 +21,7 @@ export default function KitPrensaPage() {
 
       <TitleSection title="Kit de Prensa" />
 
-      <main className="relative mx-auto max-w-5xl px-4 pb-32 pt-32 sm:px-6 lg:px-8">
+      <main className="relative mx-auto max-w-5xl px-4 pb-32 pt-4 sm:px-6 lg:px-8">
 
         <motion.section
           initial="hidden"
@@ -32,18 +32,41 @@ export default function KitPrensaPage() {
           <h2 className="text-2xl font-bold tracking-tight text-[#813893] mb-4 uppercase"
           //  style={{ fontFamily: "'thunderhouse-pro', sans-serif" }}
            >
-            Información para la Prensa y Acreditación
+            Información para Medios de Comunicación
           </h2>
+          <p className="text-[#343230]/80 leading-relaxed mb-4 text-base">
+            Este kit de prensa fue elaborado para que los medios cuenten con material de referencia al momento de difundir información sobre el evento. Solicitamos que su uso sea responsable, con el objetivo de que más personas se enteren del encuentro.
+          </p>
           <h3 className="text-xl font-semibold text-[#343230] mb-4">
+            ¿Qué vas a encontrar acá?
+          </h3>
+          <ul className="list-disc list-inside space-y-2 text-[#343230]/85 mb-6">
+            <li>Fotos de la comisión organizadora y de encuentros anteriores</li>
+            <li>Spots de invitación al encuentro</li>
+            <li>Gacetillas de prensa donde comunicamos eventos, resoluciones y posicionamientos desde la comisión organizadora</li>
+            <li>Recursos gráficos como el logo oficial</li>
+          </ul>
+          <p className="text-[#343230]/80 leading-relaxed mb-6 text-base">
+            Para ver toda la información, {' '}
+            <a
+              href="https://drive.google.com/drive/folders/1HFJbaRQSrcSKAmJ7aC4g6DI6jI4UuiEy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-[#813893] hover:text-[#662c74]"
+            >
+              hacé click aquí <ExternalLink size={14} style={{ display: 'inline' }} />
+            </a>
+          </p>
+          {/* <h3 className="text-xl font-semibold text-[#343230] mb-4">
             ¿Cómo te acreditás?
           </h3>
 
           <p className="text-[#343230]/80 leading-relaxed mb-6 text-base">
             Si sos periodista, comunicadora/e, fotógrafas/os y creadoras/es de contenido de medios comunitarios,
             alternativos, hegemónicos y autogestivos podés registrarte para la cobertura del evento.
-          </p>
+          </p> */}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div className="bg-[#faf7fb] p-4 rounded-xl border border-[#eadeed]">
               <span className="block text-xs font-bold uppercase tracking-wider text-gray-400">Plazo de solicitud</span>
               <span className="text-sm text-[#343230] font-semibold mt-1 block">[Fecha a confirmar]</span>
@@ -60,9 +83,9 @@ export default function KitPrensaPage() {
                 Pronto el link de registro <ExternalLink size={14} />
               </a>
             </div>
-          </div>
+          </div> */}
 
-          <div className="bg-[#fffcf5] border border-[#fed886] rounded-xl p-4 mb-8 text-sm text-[#6e4d05] flex gap-3 items-start">
+          {/* <div className="bg-[#fffcf5] border border-[#fed886] rounded-xl p-4 mb-8 text-sm text-[#6e4d05] flex gap-3 items-start">
             <CheckCircle className="text-[#b57f09] shrink-0 mt-0.5" size={18} />
             <p>
               <strong className="text-[#916607]">Importante:</strong> Durante el acto de apertura se entregarán las credenciales que serán solicitadas para acceder a la sala de prensa y a las zonas para medios.
@@ -175,8 +198,8 @@ export default function KitPrensaPage() {
                 Pronto habilitaremos este botón
               </a>
             </div>
-          </div>
-        </motion.section>
+          </div>*/}
+        </motion.section> 
 
       </main>
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, MapPin, ChevronDown, ChevronRight, ChevronLeft, Download, ExternalLink, Mail, Instagram, Facebook, Heart, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Clock, Users, Star, Menu, Phone, Search } from 'lucide-react';
+import { MapPin, ChevronDown, ChevronRight, ChevronLeft, Download, ExternalLink, Mail, Instagram, Facebook, Heart, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Clock, Users, Star, Menu, Phone, Search } from 'lucide-react';
 
 
 function TitleSectionTransparent({ title, subtitle }) {

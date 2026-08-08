@@ -2012,8 +2012,8 @@ export function FooterSection() {
     </div>
 
     {/* Copyright */}
-    <div className="py-6 px-4">
-    </div>
+    {/* <div className="py-6 px-4">
+    </div> */}
   </footer>;
 }
 

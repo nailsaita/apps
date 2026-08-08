@@ -14,10 +14,6 @@ const gacetillas=[
     {
         titulo: "La Comisión Organizadora del 39° Encuentro Plurinacional exigió justicia por Agostina Vega, la aparición de Delicia Mamani y la libertad de Paola Ortiz",
         archivo: "Gacetilla_Post_Conferencia_Prensa_10_Junio.pdf"
-    },    
-    {
-        titulo: "La Comisión Organizadora del 39° Encuentro Plurinacional exigió justicia por Agostina Vega, la aparición de Delicia Mamani y la libertad de Paola Ortiz",
-        archivo: "Gacetilla_Post_Conferencia_Prensa_10_Junio.pdf"
     },
     {
         titulo: "Primera muraleada camino al Encuentro Plurinacional de Mujeres, Lesbianas, Travestis, Trans, Bisexuales, Intersexuales y No Binaries",
