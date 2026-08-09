@@ -57,16 +57,16 @@ export default function KitPrensaPage() {
               hacé click aquí <ExternalLink size={14} style={{ display: 'inline' }} />
             </a>
           </p>
-          {/* <h3 className="text-xl font-semibold text-[#343230] mb-4">
-            ¿Cómo te acreditás?
+           <h3 className="text-xl font-semibold text-[#343230] mb-4">
+            Si venís a cubrir el entiendo, ¿Cómo te acreditás?
           </h3>
 
           <p className="text-[#343230]/80 leading-relaxed mb-6 text-base">
             Si sos periodista, comunicadora/e, fotógrafas/os y creadoras/es de contenido de medios comunitarios,
             alternativos, hegemónicos y autogestivos podés registrarte para la cobertura del evento.
-          </p> */}
+          </p> 
 
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div className="bg-[#faf7fb] p-4 rounded-xl border border-[#eadeed]">
               <span className="block text-xs font-bold uppercase tracking-wider text-gray-400">Plazo de solicitud</span>
               <span className="text-sm text-[#343230] font-semibold mt-1 block">[Fecha a confirmar]</span>
@@ -83,9 +83,9 @@ export default function KitPrensaPage() {
                 Pronto el link de registro <ExternalLink size={14} />
               </a>
             </div>
-          </div> */}
+          </div> 
 
-          {/* <div className="bg-[#fffcf5] border border-[#fed886] rounded-xl p-4 mb-8 text-sm text-[#6e4d05] flex gap-3 items-start">
+           <div className="bg-[#fffcf5] border border-[#fed886] rounded-xl p-4 mb-8 text-sm text-[#6e4d05] flex gap-3 items-start">
             <CheckCircle className="text-[#b57f09] shrink-0 mt-0.5" size={18} />
             <p>
               <strong className="text-[#916607]">Importante:</strong> Durante el acto de apertura se entregarán las credenciales que serán solicitadas para acceder a la sala de prensa y a las zonas para medios.
@@ -102,7 +102,7 @@ export default function KitPrensaPage() {
                 </div>
                 <div>
                   <h5 className="font-bold text-[#343230]">Conectividad de alta velocidad</h5>
-                  <p className="text-sm text-gray-500 mt-0.5">[Detalles de red/configuración]</p>
+                  <p className="text-sm text-gray-500 mt-0.5">Detalles de red/configuración</p>
                 </div>
               </div>
 
@@ -112,7 +112,7 @@ export default function KitPrensaPage() {
                 </div>
                 <div>
                   <h5 className="font-bold text-[#343230]">Estaciones de energía</h5>
-                  <p className="text-sm text-gray-500 mt-0.5">[Tomas disponibles]</p>
+                  <p className="text-sm text-gray-500 mt-0.5">Tomas disponibles</p>
                 </div>
               </div>
 
@@ -122,7 +122,7 @@ export default function KitPrensaPage() {
                 </div>
                 <div>
                   <h5 className="font-bold text-[#343230]">Zona de entrevistas</h5>
-                  <p className="text-sm text-gray-500 mt-0.5">[Espacio acondicionado]</p>
+                  <p className="text-sm text-gray-500 mt-0.5">Espacio acondicionado</p>
                 </div>
               </div>
 
@@ -170,7 +170,7 @@ export default function KitPrensaPage() {
                 </p>
               </div>
               <a
-                href="https://drive.proton.me/urls/1DQZM35XG0#TAssjJLB4zqI"
+                href="https://drive.google.com/drive/folders/1HFJbaRQSrcSKAmJ7aC4g6DI6jI4UuiEy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-5 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#813893] hover:bg-[#662c74] text-sm font-bold text-white rounded-full transition-colors shadow-lg shadow-[#813893]/20"
@@ -198,7 +198,7 @@ export default function KitPrensaPage() {
                 Pronto habilitaremos este botón
               </a>
             </div>
-          </div>*/}
+          </div>
         </motion.section> 
 
       </main>

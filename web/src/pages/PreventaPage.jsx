@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Copy, Check, ShoppingBag, Ruler, MessageCircle, Clock, MapPin } from 'lucide-react';
+import { Copy, Check, ShoppingBag, Ruler, MessageCircle, Clock, MapPin } from 'lucide-react';
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
 import TitleSectionTransparent from '@/components/TitleSectionTransparent.jsx';
-import Helmet from "react-helmet";
+import {Helmet} from "react-helmet";
 
 // ─── DATOS DE PRODUCTOS ────────────────────────────────────────────────────
 
@@ -12,9 +12,8 @@ const PRODUCTOS = [
     {
         id: 'remera',
         nombre: 'Remera estampada',
-        descripcion: 'Remera oficial del 39° Encuentro.',
+        descripcion: 'Remera oficial del 39° Encuentro, algodón 100%.',
         precio: 'A confirmar',
-        link: 'https://forms.gle/3H8ZkRNT7kUJD11h9',
         tieneTalles: true,
         colores: [
             { nombre: 'Negra', hex: '#111111', imagen: '/images/remeras/Negra.png' },
@@ -26,18 +25,20 @@ const PRODUCTOS = [
 // ─── TABLA DE TALLES (remera) ──────────────────────────────────────────────
 
 const TALLES_REMERA = [
-    { talle: 'S', pecho: '48 cm', largo: '64 cm' },
-    { talle: 'M', pecho: '51 cm', largo: '67 cm' },
-    { talle: 'L', pecho: '54 cm', largo: '70 cm' },
-    { talle: 'XL', pecho: '57 cm', largo: '73 cm' }
+    { talle: 'S', pecho: '51 cm', largo: '69 cm' },
+    { talle: 'M', pecho: '53 cm', largo: '72 cm' },
+    { talle: 'L', pecho: '55 cm', largo: '74 cm' },
+    { talle: 'XL', pecho: '57 cm', largo: '75 cm' },
+    { talle: 'XXL', pecho: '62 cm', largo: '78 cm' },
+    { talle: 'XXXL', pecho: '70 cm', largo: '92 cm' }
 ];
 
 // ─── DATOS DE PAGO ──────────────────────────────────────────────────────────
 
 const DATOS_PAGO = [
-    { label: 'Alias', valor: 'PREVENTA.ENCUENTRO.CBA' },
-    { label: 'CBU', valor: '0000000000000000000000' },
-    { label: 'Titular', valor: 'Nombre Apellido titular' }
+    { label: 'Alias', valor: 'cordoba-39encuentro' },
+    { label: 'CBU', valor: '0000003100098523074578' },
+    { label: 'Titular', valor: 'CORDOBA - 39 PLURINACIONAL DE CORDOBA' }
 ];
 
 // ─── PASOS PARA RESERVAR ────────────────────────────────────────────────────
@@ -45,19 +46,19 @@ const DATOS_PAGO = [
 const PASOS_RESERVA = [
     {
         titulo: 'Elegí tu producto y talle',
-        desc: 'Definí si querés remera, tote bag o ambos, y en el caso de la remera, el talle según la tabla de medidas.'
+        desc: 'Completá los datos solicitados en el form y elegí la cantidad de remeras, el color y talle de cada una.'
     },
     {
         titulo: 'Transferí el pago',
-        desc: 'Hacé la transferencia por el monto total a los datos de pago que están más abajo.'
+        desc: 'Hacé la transferencia por el monto total al alias o cbu que figuran en el form.'
     },
     {
         titulo: 'Enviá tu comprobante',
-        desc: 'Mandá el comprobante junto con tu nombre completo, producto y talle por WhatsApp o email (agregar contacto de la comisión).'
+        desc: 'Adjuntá el comprobante.'
     },
     {
         titulo: 'Retirá tu pedido',
-        desc: 'El retiro se hace en un punto habilitado durante el Encuentro (a confirmar por la comisión).'
+        desc: 'El retiro se hace en un punto habilitado durante el Encuentro (a confirmar).'
     }
 ];
 
@@ -74,23 +75,26 @@ function CampoPago({ label, valor }) {
             // Si el navegador bloquea el clipboard, no rompemos nada
         }
     };
+    const esTitular = label === 'Titular';
     return (
         <div className="flex items-center justify-between gap-3 bg-[#faf7fb] rounded-xl px-4 py-3 border border-[#eadeed]">
             <div className="min-w-0">
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">{label}</p>
                 <p className="text-sm font-semibold text-[#343230] truncate">{valor}</p>
             </div>
-            <button
-                onClick={copiar}
-                className="shrink-0 flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-full transition-colors"
-                style={{
-                    backgroundColor: copiado ? '#dceade' : '#eadeed',
-                    color: copiado ? '#21662f' : '#662c74'
-                }}
-            >
-                {copiado ? <Check size={14} /> : <Copy size={14} />}
-                {copiado ? 'Copiado' : 'Copiar'}
-            </button>
+            {!esTitular && (
+                <button
+                    onClick={copiar}
+                    className="shrink-0 flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-full transition-colors"
+                    style={{
+                        backgroundColor: copiado ? '#dceade' : '#eadeed',
+                        color: copiado ? '#21662f' : '#662c74'
+                    }}
+                >
+                    {copiado ? <Check size={14} /> : <Copy size={14} />}
+                    {copiado ? 'Copiado' : 'Copiar'}
+                </button>
+            )}
         </div>
     );
 }
@@ -149,15 +153,7 @@ function ProductoCard({ producto, index }) {
             <div className="p-6">
                 <h3 className="text-[#343230] mb-1">{producto.nombre}</h3>
                 <p className="text-sm text-gray-500 mb-3">{producto.descripcion}</p>
-                {/* <p className="text-sm font-bold text-[#662c74]">{producto.precio}</p> */}
-                <a
-                    href={producto.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-bold text-[#662c74] hover:underline"
-                >
-                    Para reservar, llená este formulario de Google <ExternalLink size={14} style={{ display: 'inline' }} />
-                </a>
+                <p className="text-sm font-bold text-[#662c74]">{producto.precio}</p>
             </div>
         </motion.div>
     );
@@ -169,12 +165,12 @@ export default function PreventaPage() {
     return (
         <div className="relative bg-background text-slate-100 min-h-screen">
             <Helmet>
-                <title>Preventa: Remeras y Totebags</title>
+                <title>Preventa: Remeras 39 Encuentro</title>
             </Helmet>
             <CountdownBanner />
             <Navbar />
 
-            <TitleSection title="Preventa: remeras y tote bags" />
+            <TitleSection title="Preventa: Remeras 39° Encuentro" />
 
             <main className="relative z-10 mx-auto max-w-6xl px-4 pb-24 pt-8 sm:px-6 lg:px-8">
 
@@ -188,7 +184,8 @@ export default function PreventaPage() {
                 </section>
 
                 <div className="grid md:grid-cols-2 gap-6">
-                    {/*
+
+                    {/* Tabla de talles */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -221,10 +218,11 @@ export default function PreventaPage() {
                             </table>
                         </div>
                         <p className="text-xs text-gray-400 mt-3">
-                            Medidas tomadas de prenda extendida. Ante la duda, consultá antes de reservar.
+                            Medidas tomadas de prenda extendida. 
                         </p>
                     </motion.div>
 
+                    {/* Datos de pago */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -243,6 +241,7 @@ export default function PreventaPage() {
                         </div>
                     </motion.div>
 
+                    {/* Cómo reservar */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -269,6 +268,7 @@ export default function PreventaPage() {
                         </div>
                     </motion.div>
 
+                    {/* Fecha límite */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -279,10 +279,11 @@ export default function PreventaPage() {
                         <div className="bg-[#813893] text-white w-12 h-12 rounded-full flex items-center justify-center mb-4">
                             <Clock size={22} />
                         </div>
-                        <h4 className="text-[#343230] mb-1">Fecha límite</h4>
+                        <h4 className="text-[#343230] mb-1">Fecha límite para pedir tu remera</h4>
                         <p className="text-sm text-gray-500">A confirmar.</p>
                     </motion.div>
 
+                    {/* Retiro */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -296,7 +297,6 @@ export default function PreventaPage() {
                         <h4 className="text-[#343230] mb-1">Retiro</h4>
                         <p className="text-sm text-gray-500">Durante el Encuentro, en un punto a confirmar.</p>
                     </motion.div>
- */}
                 </div>
 
                 {/* Contacto */}

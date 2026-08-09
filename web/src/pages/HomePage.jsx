@@ -24,16 +24,13 @@ const EVENTO = {
 
 const DATOS_DONACION = [{
   label: 'Alias',
-  valor: 'ENCUENTRO.PLURI.CBA'
+  valor: 'cordoba-39encuentro'
 }, {
   label: 'CBU',
-  valor: '0000000000000000000000'
-}, {
-  label: 'CVU',
-  valor: '0000000000000000000000'
+  valor: '0000003100098523074578'
 }, {
   label: 'Titular',
-  valor: 'Nombre Apellido titular'
+  valor: 'CORDOBA - 39 PLURINACIONAL DE CORDOBA - 39 PLURINACIONAL DE'
 }];
 
 // ─── COMPONENTES AUXILIARES ───────────────────────────────────────────────────
@@ -615,18 +612,19 @@ function CampoDonacion({
       // Si el navegador bloquea el clipboard, no rompemos nada
     }
   };
+  const esTitular = label === 'Titular';
   return <div className="flex items-center justify-between gap-3 bg-[#faf7fb] rounded-xl px-4 py-3 border border-[#eadeed]">
     <div className="min-w-0">
       <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">{label}</p>
       <p className="text-sm font-semibold text-[#343230] truncate">{valor}</p>
     </div>
-    <button onClick={copiar} className="shrink-0 flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-full transition-colors" style={{
+    {!esTitular && <button onClick={copiar} className="shrink-0 flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-full transition-colors" style={{
       backgroundColor: copiado ? '#dceade' : '#eadeed',
       color: copiado ? '#21662f' : '#662c74'
     }}>
       {copiado ? <Check size={14} /> : <Copy size={14} />}
       {copiado ? 'Copiado' : 'Copiar'}
-    </button>
+    </button>}
   </div>;
 }
 
@@ -768,10 +766,10 @@ function ApoyoSection() {
             <ShoppingBag size={26} />
           </div>
           <h4 className="font-bold text-white text-xl mb-2 relative z-10">
-            Preventa: remeras y tote bags
+            Preventa: Remera oficial del 39 Encuentro
           </h4>
           <p className="text-sm text-white/70 mb-6 flex-1 relative z-10">
-            Reservá tu remera o tote bag oficial del 39° Encuentro.
+            Reservá la tuya.
           </p>
           <Link to="/Preventa" className="relative z-10 bg-[#21662f] text-white font-bold px-6 py-3 rounded-full hover:bg-[#184b22] transition-colors self-start inline-flex items-center gap-2">
             Ver preventa <ArrowRight size={16} />
@@ -1960,7 +1958,7 @@ export function FooterSection() {
     {/* Contacto */}
     <div className="pt-16 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-10 mb-12">
+        <div className="grid md:grid-cols-4 gap-10 mb-12">
           <div>
             <h4 className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">Contacto general</h4>
             <div className="flex items-center gap-2 text-white/70 mb-2">
@@ -1976,28 +1974,35 @@ export function FooterSection() {
             </div>
           </div>
 
-          <div>
+          <div className="md:col-span-2">
             <h4 className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">Comisiones</h4>
-            {[
-              { label: 'Organización y logística', mail: 'orgylogistica.39encuentro@gmail.com' },
-              { label: 'Finanzas', mail: 'finanzas39encuentro@gmail.com' },
-              { label: 'Comunicación', mail: '39encuentropluri.cba@proton.me' },
-              { label: 'Alojamiento', mail: 'alojamiento.39encuentropluri.cba@proton.me' },
-              { label: 'Cultura', mail: '39encuentro.cultura@gmail.com' },
-              { label: 'Accesibilidad', mail: 'accesibilidad.39encuentro@gmail.com' },
-            ].map(com => (
-              <div key={com.label} className="flex items-start gap-2 text-white/60 mb-2">
-                <Mail size={12} className="mt-1 shrink-0" />
-                <div>
-                  <p className="text-sm leading-tight">{com.label}</p>
-                  {com.mail ? (
-                    <HiddenMail mail={com.mail} className="text-xs text-white/40 hover:text-white transition-colors break-all" />
-                  ) : (
-                    <span className="text-xs text-white/30 italic">Próximamente</span>
-                  )}
+            <div className="grid grid-cols-2 gap-x-6">
+              {[
+                { label: 'Organización y logística', mail: 'orgylogistica.39encuentro@gmail.com' },
+                { label: 'Finanzas', mail: 'finanzas39encuentro@gmail.com' },
+                { label: 'Comunicación', mail: '39encuentropluri.cba@proton.me' },
+                { label: 'Alojamiento', mail: 'alojamiento.39encuentropluri.cba@proton.me' },
+                { label: 'Cultura', mail: '39encuentro.cultura@gmail.com' },
+                { label: 'Accesibilidad', mail: 'accesibilidad.39encuentro@gmail.com' },
+                { label: 'Pueblos preexistentes', mail: 'preexistentes.39encuentro@gmail.com' },
+              ].map(com => (
+                <div key={com.label} className="flex items-start gap-2 text-white/60 mb-2">
+                  <Mail size={12} className="mt-1 shrink-0" />
+                  <div className="min-w-0">
+                    <p className="text-sm leading-tight">{com.label}</p>
+                    {com.mail ? (
+                      <a href={'mailto:' + com.mail}
+                        className="text-xs text-white/40 hover:text-white transition-colors break-all"
+                      >
+                        {com.mail}
+                      </a>
+                    ) : (
+                      <span className="text-xs text-white/30 italic">Próximamente</span>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           <div>
@@ -2051,30 +2056,26 @@ export default function HomePage() {
     <CountdownBanner />
     <Navbar />
     <BackToTop />
-    <div className="relative" style={{
+    <div className="relative">
+  {/* Gradiente como capa única de fondo, detrás de las 3 secciones */}
+  <div
+    className="absolute inset-0 pointer-events-none"
+    style={{
       background: 'linear-gradient(180deg, #2f1435 0%, #662c74 25%, #184b22 45%, #2f1435 70%, #4a2055 100%)'
-    }}>
-      {/* Patrón tileado de fondo: 35% de opacidad, modo de fusión Multiplicar. Archivo en /public/images/bg-tile.png */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        // backgroundImage: 'url(/images/bg-tile.png)',
-        // backgroundRepeat: 'repeat',
-        // backgroundSize: '340px',
-        // mixBlendMode: 'multiply',
-        // opacity: 0.35
-      }} />
-      <div className="relative">
-        <HeroSection />
-        <ApoyoSection />
-        <ConsignaSection />
-      </div>
-    </div>
+    }}
+  />
+  <div className="relative">
+    <HeroSection />
+    <ApoyoSection />
+    <ConsignaSection />
+  </div>
+</div>
     <EncuentroSection />
     <EjesSection />
     <CronogramaSection />
     <SedeSection />
     <CulturalSection />
-    <QueLlevarSection />
-    {/* <CancioneroSection /> */}
+    <CancioneroSection />
     <PrensaSection />
     <FaqSection />
     <FooterSection />

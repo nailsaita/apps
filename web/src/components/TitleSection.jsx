@@ -4,8 +4,7 @@ import { Calendar, MapPin, ChevronDown, ChevronRight, ChevronLeft, Download, Ext
 
 
 function TitleSection({ title, subtitle }) {
-  return <section id="hero" className="flex flex-col items-center justify-center text-center px-4 pt-16 pb-24 relative overflow-hidden bg-gradient-to-br from-purple-950 via-purple-800 to-green-900"
-      style={{top:100}}>
+  return <section id="hero" className="flex flex-col items-center justify-center text-center px-4 pt-36 pb-24 relative overflow-hidden bg-gradient-to-br from-purple-950 via-purple-800 to-green-900">
       {/* Fondo decorativo */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
@@ -22,9 +21,7 @@ function TitleSection({ title, subtitle }) {
     }} transition={{
       duration: 0.8
     }} className="relative z-10 max-w-5xl">
-        <h1 className="text-white font-black leading-[1.05] mb-6 text-3xl md:text-5xl lg:text-6xl" style={{
-        
-      }}>
+        <h1 className="text-white font-black leading-[1.05] mb-6 text-3xl md:text-5xl lg:text-6xl">
           {title}
         </h1>
         {subtitle && (
