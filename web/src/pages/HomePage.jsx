@@ -517,7 +517,7 @@ function HeroLottie({ className = '' }) {
 }
 
 function HeroSection() {
-  return <section id="hero" className="min-h-[85vh] flex flex-col items-center justify-center px-4 pt-24 pb-16 relative overflow-hidden">
+  return <section id="hero" className="min-h-[100vh] flex flex-col items-center justify-center px-4 pt-24 pb-16 relative overflow-hidden">
     {/* Fondo decorativo */}
     <div className="absolute inset-0 pointer-events-none">
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#813893]/20 rounded-full blur-3xl" />
@@ -1991,11 +1991,7 @@ export function FooterSection() {
                   <div className="min-w-0">
                     <p className="text-sm leading-tight">{com.label}</p>
                     {com.mail ? (
-                      <a href={'mailto:' + com.mail}
-                        className="text-xs text-white/40 hover:text-white transition-colors break-all"
-                      >
-                        {com.mail}
-                      </a>
+                      <HiddenMail mail={com.mail} className="text-xs text-white/40 hover:text-white transition-colors break-all" />
                     ) : (
                       <span className="text-xs text-white/30 italic">Próximamente</span>
                     )}
