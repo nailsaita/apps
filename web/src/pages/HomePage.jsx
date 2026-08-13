@@ -18,7 +18,7 @@ const EVENTO = {
   frase: 'Un espacio de encuentro, debate y construcción colectiva del movimiento feminista y plurinacional',
   fecha: '10, 11 y 12 de octubre de 2026',
   sede: 'Córdoba Capital',
-  diasRestantes: Math.ceil((new Date('2026-10-11') - new Date()) / (1000 * 60 * 60 * 24))
+  fechaComienzo: new Date('2026-10-10') //Math.ceil((new Date('2026-10-10') - new Date()) / (1000 * 60 * 60 * 24))
 };
 
 
@@ -36,13 +36,13 @@ const DATOS_DONACION = [{
 // ─── COMPONENTES AUXILIARES ───────────────────────────────────────────────────
 
 export function CountdownBanner() {
-  const [dias, setDias] = useState(EVENTO.diasRestantes);
+  //const [dias, setDias] = useState(EVENTO.diasRestantes);
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setDias(Math.ceil((new Date('2026-10-11') - new Date()) / (1000 * 60 * 60 * 24)));
-    }, 60000);
+    // const timer = setInterval(() => {
+    //   setDias(Math.ceil((new Date('2026-10-11') - new Date()) / (1000 * 60 * 60 * 24)));
+    // }, 60000);
 
     const onScroll = () => {
       setVisible(window.scrollY < 80);
@@ -69,7 +69,7 @@ export function CountdownBanner() {
     ease: 'easeInOut'
   }} className="fixed top-0 left-0 right-0 z-50 bg-[#813893] text-white text-center py-2 text-sm font-semibold tracking-wide">
     <span className="opacity-80">Faltan </span>
-    <span className="text-[#fdb10c] text-lg font-black mx-1">{dias}</span>
+    <span className="text-[#fdb10c] text-lg font-black mx-1">{Math.ceil((EVENTO.fechaComienzo - new Date()) / (1000 * 60 * 60 * 24))}</span>
     <span className="opacity-80"> días para el Encuentro!</span>
   </motion.div>;
 }
@@ -469,9 +469,9 @@ export function Navbar() {
             <span className="text-xs">Buscar</span>
             <span className="text-xs bg-gray-200 text-gray-500 rounded px-1.5 py-0.5 ml-1 font-mono">⌘K</span>
           </button>
-          <a href="/#inscripcion" className="bg-[#2a823c] text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-[#21662f] transition-colors flex items-center" style={{ fontFamily: "'degular', sans-serif" }}>
+          {/* <a href="/#inscripcion" className="bg-[#2a823c] text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-[#21662f] transition-colors flex items-center" style={{ fontFamily: "'degular', sans-serif" }}>
             Inscribite acá
-          </a>
+          </a> */}
         </div>
 
         {/* Mobile: lupa + hamburguesa */}
@@ -499,9 +499,9 @@ export function Navbar() {
           {links.map(l => <a key={l.href} href={l.href} onClick={() => setOpen(false)} className={`block py-2 text-sm font-medium transition-colors ${activeSection === l.id ? 'text-[#813893] font-bold' : 'text-gray-700 hover:text-[#813893]'}`} style={{ fontFamily: "'degular', sans-serif" }}>
             {l.label}
           </a>)}
-          <a href="/#inscripcion" onClick={() => setOpen(false)} className="block mt-2 bg-[#2a823c] text-white text-sm font-bold px-4 py-2 rounded-full text-center">
+          {/* <a href="/#inscripcion" onClick={() => setOpen(false)} className="block mt-2 bg-[#2a823c] text-white text-sm font-bold px-4 py-2 rounded-full text-center">
             Inscribirse
-          </a>
+          </a> */}
         </motion.div>}
       </AnimatePresence>
     </motion.nav>
@@ -581,10 +581,10 @@ function HeroSection() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/#inscripcion" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-8 py-4 rounded-full hover:bg-[#21662f] transition-colors flex items-center justify-center gap-2 shadow-lg">
+          {/* <a href="/#inscripcion" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-8 py-4 rounded-full hover:bg-[#21662f] transition-colors flex items-center justify-center gap-2 shadow-lg">
             <Users size={18} />
             Inscripción
-          </a>
+          </a> */}
           <a href="/#cronograma" className="bg-[#FFF1E3] text-[#4a2055] font-bold px-8 py-4 rounded-full hover:bg-[#fec449] transition-colors flex items-center justify-center gap-2 shadow-lg">
             <Calendar size={18} />
             Ver programa completo
@@ -1433,14 +1433,18 @@ function CulturalSection() {
         <p className="text-gray-500 max-w-xl mx-auto mb-4">
           Arte, música, teatro y más. El Encuentro también es fiesta y celebración colectiva.
         </p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSewjHAlFM65SW-sI0f7gpFlPjYy1lhTGwv30DsRcZcTVCuAeA/viewform"
+        <p className="text-gray-500 max-w-xl mx-auto mb-4 font-bold">
+          Pronto vamos a tener la grilla completa de actividades culturales.
+        </p>
+        
+        {/* <a href="https://docs.google.com/forms/d/e/1FAIpQLSewjHAlFM65SW-sI0f7gpFlPjYy1lhTGwv30DsRcZcTVCuAeA/viewform"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold px-6 py-3 rounded-full hover:bg-[#fec449] transition-colors"
         >
           <ExternalLink size={16} />
           Para Inscribir tu actividad cultural para el Encuentro, llená este formulario
-        </a>
+        </a> */}
       </div>
 
       {/* <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">

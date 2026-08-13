@@ -1,0 +1,3 @@
+Cuando esté el formulario de inscripción, volver a mostrar los botones de inscripción
+fijarse si está bien el día del countdown
+cuando el countdown llegue a 0, esconder el banner permanentemente
