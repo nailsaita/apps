@@ -1201,9 +1201,6 @@ function IlustracionSticker({ src, size = 'w-24', height, rotate = -4, className
   );
 }
 
-<<<<<<< Updated upstream
-=======
-
 function SubcomisionesSection() {
   const [tarjetaAbierta, setTarjetaAbierta] = useState(null);
 
@@ -1327,7 +1324,7 @@ Súmate a ocupar espacios que son para todas, todes. Este Encuentro es de TODAS,
     </div>
   </section>;
 }
->>>>>>> Stashed changes
+
 function EjesSection() {
   const [ejeAbierto, setEjeAbierto] = useState(null);
   return <section id="ejes" className="py-24 px-4 bg-[#faf7fb]">
