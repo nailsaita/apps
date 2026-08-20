@@ -52,7 +52,6 @@ export function CountdownBanner() {
     window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
-      clearInterval(timer);
       window.removeEventListener('scroll', onScroll);
     };
   }, []);
@@ -274,9 +273,7 @@ const INDICE_BUSQUEDA = [
 
 // ─── BUSCADOR GLOBAL ──────────────────────────────────────────────────────────
 
-function BuscadorGlobal({
-  onClose
-}) {
+function BuscadorGlobal({ onClose }) {
   const [query, setQuery] = useState('');
   const inputRef = useRef(null);
   useEffect(() => {
@@ -329,7 +326,7 @@ function BuscadorGlobal({
         {query && <button onClick={() => setQuery('')} className="text-gray-400 hover:text-gray-600">
           <X size={18} />
         </button>}
-        <button onClick={onClose} className="text-xs text-gray-400 border border-gray-200 rounded px-2 py-0.5 hover:text-gray-600 ml-1">
+         <button onClick={() => irAResultado(item.href)} className="flex items-center gap-4 px-4 py-3 hover:bg-[#faf7fb] transition-colors group w-full text-left">
           Esc
         </button>
       </div>
@@ -469,9 +466,9 @@ export function Navbar() {
             <span className="text-xs">Buscar</span>
             <span className="text-xs bg-gray-200 text-gray-500 rounded px-1.5 py-0.5 ml-1 font-mono">⌘K</span>
           </button>
-          {/* <a href="/#inscripcion" className="bg-[#2a823c] text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-[#21662f] transition-colors flex items-center" style={{ fontFamily: "'degular', sans-serif" }}>
-            Inscribite acá
-          </a> */}
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" className="bg-[#2a823c] text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-[#21662f] transition-colors flex items-center" style={{ fontFamily: "'degular', sans-serif" }}>
+  Inscribite acá
+</a>
         </div>
 
         {/* Mobile: lupa + hamburguesa */}
@@ -499,9 +496,9 @@ export function Navbar() {
           {links.map(l => <a key={l.href} href={l.href} onClick={() => setOpen(false)} className={`block py-2 text-sm font-medium transition-colors ${activeSection === l.id ? 'text-[#813893] font-bold' : 'text-gray-700 hover:text-[#813893]'}`} style={{ fontFamily: "'degular', sans-serif" }}>
             {l.label}
           </a>)}
-          {/* <a href="/#inscripcion" onClick={() => setOpen(false)} className="block mt-2 bg-[#2a823c] text-white text-sm font-bold px-4 py-2 rounded-full text-center">
-            Inscribirse
-          </a> */}
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="block mt-2 bg-[#2a823c] text-white text-sm font-bold px-4 py-2 rounded-full text-center">
+  Inscribirse
+</a> 
         </motion.div>}
       </AnimatePresence>
     </motion.nav>
@@ -581,10 +578,10 @@ function HeroSection() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          {/* <a href="/#inscripcion" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-8 py-4 rounded-full hover:bg-[#21662f] transition-colors flex items-center justify-center gap-2 shadow-lg">
-            <Users size={18} />
-            Inscripción
-          </a> */}
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-8 py-4 rounded-full hover:bg-[#21662f] transition-colors flex items-center justify-center gap-2 shadow-lg">
+  <Users size={18} />
+  Inscripción
+</a>
           <a href="/#cronograma" className="bg-[#FFF1E3] text-[#4a2055] font-bold px-8 py-4 rounded-full hover:bg-[#fec449] transition-colors flex items-center justify-center gap-2 shadow-lg">
             <Calendar size={18} />
             Ver programa completo
@@ -667,9 +664,9 @@ function DonacionesModal({
           </div>
           <h3 className="font-bold text-[#343230] text-lg m-0">Aportá al Encuentro</h3>
         </div>
-        <button onClick={onClose} className="text-gray-400 hover:text-gray-600 shrink-0">
-          <X size={20} />
-        </button>
+        <button onClick={onClose} aria-label="Cerrar búsqueda" className="shrink-0 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full p-1.5 transition-colors ml-1">
+  <X size={16} />
+</button>
       </div>
 
       <div className="p-6">
@@ -1203,138 +1200,7 @@ function IlustracionSticker({ src, size = 'w-24', height, rotate = -4, className
     />
   );
 }
-// ─── SUBCOMISIONES NUEVAS ──────────────────────────────────────────────────
 
-
-function SubcomisionesSection() {
-  const [tarjetaAbierta, setTarjetaAbierta] = useState(null);
-
-  const subcomisiones = [
-    {
-      id: 'travesti-trans',
-      titulo: 'Subcomisión Travesti Trans',
-      desc: '¡Se conformó la Comisión Travesti Trans No Binarie rumbo al 39° Encuentro Plurinacional! 🏳️‍⚧️✊🏽💛🤍💜🖤',
-      border: 'border-[#813893]/30',
-      badgeColor: 'bg-[#813893] text-white',
-      iconBg: 'bg-[#813893] text-white',
-      icono: <Rainbow size={24} />,
-      contenido: `
-Seguimos encontrándonos para ocupar y disputar los espacios conquistados con organización colectiva.
-Queremos construir un espacio de participación y debate para que nuestras voces, experiencias y agendas estén presentes y sean protagonistas en el próximo Encuentro Plurinacional.
-
-Nos convocan nuestras luchas: el derecho a la identidad, al trabajo, la salud, la educación y la vivienda; el reconocimiento de nuestras identidades; la construcción de políticas públicas que garanticen vidas dignas; y la resistencia frente a los discursos de odio, la violencia y los crímenes de odio.
-
-No queremos ser invitades. Somos parte. Queremos decidir.
-
-Convocamos a todas las personas travestis, trans, no binaries y a las identidades disidentes que quieran sumarse a este camino colectivo, desde el respeto, la escucha y el reconocimiento de nuestras propias voces.
-
-🏳️‍⚧️✊🏽 Nuestra participación también es política. Nuestra existencia es resistencia. Nuestra organización es nuestra herramienta. 💛🤍💜🖤`
-    },
-    {
-      id: 'pueblos-preexistentes',
-      titulo: 'Subcomisión Pueblos y Naciones Preexistentes',
-      desc: '¡Se conformó la Subcomisión de Pueblos Preexistentes rumbo al 39° Encuentro Plurinacional!✊🏽',
-      border: 'border-[#fdb10c]/30',
-      badgeColor: 'bg-[#fdb10c] text-[#4a2055]',
-      iconBg: 'bg-[#fdb10c] text-[#4a2055]',
-      icono: <Mountain size={24} />,
-      contenido: `Queremos construir un espacio de participación y debate para que nuestras voces, nuestros saberes y las agendas de nuestros pueblos estén presentes y sean protagonistas en el próximo Encuentro Plurinacional.
-
-Nos convocan nuestras luchas: el derecho a la tierra y al territorio, el reconocimiento de nuestras identidades y cosmovisiones, el acceso a la salud y la educación, y la resistencia frente al extractivismo, la discriminación y el avasallamiento de nuestros derechos.
-
-Convocamos a todas las personas de pueblos originarios y preexistentes, y a quienes quieran acompañar este camino colectivo, desde el respeto, la escucha y el reconocimiento de nuestra propia voz.
-
-✊🏽⛰️`
-    },
-    {
-      id: 'accesibilidad',
-      titulo: 'Subcomisión de Accesibilidad',
-      desc: 'La participación plena solo es posible con accesibilidad y apoyos. Derribar barreras capacitistas es una responsabilidad colectiva. ✊🏽',
-      border: 'border-[#2a823c]/30',
-      badgeColor: 'bg-[#2a823c] text-white',
-      iconBg: 'bg-[#2a823c] text-white',
-      icono: <Accessibility size={24} />,
-      contenido: `En este marco, se están pensando en estrategias de diseño universal que garanticen:
-🔹 El acceso a la información.
-🔹 Espacios más amigables.
-🔹 La participación en igual condición y oportunidad.
-🔹 El trato adecuado.
-🔹 Los ajustes razonables.
-
-Súmate a ocupar espacios que son para todas, todes. Este Encuentro es de TODAS, TODES.`
-    }
-  ];
-
-  return <section className="py-12 px-4 relative overflow-hidden bg-[#2f1435]">
-    <div className="max-w-5xl mx-auto relative z-10">
-      <div className="text-center mb-12">
-        <h2 className="text-white mb-3">Nuevas subcomisiones del Encuentro</h2>
-        <p className="text-white/60 max-w-xl mx-auto">
-          Este 39° Encuentro suma estos tres espacios a la Comisión Organizadora.
-        </p>
-      </div>
-
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
-        {subcomisiones.map((sub, i) => (
-          <motion.div
-  key={sub.id}
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ duration: 0.5, delay: i * 0.1 }}
-  className={`relative overflow-hidden rounded-3xl border-2 ${sub.border} bg-white/5 flex flex-col h-full`}
->
-  <div className="p-8 flex flex-col flex-1">
-    <span className={`absolute top-5 right-5 ${sub.badgeColor} text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide`}>
-      Por primera vez
-    </span>
-    <div className={`${sub.iconBg} w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10`}>
-      {sub.icono}
-    </div>
-    <h4 className="font-bold text-white text-xl mb-2 relative z-10">
-      {sub.titulo}
-    </h4>
-    <p className="text-sm text-white/70 relative z-10 flex-1">
-      {sub.desc}
-    </p>
-
-    {sub.contenido && (
-      <button
-        onClick={() => setTarjetaAbierta(tarjetaAbierta === sub.id ? null : sub.id)}
-        className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10"
-      >
-        {tarjetaAbierta === sub.id ? 'Ver menos' : 'Ver más'}
-        <ChevronDown
-          size={14}
-          className="transition-transform"
-          style={{ transform: tarjetaAbierta === sub.id ? 'rotate(180deg)' : 'rotate(0deg)' }}
-        />
-      </button>
-    )}
-  </div>
-
-  {sub.contenido && (
-    <AnimatePresence>
-      {tarjetaAbierta === sub.id && (
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: 'auto', opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          className="overflow-hidden border-t border-white/10"
-        >
-          <div className="p-8 pt-6 text-sm text-white/80 leading-relaxed whitespace-pre-line">
-            {sub.contenido}
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  )}
-</motion.div>
-        ))}
-      </div>
-    </div>
-  </section>;
-}
 function EjesSection() {
   const [ejeAbierto, setEjeAbierto] = useState(null);
   return <section id="ejes" className="py-24 px-4 bg-[#faf7fb]">
@@ -1344,9 +1210,9 @@ function EjesSection() {
         <p className="text-gray-500 max-w-xl mx-auto">
           Los talleres son espacios de diálogo y debate que funcionan durante el Encuentro, reuniendo a sus participantes alrededor de una temática. Son abiertos y horizontales, sin inscripción obligatoria.
         </p>
-        <a href="/Talleres" className="inline-flex items-center gap-1 text-[#21662f] font-bold mt-4 hover:underline">
-          Hacé click para ver mas <ArrowRight size={14} />
-        </a>
+        <Link to="/Talleres" className="inline-flex items-center gap-1 text-[#21662f] font-bold mt-4 hover:underline">
+  Hacé click para ver mas <ArrowRight size={14} />
+</Link>
       </div>
 
       {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
@@ -1972,9 +1838,9 @@ function SedeSection() {
           opacity: 0,
           y: 20
         }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
+  opacity: 1,
+  y: 0
+}} viewport={{
           once: true
         }} transition={{
           delay: i * 0.1
@@ -1982,9 +1848,9 @@ function SedeSection() {
           <div className={`${card.iconColor} mb-4`}>{card.icono}</div>
           <h4 className="font-bold text-[#343230] mb-2">{card.titulo}</h4>
           <p className="text-sm text-gray-500 flex-1">{card.desc}</p>
-          <a href={card.link} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 hover:underline`}>
-            {card.linkText} {card.link !== '#' && <ArrowRight size={12} />}
-          </a>
+          <Link to={card.link} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 hover:underline`}>
+  {card.linkText} {card.link !== '#' && <ArrowRight size={12} />}
+</Link>
         </motion.div>)}
       </div>
 
@@ -2045,9 +1911,9 @@ function PrensaSection() {
           <div className="mb-5 opacity-80">{item.icono}</div>
           <h3 className="text-white mb-3">{item.titulo}</h3>
           <p className="text-white/70 mb-6 text-sm">{item.desc}</p>
-          <a href={item.link} className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 font-bold text-sm px-5 py-2.5 rounded-full transition-colors">
-            {item.cta} <ArrowRight size={14} />
-          </a>
+          <Link to={item.link} className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 font-bold text-sm px-5 py-2.5 rounded-full transition-colors">
+  {item.cta} <ArrowRight size={14} />
+</Link>
         </motion.div>)}
       </div>
     </div>

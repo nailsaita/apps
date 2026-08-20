@@ -1,7 +1,7 @@
 import React from 'react';
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet";
 
 const CANCIONES = [
   {
