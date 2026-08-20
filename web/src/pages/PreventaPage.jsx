@@ -172,7 +172,7 @@ function ProductoCard({ producto, index }) {
 
 export default function PreventaPage() {
     return (
-        <div className="relative bg-background text-slate-100 min-h-screen">
+        <div className="relative min-h-screen bg-[#FFF1E3] text-[#343230]">
             <Helmet>
                 <title>Preventa: Remeras 39 Encuentro</title>
             </Helmet>

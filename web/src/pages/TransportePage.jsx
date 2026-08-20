@@ -10,7 +10,7 @@ import {Helmet} from "react-helmet";
 export default function TransportePage() {
 
   return (
-    <div className="relative bg-background text-slate-100">
+    <div className="relative min-h-screen bg-[#FFF1E3] text-[#343230]">
       <Helmet>
           <title>Transporte</title>
       </Helmet>
