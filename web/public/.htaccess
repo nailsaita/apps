@@ -7,13 +7,21 @@
 </IfModule>
 
 <IfModule mod_headers.c>
-	Header set X-Powered-By "Hostinger Horizons"
-
 	# Cache everything on CDN by default
-	Header set Cache-Control "public, s-maxage=604800, max-age=0"
+	# las paginas cambian con alguna regularidad, ponemos maxage en 5 minutos
+	Header set Cache-Control "public, s-maxage=300, max-age=0"
 
 	# Cache in browser all assets
 	<If "%{REQUEST_URI} =~ m#^/assets/.*$#">
+		Header set Cache-Control "public, max-age=604800"
+	</If>
+	<If "%{REQUEST_URI} =~ m#^/docs/.*$#">
+		Header set Cache-Control "public, max-age=604800"
+	</If>
+		<If "%{REQUEST_URI} =~ m#^/images/.*$#">
+		Header set Cache-Control "public, max-age=604800"
+	</If>
+		<If "%{REQUEST_URI} =~ m#^/lottie/.*$#">
 		Header set Cache-Control "public, max-age=604800"
 	</If>
 </IfModule>
