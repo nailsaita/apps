@@ -1200,7 +1200,129 @@ function IlustracionSticker({ src, size = 'w-24', height, rotate = -4, className
     />
   );
 }
+function SubcomisionesSection() {
+  const [tarjetaAbierta, setTarjetaAbierta] = useState(null);
 
+  const subcomisiones = [
+    {
+      id: 'travesti-trans',
+      titulo: 'Subcomisión Travesti Trans',
+      desc: '¡Se conformó la Comisión Travesti Trans No Binarie rumbo al 39° Encuentro Plurinacional! 🏳️‍⚧️✊🏽💛🤍💜🖤',
+      border: 'border-[#813893]/30',
+      badgeColor: 'bg-[#813893] text-white',
+      iconBg: 'bg-[#813893] text-white',
+      icono: <Rainbow size={24} />,
+      contenido: `
+Seguimos encontrándonos para ocupar y disputar los espacios conquistados con organización colectiva.
+Queremos construir un espacio de participación y debate para que nuestras voces, experiencias y agendas estén presentes y sean protagonistas en el próximo Encuentro Plurinacional.
+
+Nos convocan nuestras luchas: el derecho a la identidad, al trabajo, la salud, la educación y la vivienda; el reconocimiento de nuestras identidades; la construcción de políticas públicas que garanticen vidas dignas; y la resistencia frente a los discursos de odio, la violencia y los crímenes de odio.
+
+No queremos ser invitades. Somos parte. Queremos decidir.
+
+Convocamos a todas las personas travestis, trans, no binaries y a las identidades disidentes que quieran sumarse a este camino colectivo, desde el respeto, la escucha y el reconocimiento de nuestras propias voces.
+
+🏳️‍⚧️✊🏽 Nuestra participación también es política. Nuestra existencia es resistencia. Nuestra organización es nuestra herramienta. 💛🤍💜🖤`
+    },
+    {
+      id: 'pueblos-preexistentes',
+      titulo: 'Subcomisión Pueblos y Naciones Preexistentes',
+      desc: '¡Se conformó la Subcomisión de Pueblos Preexistentes rumbo al 39° Encuentro Plurinacional!✊🏽',
+      border: 'border-[#fdb10c]/30',
+      badgeColor: 'bg-[#fdb10c] text-[#4a2055]',
+      iconBg: 'bg-[#fdb10c] text-[#4a2055]',
+      icono: <Mountain size={24} />,
+      contenido: `Pronto mas info de esta subcomisión✊🏽⛰️`
+    },
+    {
+      id: 'accesibilidad',
+      titulo: 'Subcomisión de Accesibilidad',
+      desc: 'La participación plena solo es posible con accesibilidad y apoyos. Derribar barreras capacitistas es una responsabilidad colectiva. ✊🏽',
+      border: 'border-[#2a823c]/30',
+      badgeColor: 'bg-[#2a823c] text-white',
+      iconBg: 'bg-[#2a823c] text-white',
+      icono: <Accessibility size={24} />,
+      contenido: `En este marco, se están pensando en estrategias de diseño universal que garanticen:
+🔹 El acceso a la información.
+🔹 Espacios más amigables.
+🔹 La participación en igual condición y oportunidad.
+🔹 El trato adecuado.
+🔹 Los ajustes razonables.
+
+Súmate a ocupar espacios que son para todas, todes. Este Encuentro es de TODAS, TODES.`
+    }
+  ];
+
+  return <section className="py-12 px-4 relative overflow-hidden bg-[#2f1435]">
+    <div className="max-w-5xl mx-auto relative z-10">
+      <div className="text-center mb-12">
+        <h2 className="text-white mb-3">Nuevas subcomisiones del Encuentro</h2>
+        <p className="text-white/60 max-w-xl mx-auto">
+          Este 39° Encuentro suma estos tres espacios a la Comisión Organizadora.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+        {subcomisiones.map((sub, i) => (
+          <motion.div
+            key={sub.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+            className={`relative overflow-hidden rounded-3xl border-2 ${sub.border} bg-white/5 flex flex-col h-full`}
+          >
+            <div className="p-8 flex flex-col flex-1">
+              <span className={`absolute top-5 right-5 ${sub.badgeColor} text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide`}>
+                Por primera vez
+              </span>
+              <div className={`${sub.iconBg} w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10`}>
+                {sub.icono}
+              </div>
+              <h4 className="font-bold text-white text-xl mb-2 relative z-10">
+                {sub.titulo}
+              </h4>
+              <p className="text-sm text-white/70 relative z-10 flex-1">
+                {sub.desc}
+              </p>
+
+              {sub.contenido && (
+                <button
+                  onClick={() => setTarjetaAbierta(tarjetaAbierta === sub.id ? null : sub.id)}
+                  className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10"
+                >
+                  {tarjetaAbierta === sub.id ? 'Ver menos' : 'Ver más'}
+                  <ChevronDown
+                    size={14}
+                    className="transition-transform"
+                    style={{ transform: tarjetaAbierta === sub.id ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                  />
+                </button>
+              )}
+            </div>
+
+            {sub.contenido && (
+              <AnimatePresence>
+                {tarjetaAbierta === sub.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="overflow-hidden border-t border-white/10"
+                  >
+                    <div className="p-8 pt-6 text-sm text-white/80 leading-relaxed whitespace-pre-line">
+                      {sub.contenido}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            )}
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>;
+}
 function EjesSection() {
   const [ejeAbierto, setEjeAbierto] = useState(null);
   return <section id="ejes" className="py-24 px-4 bg-[#faf7fb]">
