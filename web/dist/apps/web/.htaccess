@@ -11,6 +11,19 @@
 	# las paginas cambian con alguna regularidad, ponemos maxage en 5 minutos
 	Header set Cache-Control "public, s-maxage=300, max-age=0"
 
+	# el service worker no debe ser cacheado 
+    <FilesMatch "^(sw|service-worker)\.js$">
+        # Force the browser and proxies to revalidate every time
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+        Header set Pragma "no-cache"
+        Header set Expires "Thu, 01 Jan 1970 00:00:00 GMT"
+        
+        # Remove ETags so the server doesn't respond with a 304 Not Modified
+        Header unset ETag
+        Header unset Last-Modified
+        FileETag None
+    </FilesMatch>
+
 	# Cache in browser all assets
 	<If "%{REQUEST_URI} =~ m#^/assets/.*$#">
 		Header set Cache-Control "public, max-age=604800"

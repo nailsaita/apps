@@ -236,7 +236,13 @@ const pwaPlugin = VitePWA({
 		]
 	},
 	workbox: {
+		skipWaiting: true,
+		clientsClaim: true,
 		cleanupOutdatedCaches: true,
+		runtimeCaching: [{
+            urlPattern: /^((?!\.(js|css|png|jpg|jpeg|svg|gif|ico|json|woff|woff2)$).)*$/, //not a static file
+            handler: 'NetworkOnly',
+		}]
 	},
 });
 
