@@ -30,7 +30,6 @@ export default function KitPrensaPage() {
           className="mb-16 bg-white/70 rounded-3xl p-6 md:p-8 border border-[#eadeed] shadow-xl shadow-[#813893]/5 backdrop-blur-sm"
         >
           <h2 className="text-2xl font-bold tracking-tight text-[#813893] mb-4 uppercase"
-          //  style={{ fontFamily: "'thunderhouse-pro', sans-serif" }}
            >
             Información para Medios de Comunicación
           </h2>
@@ -151,7 +150,6 @@ export default function KitPrensaPage() {
           className="bg-white/50 rounded-3xl p-6 md:p-8 border border-[#eadeed] shadow-xl shadow-[#813893]/5"
         >
           <h2 className="text-2xl font-bold tracking-tight text-[#813893] mb-1 uppercase" 
-          // style={{ fontFamily: "'thunderhouse-pro', sans-serif" }}
           >
             Nuestro Kit de Prensa
           </h2>

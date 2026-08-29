@@ -155,7 +155,6 @@ export default function CancioneroPage() {
               >
                 <h3
                   className="text-xl font-bold text-[#813893] mb-3 flex gap-2"
-                  // style={{ fontFamily: "'thunderhouse-pro', sans-serif" }}
                 >
                   <span className="text-[#fdb10c] font-extrabold drop-shadow-sm">
                     {index + 1}.

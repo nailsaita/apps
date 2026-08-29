@@ -20,7 +20,6 @@ export default function SemblanzaPage() {
 
                         <h2
                             className="text-2xl font-bold text-[#813893] mb-6 border-b border-[#eadeed] pb-4"
-                        // style={{ fontFamily: "'thunderhouse-pro', sans-serif" }}
                         >
                             Semblanza Encuentro Plurinacional de Mujeres, Lesbianxs, Trans, Travestis, Bisexuales, Intersex y No Binaries.
                         </h2>
@@ -29,7 +28,6 @@ export default function SemblanzaPage() {
                         <div className="space-y-4">
                             <h3
                                 className="text-xl font-semibold text-[#813893]"
-                            // style={{ fontFamily: "'thunderhouse-pro', sans-serif" }}
                             >
                                 Una historia de alcance global y raíces locales
                             </h3>
@@ -51,7 +49,6 @@ export default function SemblanzaPage() {
                         <div className="space-y-4 pt-4">
                             <h3
                                 className="text-xl font-semibold text-[#813893]"
-                            // style={{ fontFamily: "'thunderhouse-pro', sans-serif" }}
                             >
                                 ¿De qué hablamos cuándo hablamos del Encuentro?
                             </h3>
@@ -67,7 +64,6 @@ export default function SemblanzaPage() {
                         <div className="space-y-4 pt-4">
                             <h3
                                 className="text-xl font-semibold text-[#813893]"
-                            // style={{ fontFamily: "'thunderhouse-pro', sans-serif" }}
                             >
                                 Dinámica y Convocatoria
                             </h3>

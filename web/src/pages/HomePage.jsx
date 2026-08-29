@@ -538,12 +538,13 @@ function HeroSection() {
         {/* Título (3 líneas) + subtítulo, centrados igual que el logo */}
         <div className="order-2 flex-1 text-center">
           <h1 className="titulo39 font-display text-white font-black mb-6 flex flex-col items-center leading-[1.05]"
-            style={{ "marginLeft": "auto", "marginRight": "auto", "width": "60vw", "maxWidth": "580px", "lineHeight": "0.8", "fontFamily": "'thunderhouse-pro'", "fontWeight": "500" }}
+            style={{ "marginLeft": "auto", "marginRight": "auto", "width": "60vw", "maxWidth": "580px", "lineHeight": "0.8", "fontWeight": "500" }}
           >
             {/* Tamaños calculados en proporción a la cantidad de caracteres de cada línea,
                 para que las tres se perciban con un ancho visual similar. Son aproximados:
                 ajustalos a ojo si con la tipografía real (Thunderhouse) no cierran perfecto. */}
-            <span style={{
+                <img src="/images/texto3lineas.webp" alt="39 Encuentro Plurinacional de Mujeres, Lesbianas, Travestis, Trans, Bisexuales, Intersexuales y No Binaries" className="w-full max-w-[580px] mb-2" />
+            {/* <span style={{
               "fontSize": "clamp(1.6rem, 7vw, 4.6rem)", "width": "100%", "textAlign": "justify", "textAlignLast": "justify", "fontWeight": "500"
             }}>39 ENCUENTRO PLURINACIONAL</span>
             <span className="text-[#fec449]" style={{
@@ -551,7 +552,7 @@ function HeroSection() {
             }}>DE MUJERES, LESBIANAS, TRAVESTIS, TRANS,</span>
             <span className="text-[#94c09e]" style={{
               "fontSize": "clamp(1.1rem, 3.7vw, 3.1rem)", "textAlign": "justify", "textAlignLast": "justify", "width": "100%", "fontWeight": "500"
-            }}>BISEXUALES, INTERSEXUALES Y NO BINARIES</span>
+            }}>BISEXUALES, INTERSEXUALES Y NO BINARIES</span> */}
           </h1>
 
           <p className="text-white/75 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: "'degular', sans-serif" }}>
@@ -2152,22 +2153,6 @@ export function FooterSection() {
 // ─── PÁGINA PRINCIPAL ─────────────────────────────────────────────────────────
 
 export default function HomePage() {
-  useEffect(() => {
-    if (!document.getElementById('encuentro-typography')) {
-      const style = document.createElement('style');
-      style.id = 'encuentro-typography';
-      style.innerHTML = `
-        body {
-          font-family: 'degular', sans-serif !important;
-        }
-        h1, h2, h3, h4, h5, h6,
-        h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
-          font-family: 'thunderhouse-pro', sans-serif !important;
-        }
-      `;
-      document.head.appendChild(style);
-    }
-  }, []);
   return <div className="relative font-body">
     <ScrollProgressBar />
     <CountdownBanner />
