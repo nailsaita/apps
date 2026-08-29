@@ -21,7 +21,7 @@ export default function GaleriaPrensaPage() {
       <main className="relative mx-auto max-w-7xl px-4 pb-32 pt-4 sm:px-6 lg:px-8">
         <section className="rounded-3xl border border-[#eadeed] bg-white/70 p-6 shadow-xl shadow-[#813893]/5 backdrop-blur-sm sm:p-8">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {notas.map((item, index) => (
+            {notas.reverse().map((item, index) => (
               <motion.article
                 key={item.url || `${item.titulo}-${index}`}
                 initial={{ opacity: 0, y: 24 }}
@@ -41,8 +41,8 @@ export default function GaleriaPrensaPage() {
                 </div>
                 <div className="flex flex-col gap-4 p-5">
                   <div>
-                    <p className="text-sm uppercase tracking-[0.2em] text-gray-400">
-                      {item.fecha}
+                    <p className="text-sm tracking-[0.2em] text-gray-400">
+                      {item.fecha} - {item.medio}
                     </p>
                     <h3 className="mt-3 text-lg font-bold text-[#343230]">
                       {item.titulo}
