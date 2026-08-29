@@ -2,11 +2,6 @@ import path from 'node:path';
 import react from '@vitejs/plugin-react';
 import { createLogger, defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
-import inlineEditPlugin from './plugins/visual-editor/vite-plugin-react-inline-editor.js';
-import editModeDevPlugin from './plugins/visual-editor/vite-plugin-edit-mode.js';
-import selectionModePlugin from './plugins/selection-mode/vite-plugin-selection-mode.js';
-import iframeRouteRestorationPlugin from './plugins/vite-plugin-iframe-route-restoration.js';
-import pocketbaseAuthPlugin from './plugins/vite-plugin-pocketbase-auth.js';
 
 import { readFileSync } from 'node:fs';
 
@@ -236,7 +231,13 @@ const pwaPlugin = VitePWA({
 		]
 	},
 	workbox: {
+		skipWaiting: true,
+		clientsClaim: true,
 		cleanupOutdatedCaches: true,
+		runtimeCaching: [{
+            urlPattern: /^((?!\.(js|css|png|jpg|jpeg|svg|gif|ico|json|woff|woff2)$).)*$/, //not a static file
+            handler: 'NetworkOnly',
+		}]
 	},
 });
 
@@ -315,7 +316,7 @@ export default defineConfig({
 	},
 	customLogger: logger,
 	plugins: [
-		...(isDev ? [inlineEditPlugin(), editModeDevPlugin(), selectionModePlugin(), iframeRouteRestorationPlugin(), pocketbaseAuthPlugin()] : []),
+		...(isDev ? [] : []),
 		pwaPlugin,
 		react(),
 		addTransformIndexHtml

@@ -518,12 +518,13 @@ function HeroSection() {
         {/* Título (3 líneas) + subtítulo, centrados igual que el logo */}
         <div className="order-2 flex-1 text-center">
           <h1 className="titulo39 font-display text-white font-black mb-6 flex flex-col items-center leading-[1.05]"
-            style={{ "marginLeft": "auto", "marginRight": "auto", "width": "60vw", "maxWidth": "580px", "lineHeight": "0.8", "fontFamily": "'thunderhouse-pro'", "fontWeight": "500" }}
+            style={{ "marginLeft": "auto", "marginRight": "auto", "width": "60vw", "maxWidth": "580px", "lineHeight": "0.8", "fontWeight": "500" }}
           >
             {/* Tamaños calculados en proporción a la cantidad de caracteres de cada línea,
                 para que las tres se perciban con un ancho visual similar. Son aproximados:
                 ajustalos a ojo si con la tipografía real (Thunderhouse) no cierran perfecto. */}
-            <span style={{
+                <img src="/images/texto3lineas.webp" alt="39 Encuentro Plurinacional de Mujeres, Lesbianas, Travestis, Trans, Bisexuales, Intersexuales y No Binaries" className="w-full max-w-[580px] mb-2" />
+            {/* <span style={{
               "fontSize": "clamp(1.6rem, 7vw, 4.6rem)", "width": "100%", "textAlign": "justify", "textAlignLast": "justify", "fontWeight": "500"
             }}>39 ENCUENTRO PLURINACIONAL</span>
             <span className="text-[#fec449]" style={{
@@ -531,7 +532,7 @@ function HeroSection() {
             }}>DE MUJERES, LESBIANAS, TRAVESTIS, TRANS,</span>
             <span className="text-[#94c09e]" style={{
               "fontSize": "clamp(1.1rem, 3.7vw, 3.1rem)", "textAlign": "justify", "textAlignLast": "justify", "width": "100%", "fontWeight": "500"
-            }}>BISEXUALES, INTERSEXUALES Y NO BINARIES</span>
+            }}>BISEXUALES, INTERSEXUALES Y NO BINARIES</span> */}
           </h1>
 
           <p className="text-white/75 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: "'degular', sans-serif" }}>
@@ -1180,6 +1181,130 @@ function IlustracionSticker({ src, size = 'w-24', height, rotate = -4, className
   );
 }
 
+function SubcomisionesSection() {
+  const [tarjetaAbierta, setTarjetaAbierta] = useState(null);
+
+  const subcomisiones = [
+    {
+      id: 'travesti-trans',
+      titulo: 'Subcomisión Travesti Trans',
+      desc: '¡Se conformó la Comisión Travesti Trans No Binarie rumbo al 39° Encuentro Plurinacional! 🏳️‍⚧️✊🏽💛🤍💜🖤',
+      border: 'border-[#813893]/30',
+      badgeColor: 'bg-[#813893] text-white',
+      iconBg: 'bg-[#813893] text-white',
+      icono: <Rainbow size={24} />,
+      contenido: `
+Seguimos encontrándonos para ocupar y disputar los espacios conquistados con organización colectiva.
+Queremos construir un espacio de participación y debate para que nuestras voces, experiencias y agendas estén presentes y sean protagonistas en el próximo Encuentro Plurinacional.
+
+Nos convocan nuestras luchas: el derecho a la identidad, al trabajo, la salud, la educación y la vivienda; el reconocimiento de nuestras identidades; la construcción de políticas públicas que garanticen vidas dignas; y la resistencia frente a los discursos de odio, la violencia y los crímenes de odio.
+
+No queremos ser invitades. Somos parte. Queremos decidir.
+
+Convocamos a todas las personas travestis, trans, no binaries y a las identidades disidentes que quieran sumarse a este camino colectivo, desde el respeto, la escucha y el reconocimiento de nuestras propias voces.
+
+🏳️‍⚧️✊🏽 Nuestra participación también es política. Nuestra existencia es resistencia. Nuestra organización es nuestra herramienta. 💛🤍💜🖤`
+    },
+    {
+      id: 'pueblos-preexistentes',
+      titulo: 'Subcomisión Pueblos y Naciones Preexistentes',
+      desc: '¡Se conformó la Subcomisión de Pueblos Preexistentes rumbo al 39° Encuentro Plurinacional!✊🏽',
+      border: 'border-[#fdb10c]/30',
+      badgeColor: 'bg-[#fdb10c] text-[#4a2055]',
+      iconBg: 'bg-[#fdb10c] text-[#4a2055]',
+      icono: <Mountain size={24} />,
+      contenido: `Pronto mas info de esta subcomisión✊🏽⛰️`
+    },
+    {
+      id: 'accesibilidad',
+      titulo: 'Subcomisión de Accesibilidad',
+      desc: 'La participación plena solo es posible con accesibilidad y apoyos. Derribar barreras capacitistas es una responsabilidad colectiva. ✊🏽',
+      border: 'border-[#2a823c]/30',
+      badgeColor: 'bg-[#2a823c] text-white',
+      iconBg: 'bg-[#2a823c] text-white',
+      icono: <Accessibility size={24} />,
+      contenido: `En este marco, se están pensando en estrategias de diseño universal que garanticen:
+🔹 El acceso a la información.
+🔹 Espacios más amigables.
+🔹 La participación en igual condición y oportunidad.
+🔹 El trato adecuado.
+🔹 Los ajustes razonables.
+
+Súmate a ocupar espacios que son para todas, todes. Este Encuentro es de TODAS, TODES.`
+    }
+  ];
+
+  return <section className="py-12 px-4 relative overflow-hidden bg-[#2f1435]">
+    <div className="max-w-5xl mx-auto relative z-10">
+      <div className="text-center mb-12">
+        <h2 className="text-white mb-3">Nuevas subcomisiones del Encuentro</h2>
+        <p className="text-white/60 max-w-xl mx-auto">
+          Este 39° Encuentro suma estos tres espacios a la Comisión Organizadora.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+        {subcomisiones.map((sub, i) => (
+          <motion.div
+            key={sub.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+            className={`relative overflow-hidden rounded-3xl border-2 ${sub.border} bg-white/5 flex flex-col h-full`}
+          >
+            <div className="p-8 flex flex-col flex-1">
+              <span className={`absolute top-5 right-5 ${sub.badgeColor} text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide`}>
+                Por primera vez
+              </span>
+              <div className={`${sub.iconBg} w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10`}>
+                {sub.icono}
+              </div>
+              <h4 className="font-bold text-white text-xl mb-2 relative z-10">
+                {sub.titulo}
+              </h4>
+              <p className="text-sm text-white/70 relative z-10 flex-1">
+                {sub.desc}
+              </p>
+
+              {sub.contenido && (
+                <button
+                  onClick={() => setTarjetaAbierta(tarjetaAbierta === sub.id ? null : sub.id)}
+                  className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10"
+                >
+                  {tarjetaAbierta === sub.id ? 'Ver menos' : 'Ver más'}
+                  <ChevronDown
+                    size={14}
+                    className="transition-transform"
+                    style={{ transform: tarjetaAbierta === sub.id ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                  />
+                </button>
+              )}
+            </div>
+
+            {sub.contenido && (
+              <AnimatePresence>
+                {tarjetaAbierta === sub.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="overflow-hidden border-t border-white/10"
+                  >
+                    <div className="p-8 pt-6 text-sm text-white/80 leading-relaxed whitespace-pre-line">
+                      {sub.contenido}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            )}
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>;
+}
+
 function EjesSection() {
   const [ejeAbierto, setEjeAbierto] = useState(null);
   return <section id="ejes" className="py-24 px-4 bg-[#faf7fb]">
@@ -1446,7 +1571,7 @@ function CancioneroSection() {
           src="/images/ilustraciones/abrazo-1.svg"
           size="w-40 md:w-60"
           rotate={-0}
-          className="hidden lg:block absolute left-1/2 md:right-auto md:-right-4 lg:left-4 -top20"
+          className="hidden md:block absolute left-1/2 md:right-auto md:-right-4 lg:left-4 -top20"
         />
         <h2 className="text-[#343230] mb-4">Cancionero</h2>
         <p className="text-gray-500 max-w-xl mx-auto mb-6">
@@ -1522,7 +1647,7 @@ function CulturalSection() {
           src="/images/ilustraciones/retratos.svg"
           size="w-32 md:w-44"
           rotate={4}
-          className="hidden lg:block absolute left-0 md:left-20 lg:right-3 -top-10"
+          className="hidden md:block absolute left-0 md:left-20 lg:right-3 -top-10"
         />
         <h2 className="text-[#343230] mb-4">Grilla Cultural</h2>
         <p className="text-gray-500 max-w-xl mx-auto mb-4">
@@ -2130,22 +2255,6 @@ export function FooterSection() {
 // ─── PÁGINA PRINCIPAL ─────────────────────────────────────────────────────────
 
 export default function HomePage() {
-  useEffect(() => {
-    if (!document.getElementById('encuentro-typography')) {
-      const style = document.createElement('style');
-      style.id = 'encuentro-typography';
-      style.innerHTML = `
-        body {
-          font-family: 'degular', sans-serif !important;
-        }
-        h1, h2, h3, h4, h5, h6,
-        h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
-          font-family: 'thunderhouse-pro', sans-serif !important;
-        }
-      `;
-      document.head.appendChild(style);
-    }
-  }, []);
   return <div className="relative font-body">
     <ScrollProgressBar />
     <CountdownBanner />

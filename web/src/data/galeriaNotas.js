@@ -4,6 +4,7 @@ const galeriaNotas = [
     medio: "La Ranchada",
     imagen: "/images/prensa/nota8.png",
     fecha: "2026-08-22",
+    medio: "La Ranchada",
     url: "https://laranchada.com.ar/camino-al-39o-encuentro-plurinacional-cordoba-despliega-una-intensa-agenda-cultural-previa-a-la-gran-cita-de-octubre/",
   },
   {
@@ -11,6 +12,7 @@ const galeriaNotas = [
     medio: "Página12",
     imagen: "/images/prensa/nota10.png",
     fecha: "2026-08-21",
+    medio: "Página12",
     url: "https://www.pagina12.com.ar/2026/08/21/un-momento-de-inflexion-para-la-lucha-feminista/",
   },
   {
