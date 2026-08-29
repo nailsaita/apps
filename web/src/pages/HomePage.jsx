@@ -376,11 +376,9 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [buscadorAbierto, setBuscadorAbierto] = useState(false);
   const scrolled = useScrolled(80);
-  //const scrolled = false; // Desactivado temporalmente para que el navbar no se mueva al hacer scroll
   const sectionIds = ['encuentro', 'ejes', 'cronograma', 'cultural', 'sede', 'prensa'];
   const activeSection = useActiveSection(sectionIds);
 
-  // Atajo de teclado Ctrl+K / Cmd+K
   useEffect(() => {
     const onKey = e => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
@@ -391,89 +389,71 @@ export function Navbar() {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);
+
   const links = [
-    {
-      href: '/#',
-      id: '',
-      label: 'Inicio'
-    }, {
-      href: '/#encuentro',
-      id: 'encuentro',
-      label: '¿Qué es?'
-    }, {
-      href: '/#ejes',
-      id: 'ejes',
-      label: 'Talleres'
-    }, {
-      href: '/#cronograma',
-      id: 'cronograma',
-      label: 'Cronograma'
-    }, {
-      href: '/#cultural',
-        id: 'cultural',
-        label: 'Cultura'
-      }, {
-      href: '/#sede',
-      id: 'sede',
-      label: 'Sede'
-    }, {
-      href: '/#prensa',
-      id: 'prensa',
-      label: 'Prensa'
-    }];
+    { href: '/#', id: '', label: 'Inicio' },
+    { href: '/#encuentro', id: 'encuentro', label: '¿Qué es?' },
+    { href: '/#ejes', id: 'ejes', label: 'Talleres' },
+    { href: '/#cronograma', id: 'cronograma', label: 'Cronograma' },
+    { href: '/#cultural', id: 'cultural', label: 'Cultura' },
+    { href: '/#sede', id: 'sede', label: 'Sede' },
+    { href: '/#prensa', id: 'prensa', label: 'Prensa' }
+  ];
+
   return <>
     <AnimatePresence>
       {buscadorAbierto && <BuscadorGlobal onClose={() => setBuscadorAbierto(false)} />}
     </AnimatePresence>
 
     <motion.nav animate={{
-      top: scrolled ? 0 : 44,
-      backgroundColor: scrolled ? 'rgba(255,241,227,0.97)' : 'rgba(255,241,227,0.92)',
-      boxShadow: scrolled ? '0 2px 16px rgba(129,56,147,0.10)' : '0 1px 0 rgba(129,56,147,0.07)'
-    }} transition={{
-      duration: 0.25,
-      ease: 'easeInOut'
-    }} className="fixed left-0 right-0 z-40 backdrop-blur border-b border-[#eadeed]">
+  top: scrolled ? 0 : 44,
+  backgroundColor: scrolled ? 'rgba(194,112,61,0.97)' : 'rgba(194,112,61,0.92)',
+  boxShadow: scrolled ? '0 2px 16px rgba(154,52,18,0.25)' : '0 1px 0 rgba(154,52,18,0.15)'
+}} transition={{
+  duration: 0.25,
+  ease: 'easeInOut'
+}} className="fixed left-0 right-0 z-40 backdrop-blur border-b border-[#9a3412]">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between transition-all duration-300" style={{
         height: scrolled ? '52px' : '56px'
       }}>
         {/* Links centrados — desktop */}
         <div className="hidden md:flex flex-1 items-center justify-center gap-1">
           {links.map(l => {
-            const isActive = activeSection === l.id;
-            return <a key={l.href} href={l.href} className="relative text-sm font-medium px-3 py-1.5 rounded-full transition-colors duration-200" style={{
-              color: isActive ? '#813893' : '#4b5563',
-              fontFamily: "'degular', sans-serif"
-            }}>
-              {isActive && <motion.span layoutId="nav-pill" className="absolute inset-0 bg-[#eadeed] rounded-full" transition={{
-                type: 'spring',
-                stiffness: 400,
-                damping: 30
-              }} />}
-              <span className="relative z-10">{l.label}</span>
-            </a>;
-          })}
+  const isActive = activeSection === l.id;
+  return <a key={l.href} href={l.href} className="relative text-sm font-medium px-3 py-1.5 rounded-full transition-colors duration-200" style={{
+  color: isActive ? '#9a3412' : '#fff1e3',
+  fontFamily: "'degular', sans-serif"
+}}>
+    {isActive && <motion.span layoutId="nav-pill" className="absolute inset-0 bg-[#fbd7b8] rounded-full" transition={{
+      type: 'spring',
+      stiffness: 400,
+      damping: 30
+    }} />}
+    <span className="relative z-10">{l.label}</span>
+  </a>;
+})}
         </div>
 
         {/* Derecha: lupa + inscribirse — desktop */}
         <div className="hidden md:flex items-center gap-2">
-          <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="flex items-center gap-2 text-sm text-gray-400 border border-gray-200 rounded-full px-3 py-1.5 hover:border-[#c09cc9] hover:text-[#813893] transition-colors bg-gray-50" title="Buscar (Ctrl+K)">
+          <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="flex items-center gap-2 text-sm text-gray-400 border border-gray-200 rounded-full px-3 py-1.5 hover:border-[#fdb10c] hover:text-[#916607] transition-colors bg-gray-50" title="Buscar (Ctrl+K)">
             <Search size={14} />
             <span className="text-xs">Buscar</span>
             <span className="text-xs bg-gray-200 text-gray-500 rounded px-1.5 py-0.5 ml-1 font-mono">⌘K</span>
           </button>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" className="bg-[#2a823c] text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-[#21662f] transition-colors flex items-center" style={{ fontFamily: "'degular', sans-serif" }}>
-  Inscribite acá
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-10 py-4 rounded-full hover:bg-[#21662f] hover:scale-105 transition-all flex items-center justify-center gap-2 shadow-xl shadow-[#184b22]/50 ring-2 ring-white/20 text-lg">
+  <Users size={20} />
+  Inscripción
 </a>
         </div>
 
         {/* Mobile: lupa + hamburguesa */}
         <div className="md:hidden flex items-center gap-2 w-full justify-between">
-          <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="text-[#813893]">
+          <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="text-[#916607]">
             <Search size={20} />
           </button>
           <button onClick={() => setOpen(!open)} aria-label="Menú">
-            <Menu size={24} className="text-[#813893]" />
+            <Menu size={24} className="text-[#916607]" />
           </button>
         </div>
       </div>
@@ -488,13 +468,13 @@ export function Navbar() {
         }} exit={{
           height: 0,
           opacity: 0
-        }} className="md:hidden bg-[#FFF1E3] border-t border-[#eadeed] px-4 pb-4 overflow-hidden">
-          {links.map(l => <a key={l.href} href={l.href} onClick={() => setOpen(false)} className={`block py-2 text-sm font-medium transition-colors ${activeSection === l.id ? 'text-[#813893] font-bold' : 'text-gray-700 hover:text-[#813893]'}`} style={{ fontFamily: "'degular', sans-serif" }}>
+        }} className="md:hidden bg-[#FFF1E3] border-t border-[#fed886] px-4 pb-4 overflow-hidden">
+          {links.map(l => <a key={l.href} href={l.href} onClick={() => setOpen(false)} className={`block py-2 text-sm font-medium transition-colors ${activeSection === l.id ? 'text-[#916607] font-bold' : 'text-gray-700 hover:text-[#916607]'}`} style={{ fontFamily: "'degular', sans-serif" }}>
             {l.label}
           </a>)}
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="block mt-2 bg-[#2a823c] text-white text-sm font-bold px-4 py-2 rounded-full text-center">
-  Inscribirse
-</a> 
+            Inscribirse
+          </a>
         </motion.div>}
       </AnimatePresence>
     </motion.nav>
@@ -573,17 +553,20 @@ function HeroSection() {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-8 py-4 rounded-full hover:bg-[#21662f] transition-colors flex items-center justify-center gap-2 shadow-lg">
-  <Users size={18} />
-  Inscripción
-</a>
-          <a href="/#cronograma" className="bg-[#FFF1E3] text-[#4a2055] font-bold px-8 py-4 rounded-full hover:bg-[#fec449] transition-colors flex items-center justify-center gap-2 shadow-lg">
-            <Calendar size={18} />
-            Ver programa completo
-          </a>
-          <AgregarCalendarioButton />
-        </div>
+        <div className="flex flex-col items-center gap-5">
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-14 py-5 rounded-full hover:bg-[#21662f] hover:scale-105 transition-all flex items-center justify-center gap-3 shadow-xl shadow-[#184b22]/50 ring-2 ring-white/20 text-xl">
+    <Users size={24} />
+    Inscripción
+  </a>
+
+  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+    <a href="/#cronograma" className="bg-[#FFF1E3] text-[#4a2055] font-bold px-8 py-4 rounded-full hover:bg-[#fec449] transition-colors flex items-center justify-center gap-2 shadow-lg">
+      <Calendar size={18} />
+      Ver programa completo
+    </a>
+    <AgregarCalendarioButton />
+  </div>
+</div>
       </div>
     </motion.div>
   </section>;
@@ -1333,6 +1316,125 @@ function CronogramaSection() {
       </div>
     </section>
   );
+}
+function SubcomisionesSection() {
+  const [tarjetaAbierta, setTarjetaAbierta] = useState(null);
+
+  const subcomisiones = [
+    {
+      id: 'travesti-trans',
+      titulo: 'Subcomisión Travesti Trans',
+      desc: '¡Se conformó la Comisión Travesti Trans No Binarie rumbo al 39° Encuentro Plurinacional! 🏳️‍⚧️✊🏽💛🤍💜🖤',
+      border: 'border-[#813893]/30',
+      badgeColor: 'bg-[#813893] text-white',
+      iconBg: 'bg-[#813893] text-white',
+      icono: <Rainbow size={24} />,
+      contenido: `
+Seguimos encontrándonos para ocupar y disputar los espacios conquistados con organización colectiva.
+Queremos construir un espacio de participación y debate para que nuestras voces, experiencias y agendas estén presentes y sean protagonistas en el próximo Encuentro Plurinacional.
+
+Nos convocan nuestras luchas: el derecho a la identidad, al trabajo, la salud, la educación y la vivienda; el reconocimiento de nuestras identidades; la construcción de políticas públicas que garanticen vidas dignas; y la resistencia frente a los discursos de odio, la violencia y los crímenes de odio.
+
+No queremos ser invitades. Somos parte. Queremos decidir.
+
+Convocamos a todas las personas travestis, trans, no binaries y a las identidades disidentes que quieran sumarse a este camino colectivo, desde el respeto, la escucha y el reconocimiento de nuestras propias voces.
+
+🏳️‍⚧️✊🏽 Nuestra participación también es política. Nuestra existencia es resistencia. Nuestra organización es nuestra herramienta. 💛🤍💜🖤`
+    },
+    {
+  id: 'pueblos-preexistentes',
+  titulo: 'Subcomisión Pueblos y Naciones Preexistentes',
+  desc: '¡Se conformó la Subcomisión de Pueblos Preexistentes rumbo al 39° Encuentro Plurinacional!✊🏽',
+  border: 'border-[#fdb10c]/30',
+  badgeColor: 'bg-[#fdb10c] text-[#4a2055]',
+  iconBg: 'bg-[#fdb10c] text-[#4a2055]',
+  icono: <Mountain size={24} />,
+  link: '/PueblosPreexistentes'
+},
+    {
+      id: 'accesibilidad',
+      titulo: 'Subcomisión de Accesibilidad',
+      desc: 'La participación plena solo es posible con accesibilidad y apoyos. Derribar barreras capacitistas es una responsabilidad colectiva. ✊🏽',
+      border: 'border-[#2a823c]/30',
+      badgeColor: 'bg-[#2a823c] text-white',
+      iconBg: 'bg-[#2a823c] text-white',
+      icono: <Accessibility size={24} />,
+      contenido: `En este marco, se están pensando en estrategias de diseño universal que garanticen:
+🔹 El acceso a la información.
+🔹 Espacios más amigables.
+🔹 La participación en igual condición y oportunidad.
+🔹 El trato adecuado.
+🔹 Los ajustes razonables.
+
+Súmate a ocupar espacios que son para todas, todes. Este Encuentro es de TODAS, TODES.`
+    }
+  ];
+
+  return <section className="py-12 px-4 relative overflow-hidden bg-[#2f1435]">
+    <div className="max-w-5xl mx-auto relative z-10">
+      <div className="text-center mb-12">
+        <h2 className="text-white mb-3">Nuevas subcomisiones del Encuentro</h2>
+        <p className="text-white/60 max-w-xl mx-auto">
+          Este 39° Encuentro suma estos tres espacios a la Comisión Organizadora.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+        {subcomisiones.map((sub, i) => (
+          <motion.div
+            key={sub.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+            className={`relative overflow-hidden rounded-3xl border-2 ${sub.border} bg-white/5 flex flex-col h-full`}
+          >
+            <div className="p-8 flex flex-col flex-1">
+              <span className={`absolute top-5 right-5 ${sub.badgeColor} text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide`}>
+                Por primera vez
+              </span>
+              <div className={`${sub.iconBg} w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10`}>
+                {sub.icono}
+              </div>
+              <h4 className="font-bold text-white text-xl mb-2 relative z-10">
+                {sub.titulo}
+              </h4>
+              <p className="text-sm text-white/70 relative z-10 flex-1">
+                {sub.desc}
+              </p>
+
+              {sub.link && (
+  <Link
+    to={sub.link}
+    className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10"
+  >
+    Ver más
+    <ChevronDown size={14} className="-rotate-90" />
+  </Link>
+)}
+            </div>
+
+            {sub.contenido && (
+              <AnimatePresence>
+                {tarjetaAbierta === sub.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="overflow-hidden border-t border-white/10"
+                  >
+                    <div className="p-8 pt-6 text-sm text-white/80 leading-relaxed whitespace-pre-line">
+                      {sub.contenido}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            )}
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>;
 }
 
 function CancioneroSection() {

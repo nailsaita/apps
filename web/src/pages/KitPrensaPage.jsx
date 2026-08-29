@@ -73,17 +73,19 @@ export default function KitPrensaPage() {
             </div>
 
             <div className="bg-[#faf7fb] p-4 rounded-xl border border-[#eadeed] flex flex-col justify-between">
-              <span className="block text-xs font-bold uppercase tracking-wider text-gray-400">Formulario</span>
-              <a
-                href="#[Enlace_Formulario]"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-[#662c74] hover:text-[#813893] font-bold transition-colors mt-1 w-fit"
-              >
-                Pronto el link de registro <ExternalLink size={14} />
-              </a>
-            </div>
-          </div> 
+  <span className="block text-xs font-bold uppercase tracking-wider text-gray-400">Formulario</span>
+  
+  <a
+    href="https://docs.google.com/forms/d/e/1FAIpQLSeekxXv86-me2qt6-rAI6_9uWvOleZzdDHMC8zrgYx2SwnbVw/viewform"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-1.5 text-sm text-[#662c74] hover:text-[#813893] font-bold transition-colors mt-1 w-fit"
+  >
+    Registrate acá <ExternalLink size={14} />
+  </a>
+</div>
+          </div>
+
 
            <div className="bg-[#fffcf5] border border-[#fed886] rounded-xl p-4 mb-8 text-sm text-[#6e4d05] flex gap-3 items-start">
             <CheckCircle className="text-[#b57f09] shrink-0 mt-0.5" size={18} />
@@ -186,7 +188,7 @@ export default function KitPrensaPage() {
                 </div>
                 <h4 className="font-bold text-base text-[#343230] mb-2">Canal de difusión</h4>
                 <p className="text-sm text-gray-500 leading-relaxed">
-                  Grupo de WhatsApp de "Solo Administradores" para enviar alertas de cambios de cronograma y fotos en tiempo real.
+                  Grupo de WhatsApp para recibir alertas de cambios de cronograma y fotos en tiempo real.
                 </p>
               </div>
               <a

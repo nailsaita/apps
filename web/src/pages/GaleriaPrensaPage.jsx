@@ -41,13 +41,20 @@ export default function GaleriaPrensaPage() {
                 </div>
                 <div className="flex flex-col gap-4 p-5">
                   <div>
-                    <p className="text-sm uppercase tracking-[0.2em] text-gray-400">
-                      {item.fecha}
-                    </p>
-                    <h3 className="mt-3 text-lg font-bold text-[#343230]">
-                      {item.titulo}
-                    </h3>
-                  </div>
+  <div className="flex items-center justify-between gap-2">
+    <p className="text-sm uppercase tracking-[0.2em] text-gray-400">
+      {item.fecha}
+    </p>
+    {item.medio && (
+      <span className="shrink-0 rounded-full bg-[#eadeed] px-3 py-1 text-xs font-bold text-[#662c74]">
+        {item.medio}
+      </span>
+    )}
+  </div>
+  <h3 className="mt-3 text-lg font-bold text-[#343230]">
+    {item.titulo}
+  </h3>
+</div>
 
                   {item.url ? (
                     <a

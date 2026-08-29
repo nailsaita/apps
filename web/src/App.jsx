@@ -14,6 +14,7 @@ import TransportePage from '@/pages/TransportePage.jsx';
 import Galeria2007Page from '@/pages/Galeria2007Page.jsx';
 import PaolaPage from '@/pages/PaolaPage.jsx';
 import DeliciaPage from '@/pages/DeliciaPage.jsx';
+import PueblosPreexistentesPage from './pages/PueblosPreexistentes';
 
 function ScrollToHash() {
   const location = useLocation();
@@ -83,6 +84,7 @@ function App() {
         <Route path="/Transporte" element={<TransportePage />} />
         <Route path="/Paola" element={<PaolaPage />} />
         <Route path="/Delicia" element={<DeliciaPage />} />
+        <Route path="/PueblosPreexistentes" element={<PueblosPreexistentesPage />} />
 
         {/* Catch-all route for 404s */}
         <Route path="*" element={
