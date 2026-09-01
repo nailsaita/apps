@@ -5,5 +5,6 @@ hacer que botón inicio se resalte cuando estás en inicio
 probar accesibilidad
 
 actualizar regularmente
--noticias en prensa
--declaraciones de interés
+-noticias en prensa, ultima actualización 29/8
+-declaraciones de interés, última actualización 1/9
+-gacetillas, última actualización 8/8
