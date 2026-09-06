@@ -2,14 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Lottie from 'lottie-react';
-import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag, FileText, Droplet, ShieldCheck, Moon, Sparkles, Backpack } from 'lucide-react';
+import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag, FileText, Droplet, ShieldCheck, Moon, Sparkles, Backpack, Smartphone } from 'lucide-react';
 import { HiddenMail } from '@/components/HiddenMail';
 import EJES from '@/data/ejes.js';
 import FAQ from '@/data/faq.jsx';
 import ACTIVIDADES_CULTURALES from '@/data/actividadesCulturales.js';
+
 import CRONOGRAMA from '@/data/cronograma.js';
 import CANCIONES from '@/data/canciones.js';
 import { Rainbow, Mountain, Accessibility } from 'lucide-react';
+import InstallPwaButton from '@/components/InstallPwaButton.jsx';
 
 // ─── DATOS PLACEHOLDER ───────────────────────────────────────────────────────
 
@@ -480,7 +482,51 @@ export function Navbar() {
     </motion.nav>
   </>;
 }
+// ─── INSTALAR APP ────────────────────────────────────────────────────────────────
+function InstalarAppSection() {
+  return (
+    <section className="pt-28 pb-8 md:pt-32 md:pb-12 px-4 relative overflow-hidden">
+      {/* Fondo decorativo, mismo lenguaje que ApoyoSection */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-20 -right-20 w-80 h-80 bg-[#813893]/15 rounded-full blur-3xl" />
+        <div className="absolute -bottom-24 -left-16 w-96 h-96 bg-[#fdb10c]/10 rounded-full blur-3xl" />
+      </div>
 
+      <div className="max-w-4xl mx-auto relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="relative overflow-hidden rounded-3xl p-5 sm:p-8 md:p-10 border-2 border-[#fdb10c]/30 bg-gradient-to-br from-[#813893]/20 to-[#2f1435]/60 flex flex-col md:flex-row items-center gap-4 sm:gap-8 text-center md:text-left"
+        >
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#fdb10c]/10 rounded-full blur-2xl" />
+
+          <div className="bg-[#fdb10c] text-[#4a2055] w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shrink-0 relative z-10">
+            <Smartphone size={24} className="sm:hidden" />
+            <Smartphone size={30} className="hidden sm:block" />
+          </div>
+
+          <div className="flex-1 relative z-10">
+            <h3 className="font-bold text-white text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">
+              Llevá el Encuentro en tu celular
+            </h3>
+            <p className="text-xs sm:text-sm md:text-base text-white/70 mb-1">
+              Instalá la app para acceder más rápido al cronograma, la sede y toda la info, incluso con mala señal.
+            </p>
+            <p className="text-[11px] sm:text-xs text-white/50">
+              En iPhone: abrí este sitio en Safari, tocá "Compartir" y elegí "Agregar a pantalla de inicio".
+            </p>
+          </div>
+
+          <div className="relative z-10 shrink-0">
+            <InstallPwaButton />
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
 // ─── SECCIONES ────────────────────────────────────────────────────────────────
 
 function HeroLottie({ className = '' }) {
@@ -887,9 +933,15 @@ function ConsignaSection() {
     {
       id: 'paola',
       nombre: 'Paola Ortiz',
-      contenido: `¡Libertad para Paola ya! Abajo la justicia patriarcal y sus funcionarios judiciales que reproducen, avalan y sostienen las violencias machistas.`,
+      contenido: `Tras 13 años de una pelea incansable, la justicia ordenó la liberación de Paola Ortiz.`,
       ruta: '/Paola'
-    }
+    },
+    {
+      id: 'max y lulén',
+      nombre: 'Max y Lulén',
+      contenido: `No vamos a callarnos frente a una condena injusta y cruel contra Max Caviglione y Lulén Watts.`,
+      ruta: '/MaxyLulen'
+    },
   ];
 
   return (
@@ -920,7 +972,7 @@ function ConsignaSection() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-white leading-tight mb-6 text-3xl sm:text-4xl md:text-5xl"
         >
-          ¡QUE DELICIA Y PAOLA<br className="hidden sm:block" /> ESTÉN EN EL ENCUENTRO!
+          ¡QUE DELICIA, PAOLA, MAX Y LULÉN<br className="hidden sm:block" /> ESTÉN EN EL ENCUENTRO!
         </motion.h2>
 
         <motion.div
@@ -1384,57 +1436,71 @@ Súmate a ocupar espacios que son para todas, todes. Este Encuentro es de TODAS,
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
         {subcomisiones.map((sub, i) => (
+  <motion.div
+    key={sub.id}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay: i * 0.1 }}
+    className={`relative overflow-hidden rounded-3xl border-2 ${sub.border} bg-white/5 flex flex-col h-full`}
+  >
+    <div className="p-8 flex flex-col flex-1">
+      <span className={`absolute top-5 right-5 ${sub.badgeColor} text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide`}>
+        Por primera vez
+      </span>
+      <div className={`${sub.iconBg} w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10`}>
+        {sub.icono}
+      </div>
+      <h4 className="font-bold text-white text-xl mb-2 relative z-10">
+        {sub.titulo}
+      </h4>
+      <p className="text-sm text-white/70 relative z-10 flex-1">
+        {sub.desc}
+      </p>
+
+      {sub.link && (
+        <Link
+          to={sub.link}
+          className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10"
+        >
+          Ver más
+          <ChevronDown size={14} className="-rotate-90" />
+        </Link>
+      )}
+
+      {sub.contenido && (
+        <button
+          onClick={() => setTarjetaAbierta(tarjetaAbierta === sub.id ? null : sub.id)}
+          className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10"
+        >
+          {tarjetaAbierta === sub.id ? 'Ver menos' : 'Ver más'}
+          <ChevronDown
+            size={14}
+            className="transition-transform"
+            style={{ transform: tarjetaAbierta === sub.id ? 'rotate(180deg)' : 'rotate(0deg)' }}
+          />
+        </button>
+      )}
+    </div>
+
+    {sub.contenido && (
+      <AnimatePresence>
+        {tarjetaAbierta === sub.id && (
           <motion.div
-            key={sub.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            className={`relative overflow-hidden rounded-3xl border-2 ${sub.border} bg-white/5 flex flex-col h-full`}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden border-t border-white/10"
           >
-            <div className="p-8 flex flex-col flex-1">
-              <span className={`absolute top-5 right-5 ${sub.badgeColor} text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide`}>
-                Por primera vez
-              </span>
-              <div className={`${sub.iconBg} w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10`}>
-                {sub.icono}
-              </div>
-              <h4 className="font-bold text-white text-xl mb-2 relative z-10">
-                {sub.titulo}
-              </h4>
-              <p className="text-sm text-white/70 relative z-10 flex-1">
-                {sub.desc}
-              </p>
-
-              {sub.link && (
-                <Link
-                  to={sub.link}
-                  className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10"
-                >
-                  Ver más
-                  <ChevronDown size={14} className="-rotate-90" />
-                </Link>
-              )}
+            <div className="p-8 pt-6 text-sm text-white/80 leading-relaxed whitespace-pre-line">
+              {sub.contenido}
             </div>
-
-            {sub.contenido && (
-              <AnimatePresence>
-                {tarjetaAbierta === sub.id && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    className="overflow-hidden border-t border-white/10"
-                  >
-                    <div className="p-8 pt-6 text-sm text-white/80 leading-relaxed whitespace-pre-line">
-                      {sub.contenido}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            )}
           </motion.div>
-        ))}
+        )}
+      </AnimatePresence>
+    )}
+  </motion.div>
+))}
       </div>
     </div>
   </section>;
@@ -1890,7 +1956,7 @@ function SedeSection() {
         <MapaEncuentro />
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 items-start">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 items-stretch">
         {cards.map((card, i) => card.expandible ? <motion.div key={i} initial={{
           opacity: 0,
           y: 20
@@ -1979,14 +2045,14 @@ function PrensaSection() {
       <div className="grid md:grid-cols-3 gap-6">
         {[{
           icono: <Download size={28} />,
-          titulo: 'Kit de prensa',
+          titulo: 'Kit de prensa y Acreditaciones',
           desc: 'Logos, imágenes, materiales e instrucciones para medios. / Información para la prensa y acreditación.',
           link: '/KitPrensa',
           cta: 'Ver más',
           color: 'from-[#813893] to-[#662c74]'
         }, {
           icono: <ExternalLink size={28} />,
-          titulo: 'Gacetillas',
+          titulo: 'Gacetillas y Declaraciones de interés',
           desc: 'Comunicados oficiales y novedades del Encuentro.',
           link: '/Gacetillas',
           cta: 'Ver gacetillas',
@@ -2137,6 +2203,7 @@ export default function HomePage() {
     <ScrollProgressBar />
     <CountdownBanner />
     <Navbar />
+   <InstalarAppSection/>
     <BackToTop />
     <div className="relative">
       {/* Gradiente como capa única de fondo, detrás de las 3 secciones */}

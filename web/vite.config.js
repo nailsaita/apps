@@ -215,19 +215,18 @@ const pwaPlugin = VitePWA({
 	disable: isDev,
 	registerType: 'autoUpdate',
 	injectRegister: 'inline',
-	includeAssets: ['favicon.ico', 'favicon-96x96.png'],
+	includeAssets: ['favicon.ico', 'favicon-96x96.png', 'launchericon-512x512.png', '512.png'],
 	manifest: {
 		name: 'Encuentro 39',
 		short_name: 'Encuentro39',
 		description: 'PWA shell for Encuentro 39',
-		theme_color: '#ffffff',
-		background_color: '#ffffff',
+		theme_color: '#813893',
+		background_color: '#2f1435',
 		display: 'standalone',
 		start_url: '/',
 		icons: [
-			{ src: 'favicon-96x96.png', sizes: '96x96', type: 'image/png' },
-			{ src: 'favicon-96x96.png', sizes: '192x192', type: 'image/png' },
-			{ src: 'favicon-96x96.png', sizes: '512x512', type: 'image/png' }
+			{ src: 'launchericon-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+			{ src: '512.png', sizes: '512x512', type: 'image/png' }
 		]
 	},
 	workbox: {

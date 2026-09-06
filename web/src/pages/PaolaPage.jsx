@@ -34,24 +34,34 @@ export default function PaolaPage() {
           </span>
 
           <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[#813893] mb-8 leading-snug">
-            ¡Libertad para Paola ya! Abajo la justicia patriarcal y sus funcionarios judiciales que reproducen, avalan y sostienen las violencias machistas.
+            ¡PAOLA ORTIZ ESTÁ EN LIBERTAD! 🕊️💜
           </h2>
 
           <div className="space-y-5 text-[#343230]/85 leading-relaxed text-base">
             <p>
-              Paola Ortíz está presa hace trece años por una emergencia obstétrica. Fue condenada a prisión perpetua y acusada sin pruebas por haber tenido un parto en avalancha en condiciones de precariedad, sumándose a tantos otros casos aleccionadores que existen en nuestro país, como el de Belén en Tucumán.
+              Tras 13 años de una pelea incansable, la justicia ordenó la liberación de Paola Ortiz. Un recurso presentado por sus abogadas Julia Luna y Rocío Garro e impulsado por la fuerza colectiva de la militancia transfeminista logró romper el encierro.
             </p>
-            <p>
-              Este año, en mayo, el Comité Nacional de Prevención para la Tortura realizó una presentación en la causa planteando que esta condena configura un trato discriminatorio por la desproporcionalidad de la pena, y que la cadena perpetua es un trato inhumano, cruel y degradante, considerada tortura. El Comité se sumó a nuestra exigencia a que el Tribunal Superior de Justicia revise el caso con perspectiva de género y de derechos humanos, perspectiva que Paola no tuvo durante el proceso judicial que la condenó. Hace más de 400 días que esperamos la respuesta del TSJ.
+
+            <p className="font-bold text-[#813893]">
+              📍 ¿Por qué este fallo marca un hito?
             </p>
+
             <p>
-              ¡Paola debe estar en el 39º Encuentro, libre y abrazada por su familia, amigues, compañeres y las cientos de miles que nos organizamos y luchamos por nuestros derechos sexuales y reproductivos!
+              Paola estuvo injustamente presa a causa de la criminalización de una emergencia obstétrica: una expresión de la violencia institucional y patriarcal que castiga a las personas gestantes en situación de vulnerabilidad. Su libertad no es una concesión, es una conquista de la militancia feminista.
+            </p>
+
+            <p>
+              Llevamos su nombre como bandera política y exigencia en cada rincón del país. Hoy celebramos que no solo recuperó su libertad: ¡PAOLA VA A ESTAR EN EL ENCUENTRO! ✊🏽✨
+            </p>
+
+            <p>
+              Abrazamos a Paola, a su familia, a sus abogadas y a cada compañera que no bajó los brazos en estos 13 años de lucha.
             </p>
           </div>
 
           <div className="mt-10 bg-[#813893] text-white rounded-2xl p-6 text-center">
             <p className="text-xl md:text-2xl font-black tracking-tight">
-              ¡Libre la queremos!
+              ¡Nos vemos en Córdoba para marchar con Paola! 💜
             </p>
           </div>
         </motion.section>

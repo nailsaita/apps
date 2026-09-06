@@ -7,7 +7,11 @@ import galeriaNotas from '@/data/galeriaNotas.js';
 import { Helmet } from "react-helmet";
 
 export default function GaleriaPrensaPage() {
-  const notas = galeriaNotas.filter((item) => item.titulo.trim());
+  const notas = galeriaNotas
+    .filter((item) => item.titulo.trim())
+    .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+
+  console.log('Orden de notas:', notas.map((n) => n.fecha));
 
   return (
     <div className="relative min-h-screen bg-[#FFF1E3] text-[#343230]">
@@ -21,7 +25,7 @@ export default function GaleriaPrensaPage() {
       <main className="relative mx-auto max-w-7xl px-4 pb-32 pt-4 sm:px-6 lg:px-8">
         <section className="rounded-3xl border border-[#eadeed] bg-white/70 p-6 shadow-xl shadow-[#813893]/5 backdrop-blur-sm sm:p-8">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {notas.reverse().map((item, index) => (
+            {notas.map((item, index) => (
               <motion.article
                 key={item.url || `${item.titulo}-${index}`}
                 initial={{ opacity: 0, y: 24 }}
@@ -41,20 +45,20 @@ export default function GaleriaPrensaPage() {
                 </div>
                 <div className="flex flex-col gap-4 p-5">
                   <div>
-  <div className="flex items-center justify-between gap-2">
-    <p className="text-sm uppercase tracking-[0.2em] text-gray-400">
-      {item.fecha}
-    </p>
-    {item.medio && (
-      <span className="shrink-0 rounded-full bg-[#eadeed] px-3 py-1 text-xs font-bold text-[#662c74]">
-        {item.medio}
-      </span>
-    )}
-  </div>
-  <h3 className="mt-3 text-lg font-bold text-[#343230]">
-    {item.titulo}
-  </h3>
-</div>
+                    <div className="flex items-center justify-between gap-2">
+                      <p className="text-sm uppercase tracking-[0.2em] text-gray-400">
+                        {item.fecha}
+                      </p>
+                      {item.medio && (
+                        <span className="shrink-0 rounded-full bg-[#eadeed] px-3 py-1 text-xs font-bold text-[#662c74]">
+                          {item.medio}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="mt-3 text-lg font-bold text-[#343230]">
+                      {item.titulo}
+                    </h3>
+                  </div>
 
                   {item.url ? (
                     <a
