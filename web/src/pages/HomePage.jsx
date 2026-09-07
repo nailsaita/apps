@@ -413,7 +413,7 @@ export function Navbar() {
     }} transition={{
       duration: 0.25,
       ease: 'easeInOut'
-    }} className="fixed left-0 right-0 z-40 border-b border-[#9a3412] bg-[#FFF1E3]">
+    }} className="fixed left-0 right-0 z-40 border-b border-[#9a3412] bg-[#FFF1E3]" style={{ zIndex: 100 }}>
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between transition-all duration-300" style={{
         height: scrolled ? '52px' : '56px'
       }}>
@@ -1227,7 +1227,7 @@ function EncuentroSection() {
                 exit={{ opacity: 0 }}
                 transition={{ x: { duration: 1.3, repeat: Infinity, ease: 'easeInOut' }, opacity: { duration: 0.3 } }}
                 className="absolute top-1 right-0 bg-[#fdb10c] text-[#4a2055] w-8 h-8 rounded-full flex items-center justify-center shadow-md pointer-events-none"
-                style={{ zIndex: 99 }}
+                style={{ zIndex: 10 }}
               >
                 <ArrowRight size={16} />
               </motion.div>
