@@ -484,6 +484,47 @@ export function Navbar() {
 }
 // ─── INSTALAR APP ────────────────────────────────────────────────────────────────
 function InstalarAppSection() {
+  //movemos la lógica de esconder acá, para esconder el banner entero
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [instalado, setInstalado] = useState(false);
+
+  useEffect(() => {
+    // Si ya está corriendo como app instalada, no mostramos el botón
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      setInstalado(true);
+    }
+
+    const onBeforeInstallPrompt = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    const onAppInstalled = () => {
+      setInstalado(true);
+      setDeferredPrompt(null);
+    };
+
+    window.addEventListener('beforeinstallprompt', onBeforeInstallPrompt);
+    window.addEventListener('appinstalled', onAppInstalled);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', onBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', onAppInstalled);
+    };
+  }, []);
+
+  const handleInstalar = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    // outcome es 'accepted' o 'dismissed'
+    setDeferredPrompt(null);
+  };
+
+  // No mostramos nada si ya está instalada o el navegador no ofreció el prompt todavía
+  if (instalado || !deferredPrompt) return null;
+
+
   return (
     <section className="pt-28 pb-8 md:pt-32 md:pb-12 px-4 relative overflow-hidden">
       {/* Fondo decorativo, mismo lenguaje que ApoyoSection */}
@@ -520,8 +561,13 @@ function InstalarAppSection() {
           </div>
 
           <div className="relative z-10 shrink-0">
-            <InstallPwaButton />
-          </div>
+            <button
+              onClick={handleInstalar}
+              className={`inline-flex items-center gap-2 bg-[#813893] text-white font-bold px-4 py-2 rounded-full hover:bg-[#662c74] transition-colors `}
+            >
+              <Download size={16} />
+              Instalar app
+            </button>          </div>
         </motion.div>
       </div>
     </section>
@@ -1436,71 +1482,71 @@ Súmate a ocupar espacios que son para todas, todes. Este Encuentro es de TODAS,
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
         {subcomisiones.map((sub, i) => (
-  <motion.div
-    key={sub.id}
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay: i * 0.1 }}
-    className={`relative overflow-hidden rounded-3xl border-2 ${sub.border} bg-white/5 flex flex-col h-full`}
-  >
-    <div className="p-8 flex flex-col flex-1">
-      <span className={`absolute top-5 right-5 ${sub.badgeColor} text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide`}>
-        Por primera vez
-      </span>
-      <div className={`${sub.iconBg} w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10`}>
-        {sub.icono}
-      </div>
-      <h4 className="font-bold text-white text-xl mb-2 relative z-10">
-        {sub.titulo}
-      </h4>
-      <p className="text-sm text-white/70 relative z-10 flex-1">
-        {sub.desc}
-      </p>
-
-      {sub.link && (
-        <Link
-          to={sub.link}
-          className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10"
-        >
-          Ver más
-          <ChevronDown size={14} className="-rotate-90" />
-        </Link>
-      )}
-
-      {sub.contenido && (
-        <button
-          onClick={() => setTarjetaAbierta(tarjetaAbierta === sub.id ? null : sub.id)}
-          className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10"
-        >
-          {tarjetaAbierta === sub.id ? 'Ver menos' : 'Ver más'}
-          <ChevronDown
-            size={14}
-            className="transition-transform"
-            style={{ transform: tarjetaAbierta === sub.id ? 'rotate(180deg)' : 'rotate(0deg)' }}
-          />
-        </button>
-      )}
-    </div>
-
-    {sub.contenido && (
-      <AnimatePresence>
-        {tarjetaAbierta === sub.id && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden border-t border-white/10"
+            key={sub.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+            className={`relative overflow-hidden rounded-3xl border-2 ${sub.border} bg-white/5 flex flex-col h-full`}
           >
-            <div className="p-8 pt-6 text-sm text-white/80 leading-relaxed whitespace-pre-line">
-              {sub.contenido}
+            <div className="p-8 flex flex-col flex-1">
+              <span className={`absolute top-5 right-5 ${sub.badgeColor} text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide`}>
+                Por primera vez
+              </span>
+              <div className={`${sub.iconBg} w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10`}>
+                {sub.icono}
+              </div>
+              <h4 className="font-bold text-white text-xl mb-2 relative z-10">
+                {sub.titulo}
+              </h4>
+              <p className="text-sm text-white/70 relative z-10 flex-1">
+                {sub.desc}
+              </p>
+
+              {sub.link && (
+                <Link
+                  to={sub.link}
+                  className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10"
+                >
+                  Ver más
+                  <ChevronDown size={14} className="-rotate-90" />
+                </Link>
+              )}
+
+              {sub.contenido && (
+                <button
+                  onClick={() => setTarjetaAbierta(tarjetaAbierta === sub.id ? null : sub.id)}
+                  className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10"
+                >
+                  {tarjetaAbierta === sub.id ? 'Ver menos' : 'Ver más'}
+                  <ChevronDown
+                    size={14}
+                    className="transition-transform"
+                    style={{ transform: tarjetaAbierta === sub.id ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                  />
+                </button>
+              )}
             </div>
+
+            {sub.contenido && (
+              <AnimatePresence>
+                {tarjetaAbierta === sub.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="overflow-hidden border-t border-white/10"
+                  >
+                    <div className="p-8 pt-6 text-sm text-white/80 leading-relaxed whitespace-pre-line">
+                      {sub.contenido}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            )}
           </motion.div>
-        )}
-      </AnimatePresence>
-    )}
-  </motion.div>
-))}
+        ))}
       </div>
     </div>
   </section>;
@@ -2203,7 +2249,7 @@ export default function HomePage() {
     <ScrollProgressBar />
     <CountdownBanner />
     <Navbar />
-   <InstalarAppSection/>
+    <InstalarAppSection />
     <BackToTop />
     <div className="relative">
       {/* Gradiente como capa única de fondo, detrás de las 3 secciones */}
