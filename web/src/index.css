@@ -63,7 +63,7 @@
     @apply bg-background text-foreground;
     font-family: "Degular";
     overflow-x: hidden;
-    background-image: url('/images/bg-tile.png');
+    /*background-image: url('/images/bg-tile.png');*/
     background-repeat: repeat;
     background-position: center top;
     background-size: 340px;

@@ -397,8 +397,8 @@ export function Navbar() {
     { href: '/#encuentro', id: 'encuentro', label: '¿Qué es?' },
     { href: '/#ejes', id: 'ejes', label: 'Talleres' },
     { href: '/#cronograma', id: 'cronograma', label: 'Cronograma' },
-    { href: '/#cultural', id: 'cultural', label: 'Cultura' },
     { href: '/#sede', id: 'sede', label: 'Sede' },
+    { href: '/#cultural', id: 'cultural', label: 'Cultura' },
     { href: '/#prensa', id: 'prensa', label: 'Prensa' }
   ];
 
@@ -409,12 +409,11 @@ export function Navbar() {
 
     <motion.nav animate={{
       top: scrolled ? 0 : 44,
-      backgroundColor: scrolled ? 'rgba(194,112,61,0.97)' : 'rgba(194,112,61,0.92)',
       boxShadow: scrolled ? '0 2px 16px rgba(154,52,18,0.25)' : '0 1px 0 rgba(154,52,18,0.15)'
     }} transition={{
       duration: 0.25,
       ease: 'easeInOut'
-    }} className="fixed left-0 right-0 z-40 backdrop-blur border-b border-[#9a3412]">
+    }} className="fixed left-0 right-0 z-40 border-b border-[#9a3412] bg-[#4a2055]">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between transition-all duration-300" style={{
         height: scrolled ? '52px' : '56px'
       }}>
@@ -443,7 +442,7 @@ export function Navbar() {
             <span className="text-xs">Buscar</span>
             <span className="text-xs bg-gray-200 text-gray-500 rounded px-1.5 py-0.5 ml-1 font-mono">⌘K</span>
           </button>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-10 py-4 rounded-full hover:bg-[#21662f] hover:scale-105 transition-all flex items-center justify-center gap-2 shadow-xl shadow-[#184b22]/50 ring-2 ring-white/20 text-lg">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-8 py-2 rounded-full hover:bg-[#21662f] hover:scale-105 transition-all flex items-center justify-center gap-2 shadow-xl shadow-[#184b22]/50 ring-2 ring-white/20 text-lg">
             <Users size={20} />
             Inscripción
           </a>
@@ -451,11 +450,14 @@ export function Navbar() {
 
         {/* Mobile: lupa + hamburguesa */}
         <div className="md:hidden flex items-center gap-2 w-full justify-between">
-          <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="text-[#916607]">
+          <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="text-white">
             <Search size={20} />
           </button>
+          <a href="/#" className="text-white font-bold">
+            39 Encuentro Pluri
+          </a>
           <button onClick={() => setOpen(!open)} aria-label="Menú">
-            <Menu size={24} className="text-[#916607]" />
+            <Menu size={24} className="text-white" />
           </button>
         </div>
       </div>
@@ -526,49 +528,30 @@ function InstalarAppSection() {
 
 
   return (
-    <section className="pt-28 pb-8 md:pt-32 md:pb-12 px-4 relative overflow-hidden">
-      {/* Fondo decorativo, mismo lenguaje que ApoyoSection */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-20 -right-20 w-80 h-80 bg-[#813893]/15 rounded-full blur-3xl" />
-        <div className="absolute -bottom-24 -left-16 w-96 h-96 bg-[#fdb10c]/10 rounded-full blur-3xl" />
-      </div>
+    <section className="w-screen w-full pt-6 pb-6 px-4 bg-[#2a823c]">
+      <div className="max-w-6xl mx-auto flex flex-row flex-nowrap items-center gap-3 sm:gap-5">
+        {/* <div className="bg-[#fdb10c] text-[#4a2055] w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shrink-0 relative z-10">
+          <Smartphone size={24} />
+        </div> */}
 
-      <div className="max-w-4xl mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="relative overflow-hidden rounded-3xl p-5 sm:p-8 md:p-10 border-2 border-[#fdb10c]/30 bg-gradient-to-br from-[#813893]/20 to-[#2f1435]/60 flex flex-col md:flex-row items-center gap-4 sm:gap-8 text-center md:text-left"
-        >
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#fdb10c]/10 rounded-full blur-2xl" />
+        <div className="flex-1 min-w-0 relative z-10">
+          <h3 className="font-bold text-white text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">
+            Instalate la App para llevarte el Encuentro en tu celu
+          </h3>
+          <p className="text-[11px] sm:text-xs text-white/50">
+            En iPhone: abrí este sitio en Safari, tocá "Compartir" y elegí "Agregar a pantalla de inicio".
+          </p>
+        </div>
 
-          <div className="bg-[#fdb10c] text-[#4a2055] w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shrink-0 relative z-10">
-            <Smartphone size={24} className="sm:hidden" />
-            <Smartphone size={30} className="hidden sm:block" />
-          </div>
-
-          <div className="flex-1 relative z-10">
-            <h3 className="font-bold text-white text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">
-              Llevá el Encuentro en tu celular
-            </h3>
-            <p className="text-xs sm:text-sm md:text-base text-white/70 mb-1">
-              Instalá la app para acceder más rápido al cronograma, la sede y toda la info, incluso con mala señal.
-            </p>
-            <p className="text-[11px] sm:text-xs text-white/50">
-              En iPhone: abrí este sitio en Safari, tocá "Compartir" y elegí "Agregar a pantalla de inicio".
-            </p>
-          </div>
-
-          <div className="relative z-10 shrink-0">
-            <button
-              onClick={handleInstalar}
-              className={`inline-flex items-center gap-2 bg-[#813893] text-white font-bold px-4 py-2 rounded-full hover:bg-[#662c74] transition-colors `}
-            >
-              <Download size={16} />
-              Instalar app
-            </button>          </div>
-        </motion.div>
+        <div className="relative z-10 shrink-0">
+          <button
+            onClick={handleInstalar}
+            className="inline-flex items-center gap-2 bg-[#813893] text-white font-bold px-3 sm:px-4 py-2 rounded-full whitespace-nowrap hover:bg-[#662c74] transition-colors"
+          >
+            <Download size={16} />
+            Instalar app
+          </button>
+        </div>
       </div>
     </section>
   );
@@ -582,13 +565,15 @@ function HeroLottie({ className = '' }) {
 }
 
 function HeroSection() {
-  return <section id="hero" className="min-h-[100vh] flex flex-col items-center justify-center px-4 pt-24 pb-16 relative overflow-hidden">
+  return <section id="hero" className="min-h-[100vh] flex flex-col items-center justify-center  pt-24 pb-16 relative overflow-hidden " 
+  style={{ background: 'linear-gradient(180deg, #2f1435 0%, #662c74 25%, #184b22 45%, #2f1435 70%, #4a2055 100%)' }}>
     {/* Fondo decorativo */}
     <div className="absolute inset-0 pointer-events-none">
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#813893]/20 rounded-full blur-3xl" />
       <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[#2a823c]/20 rounded-full blur-3xl" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#fdb10c]/10 rounded-full blur-3xl" />
     </div>
+    <InstalarAppSection />
 
     <motion.div initial={{
       opacity: 0,
@@ -598,7 +583,7 @@ function HeroSection() {
       y: 0
     }} transition={{
       duration: 0.8
-    }} className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center">
+    }} className="relative px-4 z-10 w-full max-w-5xl mx-auto flex flex-col items-center">
 
       {/* Bloque: Lottie + Título/Subtítulo — todo centrado (logo y título alineados entre sí) */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:gap-12 w-full">
@@ -608,23 +593,11 @@ function HeroSection() {
         </div>
 
         {/* Título (3 líneas) + subtítulo, centrados igual que el logo */}
-        <div className="order-2 flex-1 text-center">
+        <div className="order-2 flex-1 text-center pt-12">
           <h1 className="titulo39 font-display text-white font-black mb-6 flex flex-col items-center leading-[1.05]"
             style={{ "marginLeft": "auto", "marginRight": "auto", "width": "60vw", "maxWidth": "580px", "lineHeight": "0.8", "fontWeight": "500" }}
           >
-            {/* Tamaños calculados en proporción a la cantidad de caracteres de cada línea,
-                para que las tres se perciban con un ancho visual similar. Son aproximados:
-                ajustalos a ojo si con la tipografía real (Thunderhouse) no cierran perfecto. */}
             <img src="/images/texto3lineas.webp" alt="39 Encuentro Plurinacional de Mujeres, Lesbianas, Travestis, Trans, Bisexuales, Intersexuales y No Binaries" className="w-full max-w-[580px] mb-2" />
-            {/* <span style={{
-              "fontSize": "clamp(1.6rem, 7vw, 4.6rem)", "width": "100%", "textAlign": "justify", "textAlignLast": "justify", "fontWeight": "500"
-            }}>39 ENCUENTRO PLURINACIONAL</span>
-            <span className="text-[#fec449]" style={{
-              "fontSize": "clamp(1.05rem, 3.6vw, 2.6rem)", "textAlign": "justify", "textAlignLast": "justify", "width": "100%", "fontWeight": "500"
-            }}>DE MUJERES, LESBIANAS, TRAVESTIS, TRANS,</span>
-            <span className="text-[#94c09e]" style={{
-              "fontSize": "clamp(1.1rem, 3.7vw, 3.1rem)", "textAlign": "justify", "textAlignLast": "justify", "width": "100%", "fontWeight": "500"
-            }}>BISEXUALES, INTERSEXUALES Y NO BINARIES</span> */}
           </h1>
 
           <p className="text-white/75 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed" style={{ fontFamily: "'degular', sans-serif" }}>
@@ -757,7 +730,7 @@ function DonacionesModal({
 
 function ApoyoSection() {
   const [modalAbierto, setModalAbierto] = useState(false);
-  return <section className="py-12 px-4 relative overflow-hidden">
+  return <section className="py-24 px-4 relative overflow-hidden bg-[#FFF1E3]">
     {/* Fondo decorativo */}
     <div className="absolute inset-0 pointer-events-none">
       <div className="absolute -top-20 -left-20 w-80 h-80 bg-[#fdb10c]/10 rounded-full blur-3xl" />
@@ -773,8 +746,8 @@ function ApoyoSection() {
           rotate={5}
           className="hidden md:block absolute left-0 md:right-8 lg:right-10 -top-6"
         />
-        <h2 className="text-white mb-3">Sumate a sostener el Encuentro</h2>
-        <p className="text-white/60 max-w-xl mx-auto">
+        <h2 className="text-[#4a2055] mb-3">Sumate a sostener el Encuentro</h2>
+        <p className="text-[#343230]/70 max-w-xl mx-auto">
           Dos formas de aportar a la organización colectiva, sin sponsors ni financiamiento estatal.
         </p>
       </div>
@@ -793,7 +766,7 @@ function ApoyoSection() {
           duration: 0.5
         }} whileHover={{
           y: -4
-        }} className="relative overflow-hidden rounded-3xl p-8 border-2 border-[#fdb10c]/30 bg-gradient-to-br from-[#fdb10c]/10 to-[#2f1435]/40 flex flex-col">
+        }} className="relative overflow-hidden rounded-2xl p-6 border-2 border-[#fed886] bg-[#fffcf5] flex flex-col">
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#fdb10c]/10 rounded-full blur-2xl" />
           <span className="absolute top-5 right-5 bg-[#fdb10c] text-[#4a2055] text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
             Solidario
@@ -801,13 +774,13 @@ function ApoyoSection() {
           <div className="bg-[#fdb10c] text-[#4a2055] w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10">
             <Heart size={26} fill="currentColor" />
           </div>
-          <h4 className="font-bold text-white text-xl mb-2 relative z-10">
+          <h4 className="font-bold text-[#343230] text-xl mb-2 relative z-10">
             El Encuentro se sostiene entre todes
           </h4>
-          <p className="text-sm text-white/70 mb-6 flex-1 relative z-10">
+          <p className="text-sm text-[#343230]/70 mb-6 flex-1 relative z-10">
             Tu aporte ayuda a cubrir sede, materiales y logística.
           </p>
-          <button onClick={() => setModalAbierto(true)} className="relative z-10 bg-[#813893] text-white font-bold px-6 py-3 rounded-full hover:bg-[#9659a5] transition-colors self-start">
+          <button onClick={() => setModalAbierto(true)} className="relative z-10 bg-[#813893] text-white font-bold px-6 py-3 rounded-full hover:bg-[#662c74] transition-colors self-start">
             Quiero aportar
           </button>
         </motion.div>
@@ -826,7 +799,7 @@ function ApoyoSection() {
           delay: 0.1
         }} whileHover={{
           y: -4
-        }} className="relative overflow-hidden rounded-3xl p-8 border-2 border-[#2a823c]/30 bg-gradient-to-br from-[#2a823c]/10 to-[#2f1435]/40 flex flex-col">
+        }} className="relative overflow-hidden rounded-2xl p-6 border-2 border-[#b8d5be] bg-[#f6faf7] flex flex-col">
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#2a823c]/10 rounded-full blur-2xl" />
           <span className="absolute top-5 right-5 bg-[#2a823c] text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
             Edición limitada
@@ -834,10 +807,10 @@ function ApoyoSection() {
           <div className="bg-[#2a823c] text-white w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10">
             <ShoppingBag size={26} />
           </div>
-          <h4 className="font-bold text-white text-xl mb-2 relative z-10">
+          <h4 className="font-bold text-[#343230] text-xl mb-2 relative z-10">
             Preventa: Remera oficial del 39 Encuentro
           </h4>
-          <p className="text-sm text-white/70 mb-6 flex-1 relative z-10">
+          <p className="text-sm text-[#343230]/70 mb-6 flex-1 relative z-10">
             Reservá la tuya.
           </p>
           <Link to="/Preventa" className="relative z-10 bg-[#21662f] text-white font-bold px-6 py-3 rounded-full hover:bg-[#184b22] transition-colors self-start inline-flex items-center gap-2">
@@ -2249,22 +2222,10 @@ export default function HomePage() {
     <ScrollProgressBar />
     <CountdownBanner />
     <Navbar />
-    <InstalarAppSection />
     <BackToTop />
-    <div className="relative">
-      {/* Gradiente como capa única de fondo, detrás de las 3 secciones */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'linear-gradient(180deg, #2f1435 0%, #662c74 25%, #184b22 45%, #2f1435 70%, #4a2055 100%)'
-        }}
-      />
-      <div className="relative">
-        <HeroSection />
-        <ApoyoSection />
-        <ConsignaSection />
-      </div>
-    </div>
+    <HeroSection />
+    <ApoyoSection />
+    <ConsignaSection />
     <EncuentroSection />
     <SubcomisionesSection />
     <EjesSection />
