@@ -413,7 +413,7 @@ export function Navbar() {
     }} transition={{
       duration: 0.25,
       ease: 'easeInOut'
-    }} className="fixed left-0 right-0 z-40 border-b border-[#9a3412] bg-[#4a2055]">
+    }} className="fixed left-0 right-0 z-40 border-b border-[#9a3412] bg-[#FFF1E3]">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between transition-all duration-300" style={{
         height: scrolled ? '52px' : '56px'
       }}>
@@ -422,7 +422,7 @@ export function Navbar() {
           {links.map(l => {
             const isActive = activeSection === l.id;
             return <a key={l.href} href={l.href} className="relative text-sm font-medium px-3 py-1.5 rounded-full transition-colors duration-200" style={{
-              color: isActive ? '#9a3412' : '#fff1e3',
+              color: isActive ? '#222222' : '#111111',
               fontFamily: "'degular', sans-serif"
             }}>
               {isActive && <motion.span layoutId="nav-pill" className="absolute inset-0 bg-[#fbd7b8] rounded-full" transition={{
@@ -450,14 +450,15 @@ export function Navbar() {
 
         {/* Mobile: lupa + hamburguesa */}
         <div className="md:hidden flex items-center gap-2 w-full justify-between">
-          <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="text-white">
+          <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="text-gray-700">
             <Search size={20} />
           </button>
-          <a href="/#" className="text-white font-bold">
-            39 Encuentro Pluri
+          <a href="/#" className="text-gray-800 font-bold">
+            <img src="/images/logoblanco.png" className="h-7 inline mb-1" style={{"filter":"brightness(0) saturate(100%) invert(11%) sepia(36%) saturate(675%) hue-rotate(175deg) brightness(96%) contrast(88%)"}} />
+            <span className="text-lg">39 Encuentro Pluri</span>
           </a>
           <button onClick={() => setOpen(!open)} aria-label="Menú">
-            <Menu size={24} className="text-white" />
+            <Menu size={24} className="text-gray-700" />
           </button>
         </div>
       </div>
@@ -529,14 +530,10 @@ function InstalarAppSection() {
 
   return (
     <section className="w-screen w-full pt-6 pb-6 px-4 bg-[#2a823c]">
-      <div className="max-w-6xl mx-auto flex flex-row flex-nowrap items-center gap-3 sm:gap-5">
-        {/* <div className="bg-[#fdb10c] text-[#4a2055] w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shrink-0 relative z-10">
-          <Smartphone size={24} />
-        </div> */}
-
+      <div className="max-w-5xl mx-auto flex flex-row flex-nowrap items-center gap-3 sm:gap-5">
         <div className="flex-1 min-w-0 relative z-10">
           <h3 className="font-bold text-white text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">
-            Instalate la App para llevarte el Encuentro en tu celu
+            Instalá la App para llevarte el Encuentro en tu celu
           </h3>
           <p className="text-[11px] sm:text-xs text-white/50">
             En iPhone: abrí este sitio en Safari, tocá "Compartir" y elegí "Agregar a pantalla de inicio".
@@ -964,7 +961,8 @@ function ConsignaSection() {
   ];
 
   return (
-    <section id="consigna" className="relative py-12 px-4 overflow-hidden">
+    <section id="consigna" className="relative py-12 px-4 overflow-hidden"
+    style={{ background: 'linear-gradient(90deg, #813893, #2a823c)' }}>
       {/* Blobs decorativos, mismo lenguaje visual que el resto del sitio */}
       <div className="absolute -top-24 -left-16 w-80 h-80 bg-[#fdb10c]/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-24 -right-16 w-96 h-96 bg-[#2a823c]/20 rounded-full blur-3xl pointer-events-none" />
