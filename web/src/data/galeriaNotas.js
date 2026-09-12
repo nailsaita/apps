@@ -1,5 +1,33 @@
 const galeriaNotas = [
   {
+    titulo: "Reunión en ATE Córdoba de cara al 39° Encuentro Plurinacional de Mujeres",
+    medio: "ATE",
+    imagen: "/images/prensa/nota11.png",
+    fecha: "2026-09-10",
+    url: "https://ate.org.ar/260910-genero-cordoba/",
+  },
+  {
+    titulo: "¡Córdoba, allá vamos! Camino al 39° Encuentro Plurinacional de Mujeres y disidencias. Nos estamos preparando",
+    medio: "Periodismo de Izquierda",
+    imagen: "/images/prensa/nota12.png",
+    fecha: "2026-09-07",
+    url: "https://periodismodeizquierda.com/cordoba-alla-vamos-camino-al-39-encuentro-plurinacional-de-mujeres-y-disidencias-nos-estamos-preparando/",
+  },
+  {
+    titulo: "En marcha: abrieron las inscripciones del 39º Encuentro Plurinacional de Mujeres y Diversidades",
+    medio: "La Nueva Mañana",
+    imagen: "/images/prensa/nota13.png",
+    fecha: "2026-09-03",
+    url: "https://lmdiario.com.ar/contenido/527055/en-marcha-abrieron-las-inscripciones-del-39-encuentro-plurinacional-de-mujeres-y",
+  },
+  {
+    titulo: "El Encuentro brota en todo el territorio provincial",
+    medio: "PCR (Partido Comunista Revolucionario)",
+    imagen: "/images/prensa/nota14.png",
+    fecha: "2026-09-02",
+    url: "https://pcr.org.ar/el-encuentro-brota-en-todo-el-territorio-provincial/",
+  },
+  {
     titulo: "Camino al 39º Encuentro Plurinacional: Córdoba despliega una intensa agenda cultural previa a la gran cita de octubre",
     medio: "La Ranchada",
     imagen: "/images/prensa/nota8.png",
@@ -35,6 +63,20 @@ const galeriaNotas = [
     url: "https://radiogarabato.com.ar/2026/08/10/se-acerca-el-39-encuentro-plurinacional-de-mujeres-lesbianas-travestis-trans-bisexuales-intersex-y-no-binaries/",
   },
   {
+    titulo: "La Intersindical rumbo al 39°Encuentro Plurinacional de Mujeres y Diversidades",
+    medio: "CISPREN",
+    imagen: "/images/prensa/nota15.png",
+    fecha: "2026-08-31",
+    url: "https://www.cispren.org.ar/la-intersindical-rumbo-al-39encuentro-plurinacional-de-mujeres-y-diversidades/",
+  },
+  {
+    titulo: "Encuentro plurinacional de mujeres y diversidades. Córdoba 2026",
+    medio: "AGDUBA",
+    imagen: "/images/prensa/nota17.png",
+    fecha: "2026-07-01",
+    url: "https://agduba.org.ar/encuentro-plurinacional-de-mujeres-y-diversidades-cordoba-2026/",
+  },
+  {
     titulo: "Córdoba se prepara para recibir el 39° Encuentro Plurinacional de Mujeres y Diversidades: esperan más de 200 mil personas",
     medio: "La Voz",
     imagen: "/images/prensa/nota2.png",
@@ -56,6 +98,13 @@ const galeriaNotas = [
     url: "https://www.anred.org/cordoba-es-la-sede-del-39-encuentro-plurinacional-los-feminismos-se-organizan-frente-al-ajuste-y-los-discursos-de-odio/",
   },
   {
+    titulo: "Argentina: 39° Encuentro Plurinacional. Un momento de inflexión para la lucha feminista",
+    medio: "La Haine (España)",
+    imagen: "/images/prensa/nota18.png",
+    fecha: "2026-01-01",
+    url: "https://www.lahaine.org/mundo.php/argentina-39-encuentro-plurinacional-un-momento-de",
+  },
+  {
     titulo: "Se viene el Cordobazo",
     medio: "Página12",
     imagen: "/images/prensa/nota1.png",
@@ -68,6 +117,13 @@ const galeriaNotas = [
     imagen: "/images/prensa/nota4.png",
     fecha: "2025-11-24",
     url: "https://www.diarionorte.com/319692-cordoba-sera-sede-del-39-encuentro-plurinacional-de-mujeres",
+  },
+  {
+    titulo: "Argentina's Encuentro Plurinacional, a bastion against state anti-feminism",
+    medio: "Ojalá (México)",
+    imagen: "/images/prensa/nota19.png",
+    fecha: "2025-12-11",
+    url: "https://www.ojala.mx/en/ojala-en/argentinas-encuentro-plurinacional-a-bastion-against-anti-feminism",
   },
 ];
 
