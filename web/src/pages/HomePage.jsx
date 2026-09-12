@@ -1256,7 +1256,7 @@ function EjesSection() {
   const [ejeAbierto, setEjeAbierto] = useState(null);
   return <section id="ejes" className="py-24 px-4 bg-[#faf7fb]">
     <div className="max-w-6xl mx-auto">
-      <div className="text-center mb-12">
+      <div className="text-center mb-2">
         <h2 className="text-[#343230] mb-4">Ejes temáticos y talleres</h2>
         <p className="text-gray-500 max-w-xl mx-auto">
           Los talleres son espacios de diálogo y debate que funcionan durante el Encuentro, reuniendo a sus participantes alrededor de una temática. Son abiertos y horizontales, sin inscripción obligatoria.
@@ -1305,11 +1305,11 @@ function EjesSection() {
       </div> */}
 
       {/* Mapa placeholder */}
-      <div className="bg-[#FFF1E3] rounded-3xl border-2 border-dashed border-gray-200 h-72 flex flex-col items-center justify-center text-gray-400">
+      {/* <div className="bg-[#FFF1E3] rounded-3xl border-2 border-dashed border-gray-200 h-72 flex flex-col items-center justify-center text-gray-400">
         <MapPin size={40} className="mb-3 opacity-40" />
         <p className="font-semibold">Mapa de ubicaciones de talleres</p>
         <p className="text-sm mt-1">Se cargará cuando se confirmen las sedes</p>
-      </div>
+      </div> */}
     </div>
   </section>;
 }
