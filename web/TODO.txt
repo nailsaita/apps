@@ -6,7 +6,6 @@ probar accesibilidad
 
 pwa
 -probar como toma nuevas versiones
--esconder banner de instalar app cuando la app ya está instalada
 -esconder scrollbar en mobile, porque se ve entre dos cosas violetas
 -ver si se pueden recargar imágenes fallidas?
 

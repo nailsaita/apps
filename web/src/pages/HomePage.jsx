@@ -2223,12 +2223,12 @@ export default function HomePage() {
     <BackToTop />
     <HeroSection />
     <ApoyoSection />
+    <SedeSection />
+    <CronogramaSection />
+    <EjesSection />
     <ConsignaSection />
     <EncuentroSection />
     <SubcomisionesSection />
-    <EjesSection />
-    <CronogramaSection />
-    <SedeSection />
     <CulturalSection />
     <CancioneroSection />
     <PrensaSection />
