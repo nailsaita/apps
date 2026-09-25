@@ -454,7 +454,7 @@ export function Navbar() {
             <Search size={20} />
           </button>
           <a href="/#" className="text-gray-800 font-bold">
-            <img src="/images/logoblanco.png" className="h-7 inline mb-1" style={{"filter":"brightness(0) saturate(100%) invert(11%) sepia(36%) saturate(675%) hue-rotate(175deg) brightness(96%) contrast(88%)"}} />
+            <img src="/images/logoblanco.png" alt="Logo" className="h-7 inline mb-1" style={{"filter":"brightness(0) saturate(100%) invert(11%) sepia(36%) saturate(675%) hue-rotate(175deg) brightness(96%) contrast(88%)"}} />
             <span className="text-lg">39 Encuentro Pluri</span>
           </a>
           <button onClick={() => setOpen(!open)} aria-label="Menú">
@@ -2148,13 +2148,13 @@ export function FooterSection() {
             <h4 className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">Contacto general</h4>
             <div className="flex items-center gap-2 text-white/70 mb-2">
               <div>
-                <HiddenMail mail="39encuentropluri.cba@proton.me" className="text-white/60 hover:text-white transition-colors"><Mail size={20} /></HiddenMail>
+                <HiddenMail mail="39encuentropluri.cba@proton.me" ariaLabel="Correo electrónico" className="text-white/60 hover:text-white transition-colors"><Mail size={20} /></HiddenMail>
               </div>
               <div>
-                <a href="https://www.instagram.com/39encuentropluri.cba/" target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors"><Instagram size={20} /></a>
+                <a href="https://www.instagram.com/39encuentropluri.cba/" aria-label="Instagram" target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors"><Instagram size={20} /></a>
               </div>
               <div>
-                <a href="https://www.facebook.com/people/39-Encuentro-Plurinacional-C%C3%B3rdoba-2026/61584355586326/#" target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors"><Facebook size={20} /></a>
+                <a href="https://www.facebook.com/people/39-Encuentro-Plurinacional-C%C3%B3rdoba-2026/61584355586326/#" aria-label="Facebook" target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors"><Facebook size={20} /></a>
               </div>
             </div>
           </div>
