@@ -1,4 +1,3 @@
-
 import { HiddenMail } from '@/components/HiddenMail.jsx';
 
 const FAQ = [{
@@ -41,6 +40,31 @@ Cada taller aborda una temática específica y tiene una dinámica que garantiza
     Para aprovechar todas las actividades del Encuentro.
     {/* Visitá la <a href="/Transporte" className="text-blue-500 hover:underline">página de Transporte</a> para aprovechar todas las actividades del Encuentro.<br/> */}
   </>
+}, {
+  pregunta: '¿Dónde sucede el Encuentro?',
+  respuesta: <>Las actividades van a suceder en un radio de 20 cuadras a la redonda del centro de la ciudad de Córdoba, aproximadamente desde Ciudad Universitaria hasta barrio Alberdi 💚</>
+}, {
+  pregunta: '¿Cuándo se comunicarán la grilla cultural?',
+  respuesta: <>Se están respondiendo vía mail las 300 propuestas que participarán. Si sos artistx, revisá tu mail para chequear y si querés asistir, estate atentx al posteo que saldrá pronto.</>
+}, {
+  pregunta: '¿Hay listado de alojamientos amigues?',
+  respuesta: <>La Comisión Organizadora no gestionará información sobre alojamiento que no sea en piso, en las escuelas.<br/>
+    Hay grupos de Facebook en los que se comparte info. También estamos compartiendo info de viajes con colectivas, agrupaciones y organizaciones en historias.</>
+}, {
+  pregunta: '¿Cuándo me confirmarán en qué escuela me alojo?',
+  respuesta: <>Ya se está respondiendo vía mail a quienes se fueron inscribiendo.<br/>
+    Revisá tus mails y spams por las dudas.</>
+}, {
+  pregunta: '¿Llega un mail de confirmación luego de realizar la inscripción?',
+  respuesta: <>Sí. Revisá tus mails y spams por las dudas.</>
+}, {
+  pregunta: '¿Dónde podremos retirar nuestra bolsita y acreditación?',
+  respuesta: <>Durante el Encuentro habrá puntos para estas tareas en lugares claves que serán señalizados en el mapa online.<br/>
+    También, en el acto de apertura habrá mesita de inscripciones y retiro de kit de inscripción con sus materiales impresos.</>
+}, {
+  pregunta: '¿Cómo puedo acreditarme para el área de prensa?',
+  respuesta: <>Visitá nuestra web, y en la sección de Kit de Prensa, encontrarás el formulario para inscribirte.<br/>
+    En el mismo está toda la información necesaria sobre salas de prensa, acreditaciones y formas de comunicación con periodistas durante los días del Encuentro.</>
 },
 ];
 export default FAQ;

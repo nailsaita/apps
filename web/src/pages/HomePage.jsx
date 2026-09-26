@@ -7,6 +7,7 @@ import { HiddenMail } from '@/components/HiddenMail';
 import EJES from '@/data/ejes.js';
 import FAQ from '@/data/faq.jsx';
 import ACTIVIDADES_CULTURALES from '@/data/actividadesCulturales.js';
+import CARTELERA_ESCENARIOS from '@/data/carteleraEscenarios.js';
 
 import CRONOGRAMA from '@/data/cronograma.js';
 import CANCIONES from '@/data/canciones.js';
@@ -324,9 +325,6 @@ function BuscadorGlobal({ onClose }) {
         {query && <button onClick={() => setQuery('')} className="text-gray-400 hover:text-gray-600">
           <X size={18} />
         </button>}
-        {/* <button onClick={() => onClose} className="flex items-center gap-4 px-4 py-3 hover:bg-[#faf7fb] transition-colors group w-full text-left">
-          Esc
-        </button> */}
       </div>
 
       {/* Resultados */}
@@ -958,6 +956,12 @@ function ConsignaSection() {
       contenido: `No vamos a callarnos frente a una condena injusta y cruel contra Max Caviglione y Lulén Watts.`,
       ruta: '/MaxyLulen'
     },
+    {
+      id: 'flavia saganías',
+      nombre: 'Flavia Saganías',
+      contenido: `Por ella, por todas las madres protectoras y personas sobrevivientes de ASI, que se haga justicia.`,
+      ruta: '/Flavia'
+    },
   ];
 
   return (
@@ -989,7 +993,7 @@ function ConsignaSection() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-white leading-tight mb-6 text-3xl sm:text-4xl md:text-5xl"
         >
-          ¡QUE DELICIA, PAOLA, MAX Y LULÉN<br className="hidden sm:block" /> ESTÉN EN EL ENCUENTRO!
+          ¡QUE DELICIA, FLAVIA, PAOLA, MAX Y LULÉN<br className="hidden sm:block" /> ESTÉN EN EL ENCUENTRO!
         </motion.h2>
 
         <motion.div
@@ -1251,7 +1255,6 @@ function IlustracionSticker({ src, size = 'w-24', height, rotate = -4, className
 }
 
 
-
 function EjesSection() {
   const [ejeAbierto, setEjeAbierto] = useState(null);
   return <section id="ejes" className="py-24 px-4 bg-[#faf7fb]">
@@ -1265,51 +1268,6 @@ function EjesSection() {
           Hacé click para ver mas <ArrowRight size={14} />
         </Link>
       </div>
-
-      {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-        {EJES.map(eje => <motion.div key={eje.id} layout onClick={() => setEjeAbierto(ejeAbierto === eje.id ? null : eje.id)} className="bg-[#FFF1E3] rounded-2xl p-6 cursor-pointer border-2 transition-all hover:shadow-md" style={{
-          borderColor: ejeAbierto === eje.id ? eje.color : 'transparent'
-        }} whileHover={{
-          y: -2
-        }}>
-          <div className="flex justify-between items-start mb-3">
-            <div className="w-3 h-3 rounded-full mt-1" style={{
-              backgroundColor: eje.color
-            }} />
-            <ChevronDown size={16} className="text-gray-400 transition-transform" style={{
-              transform: ejeAbierto === eje.id ? 'rotate(180deg)' : 'rotate(0deg)'
-            }} />
-          </div>
-          <h4 className="font-bold text-[#343230] leading-snug mb-3" style={{
-            color: ejeAbierto === eje.id ? eje.color : undefined
-          }}>
-            {eje.titulo}
-          </h4>
-          <AnimatePresence>
-            {ejeAbierto === eje.id && <motion.ul initial={{
-              height: 0,
-              opacity: 0
-            }} animate={{
-              height: 'auto',
-              opacity: 1
-            }} exit={{
-              height: 0,
-              opacity: 0
-            }} className="overflow-hidden">
-              {eje.talleres.map((t, i) => <li key={i} className="text-sm text-gray-500 py-1 border-t border-gray-100 first:border-0">
-                {t}
-              </li>)}
-            </motion.ul>}
-          </AnimatePresence>
-        </motion.div>)}
-      </div> */}
-
-      {/* Mapa placeholder */}
-      {/* <div className="bg-[#FFF1E3] rounded-3xl border-2 border-dashed border-gray-200 h-72 flex flex-col items-center justify-center text-gray-400">
-        <MapPin size={40} className="mb-3 opacity-40" />
-        <p className="font-semibold">Mapa de ubicaciones de talleres</p>
-        <p className="text-sm mt-1">Se cargará cuando se confirmen las sedes</p>
-      </div> */}
     </div>
   </section>;
 }
@@ -1600,6 +1558,76 @@ function CancioneroSection() {
     </div>
   </section>;
 }
+
+// ─── CARTELERA DE ARTISTAS POR ESCENARIO (dentro de la Grilla Cultural) ───────
+
+function CarteleraEscenarios() {
+  const [escenarioAbierto, setEscenarioAbierto] = useState(CARTELERA_ESCENARIOS[0]?.id ?? null);
+
+  return (
+    <div className="mt-16">
+      <h3 className="text-center text-[#343230] mb-8">Cartelera de artistas por escenario</h3>
+      <div className="space-y-4 max-w-4xl mx-auto">
+        {CARTELERA_ESCENARIOS.map(bloque => (
+          <div key={bloque.id} className="bg-[#faf7fb] rounded-2xl border-2 border-[#eadeed] overflow-hidden">
+            <button
+              onClick={() => setEscenarioAbierto(escenarioAbierto === bloque.id ? null : bloque.id)}
+              className="w-full text-left p-6 flex justify-between items-start gap-4 hover:bg-[#f3e9f5] transition-colors"
+            >
+              <div>
+                <h4 className="text-lg font-bold text-[#4a2055] mb-1">{bloque.escenario}</h4>
+                {bloque.horario && <p className="text-sm text-gray-500">{bloque.horario}</p>}
+                {bloque.conduccion && (
+                  <p className="text-xs text-gray-400 mt-1">Conducción sugerida: {bloque.conduccion}</p>
+                )}
+              </div>
+              <ChevronDown
+                size={20}
+                className="text-[#813893] shrink-0 transition-transform mt-1"
+                style={{ transform: escenarioAbierto === bloque.id ? 'rotate(180deg)' : 'rotate(0deg)' }}
+              />
+            </button>
+
+            <AnimatePresence>
+              {escenarioAbierto === bloque.id && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  className="overflow-hidden border-t border-[#eadeed]"
+                >
+                  <div className="p-6 pt-4 space-y-3">
+                    {bloque.actividades.map((act, i) => (
+                      <div
+    key={i}
+    className="flex flex-nowrap items-center gap-4 py-2 border-b border-[#eadeed] last:border-0 overflow-x-auto"
+  >
+    <span className="font-bold text-[#343230] whitespace-nowrap shrink-0">{act.nombre}</span>
+    <span className="text-xs font-bold text-[#916607] uppercase tracking-wide whitespace-nowrap shrink-0">
+      {act.tipo}
+    </span>
+    {act.procedencia && (
+      <span className="text-xs text-gray-400 whitespace-nowrap shrink-0">{act.procedencia}</span>
+    )}
+    {act.duracion && (
+      <span className="text-xs text-gray-400 whitespace-nowrap shrink-0">{act.duracion}</span>
+    )}
+    {act.descripcion && (
+      <span className="text-sm text-gray-500 whitespace-nowrap">{act.descripcion}</span>
+    )}
+  </div>
+))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function CulturalSection() {
   return <section id="cultural" className="py-24 px-4 bg-[#FFF1E3]">
     <div className="max-w-6xl mx-auto">
@@ -1614,45 +1642,10 @@ function CulturalSection() {
         <p className="text-gray-500 max-w-xl mx-auto mb-4">
           Arte, música, teatro y más. El Encuentro también es fiesta y celebración colectiva.
         </p>
-        <p className="text-gray-500 max-w-xl mx-auto mb-4 font-bold">
-          Pronto vamos a tener la grilla completa de actividades culturales.
-        </p>
-
-        {/* <a href="https://docs.google.com/forms/d/e/1FAIpQLSewjHAlFM65SW-sI0f7gpFlPjYy1lhTGwv30DsRcZcTVCuAeA/viewform"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold px-6 py-3 rounded-full hover:bg-[#fec449] transition-colors"
-        >
-          <ExternalLink size={16} />
-          Para Inscribir tu actividad cultural para el Encuentro, llená este formulario
-        </a> */}
+     
       </div>
 
-      {/* <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {ACTIVIDADES_CULTURALES.map((act, i) => <motion.div key={act.id} initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          delay: i * 0.08
-        }} className="bg-[#faf7fb] rounded-2xl overflow-hidden border border-[#eadeed] hover:shadow-lg transition-shadow cursor-pointer group">
-          <div className="h-36 bg-gradient-to-br from-[#feecc2] to-[#eadeed] flex items-center justify-center text-6xl group-hover:scale-105 transition-transform">
-            {act.emoji}
-          </div>
-          <div className="p-5">
-            <span className="text-xs font-bold text-[#b57f09] uppercase tracking-wider">{act.tipo}</span>
-            <h4 className="font-bold text-[#343230] mt-1 mb-2">{act.nombre}</h4>
-            <p className="text-sm text-gray-500">{act.descripcion}</p>
-            <a href="#" className="inline-flex items-center gap-1 text-[#b57f09] text-sm font-bold mt-3 hover:underline">
-              Ver más <ArrowRight size={12} />
-            </a>
-          </div>
-        </motion.div>)}
-      </div> */}
+      <CarteleraEscenarios />
     </div>
   </section>;
 }
@@ -2037,18 +2030,6 @@ function SedeSection() {
           </Link>
         </motion.div>)}
       </div>
-
-      {/* Card opcional: venir desde tu provincia */}
-      {/* <div className="bg-[#2f1435] text-white rounded-3xl p-8 flex flex-col md:flex-row items-center gap-6">
-        <div className="text-5xl">🚌</div>
-        <div className="flex-1">
-          <h3 className="text-white mb-2">¿Venís desde otra provincia?</h3>
-          <p className="text-white/70">Contactos de organizaciones que ofrecen colectivos desde distintos puntos del país para venir al Encuentro.</p>
-        </div>
-        <a href="#" className="bg-[#fdb10c] text-[#4a2055] font-bold px-6 py-3 rounded-full hover:bg-[#fec449] transition-colors whitespace-nowrap shrink-0">
-          Ver contactos
-        </a>
-      </div> */}
     </div>
   </section>;
 }
@@ -2205,10 +2186,6 @@ export function FooterSection() {
         className="w-full h-auto object-cover"
       />
     </div>
-
-    {/* Copyright */}
-    {/* <div className="py-6 px-4">
-    </div> */}
   </footer>;
 }
 

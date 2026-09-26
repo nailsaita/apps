@@ -1,4 +1,3 @@
-
 const CARTELERA_ESCENARIOS = [
   {
     id: 'apertura',
@@ -169,8 +168,8 @@ const CARTELERA_ESCENARIOS = [
   },
   {
     id: 'festi-torta',
-    escenario: 'Festi-Torta',
-    horario: '22 a 3 hs',
+    escenario: 'Festi Torta',
+    horario: '21:30 a 3 hs',
     estado: '',
     actividades: [
       {
@@ -267,16 +266,10 @@ const CARTELERA_ESCENARIOS = [
   },
   {
     id: 'escenario-pena',
-    escenario: 'Escenario Peña',
+    escenario: 'Festival del 39 Encuentro',
     horario: '21 a 2 hs',
-    estado: '15 proyectos',
+    estado: '',
     actividades: [
-      {
-        nombre: '"Las Palliris" (danza)',
-        tipo: 'Escénicas',
-        procedencia: 'Buenos Aires',
-        descripcion: ''
-      },
       {
         nombre: 'WARMIS Sikuri de Abya Yala',
         tipo: 'Música',
