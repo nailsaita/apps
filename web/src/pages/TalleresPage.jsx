@@ -123,6 +123,20 @@ function TallerCard({ taller, terms, forceOpen }) {
             <p className="px-4 pb-4 text-sm leading-relaxed text-[#343230]/80">
               <Highlight text={taller.descripcion} terms={terms} />
             </p>
+            {taller.subejes && (
+              <ul className="px-4 pb-4 space-y-3">
+                {taller.subejes.map((sub, idx) => (
+                  <li key={idx} className="rounded-xl border border-[#eadeed] bg-[#faf7fb] p-3">
+                    <h4 className="mb-1 text-sm font-bold text-[#662c74]">
+                      <Highlight text={sub.titulo} terms={terms} />
+                    </h4>
+                    <p className="text-sm leading-relaxed text-[#343230]/80">
+                      <Highlight text={sub.descripcion} terms={terms} />
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -207,7 +221,15 @@ export default function TalleresPage() {
         items: eje.talleres.map((taller) => ({
           taller,
           texto: fold(
-            [taller.titulo, taller.descripcion, taller.grupo, taller.lugar, eje.titulo, eje.corto]
+            [
+              taller.titulo,
+              taller.descripcion,
+              taller.grupo,
+              taller.lugar,
+              eje.titulo,
+              eje.corto,
+              ...(taller.subejes || []).flatMap(s => [s.titulo, s.descripcion])
+            ]
               .filter(Boolean)
               .join(' ')
           ),
