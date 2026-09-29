@@ -1566,7 +1566,7 @@ function CarteleraEscenarios() {
 
   return (
     <div className="mt-16">
-      <h3 className="text-center text-[#343230] mb-8">Cartelera de artistas por escenario</h3>
+      <h3 className="text-center text-[#343230] mb-8">Cartelera de artística por escenario</h3>
       <div className="space-y-4 max-w-4xl mx-auto">
         {CARTELERA_ESCENARIOS.map(bloque => (
           <div key={bloque.id} className="bg-[#faf7fb] rounded-2xl border-2 border-[#eadeed] overflow-hidden">
