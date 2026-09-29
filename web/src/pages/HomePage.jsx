@@ -1265,7 +1265,7 @@ function EjesSection() {
           Los talleres son espacios de diálogo y debate que funcionan durante el Encuentro, reuniendo a sus participantes alrededor de una temática. Son abiertos y horizontales, sin inscripción obligatoria.
         </p>
         <Link to="/Talleres" className="inline-flex items-center gap-1 text-[#21662f] font-bold mt-4 hover:underline">
-          Hacé click para ver mas <ArrowRight size={14} />
+          Ver Ejes Temáticos, Talleres y Escuelas donde se ubican <ArrowRight size={14} />
         </Link>
       </div>
     </div>
