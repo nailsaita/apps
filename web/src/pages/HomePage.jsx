@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Lottie from 'lottie-react';
-import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag, FileText, Droplet, ShieldCheck, Moon, Sparkles, Backpack, Smartphone } from 'lucide-react';
+import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag, FileText, Droplet, ShieldCheck, Moon, Sparkles, Backpack, Smartphone, PersonStanding } from 'lucide-react';
 import { HiddenMail } from '@/components/HiddenMail';
 import EJES from '@/data/ejes.js';
 import FAQ from '@/data/faq.jsx';
@@ -435,11 +435,11 @@ export function Navbar() {
 
         {/* Derecha: lupa + inscribirse — desktop */}
         <div className="hidden md:flex items-center gap-2">
-          <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="flex items-center gap-2 text-sm text-gray-400 border border-gray-200 rounded-full px-3 py-1.5 hover:border-[#fdb10c] hover:text-[#916607] transition-colors bg-gray-50" title="Buscar (Ctrl+K)">
+          {/* <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="flex items-center gap-2 text-sm text-gray-400 border border-gray-200 rounded-full px-3 py-1.5 hover:border-[#fdb10c] hover:text-[#916607] transition-colors bg-gray-50" title="Buscar (Ctrl+K)">
             <Search size={14} />
             <span className="text-xs">Buscar</span>
             <span className="text-xs bg-gray-200 text-gray-500 rounded px-1.5 py-0.5 ml-1 font-mono">⌘K</span>
-          </button>
+          </button> */}
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-8 py-2 rounded-full hover:bg-[#21662f] hover:scale-105 transition-all flex items-center justify-center gap-2 shadow-xl shadow-[#184b22]/50 ring-2 ring-white/20 text-lg">
             <Users size={20} />
             Inscripción
@@ -448,9 +448,10 @@ export function Navbar() {
 
         {/* Mobile: lupa + hamburguesa */}
         <div className="md:hidden flex items-center gap-2 w-full justify-between">
-          <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="text-gray-700">
+          {/* <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="text-gray-700">
             <Search size={20} />
-          </button>
+          </button> */}
+          <div style={{width: "10px"}}></div>
           <a href="/#" className="text-gray-800 font-bold">
             <img src="/images/logoblanco.png" alt="Logo" className="h-7 inline mb-1" style={{"filter":"brightness(0) saturate(100%) invert(11%) sepia(36%) saturate(675%) hue-rotate(175deg) brightness(96%) contrast(88%)"}} />
             <span className="text-lg">39 Encuentro Pluri</span>
@@ -1388,7 +1389,7 @@ Convocamos a todas las personas travestis, trans, no binaries y a las identidade
       border: 'border-[#2a823c]/30',
       badgeColor: 'bg-[#2a823c] text-white',
       iconBg: 'bg-[#2a823c] text-white',
-      icono: <Accessibility size={24} />,
+      icono: <PersonStanding size={28} />,
       contenido: `En este marco, se están pensando en estrategias de diseño universal que garanticen:
 🔹 El acceso a la información.
 🔹 Espacios más amigables.
@@ -1599,24 +1600,24 @@ function CarteleraEscenarios() {
                   <div className="p-6 pt-4 space-y-3">
                     {bloque.actividades.map((act, i) => (
                       <div
-    key={i}
-    className="flex flex-nowrap items-center gap-4 py-2 border-b border-[#eadeed] last:border-0 overflow-x-auto"
-  >
-    <span className="font-bold text-[#343230] whitespace-nowrap shrink-0">{act.nombre}</span>
-    <span className="text-xs font-bold text-[#916607] uppercase tracking-wide whitespace-nowrap shrink-0">
-      {act.tipo}
-    </span>
-    {act.procedencia && (
-      <span className="text-xs text-gray-400 whitespace-nowrap shrink-0">{act.procedencia}</span>
-    )}
-    {act.duracion && (
-      <span className="text-xs text-gray-400 whitespace-nowrap shrink-0">{act.duracion}</span>
-    )}
-    {act.descripcion && (
-      <span className="text-sm text-gray-500 whitespace-nowrap">{act.descripcion}</span>
-    )}
-  </div>
-))}
+                        key={i}
+                        className="flex flex-nowrap items-center gap-4 py-2 border-b border-[#eadeed] last:border-0 overflow-x-auto"
+                      >
+                        <span className="font-bold text-[#343230] whitespace-nowrap shrink-0">{act.nombre}</span>
+                        <span className="text-xs font-bold text-[#916607] uppercase tracking-wide whitespace-nowrap shrink-0">
+                          {act.tipo}
+                        </span>
+                        {act.procedencia && (
+                          <span className="text-xs text-gray-400 whitespace-nowrap shrink-0">{act.procedencia}</span>
+                        )}
+                        {act.duracion && (
+                          <span className="text-xs text-gray-400 whitespace-nowrap shrink-0">{act.duracion}</span>
+                        )}
+                        {act.descripcion && (
+                          <span className="text-sm text-gray-500 whitespace-nowrap">{act.descripcion}</span>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </motion.div>
               )}
@@ -1642,10 +1643,12 @@ function CulturalSection() {
         <p className="text-gray-500 max-w-xl mx-auto mb-4">
           Arte, música, teatro y más. El Encuentro también es fiesta y celebración colectiva.
         </p>
-     
+        <p className="text-gray-500 max-w-xl mx-auto mb-4 font-bold">
+          Pronto vamos a tener la grilla completa de actividades culturales.
+        </p>
       </div>
 
-      <CarteleraEscenarios />
+      {/* <CarteleraEscenarios /> */}
     </div>
   </section>;
 }

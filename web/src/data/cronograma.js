@@ -13,7 +13,7 @@ const CRONOGRAMA = {
     actividad: 'Talleres - Escuelas y facultades céntricas'
   }, {
     hora: '18:00 Hs',
-    actividad: 'Marcha contra los travesticidios, lesbicidios y transfemicidios'
+    actividad: 'Marcha contra los travesticidios, transfemicidios y transhomicidios'
   }, {
     hora: '21:30 Hs',
     actividad: 'Festi torta'
