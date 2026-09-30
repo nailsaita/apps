@@ -8,8 +8,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 /* ---------- Utilidades de búsqueda ---------- */
 
-// Quita tildes y pasa a minúsculas conservando el largo del texto,
-// así los índices sirven para resaltar sobre el texto original.
 const fold = (str) =>
   str
     .split('')
@@ -145,8 +143,6 @@ function TallerCard({ taller, terms, forceOpen }) {
     </li>
   );
 }
-
-/* ---------- Eje (acordeón) ---------- */
 
 function EjeSection({ eje, talleres, terms, open, onToggle, buscando }) {
   const total = eje.talleres.length;

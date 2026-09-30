@@ -1,6 +1,4 @@
-// src/data/talleres.js
-// Ejes temáticos y talleres del 39° Encuentro Plurinacional.
-// Cada taller: { titulo, descripcion, grupo?, lugar?, mapa? }
+
 
 const ALBERDI = 'Escuela Juan Bautista Alberdi · Av. General Paz 488';
 const IPEM86 = 'I.P.E.M. Nº 86 Gabriela Mistral · Av. Humberto Primo 145';
@@ -38,7 +36,14 @@ const places = {
 
 
 
-const t = (titulo, descripcion = '', extra = {}) => ({ titulo, descripcion, ...extra });
+const t = (titulo, descripcion = '', extra = {}) => {
+  if (extra.lugar && typeof extra.lugar === 'object') {
+    const { lugar, ...restoExtra } = extra;
+    return { titulo, descripcion, ...restoExtra, ...lugar };
+  }
+  return { titulo, descripcion, ...extra };
+};
+
 
 export const TALLERES_EJES = [
   {
