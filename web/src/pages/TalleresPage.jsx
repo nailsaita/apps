@@ -92,7 +92,7 @@ function TallerCard({ taller, terms, forceOpen }) {
               {taller.grupo}
             </span>
           )}
-          {taller.lugar && (
+          {/* {taller.lugar && (
             <span className="inline-flex items-center gap-1 rounded-full bg-[#f6faf7] px-2.5 py-0.5 text-xs font-semibold text-[#21662f]">
               <MapPin size={12} />
               <a href={taller.lugar.maps} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-[#813893]">
@@ -109,7 +109,7 @@ function TallerCard({ taller, terms, forceOpen }) {
                 </a>
               )}
             </span>
-          )}
+          )} */}
         </div>
       )}
 
