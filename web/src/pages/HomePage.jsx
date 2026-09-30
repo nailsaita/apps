@@ -394,10 +394,10 @@ export function Navbar() {
     { href: '/#', id: '', label: 'Inicio' },
     { href: '/#sede', id: 'sede', label: 'Sede' },
     { href: '/#cronograma', id: 'cronograma', label: 'Cronograma' },
-    { href: '/#ejes', id: 'ejes', label: 'Talleres' },
+    { href: '/Talleres', id: 'ejes', label: 'Talleres' },
     { href: '/#encuentro', id: 'encuentro', label: '¿Qué es?' },
     { href: '/#cultural', id: 'cultural', label: 'Cultura' },
-    { href: '/#prensa', id: 'prensa', label: 'Prensa' }
+    { href: '/KitPrensa', id: 'prensa', label: 'Prensa' }
   ];
 
   return <>
