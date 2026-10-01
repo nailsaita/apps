@@ -39,7 +39,6 @@ const DATOS_DONACION = [{
 // ─── COMPONENTES AUXILIARES ───────────────────────────────────────────────────
 
 export function CountdownBanner() {
-  //const [dias, setDias] = useState(EVENTO.diasRestantes);
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -55,6 +54,26 @@ export function CountdownBanner() {
     };
   }, []);
 
+  // Días que faltan comparando fechas locales a medianoche
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  const dias = Math.round((INICIO_ENCUENTRO - hoy) / (1000 * 60 * 60 * 24));
+
+  let contenido;
+  if (dias > 0) {
+    contenido = <>
+      <span className="opacity-80">{dias === 1 ? 'Falta' : 'Faltan'} </span>
+      <span className="text-[#fdb10c] text-lg font-black mx-1">{dias}</span>
+      <span className="opacity-80"> {dias === 1 ? 'día' : 'días'} para el Encuentro!</span>
+    </>;
+  } else if (dias >= -2) {
+    contenido = <span className="text-[#fdb10c] text-lg font-black">
+      ¡{DIAS_ENCUENTRO[-dias]} del Encuentro!
+    </span>;
+  } else {
+    contenido = <span className="opacity-90">¡Gracias por ser parte del 39° Encuentro!</span>;
+  }
+
   return <motion.div initial={{
     y: -60,
     opacity: 1
@@ -66,11 +85,12 @@ export function CountdownBanner() {
     duration: 0.25,
     ease: 'easeInOut'
   }} className="fixed top-0 left-0 right-0 z-50 bg-[#813893] text-white text-center py-2 text-sm font-semibold tracking-wide">
-    <span className="opacity-80">Faltan </span>
-    <span className="text-[#fdb10c] text-lg font-black mx-1">{Math.ceil((EVENTO.fechaComienzo - new Date()) / (1000 * 60 * 60 * 24))}</span>
-    <span className="opacity-80"> días para el Encuentro!</span>
+    {contenido}
   </motion.div>;
 }
+
+const INICIO_ENCUENTRO = new Date(2026, 9, 10); // 10/oct/2026, hora local (los meses empiezan en 0)
+const DIAS_ENCUENTRO = ['Primer día', 'Segundo día', 'Tercer día'];
 
 // ─── HOOKS GLOBALES DE SCROLL ─────────────────────────────────────────────────
 
@@ -1258,16 +1278,30 @@ function IlustracionSticker({ src, size = 'w-24', height, rotate = -4, className
 
 function EjesSection() {
   const [ejeAbierto, setEjeAbierto] = useState(null);
-  return <section id="ejes" className="py-24 px-4 bg-[#faf7fb]">
+  return <section id="ejes" className="py-24 px-4 bg-[#FFF1E3]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-2">
-        <h2 className="text-[#343230] mb-4">Ejes temáticos y talleres</h2>
+        <h2 className="text-[#343230] mb-4 text-4xl md:text-5xl">Ejes temáticos y talleres</h2>
         <p className="text-gray-500 max-w-xl mx-auto">
           Los talleres son espacios de diálogo y debate que funcionan durante el Encuentro, reuniendo a sus participantes alrededor de una temática. Son abiertos y horizontales, sin inscripción obligatoria.
         </p>
-        <Link to="/Talleres" className="inline-flex items-center gap-1 text-[#21662f] font-bold mt-4 hover:underline">
-          Ver Ejes Temáticos, Talleres y Escuelas donde se ubican <ArrowRight size={14} />
-        </Link>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-10"
+        >
+          <Link
+            to="/Talleres"
+            className="group inline-flex items-center justify-center gap-3 bg-[#813893] text-white font-black px-8 sm:px-12 py-5 rounded-full hover:bg-[#662c74] hover:scale-105 transition-all shadow-xl shadow-[#4a2055]/40 ring-2 ring-[#fdb10c] text-lg sm:text-xl"
+          >
+            <MapPin size={24} className="text-[#fdb10c] shrink-0" />
+            <span>Ver Ejes Temáticos, Talleres y Escuelas donde se ubican</span>
+            <ArrowRight size={24} className="shrink-0 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </motion.div>
       </div>
     </div>
   </section>;
@@ -1484,7 +1518,7 @@ Súmate a ocupar espacios que son para todas, todes. Este Encuentro es de TODAS,
 
 function CancioneroSection() {
   const [cancionAbierta, setCancionAbierta] = useState(null);
-  return <section id="cancionero" className="py-24 px-4 bg-[#faf7fb]">
+  return <section id="cancionero" className="py-24 px-4 bg-[#2f1435]">
     <div className="max-w-4xl mx-auto">
       <div className="text-center mb-12 relative">
         <IlustracionSticker
@@ -1493,8 +1527,8 @@ function CancioneroSection() {
           rotate={-0}
           className="hidden md:block absolute left-1/2 md:right-auto md:-right-4 lg:left-4 -top20"
         />
-        <h2 className="text-[#343230] mb-4">Cancionero</h2>
-        <p className="text-gray-500 max-w-xl mx-auto mb-6">
+        <h2 className="text-white mb-4">Cancionero</h2>
+        <p className="text-white/70 max-w-xl mx-auto mb-6">
           Canciones sugeridas para este 39 encuentro en Córdoba
         </p>
 
@@ -1517,7 +1551,7 @@ function CancioneroSection() {
           once: true
         }} transition={{
           delay: i * 0.05
-        }} className="bg-[#FFF1E3] rounded-2xl border-2 border-gray-200 overflow-hidden">
+        }} className="bg-[#FFF1E3] rounded-2xl border-2 border-[#eadeed] overflow-hidden">
           <button onClick={() => setCancionAbierta(cancionAbierta === cancion.id ? null : cancion.id)} className="w-full text-left p-6 flex justify-between items-start gap-4 hover:bg-[#faf7fb] transition-colors">
             <div className="flex-1">
               <h3 className="text-lg font-bold text-[#343230] mb-1">{cancion.titulo}</h3>
@@ -1538,7 +1572,7 @@ function CancioneroSection() {
             }} exit={{
               height: 0,
               opacity: 0
-            }} className="overflow-hidden border-t border-gray-200">
+            }} className="overflow-hidden border-t border-[#eadeed]">
               <div className="p-6 bg-[#faf7fb]">
                 <pre className="text-sm text-[#343230]/90 leading-relaxed font-sans whitespace-pre-wrap break-words">
                   {cancion.letra}
@@ -1559,7 +1593,6 @@ function CancioneroSection() {
     </div>
   </section>;
 }
-
 // ─── CARTELERA DE ARTISTAS POR ESCENARIO (dentro de la Grilla Cultural) ───────
 
 function CarteleraEscenarios() {
@@ -1630,7 +1663,7 @@ function CarteleraEscenarios() {
 }
 
 function CulturalSection() {
-  return <section id="cultural" className="py-24 px-4 bg-[#FFF1E3]">
+  return <section id="cultural" className="py-24 px-4 bg-[#2f1435]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12 relative">
         <IlustracionSticker
@@ -1639,11 +1672,11 @@ function CulturalSection() {
           rotate={4}
           className="hidden md:block absolute left-0 md:left-20 lg:right-3 -top-10"
         />
-        <h2 className="text-[#343230] mb-4">Grilla Cultural</h2>
-        <p className="text-gray-500 max-w-xl mx-auto mb-4">
+        <h2 className="text-white mb-4">Grilla Cultural</h2>
+        <p className="text-white/70 max-w-xl mx-auto mb-4">
           Arte, música, teatro y más. El Encuentro también es fiesta y celebración colectiva.
         </p>
-        <p className="text-gray-500 max-w-xl mx-auto mb-4 font-bold">
+        <p className="text-white/70 max-w-xl mx-auto mb-4 font-bold">
           Pronto vamos a tener la grilla completa de actividades culturales.
         </p>
       </div>
@@ -1917,14 +1950,13 @@ function MapaEncuentro() {
 function SedeSection() {
   const [cardAbierta, setCardAbierta] = useState(null);
   const cards = [{
-    icono: <Home size={24} />,
-    titulo: 'Alojamiento',
-    desc: '¡Largamos preinscripción para el alojamiento!',
-    color: 'bg-[#faf7fb] border-[#d5bddb]',
-    iconColor: 'text-[#662c74]',
-    expandible: true,
-    contenido: `🏫¡Largamos preinscripción para el alojamiento!\n\nSi estás en una organización, colectiva, grupalidad o viajás sola o sole y querés ir inscribiéndote, necesitamos que te comuniques a través de este mail alojamiento.39encuentropluri.cba@proton.me\n\n👉🏽 Por ese medio te especificaremos qué información necesitamos y cómo compartirla de manera más segura.\n\n🧡 ¡Nos vamos preparando para recibir a todas y todes!`
-  }, {
+  icono: <Home size={24} />,
+  titulo: 'Alojamiento',
+  desc: 'Ya respondimos por email las solicitudes de alojamiento. Revisá tu casilla, incluida la carpeta de spam.',
+  color: 'bg-[#faf7fb] border-[#d5bddb]',
+  iconColor: 'text-[#662c74]',
+  expandible: true
+}, {
     icono: <Bus size={24} />,
     titulo: 'Transporte',
     desc: 'Info de transporte urbano, SUBE, y cómo llegar al Encuentro.',
@@ -1949,7 +1981,7 @@ function SedeSection() {
     expandible: true,
     contenido: '👉🏽 Estamos trabajando para ofrecer opciones de la economía popular, accesibles y con propuestas sin TACC y veganas para habitar el encuentro entre todxs.'
   }];
-  return <section id="sede" className="py-24 px-4 bg-[#faf7fb]">
+  return <section id="sede" className="py-24 px-4 bg-[#FFF1E3]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12 relative">
         <IlustracionSticker
@@ -1969,7 +2001,7 @@ function SedeSection() {
         <MapaEncuentro />
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 items-stretch">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 items-start">
         {cards.map((card, i) => card.expandible ? <motion.div key={i} initial={{
           opacity: 0,
           y: 20
@@ -1984,7 +2016,7 @@ function SedeSection() {
           <div className="p-6 flex flex-col flex-1">
             <div className={`${card.iconColor} mb-4`}>{card.icono}</div>
             <h4 className="font-bold text-[#343230] mb-2">{card.titulo}</h4>
-            <p className="text-sm text-gray-500 flex-1">{card.desc}</p>
+            <p className="text-sm text-gray-500 flex-1 min-h-[81px]">{card.desc}</p>
             <button onClick={() => setCardAbierta(cardAbierta === card.titulo ? null : card.titulo)} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 self-start hover:underline`}>
               {cardAbierta === card.titulo ? 'Ver menos' : 'Ver más'}
               <ChevronDown size={14} className="transition-transform" style={{
@@ -2005,12 +2037,14 @@ function SedeSection() {
             }} className="overflow-hidden border-t border-[#eadeed]">
               <div className="p-6 bg-white/40 text-sm text-[#343230]/90 leading-relaxed whitespace-pre-line break-words">
                 {card.titulo === 'Alojamiento' ? <>
-                  🏫¡Largamos preinscripción para el alojamiento!{"\n\n"}
-                  Si estás en una organización, colectiva, grupalidad o viajás sola o sole y querés ir inscribiéndote, necesitamos que te comuniques a través de este mail{' '}
-                  <HiddenMail mail="alojamiento.39encuentropluri.cba@proton.me" className="font-bold underline hover:text-[#662c74] break-all" />
-                  {"\n\n"}👉🏽 Por ese medio te especificaremos qué información necesitamos y cómo compartirla de manera más segura.{"\n\n"}
-                  🧡 ¡Nos vamos preparando para recibir a todas y todes!
-                </> : card.contenido}
+  El equipo de Alojamiento ya respondió por email las solicitudes, indicando el espacio asignado y el domicilio correspondiente a cada grupo.{"\n\n"}
+  Si todavía no recibiste esa respuesta, te pedimos que revises la carpeta de <strong>SPAM</strong> antes de escribirnos.{"\n\n"}
+  Si ya la recibiste y aún no respondiste, por favor respondé ese mismo mail confirmando el número de compañerxs que finalmente asisten, o compartiendo cualquier corrección o aclaración que consideres necesaria.{"\n\n"}
+  Nos ayuda mucho que puedan responder a tiempo para terminar de organizar todo 💜{"\n\n"}
+  ¡Gracias por ayudarnos a organizar mejor el encuentro!{"\n\n"}
+  ✉️ Contacto:{' '}
+  <HiddenMail mail="alojamiento.39encuentropluri.cba@proton.me" className="font-bold underline hover:text-[#662c74] break-all" />
+</> : card.contenido}
               </div>
             </motion.div>}
           </AnimatePresence>
@@ -2027,7 +2061,7 @@ function SedeSection() {
         }} className={`${card.color} border-2 rounded-2xl p-6 flex flex-col`}>
           <div className={`${card.iconColor} mb-4`}>{card.icono}</div>
           <h4 className="font-bold text-[#343230] mb-2">{card.titulo}</h4>
-          <p className="text-sm text-gray-500 flex-1">{card.desc}</p>
+          <p className="text-sm text-gray-500 flex-1 min-h-[81px]">{card.desc}</p>
           <Link to={card.link} className={`inline-flex items-center gap-1 ${card.iconColor} text-sm font-bold mt-4 hover:underline`}>
             {card.linkText} {card.link !== '#' && <ArrowRight size={12} />}
           </Link>
@@ -2092,7 +2126,7 @@ function FaqSection() {
   const [faqAbierta, setFaqAbierta] = useState(null);
   return <>
     {/* FAQ */}
-    <div className="py-12 px-4 border-b border-white/10 bg-[#2f1435] text-white">
+    <div id="faq" className="py-12 px-4 border-b border-white/10 bg-[#2f1435] text-white">
       <div className="max-w-3xl mx-auto">
         <h2 className="text-white text-center mb-10">Preguntas frecuentes</h2>
         {FAQ.map((item, i) => <div key={i} className="border-b border-white/10">
@@ -2121,7 +2155,6 @@ function FaqSection() {
     </div>
   </>
 }
-
 export function FooterSection() {
   return <footer className="bg-[#2f1435] text-white">
     {/* Contacto */}
@@ -2202,16 +2235,16 @@ export default function HomePage() {
     <Navbar />
     <BackToTop />
     <HeroSection />
-    <ApoyoSection />
     <SedeSection />
     <CronogramaSection />
     <EjesSection />
+    <CulturalSection />
+    <ApoyoSection />
     <ConsignaSection />
     <EncuentroSection />
-    <SubcomisionesSection />
-    <CulturalSection />
     <CancioneroSection />
     <PrensaSection />
+    <SubcomisionesSection />
     <FaqSection />
     <FooterSection />
   </div>;

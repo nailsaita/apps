@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 /* ---------- Utilidades de búsqueda ---------- */
 
+// Quita tildes y pasa a minúsculas conservando el largo del texto,
+// así los índices sirven para resaltar sobre el texto original.
 const fold = (str) =>
   str
     .split('')
@@ -90,12 +92,10 @@ function TallerCard({ taller, terms, forceOpen }) {
               {taller.grupo}
             </span>
           )}
-          {/* {taller.lugar && (
+          {taller.lugar && (
             <span className="inline-flex items-center gap-1 rounded-full bg-[#f6faf7] px-2.5 py-0.5 text-xs font-semibold text-[#21662f]">
               <MapPin size={12} />
-              <a href={taller.lugar.maps} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-[#813893]">
-                {taller.lugar.name} · {taller.lugar.address}
-              </a>
+              {taller.lugar}
               {taller.mapa && (
                 <a
                   href={taller.mapa}
@@ -107,7 +107,7 @@ function TallerCard({ taller, terms, forceOpen }) {
                 </a>
               )}
             </span>
-          )} */}
+          )}
         </div>
       )}
 
@@ -143,6 +143,8 @@ function TallerCard({ taller, terms, forceOpen }) {
     </li>
   );
 }
+
+/* ---------- Eje (acordeón) ---------- */
 
 function EjeSection({ eje, talleres, terms, open, onToggle, buscando }) {
   const total = eje.talleres.length;
