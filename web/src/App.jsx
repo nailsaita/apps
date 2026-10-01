@@ -63,7 +63,7 @@ function App() {
         <Route path="/Flavia" element={<FlaviaPage />} />
         <Route path="/PueblosPreexistentes" element={<PueblosPreexistentesPage />} />
         {/* <Route path="/carteleraEscenarios" element={<carteleraEscenarios />} /> */}
-        <Route path="/Mapa" element={<MapaPage />} />
+        {/* <Route path="/Mapa" element={<MapaPage />} /> */}
 
         {/* Catch-all route for 404s */}
         <Route path="*" element={

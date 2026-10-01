@@ -414,7 +414,7 @@ export function Navbar({hasTopSpace = true}) {
     { href: '/#', id: '', label: 'Inicio' },
     { href: '/#sede', id: 'sede', label: 'Sede' },
     { href: '/#cronograma', id: 'cronograma', label: 'Cronograma' },
-    { href: '/Talleres', id: 'ejes', label: 'Talleres' },
+    { href: '/#ejes', id: 'ejes', label: 'Talleres' },
     { href: '/#encuentro', id: 'encuentro', label: '¿Qué es?' },
     { href: '/#cultural', id: 'cultural', label: 'Cultura' },
     { href: '/KitPrensa', id: 'prensa', label: 'Prensa' },
@@ -1287,7 +1287,7 @@ function EjesSection() {
           Los talleres son espacios de diálogo y debate que funcionan durante el Encuentro, reuniendo a sus participantes alrededor de una temática. Son abiertos y horizontales, sin inscripción obligatoria.
         </p>
 
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -1302,7 +1302,7 @@ function EjesSection() {
             <span>Ver Ejes Temáticos, Talleres y Escuelas donde se ubican</span>
             <ArrowRight size={24} className="shrink-0 transition-transform group-hover:translate-x-1" />
           </Link>
-        </motion.div>
+        </motion.div> */}
       </div>
     </div>
   </section>;
@@ -1999,8 +1999,8 @@ function SedeSection() {
 
       {/* Mapa placeholder */}
       <div>
-        {/* <MapaEncuentro /> */}
-        <iframe src="https://www.google.com/maps/d/embed?mid=1ACKW_W7BXV8_jr2GrRomUidKBy07W2E&ehbc=2E312F"  style={{ width: '100%', height: '28rem', border: 'none', marginTop: '56px', borderRadius: '1.5rem', marginBottom: '2.5rem'}}></iframe>
+        <MapaEncuentro />
+        {/* <iframe src="https://www.google.com/maps/d/embed?mid=1ACKW_W7BXV8_jr2GrRomUidKBy07W2E&ehbc=2E312F"  style={{ width: '100%', height: '28rem', border: 'none', marginTop: '56px', borderRadius: '1.5rem', marginBottom: '2.5rem'}}></iframe> */}
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 items-start">
