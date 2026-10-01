@@ -11,6 +11,9 @@
 	# las paginas cambian con alguna regularidad, ponemos maxage en 5 minutos
 	Header set Cache-Control "public, s-maxage=300, max-age=0"
 
+	# para poder embeber Google Maps
+	Header set Cross-Origin-Resource-Policy "cross-origin"
+
 	# el service worker no debe ser cacheado 
     <FilesMatch "^(sw|service-worker)\.js$">
         # Force the browser and proxies to revalidate every time

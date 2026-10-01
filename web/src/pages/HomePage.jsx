@@ -322,7 +322,7 @@ function BuscadorGlobal({ onClose }) {
     opacity: 1
   }} exit={{
     opacity: 0
-  }} className="fixed inset-0 z-[70] bg-black/50 backdrop-blur-sm flex items-start justify-center pt-20 px-4" onClick={onClose}>
+  }} className="fixed inset-0 z-[120] bg-black/50 backdrop-blur-sm flex items-start justify-center pt-20 px-4" onClick={onClose}>
     <motion.div initial={{
       opacity: 0,
       y: -20,
@@ -392,7 +392,7 @@ function BuscadorGlobal({ onClose }) {
 
 // ─── NAVBAR ───────────────────────────────────────────────────────────────────
 
-export function Navbar() {
+export function Navbar({hasTopSpace = true}) {
   const [open, setOpen] = useState(false);
   const [buscadorAbierto, setBuscadorAbierto] = useState(false);
   const scrolled = useScrolled(80);
@@ -417,7 +417,8 @@ export function Navbar() {
     { href: '/Talleres', id: 'ejes', label: 'Talleres' },
     { href: '/#encuentro', id: 'encuentro', label: '¿Qué es?' },
     { href: '/#cultural', id: 'cultural', label: 'Cultura' },
-    { href: '/KitPrensa', id: 'prensa', label: 'Prensa' }
+    { href: '/KitPrensa', id: 'prensa', label: 'Prensa' },
+    // { href: '/Mapa', id: 'mapa', label: 'Mapa' },
   ];
 
   return <>
@@ -426,10 +427,10 @@ export function Navbar() {
     </AnimatePresence>
 
     <motion.nav animate={{
-      top: scrolled ? 0 : 44,
+      top:  (scrolled || !hasTopSpace) ? 0 : 44,
       boxShadow: scrolled ? '0 2px 16px rgba(154,52,18,0.25)' : '0 1px 0 rgba(154,52,18,0.15)'
     }} transition={{
-      duration: 0.25,
+      duration: hasTopSpace ? 0.25 : 0,
       ease: 'easeInOut'
     }} className="fixed left-0 right-0 z-40 border-b border-[#9a3412] bg-[#FFF1E3]" style={{ zIndex: 100 }}>
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between transition-all duration-300" style={{
@@ -702,7 +703,7 @@ function DonacionesModal({
     opacity: 1
   }} exit={{
     opacity: 0
-  }} className="fixed inset-0 z-[70] bg-black/50 backdrop-blur-sm flex items-center justify-center px-4" onClick={onClose}>
+  }} className="fixed inset-0 z-[120] bg-black/50 backdrop-blur-sm flex items-center justify-center px-4" onClick={onClose}>
     <motion.div initial={{
       opacity: 0,
       y: 16,
@@ -1998,7 +1999,8 @@ function SedeSection() {
 
       {/* Mapa placeholder */}
       <div>
-        <MapaEncuentro />
+        {/* <MapaEncuentro /> */}
+        <iframe src="https://www.google.com/maps/d/embed?mid=1ACKW_W7BXV8_jr2GrRomUidKBy07W2E&ehbc=2E312F"  style={{ width: '100%', height: '28rem', border: 'none', marginTop: '56px', borderRadius: '1.5rem', marginBottom: '2.5rem'}}></iframe>
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 items-start">
