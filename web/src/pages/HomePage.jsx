@@ -414,7 +414,7 @@ export function Navbar({hasTopSpace = true}) {
     { href: '/#', id: '', label: 'Inicio' },
     { href: '/#sede', id: 'sede', label: 'Sede' },
     { href: '/#cronograma', id: 'cronograma', label: 'Cronograma' },
-    { href: '/#ejes', id: 'ejes', label: 'Talleres' },
+    { href: '/Talleres', id: 'ejes', label: 'Talleres' },
     { href: '/#encuentro', id: 'encuentro', label: '¿Qué es?' },
     { href: '/#cultural', id: 'cultural', label: 'Cultura' },
     { href: '/KitPrensa', id: 'prensa', label: 'Prensa' },
@@ -1287,7 +1287,7 @@ function EjesSection() {
           Los talleres son espacios de diálogo y debate que funcionan durante el Encuentro, reuniendo a sus participantes alrededor de una temática. Son abiertos y horizontales, sin inscripción obligatoria.
         </p>
 
-        {/* <motion.div
+        <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -1302,7 +1302,7 @@ function EjesSection() {
             <span>Ver Ejes Temáticos, Talleres y Escuelas donde se ubican</span>
             <ArrowRight size={24} className="shrink-0 transition-transform group-hover:translate-x-1" />
           </Link>
-        </motion.div> */}
+        </motion.div>
       </div>
     </div>
   </section>;

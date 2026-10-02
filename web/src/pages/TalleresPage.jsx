@@ -1,13 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
-//import { TALLERES_EJES, TOTAL_TALLERES } from '@/data/talleres';
+import { TALLERES_EJES, TOTAL_TALLERES } from '@/data/talleres';
 import { ChevronDown, MapPin, Users, MessageCircle, Clock, Search, X } from 'lucide-react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const TALLERES_EJES = []
-const TOTAL_TALLERES = 0;
+// const TALLERES_EJES = []
+// const TOTAL_TALLERES = 0;
 
 /* ---------- Utilidades de búsqueda ---------- */
 
@@ -281,14 +281,14 @@ export default function TalleresPage() {
       <main className="relative z-10 mx-auto max-w-7xl px-4 pb-24 pt-32 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">
           <h2 className="mb-4 text-[#343230]">Ejes temáticos y talleres</h2>
-          <p className=" hidden mx-auto max-w-2xl text-gray-500">
+          <p className="mx-auto max-w-2xl text-gray-500">
             {TALLERES_EJES.length} ejes y {TOTAL_TALLERES} talleres. Buscá por tema, palabra clave o eje para
             encontrar rápido dónde participar.
           </p>
         </div>
 
         {/* ---------- Buscador y listado ---------- */}
-        <section className="hidden mx-auto mb-20 max-w-5xl " aria-label="Buscador de talleres">
+        <section className="mx-auto mb-20 max-w-5xl " aria-label="Buscador de talleres">
           <div className="mb-4 rounded-3xl border-2 border-[#eadeed] bg-white/70 p-4 sm:p-5">
             <label htmlFor="buscador-talleres" className="sr-only">
               Buscar talleres
