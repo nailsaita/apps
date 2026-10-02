@@ -17,6 +17,7 @@ import DeliciaPage from '@/pages/DeliciaPage.jsx';
 import PueblosPreexistentesPage from './pages/PueblosPreexistentes';
 import MaxyLulen from './pages/MaxyLulen';
 import FlaviaPage from '@/pages/FlaviaPage.jsx';
+import MapaPage from '@/pages/MapaPage.jsx';
 
 function ScrollToHash() {
   const location = useLocation();
@@ -62,7 +63,7 @@ function App() {
         <Route path="/Flavia" element={<FlaviaPage />} />
         <Route path="/PueblosPreexistentes" element={<PueblosPreexistentesPage />} />
         {/* <Route path="/carteleraEscenarios" element={<carteleraEscenarios />} /> */}
-
+        {/* <Route path="/Mapa" element={<MapaPage />} /> */}
 
         {/* Catch-all route for 404s */}
         <Route path="*" element={
