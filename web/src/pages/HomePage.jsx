@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Lottie from 'lottie-react';
-import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag, FileText, Droplet, ShieldCheck, Moon, Sparkles, Backpack, Smartphone, PersonStanding } from 'lucide-react';
+import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag, FileText, Droplet, ShieldCheck, Moon, Sparkles, Backpack, Smartphone, PersonStanding, Youtube } from 'lucide-react';
 import { HiddenMail } from '@/components/HiddenMail';
 import EJES from '@/data/ejes.js';
 import FAQ from '@/data/faq.jsx';
@@ -89,7 +89,7 @@ export function CountdownBanner() {
   </motion.div>;
 }
 
-const INICIO_ENCUENTRO = new Date(2026, 9, 10); // 10/oct/2026, hora local (los meses empiezan en 0)
+const INICIO_ENCUENTRO = new Date(2026, 9, 10); 
 const DIAS_ENCUENTRO = ['Primer día', 'Segundo día', 'Tercer día'];
 
 // ─── HOOKS GLOBALES DE SCROLL ─────────────────────────────────────────────────
@@ -575,6 +575,36 @@ function InstalarAppSection() {
 }
 // ─── SECCIONES ────────────────────────────────────────────────────────────────
 
+// ─── TRANSMISIÓN EN YOUTUBE ───────────────────────────────────────────────────
+
+function TransmisionLink() {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  const dias = Math.round((INICIO_ENCUENTRO - hoy) / (1000 * 60 * 60 * 24));
+  const enVivo = dias <= 0 && dias >= -2;
+  const badge = enVivo ? 'En vivo' : dias > 0 ? 'Próximamente' : 'Transmisiones';
+
+  return (
+    <a
+      href='https://www.youtube.com/@39EncuentroPluriCBA'
+      target="_blank"
+      rel="noreferrer"
+      className="group inline-flex items-center gap-3 bg-white/10 border border-white/25 hover:bg-white/20 transition-colors backdrop-blur-sm rounded-full pl-4 pr-3 py-2 text-white"
+    >
+      <span className="relative flex h-2.5 w-2.5 shrink-0">
+        <span className={`absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping ${enVivo ? 'bg-red-500' : 'bg-[#fdb10c]'}`} />
+        <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${enVivo ? 'bg-red-500' : 'bg-[#fdb10c]'}`} />
+      </span>
+      <span className="text-xs font-black uppercase tracking-widest text-white/80">{badge}</span>
+      <span className="w-px h-4 bg-white/25" />
+      <span className="text-sm font-semibold">Seguí la transmisión desde nuestro canal de YouTube</span>
+      <span className="bg-white text-[#c0392b] w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform group-hover:scale-110">
+        <Youtube size={16} />
+      </span>
+    </a>
+  );
+}
+
 function HeroLottie({ className = '' }) {
   return <div className={className}>
     <Lottie path="/lottie/Logo.json" loop={true} autoplay style={{ width: '100%', height: '100%' }} />
@@ -642,13 +672,15 @@ function HeroSection() {
             Inscripción
           </a>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/#cronograma" className="bg-[#FFF1E3] text-[#4a2055] font-bold px-8 py-4 rounded-full hover:bg-[#fec449] transition-colors flex items-center justify-center gap-2 shadow-lg">
               <Calendar size={18} />
               Ver programa completo
             </a>
             <AgregarCalendarioButton />
           </div>
+
+          <TransmisionLink />
         </div>
       </div>
     </motion.div>
@@ -1552,11 +1584,11 @@ function CancioneroSection() {
           once: true
         }} transition={{
           delay: i * 0.05
-        }} className="bg-[#FFF1E3] rounded-2xl border-2 border-[#eadeed] overflow-hidden">
-          <button onClick={() => setCancionAbierta(cancionAbierta === cancion.id ? null : cancion.id)} className="w-full text-left p-6 flex justify-between items-start gap-4 hover:bg-[#faf7fb] transition-colors">
+        }} className="bg-white/5 rounded-2xl border border-white/15 overflow-hidden">
+          <button onClick={() => setCancionAbierta(cancionAbierta === cancion.id ? null : cancion.id)} className="w-full text-left p-6 flex justify-between items-start gap-4 hover:bg-white/10 transition-colors">
             <div className="flex-1">
-              <h3 className="text-lg font-bold text-[#343230] mb-1">{cancion.titulo}</h3>
-              <p className="text-sm text-gray-500 italic">{cancion.artista}</p>
+              <h3 className="text-lg font-bold text-white mb-1">{cancion.titulo}</h3>
+              <p className="text-sm text-white/60 italic">{cancion.artista}</p>
             </div>
             <ChevronDown size={20} className="text-[#fdb10c] shrink-0 transition-transform" style={{
               transform: cancionAbierta === cancion.id ? 'rotate(180deg)' : 'rotate(0deg)'
@@ -1573,9 +1605,9 @@ function CancioneroSection() {
             }} exit={{
               height: 0,
               opacity: 0
-            }} className="overflow-hidden border-t border-[#eadeed]">
-              <div className="p-6 bg-[#faf7fb]">
-                <pre className="text-sm text-[#343230]/90 leading-relaxed font-sans whitespace-pre-wrap break-words">
+            }} className="overflow-hidden border-t border-white/10">
+              <div className="p-6 bg-black/20">
+                <pre className="text-sm text-white/85 leading-relaxed font-sans whitespace-pre-wrap break-words">
                   {cancion.letra}
                 </pre>
               </div>
@@ -1584,13 +1616,13 @@ function CancioneroSection() {
         </motion.div>)}
       </div>
 
-      <div className="mt-12 bg-[#FFF1E3] rounded-2xl border-2 border-[#fec449]/60 p-8 text-center">
-        <Music size={32} className="mx-auto mb-4 text-[#fdb10c]" />
-        <h3 className="text-[#343230] font-bold mb-2">¿Tenés una canción para agregar?</h3>
-        <p className="text-gray-600 text-sm mb-4">
-          Enviala a <strong><HiddenMail mail="39encuentropluri.cba@proton.me" /></strong>
-        </p>
-      </div>
+      <div className="mt-8 bg-white/5 rounded-2xl border-2 border-[#fdb10c]/40 px-6 py-4 flex flex-col sm:flex-row items-center justify-center gap-x-4 gap-y-1 text-center sm:text-left">
+  <Music size={22} className="text-[#fdb10c] shrink-0" />
+  <h3 className="text-white font-bold text-base m-0">¿Tenés una canción para agregar?</h3>
+  <p className="text-white/70 text-sm m-0">
+    Enviala a <strong className="text-white"><HiddenMail mail="39encuentropluri.cba@proton.me" className="text-white underline" /></strong>
+  </p>
+</div>
     </div>
   </section>;
 }
@@ -1972,7 +2004,7 @@ function SedeSection() {
     color: 'bg-red-50 border-red-200',
     iconColor: 'text-red-600',
     expandible: true,
-    contenido: `🚑 Vamos a contar con puestos sanitarios y datos de emergencia de las compañeras de la subcomisión de Cuidados Colectivos durante todo el Encuentro.\n\n🛡️ Estamos trabajando en un protocolo claro de actuación ante situaciones de acoso o violencia durante el Encuentro, con referentes, grupo de abogades y vías de contacto para pedir contención o acompañamiento en el momento.\n`
+    contenido: `🚨 Urgencias: llamar al 107.\n\n🏥 Guardia 24 hs\n• Hospital San Roque: Bajada Pucará\n• Hospital Rawson: Bajada Pucará\n\n🩺 Consultas de baja complejidad\nDirección de Especialidades Médicas: Sarmiento 450, sábado y domingo de 10 a 18 hs.\n\n⛑️ Puesto sanitario: Plaza Cultural.\n\n🛡️ Estamos trabajando en un protocolo claro de actuación ante situaciones de acoso o violencia durante el Encuentro, con referentes, grupo de abogades y vías de contacto para pedir contención o acompañamiento en el momento.\n`
   }, {
     icono: <Utensils size={24} />,
     titulo: 'Feria y Alimentación',
