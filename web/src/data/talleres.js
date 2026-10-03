@@ -1,47 +1,52 @@
-const ALBERDI = 'Escuela Juan Bautista Alberdi · Av. General Paz 488';
-const IPEM86 = 'I.P.E.M. Nº 86 Gabriela Mistral · Av. Humberto Primo 145';
-const IPEM270 = 'I.P.E.M. Nº 270 Manuel Belgrano · Dean Funes 850';
-const IPET247 = 'I.P.E.T. Nº 247 Ing Carlos Cassaffousth · Dean Funes 1511';
-const IPET249 = 'I.P.E.T. Nº 249 Nicolás Copérnico · Mariano Moreno 551';
-const IPEM115 = 'I.P.E.M. N° 115 Domingo Faustino Sarmiento . Av Colón 1329';
-const Belgrano = 'Esc. Sup. De Comercio Manuel Belgrano . La Rioja 1450';
-const CARBO = 'Esc. Normal Superior Alejandro Carbó . Colón 951';
-const IPET248 = 'I.P.E.T. N° 248 Leopoldo Lugones . Ituzaingó 483';
-const IPEM268 = 'I.P.E.M. N° 268 Dean Funes . Perú 10';
-const IPEM138 = 'I.P.E.M. N° 138 Jerónimo Luis de Cabrera . Santa Rosa 650';
-const ESCSAENZPEÑA = 'Escuela Presidente Roque Saenz Peña . Av Velez Sarsfield 1002';
-const IPET66 = 'I.P.E.T. N° 66 Dr. José A. Balseiro . Hipólito Irigoyen 258';
-const DERQUI = 'Escuela Santiago Derqui . Santa Rosa 340';
-
+// Sedes según el mapa oficial: num = número de referencia del mapa.
 const places = {
-  ALBERDI: { name: 'Escuela Juan Bautista Alberdi', address: 'Av. General Paz 488', maps: 'https://maps.app.goo.gl/7vcd3CVQdyMJFgaU7' },
-  IPEM86: { name: 'I.P.E.M. Nº 86 Gabriela Mistral', address: 'Av. Humberto Primo 145', maps: 'https://maps.app.goo.gl/5ZTFMXQLbKVzKLzS6' },
-  IPEM270: { name: 'I.P.E.M. Nº 270 Manuel Belgrano', address: 'Dean Funes 850', maps: 'https://maps.app.goo.gl/Qa91Li4tebvB9tv4A' },
-  IPET247: { name: 'I.P.E.T. Nº 247 Ing Carlos Cassaffousth', address: 'Dean Funes 1511', maps: 'https://maps.app.goo.gl/61MRDHQVYXZDhgVM8' },
-  IPET249: { name: 'I.P.E.T. Nº 249 Nicolás Copérnico', address: 'Mariano Moreno 551', maps: 'https://maps.app.goo.gl/ofS7RYyCjsuGVXSJ8' },
-  IPEM115: { name: 'I.P.E.M. N° 115 Domingo Faustino Sarmiento', address: 'Av Colón 1329', maps: 'https://maps.app.goo.gl/QmYpQBHw7S9yG1cK7' },
-  Belgrano: { name: 'Esc. Sup. De Comercio Manuel Belgrano', address: 'La Rioja 1450', maps: 'https://maps.app.goo.gl/FWCu1oY2NHBoo2WN9' },
-  CARBO: { name: 'Esc. Normal Superior Alejandro Carbó', address: 'Colón 951', maps: 'https://maps.app.goo.gl/sXjq1RpurFLPuA8CA' },
-  IPET248: { name: 'I.P.E.T. N° 248 Leopoldo Lugones', address: 'Ituzaingó 483', maps: 'https://maps.app.goo.gl/BfuRdbqXSp4M26Ev8' },
-  IPEM268: { name: 'I.P.E.M. N° 268 Dean Funes', address: 'Perú 10', maps: 'https://maps.app.goo.gl/T1hwLRVBMFXZBaqN9' },
-  IPEM138: { name: 'I.P.E.M. N° 138 Jerónimo Luis de Cabrera', address: 'Santa Rosa 650', maps: 'https://maps.app.goo.gl/yeByPjcvYXcAVFKY9' },
-  ESCSAENZPEÑA: { name: 'Escuela Presidente Roque Saenz Peña', address: 'Av Velez Sarsfield 1002', maps: 'https://maps.app.goo.gl/zLe1iNLJguRcVUio6' },
-  IPET66: { name: 'I.P.E.T. N° 66 Dr. José A. Balseiro', address: 'Hipólito Irigoyen 258', maps: 'https://maps.app.goo.gl/urWGKFz5zgAokduC9' },
-  DERQUI: { name: 'Escuela Santiago Derqui', address: 'Santa Rosa 340', maps: 'https://maps.app.goo.gl/rG3BAdY4zPqJBXwR8' },
-  CANCHAFUTBOL: { name: 'Canchita de fútbol', address: 'zona Parque Sarmiento', maps: 'https://maps.app.goo.gl/2VdBQwbCbgCBVymL9' }
+  ALBERDI: { num: 1, name: 'Escuela Juan Bautista Alberdi', address: 'Av. General Paz 488', maps: 'https://maps.app.goo.gl/7vcd3CVQdyMJFgaU7' },
+  EXACTAS: { num: 2, name: 'Facultad de Cs. Exactas UNC', address: 'Vélez Sársfield 299', maps: '' },
+  IPEM86: { num: 3, name: 'I.P.E.M. Nº 86 Gabriela Mistral', address: 'Av. Humberto Primo 145', maps: 'https://maps.app.goo.gl/5ZTFMXQLbKVzKLzS6' },
+  DERQUI: { num: 4, name: 'Escuela Santiago Derqui', address: 'Santa Rosa 340', maps: 'https://maps.app.goo.gl/rG3BAdY4zPqJBXwR8' },
+  DERECHO: { num: 5, name: 'Facultad de Derecho UNC', address: 'Obispo Trejo 242', maps: '' },
+  Belgrano: { num: 6, name: 'Esc. Sup. De Comercio Manuel Belgrano', address: 'La Rioja 1450', maps: 'https://maps.app.goo.gl/FWCu1oY2NHBoo2WN9' },
+  CARBO: { num: 7, name: 'Esc. Normal Superior Alejandro Carbó', address: 'Colón 951', maps: 'https://maps.app.goo.gl/sXjq1RpurFLPuA8CA' },
+  MORENO: { num: 8, name: 'Escuela Mariano Moreno', address: 'Santa Rosa 1299', maps: '' },
+  IPET247: { num: 9, name: 'I.P.E.T. Nº 247 Ing Carlos Cassaffousth', address: 'Dean Funes 1511', maps: 'https://maps.app.goo.gl/61MRDHQVYXZDhgVM8' },
+  IPEM268: { num: 10, name: 'I.P.E.M. N° 268 Dean Funes', address: 'Perú 10', maps: 'https://maps.app.goo.gl/T1hwLRVBMFXZBaqN9' },
+  IPEM138: { num: 11, name: 'I.P.E.M. N° 138 Jerónimo Luis de Cabrera', address: 'Santa Rosa 650', maps: 'https://maps.app.goo.gl/yeByPjcvYXcAVFKY9' },
+  ESCSAENZPEÑA: { num: 12, name: 'Escuela Presidente Roque Saenz Peña', address: 'Av Velez Sarsfield 1002', maps: 'https://maps.app.goo.gl/zLe1iNLJguRcVUio6' },
+  IPET66: { num: 13, name: 'I.P.E.T. N° 66 Dr. José A. Balseiro', address: 'Hipólito Irigoyen 258', maps: 'https://maps.app.goo.gl/urWGKFz5zgAokduC9' },
+  IPEM115: { num: 14, name: 'I.P.E.M. N° 115 Domingo Faustino Sarmiento', address: 'Av Colón 1329', maps: 'https://maps.app.goo.gl/QmYpQBHw7S9yG1cK7' },
+  CANCHAFUTBOL: { num: 15, name: 'Parque Sarmiento', address: 'cerca del Monumento al Gral Bustos', maps: 'https://maps.app.goo.gl/2VdBQwbCbgCBVymL9' },
+  ORTIZ: { num: 16, name: 'Esc. Gral. Francisco Ortiz de Ocampo', address: 'Salta 250', maps: '' },
+  CENMA: { num: 17, name: 'C.E.N.M.A. Salud', address: 'Deán Funes 417', maps: '' },
+  ALVAREZ: { num: 18, name: 'Esc. Gob. José Manuel Álvarez', address: 'Wenceslao Paunero esq. Arenal', maps: '' },
+  IPET48: { num: 19, name: 'I.P.E.T. N° 48 Presidente Roca', address: 'Av. Gobernador Roca s/n', maps: '' },
+  LEGUIZAMON: { num: 20, name: 'Instituto Superior Carlos Leguizamón', address: 'Concepción Arenal 1177', maps: '' },
+  IPEM38: { num: 21, name: 'I.P.E.M. N° 38 Francisco Pablo de Mauro', address: 'Wenceslao Paunero 699', maps: '' },
 };
 
-
-
+const mapsUrl = (p) => {
+  if (p.maps) return p.maps;
+  const consulta = `${p.name}, ${p.address}, Córdoba, Argentina`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(consulta)}`;
+};
 
 const t = (titulo, descripcion = '', extra = {}) => {
-  if (extra.lugar && typeof extra.lugar === 'object') {
-    const { lugar, ...restoExtra } = extra;
-    return { titulo, descripcion, ...restoExtra, ...lugar };
+  const { lugar, ...resto } = extra;
+  if (lugar && typeof lugar === 'object') {
+    const link = mapsUrl(lugar);
+    return {
+      titulo,
+      descripcion,
+      ...resto,
+      lugar: `${lugar.name} · ${lugar.address}`,
+      numLugar: lugar.num,
+      name: lugar.name,
+      address: lugar.address,
+      maps: link,
+      mapa: link,
+    };
   }
   return { titulo, descripcion, ...extra };
 };
-
 
 export const TALLERES_EJES = [
   {
@@ -51,19 +56,19 @@ export const TALLERES_EJES = [
     talleres: [
       t('1 - 40 años de Encuentros Plurinacionales',
         'Actualidad del movimiento de mujeres, feminismos y transfeminismos frente a las derechas y ultraderechas. ¿De dónde venimos y hacia dónde vamos? Desde los Encuentros Nacionales de Mujeres hacia los Plurinacionales de Mujeres, Lesbianas, Travestis, Trans, Bisexuales, Intersexuales y No Binaries. Balance del impacto social y político de los 40 años de Encuentros en Argentina. Repercusiones en Latinoamérica y el resto del mundo. Planteos en relación al funcionamiento y la organización de los encuentros. Actualización de las luchas del movimiento feminista y transfeminista: pluralidad de causas y activismos. Protagonismos de los movimientos feministas y transfeministas populares y estrategias de resistencia al sistema opresor capitalista, patriarcal, extractivista, racista y colonial. Lucha antifacista.',
-        { lugar: places['ALBERDI'] }),
+        { lugar: places['EXACTAS'] }),
       t('2 - Yomar y los feminismos negros',
         'Activismos: Acción colectiva, organización comunitaria, liderazgo territorial, redes de apoyo, tecnologías de resistencia, pedagogías de lucha, cuidado colectivo, espacios seguros. Apropiación cultural y reparación histórica: Apropiación cultural, reconocimiento, autoría y legitimidad, memoria afrodescendiente, patrimonio vivo, invisibilización, extractivismo cultural, reparación simbólica, reparación material, restitución. Territorio y trabajo barrial: Anclaje territorial, memoria situada, territorio vivido, comunidad, trabajo barrial, referentes locales, redes territoriales, circuitos de memoria, cuerpas y territorio, saberes locales. Estrategias antipunitivas: Antipunitivismo, transformación de conflictos, responsabilidad colectiva, reparación, escucha, cuidado, límites, justicia no punitiva, acompañamiento, construcción de acuerdos, el lenguaje como espacio de lucha.',
-        { lugar: places['ALBERDI'] }),
+        { lugar: places['DERECHO'] }),
       t('3 - Feminismos Comunitarios, Territoriales, Indígenas y Campesinos',
         'Feminismos comunitarios. Género, cuerpo y territorio. Patriarcado, racismo, capitalismo y colonialismo. Despatriarcalización y descolonización. Aportes y experiencias de mujeres indígenas, campesinas y populares. Violencias y desigualdades desde una mirada comunitaria. Redes de cuidado y organización colectiva. Saberes ancestrales y experiencias de resistencia. Autonomía, participación y construcción de estrategias comunitarias. Feminismo desde los territorios.',
-        { lugar: places['ALBERDI'] }),
+        { lugar: places['DERECHO'] }),
       t('4 - Activismos marrones y anti-racismos',
         'Del insulto al orgullo. Racismo en la construcción de la identidad nacional. Identidades marronas dentro del movimiento LGBTTTINBQ+. Cuerpos marrones en las luchas sociales. La racialización del trabajo. Racismos y violencias institucionales. El arte y la cultura marrona. La representación en las artes y apropiación cultural. Relación con pueblos indígenas y pueblos originarios. Estigmatización y criminalización de cuerpos marrones. Visibilización de les marrones en la historia. Adopciones y apropiaciones ilegales de bebés racializadas y racializadxs en democracia. Representación marrona en espacios de poder, sindicatos y centros de estudiantes. Lucha antiracista, estrategias de visibilización contra el racismo estructural. Organización y colectivos marrones. Sociedad antiracista para las nuevas generaciones.',
-        { lugar: places['ALBERDI'] }),
+        { lugar: places['DERECHO'] }),
       t('5 - Activismos de identidades lésbicas',
         'Historicidad, situación actual de los activismos lésbicos en los territorios, principales avances y obstáculos. Relación de los activismos lésbicos en el movimiento LGBTTTIQ+ y con otros movimientos. Estrategias para la recuperación y transmisión de la historia de los lesboactivismos en el territorio. Lesboodio, lesbocidios, abusos y violencias correctivas. Vínculos lésbicos libres de violencias. Escraches y aislamiento en la comunidad disidente. Estrategias de visibilización y conocimiento de casos. Redes sociales. Activismos lésbicos en los pueblos originarios y patriarcado ancestral. Producciones artísticas, filosóficas y políticas. Visibilidad, activismos y formas de organización. Agenda.',
-        { lugar: places['IPEM86'] }),
+        { lugar: places['ALBERDI'] }),
       t('6 - Activismos travesti, trans, transgénero',
         'Cupo laboral: Implementación de la Ley 27.636 Diana Sacayan-Lohana Berkins. Avances, retrocesos y demoras en la adhesión y aplicación en las provincias: estrategias para su implementación. Proyecto de Ley integral Trans. Reconocimiento y reparación histórica. Vejeces trans. Acceso a la salud Integral, consumo problemático y salud mental. Acceso a la justicia. ESI. Implementación efectiva de la Ley 26.743 Identidad de Género. Identidades marronas. Acompañamientos y militancia de familiares. Acceso a la educación, permanencia, deserción escolar.',
         { lugar: places['ALBERDI'] }),
@@ -72,25 +77,25 @@ export const TALLERES_EJES = [
         { lugar: places['ALBERDI'] }),
       t('8 - Activismos gordes',
         'Vínculos y resignificación de los cuerpos gordes. Erotismo y placer. Body-positive. Modelo médico hegemónico. Cultura de la dieta, patologización y medicalización de la gordura. Experiencias de negación en la circulación social de los cuerpos gordes. Ciudades expulsivas. La imagen como limitación al acceso al trabajo. Violencia mediática. Alianzas estratégicas: vínculos entre feminismos, transfeminismos y la diversidad corporal. Nuevas formas de politización del cuerpo. Discriminación, gordo-odio y las opresiones hetero-cis-patriarcales. Activismos por los cuerpos disidentes. Ley de talles N° 27.521. Avanzadas conservadoras, neoliberales y fascistas sobre los cuerpos. Formas de control, normalización y disciplinamiento. Acciones y estrategias colectivas de visibilización. Resistencias.',
-        { lugar: places['ALBERDI'] }),
+        { lugar: places['ORTIZ'] }),
       t('9 - Activismos disca en primera persona (solo para discas)',
         'Autonomía, participación plena y construcción colectiva dentro de los activismos discas. Derecho a la participación plena, autonomía, organización y construcción colectiva. Accesibilidad como práctica política. Estrategias de co-construcción con personas con discapacidad e interseccionalidades. Políticas públicas, estrategias en la construcción y el ejercicio de los derechos. Pensiones no contributivas y trabajo. Programa Incluir salud y prepagas. Agencia Nacional de Discapacidad, acción federal, observatorio nacional y responsabilidad social. Representación política partidaria. Ley Nacional de emergencia en discapacidad. Ruralidad. Red federal en defensa de las personas con discapacidad. Luchas contra los paradigmas y modelos hegemónicos y capacitistas.',
-        { lugar: places['ALBERDI'] }),
+        { lugar: places['LEGUIZAMON'] }),
       t('10 - Activismos Anarco trans-feministas',
         'Prácticas anarquistas, feministas y transfeministas, y sus relaciones. Perspectivas políticas, culturales e ideológicas. Luchas y debates contra las estructuras de poder y dominación. Anarco transfeminismos en el contexto geopolítico actual. Feminismos y transfeminismos fuera de la influencia de la dominación de ideologías autoritarias. Estrategias de acción y organización. Acción directa y autosuficiencia. Pedagogías anarquistas. Comunidades feministas y transfeministas anarquistas.',
-        { lugar: places['ALBERDI'] }),
+        { lugar: places['DERQUI'] }),
       t('11 - Eco-transfeminismos',
         'Ecotransfeminismos. Feminismos, transfeminismos y ecologismo social. Corrientes políticas eco transfeministas de cuidado de cuerpos y territorios. Luchas anti-extractivistas: minería, agronegocio, desarrollismo, petroleras, etc. Defensoras ambientales y criminalización. La salud como problemática socioambiental y de género. Agenda legislativa con perspectiva de género e interculturalidad: acuerdo de Escazú, plan de acción contra el cambio climático. Acciones para la protección de bosques, pastizales, humedales, glaciares, ríos, mares, acuíferos y biodiversidad. Educación ambiental integral y protección de bienes comunes. Asambleas socio-ambientales. Movilizaciones contra el RIGI - Ley de inviolabilidad de la propiedad privada. Audiencias públicas vinculantes.',
-        { lugar: places['ALBERDI'] }),
+        { lugar: places['DERQUI'] }),
       t('12 - Activismos antiespecistas',
         'Relación entre feminismos, transfeminismos y antiespecismo. Privilegios de género y especie. Antropocentrismo y androcentrismo. Consumo de cuerpos: cosificación, mercantilismo y productividad. Capitalismo especista y patriarcal. Anarcoveganismo feminista y transfeminista. Objetivación de los cuerpos humanos y de las hembras no humanas. Modificación genética y estética de humanxs y no humanxs. Publicidad especista y patriarcal. Lucha por la liberación animal. Crítica al binarismo ontológico desde una mirada animal. Estrategias para el debate sobre el vínculo entre el género, la especie y las clases sociales. Mascotismos. Jerarquización y desjerarquización de las especies. ¿Qué alternativas viables se habitan hoy?',
-        { lugar: places['ALBERDI'] }),
+        { lugar: places['DERQUI'] }),
       t('13 - Feminismos y partidos políticos',
         'Construcción de los espacios de participación y representación. Desigualdad de género en las participaciones y representaciones. Cupo, cuota y paridad. Representación paritaria real. Autoritarismo partidario, lógicas y prácticas patriarcales en el ejercicio del poder y violencias machistas. Transversalidad de las políticas integrales de género. Orgánicas partidarias y representación feminista y transfeminista. Interseccionalidades. Interrelación con los movimientos sociales, feministas y transfeministas. Ley Micaela en los partidos políticos. Narcopolítica y democracia. Liderazgos colectivos, transfeministas y disidentes.',
-        { lugar: places['ALBERDI'] }),
+        { lugar: places['CENMA'] }),
       t('14 - Iglesias y Estado Asunto Separado',
         'Historia y contextos de las relaciones entre las iglesias y el estado. Estado laico en contraposición al Estado confesional. Financiamiento estatal a las iglesias. Injerencia de las iglesias en ámbitos de orden público. Objeción de conciencia y su utilización para obstaculizar el ejercicio de los derechos sexuales y reproductivos. Proyectos de ley sobre la anulación y derogación de los privilegios a las iglesias y de libertad religiosa. Apostasía. Demandas de las organizaciones que luchan contra los abusos eclesiásticos. Pedofilia y Pederastia. Teología feminista. Prácticas coercitivas del culto. Lucha de las comunidades frente a los mandatos religiosos.',
-        { lugar: places['ALBERDI'] }),
+        { lugar: places['CENMA'] }),
     ],
   },
   {
@@ -100,25 +105,25 @@ export const TALLERES_EJES = [
     talleres: [
       t('15 - Soberanía de los territorios y de la tierra',
         'Ley de extranjerización de la tierra y sus impactos. Desalojos. Derecho a la tierra. Marco jurídico. Banco de tierras. Titularización, propiedad de la tierra, tenencias individuales y comunales. Condiciones laborales, reconocimiento del trabajo de mujeres y disidencias, campesinas y trabajadoras rurales. Leyes de acceso a la tierra. Integración socio-urbana y acceso al hábitat. Luchas por la tierra y estrategias de resistencia, articulación de las luchas campesinas y rurales en Indoamérica/Abya Yala. Lucha campesina, campesinizar el movimiento transfeminista. Reforma agraria transfeminista, integral, popular y decolonial.',
-        { lugar: places['IPEM270'] }),
+        { lugar: places['MORENO'] }),
       t('16 - Soberanía Nacional y Plurinacional',
         'Soberanía marítima y del río Paraná. Corredor Andes-Atlántico. Proyección bicontinental y defensa: Malvinas, Atlántico Sur y Antártida. Establecimiento de bases y unidades militares en la Patagonia. Soberanía energética, espacial y aeroespacial, de la producción, la pesca y el desarrollo industrial-agrario. Pymes, cooperativas y defensa de las empresas públicas. Comunicación social y soberanía.',
-        { lugar: places['IPEM270'] }),
+        { lugar: places['MORENO'] }),
       t('17 - Soberanía de los bienes comunes frente a la avanzada extractivista',
         'Saqueo y apropiación de los bienes naturales. Contaminación de la tierra, el aire y el agua. Extractivismo y agronegocio. Derecho al acceso al agua. Megaminería y explotación del litio, fracking y explotación petrolera, gasífera, acuífera, etc. RIGI. Extractivismo y relación con el narcotráfico, la trata de personas y la prostitución. Racismo ambiental y gentrificación. Especulación inmobiliaria. Turismo extractivo. Extractivismo energético y capitalismo verde. Crisis climática y el rol de las mujeres y las disidencias. Impacto en los trabajos de cuidado. Falsas soluciones, hidrógeno verde, bonos de carbono, basureros nucleares. Estrategias de organización y lucha. ¿Bienes comunes para quién? Construcción de una transición ecosocial.',
-        { lugar: places['IPEM270'] }),
+        { lugar: places['MORENO'] }),
       t('18 - Soberanía económica y deuda externa',
         'Origen, reproducción, acrecentamiento y estado actual de la deuda externa. Fondos buitres y FMI. Dependencia económica versus soberanía política. Economía bimonetaria. Deuda como herramienta de dominación. Impactos y consecuencias de los ajustes en la salud, la educación y la vida cotidiana de las mujeres y disidencias. Deuda legítima e ilegítima. Bicicleta financiera y fuga de capitales. Estatización de la deuda privada. La deuda es con nosotras y nosotres.',
-         { lugar: places['IPEM270'] }),
+        { lugar: places['IPEM115'] }),
       t('19 - Soberanía económica y endeudamiento de los sectores populares',
         'Acceso a ingresos. Brecha salarial. Trabajo informal. Trabajo que no generan ingresos pero sí valor para la comunidad. Acceso al crédito. Tipos de crédito, fuentes de endeudamiento, instrumentos. Costos monetarios y no monetarios (salud mental, restricciones en el modo de vida, conflictos vinculares). Actores y responsabilidades en la deuda y la usura: Estados, Empresas, Narco. Propuestas. Acciones legislativas. Créditos a tasa baja para desendeudamiento con fuentes informales/más caras. Espacios de acompañamiento, asesoramiento. Espacios comunitarios como potencia. Redistribución del ingreso. Autodefensa financiera. Estrategias para el desendeudamiento.',
-         { lugar: places['IPEM270'] }),
+        { lugar: places['IPEM115'] }),
       t('20 - Soberanía Alimentaria',
         'Emergencia alimentaria y el alimento sano como primer derecho básico para la vida. Agroecología como solución. Seguridad alimentaria. Agrotóxicos, transgénicos y sus efectos. Defensa de las semillas. Defensa del territorio. Cuidado y acceso a la tierra. Desigualdades en las tareas de cuidado. Extractivismo y defensa de los bienes comunes. Fortalecimiento de la producción, la industrialización y comercialización justa. Monocultivo y monopolio de las empresas de alimentos. Ley de etiquetado frontal, precio de los alimentos y alimentos como commodities, hambre y sistema productivo. Promotorxs de soberanía alimentaria en los barrios populares.',
-         { lugar: places['IPEM270'] }),
+        { lugar: places['IPEM115'] }),
       t('21 - Tecnopolítica, soberanía digital y ciberactivismos',
         'El territorio digital como dimensión tecnopolítica. Relaciones de poder y estrategias en torno a las infraestructuras críticas que utilizamos para comunicarnos y vivir. Cercamiento y la colonización de internet por parte de ciertos sectores. ¿Cómo resistir frente a este avance? Tácticas y estrategias transfeministas. ¿Qué tipo de soberanía digital se puede pensar y construir dentro del marco geopolítico y global actual? Territorios digitales y analógicos. Vínculos entre territorialidades. Infraestructuras, redes comunitarias. Poder tecnológico, económico y científico. Disputas, asimetrías, racismo en la virtualidad o sesgos racistas en la virtualidad, algoritmos que omiten o exacerban, propiedad/colonialismo/dependencia, capacidades colectivas: estrategias de resistencias, luchas y organización para la emancipación.',
-        { lugar: places['IPEM270'] }),
+        { lugar: places['IPEM115'] }),
     ],
   },
   {
@@ -131,7 +136,7 @@ export const TALLERES_EJES = [
         { lugar: places['IPEM86'] }),
       t('23 - Lesbianismos',
         'El lesbianismo como identidad política. Multiplicidad de identidades lésbicas. Sexualidades. Recuperar nuestras niñeces. Relaciones con la familia de origen. Familias lésbicas, maternidades, xaternidades, adopción. Acceso al derecho libre y gratuito a las técnicas de reproducción humana asistida. Autocuidado y cuidados en las relaciones sexuales. Faltante de preservativos para vulvas. Adulteces mayores lesbianas. El lesbianismo en distintos contextos políticos, religiosos, socioculturales, en los pueblos originarios, patriarcado ancestral, y afrodescendiente. Estereotipos, imaginarios lésbicos, cosificación. Lesboodio, lesbocidios, abusos y violencias correctivas. Discriminación, opresión y represión.',
-        { lugar: places['IPEM86'] }),
+        { lugar: places['ALBERDI'] }),
       t('24 - Bisexualidades',
         'La bisexualidad como identidad política. Bi-sibilidad. Relaciones sexo-afectivas. Bi-vencias y experiencias. Salud sexual reproductiva y no reproductiva. Diversidad familiar y vínculos sexo afectivos. Xaternidades. Opresión de género. Estereotipos y prejuicios. Biodio. Críticas a las categorías binarias y a la mononorma.',
         { lugar: places['IPEM86'] }),
@@ -152,7 +157,7 @@ export const TALLERES_EJES = [
         { lugar: places['IPEM86'] }),
       t('30 - Sexualidades, vínculos, cuerpos y afectos',
         'Políticas de los cuerpos. Discursos hegemónicos en torno a los cuerpos, derecho a la sexualidad. Sexualidad más allá de la genitalidad. Sistema normativo heterocispatriarcal. Sexismo, estereotipos sexuales, tabúes, placer, erotismo y autoerotismo. Pro-sexo, post-porno. Estereotipos sexuales y violencias raciales sobre los cuerpos y en la industria del porno. Diversidad sexual, asistencia sexual y tecnologías sexuales/protésicas. Capacitismo, modelos de belleza, cosificación, exigencias sobre los cuerpos, industrias de tratamientos y cirugías estéticas, dietas y trastornos alimentarios. Influencia de las instituciones patriarcales en la construcción de la sexualidad, el placer y el goce.',
-        { lugar: places['IPEM86'] }),
+        { lugar: places['ALBERDI'] }),
     ],
   },
   {
@@ -162,16 +167,16 @@ export const TALLERES_EJES = [
     talleres: [
       t('31 - Niñeces (sin adultxs)',
         'Protagonismo infantil. ¿Qué es ser niñe hoy? Construcción de autonomía e identidad. Redes sociales y uso de tecnología. Niñas no madres. Discriminación y violencia. Derechos de las niñeces: Convención de niñxs. ESI. Cuidados y cambios en el cuerpo, vínculos y encuentro con otres. Derechos de las niñeces y participación política. Derecho al juego. Niñeces trans y no binaries. Resguardo de la Identidad étnico-racial de infancias y adolescentes.',
-        { lugar: places['DERQUI'] }),
+        { lugar: places['Belgrano'] }),
       t('32 - Adolescencias y juventudes (sin adultxs)',
         'Adolescentes y jóvenes como sujetes políticxs. Salud mental. Baja de imputabilidad. ESI cambios en el cuerpo y estereotipos de género. Derechos de las adolescencia. Derechos sexuales reproductivos y no reproductivos. Trabajo, estudio y tiempo libre. Incidencia, participación y representación política estudiantil. Construcción de autonomía e identidad. Ley de identidad de género. Derecho a ser nombrades. El acceso y la garantía de derechos de niñeces y adolescencias trans y no binaries. Violencias patriarcales ¿Cómo las erradicamos? ¿Cómo habitamos las instituciones? Desafíos y obstáculos. DNU N.º 62/2025, modificación a la ley de identidad de género con respecto a infancias y adolescencias. Derechos Humanos, Memoria: pasado, presente y futuro. Adolescencias y juventudes trans y no binaries. Resguardo de la Identidad étnico-racial de infancias y adolescentes. Uso de la tecnología, redes sociales. Adicciones y consumo problemático. Ausencia del Estado. Límites, ausencias y desafíos frente a las instituciones públicas y privadas.',
-        { lugar: places['DERQUI'] }),
+        { lugar: places['Belgrano'] }),
       t('33 - Adultes y activistas que acompañan niñeces, adolescentes y juventudes',
         'Prácticas de diálogo no adultocentristas. Miedos e incertidumbre en el acompañamiento. ¿Quién cuida a les que cuidan? Alcances y límites en los acompañamientos. Cuestiones éticas. Políticas públicas de acompañamiento. Salud mental en las niñeces y juventudes y la problemática del suicidio. Resguardo de la Identidad étnico-racial de infancias y adolescentes. DNU N.º 62/2025: Decreto presidencial de modificación a la ley de identidad de género con respecto a infancias y adolescencias.',
-        { lugar: places['DERQUI'] }),
+        { lugar: places['Belgrano'] }),
       t('34 - Vejeces como sujetes politiques',
         'Rol social de las vejeces. Prolongación de las expectativas de vida, impacto sobre la salud y vulnerabilidades. Edadismo: discriminación por edad. Participación política. Independencia y autonomía. Derechos y acceso a la justicia. Uso de tecnología. La soledad no deseada. Relaciones familiares afectivas. Interseccionalidades y vejeces. Sexualidades en la vejez.',
-        { lugar: places['IPET247'] }),
+        { lugar: places['IPEM38'] }),
     ],
   },
   {
@@ -181,31 +186,31 @@ export const TALLERES_EJES = [
     talleres: [
       t('35 - Violencias heterocispatriarcales y antifeminismo organizado',
         'Resistencias colectivas en un contexto político de crueldad. Redes de acompañamiento para el acceso a dispositivos de abordaje a las violencias y acceso a la (in)justicia. Reconfiguración de las violencias en el marco del avance de los antifeminismos organizados y del desfinanciamiento de las políticas públicas. Experiencias y demandas para la construcción de nuevos dispositivos de abordaje de prevención, asistencia y acompañamientos. Violencias y nuevas formas de hostigamiento y persecución. ¿Quiénes cuidan a les que cuidan/acompañan/denuncian/y se organizan?',
-        { lugar: places['IPET249'] }),
+        { lugar: places['ALVAREZ'] }),
       t('36 - Femicidio, feminicidio y suicidio femicida',
         'Rol y responsabilidad de las instituciones estatales y el sistema de justicia. Funcionamiento y desfinanciamiento de los dispositivos de prevención y erradicación de la violencia hacia las mujeres. Ley 26.485: violencia simbólica, física, sexual, económica, psicológica. Víctimas colaterales, reparación. Prevención y postvención del suicidio. Responsabilidad de los medios de comunicación: construcción de la buena o mala víctima. Registros comunitarios de femicidios y feminicidios. Femicidio en contextos de narcotráfico. Lucha de sobrevivientes, familiares y organizaciones. Estrategias y alianzas para la construcción de una justicia transfeminista. Suicidio femicida.',
-        { lugar: places['IPET249'] }),
+        { lugar: places['ALVAREZ'] }),
       t('37 - Travesticidios, lesbicidios y transhomicidios',
         'Construcción y reproducción de los discursos de odio desde los gobiernos y sus efectos en las condiciones de vida/muerte. Las distintas tramas de vulnerabilidades: exclusión social, suicidios dentro del colectivo LTTTQNB+. Violencias patriarcales en vínculos no heterosexuales, heteronorma, ci-sexismos, transodio y lesbo-odio internalizado. Estrategias y demandas del colectivo. Prácticas de reparación. Estrategias de lucha y visibilización. Registros realizados por organizaciones sociales. Hacia una justicia transfeminista. Implementación real de derechos conquistados. Ley Brisa.',
-        { lugar: places['IPET249'] }),
-      t('38 - Explotación sexual y laboral',
+        { lugar: places['IPET48'] }),
+      t('38 - Explotación sexual y laboral. Redes de trata.',
         'Redes de trata. Procesos de empobrecimiento y feminización de la pobreza. Complicidad y connivencia policial, poder judicial, poder político y económico. Relaciones del extractivismo, narcotráfico, migración para la explotación sexual, laboral y trata de personas. Vulneración de personas migrantes. Trata de mujeres, travesti, trans, niñas, niñes y adolescentes con fines de explotación sexual o laboral. Trata con fines de explotación reproductiva. Límites y retrocesos en materia de políticas públicas. Leyes N° 26.364 y 26842. Desaparecidas por explotación sexual y laboral. Reducción a servidumbre y redes de trata. Niñas sirvientas. Experiencias y demandas para la construcción de nuevos dispositivos de prevención, acceso, mecanismos de búsquedas efectivas y desmantelamiento del sistema que reproduce la explotación de nuestros cuerpos.',
-        { lugar: places['IPET249'] }),
+        { lugar: places['IPET48'] }),
       t('39 - Madres protectoras, abuso sexual hacia niñeces y adolescencias, sobrevivientes',
         'Reconocimiento de las diversas situaciones de abuso y violencia hacia las niñeces y juventudes. La práctica del chineo. Estrategias de acompañamiento, denuncia y cuidados. Acceso al sistema de protección a las niñeces y juventudes. Experiencias y demandas. Criminalización y patologización de madres protectoras. (In)justicia patriarcal, uso del falso SAP, encubrimiento institucional de abusadores. Construcción de dispositivos de nuevos abordajes para la prevención, asistencia y acompañamientos: real aplicación de la ESI, fiscalías especializadas, patrocinio jurídico gratuito.',
-        { lugar: places['IPET249'] }),
+        { lugar: places['IPET66'] }),
       t('40 - Violencias heterocispatriarcales en ámbitos institucionales',
         'Construcción y reproducción de la violencia por motivos de género en: instituciones estatales, empresariales, sindicales y eclesiásticas, entre otras. Configuración de prácticas y lógicas violentas que construyen cultura institucional patriarcal y acentúan las condiciones de vulnerabilidad. Violencia e interseccionalidad. Pactos y convenios internacionales. Estrategias de abordajes: denuncias, acompañamientos y sanciones. Alianzas para el desmantelamiento de las estructuras institucionales que sostienen las violencias patriarcales en dichos ámbitos.',
-        { lugar: places['IPEM115'] }),
+        { lugar: places['IPET48'] }),
       t('41 - Violencia gineco obstétrica',
         'Violencia gineco obstétrica en el ámbito público, privado y domiciliario. Derecho y acceso a la información. Protocolos institucionales. Uso del cannabis y personas gestantes. Barreras y obstáculos del sistema de salud en la autonomía, prácticas abusivas e innecesarias, elección de los métodos anticonceptivos. Parto y lactancia con VIH. No criminalización de la emergencia gineco obstétrica. Comercialización de material genético. Formas de parir. Duelo post parto y perinatal. Justicia Sexual Reproductiva. Parto respetado y accesibilidad para personas con discapacidad. Acompañamiento intercultural, LSA e información accesible.',
-        { lugar: places['IPEM115'] }),
-      t('42 - Violencia digital, redes sociales',
+        { lugar: places['IPET48'] }),
+      t('42 - Violencia digital, redes sociales. Medios de comunicación y grooming',
         'Medios de comunicación y grooming. Ética de cuidado y respeto frente a la espectacularización de la violencia. Uso de Inteligencia Artificial, producción y difusión de imágenes alteradas por IA (deepfakes). Rol de los medios tradicionales y digitales en la revictimización y en la viralización de los discursos de odio. Desinformación y noticias falsas. Haters y trolls. Rol de los medios comunitarios, populares y alternativos frente a los hegemónicos. Persecución a personas con voz pública. Cuidado digital feminista. Abordaje de la salud mental. Plena implementación de la Ley Micaela, Ley Olimpia y Ley Belén.',
-        { lugar: places['IPEM115'] }),
+        { lugar: places['IPET48'] }),
       t('43 - Violencia hacia personas mayores',
         'Viejismo. Violencias institucionales, violencias en el ámbito familiar y de cuidados, violencias económicas, violencias digitales. Barreras de acceso a la salud, la justicia y los trámites, incluida la brecha digital. Redes y estrategias para afrontar y acompañar frente a situaciones de violencia. Autonomía, participación, redes comunitarias y acompañamientos.',
-        { lugar: places['IPEM115'] }),
+        { lugar: places['IPET48'] }),
     ],
   },
   {
@@ -219,7 +224,7 @@ export const TALLERES_EJES = [
       t('45 - Desapariciones forzadas y desaparecides en democracia',
         'Estrategias colectivas de organización. Familiares y organizaciones por la verdad y la justicia. Responsabilidad de las distintas instituciones del Estado en la desaparición de personas. Aparato represivo y continuidades desde la dictadura. Complicidades e impunidades de las instituciones policiales y judiciales. Protocolos de búsquedas. Experiencias y organización colectiva. Nuevos mecanismos de extorsión y persecución. Políticas de reparación y resarcimientos.',
         { lugar: places['Belgrano'] }),
-      t('46 - Torturas y asesinatos en contextos de encierro',
+      t('46 - Torturas y asesinatos en contextos de encierro. Redes de acompañamiento y apoyo entre familiares y personas allegadas',
         'Redes de acompañamiento y apoyo entre familiares y personas allegadas. Organización colectiva y lucha contra torturas y asesinatos en cárceles y comisarías. Políticas de encierro y superpoblación carcelaria. Violaciones a derechos humanos, hacinamiento y condiciones de vida de personas privadas de su libertad. Formas específicas de violencia contra mujeres y disidencias. Solidaridad anticarcelaria y antipunitivismo. Muertes y torturas en hospitales e instituciones de salud mental. Acceso a la justicia. Incumplimiento de los protocolos contra las torturas. Ineficacia de las investigaciones, violencias institucionales. Experiencias de resistencia y organización, estrategias de visibilización y denuncia.',
         { lugar: places['Belgrano'] }),
       t('47 - Personas privadas de la libertad: cárceles y sistemas penitenciarios',
@@ -254,7 +259,7 @@ export const TALLERES_EJES = [
         'Cuerpo como primer territorio a defender. Identificación de violencias sobre cuerpos y territorios. Mapeo territorial colectivo como herramienta para visibilizar afectaciones, sitios sagrados, conflictos y resistencias. Espiritualidad como re-existencia política. Perfilamiento racial, gatillo fácil y operativos racistas. Apropiación cultural en Argentina Ka’Ndombe, recorrido y mecanismos de resistencia. Permiso y agradecimiento al territorio y ceremonia. ',
         { lugar: places['CARBO'] }),
       t('55 - Identidades Afro. Crianzas. Diásporas.', ' ', //un espacio vacío para que renderee
-        { 
+        {
           lugar: places['CARBO'],
           subejes: [
             t('Identidades Afro.','Genocidio a ancestres, invisibilización en registros, pasado esclavista, aportes Afro al país, identidad afroargentina, mujeres afroargentinas en historia, organizaciones, afrojóvenes, mayoras, comunidad Afro LTTBINoBQI+.'),
@@ -296,19 +301,19 @@ export const TALLERES_EJES = [
     talleres: [
       t('62 - Trabajadoras de casas particulares',
         'Derechos laborales. Formalización y retraimiento de la formalización de las trabajadoras, impacto en la seguridad social y en las jubilaciones. Sindicalización. Violencias laborales. Violencias sexuales en el ámbito de trabajo. Reconocimiento de los trabajos de cuidado y su aporte para el desarrollo de los países. Cadenas globales de cuidado. Trabajo en casas particulares y migración. Estrategias de negociación con les empleadores. Vínculos y relaciones con las familias con las que se trabaja. Dificultades para reclamar derechos laborales.',
-        { lugar: places['IPET248'] }),
+        { lugar: places['CARBO'] }),
       t('63 - Trabajos de cuidado',
         '¿De qué hablamos cuando hablamos de cuidado? Aportes desde la economía transfeminista para pensar los cuidados. Estereotipos de género. Feminización de los sectores que sostienen cuidados. Estrategias para cuestionar la división sexual del trabajo. Apoyos y redes de cuidado. Políticas y desmantelamiento de las políticas de cuidado. Infraestructuras y equipamientos para los cuidados. Ciudades cuidadoras. Cuidados de los bienes comunes y sostenibilidad de la vida. Acuerdo Nacional de los cuidados.',
-        { lugar: places['IPET248'] }),
+        { lugar: places['IPET66'] }),
       t('64 - Trabajos de cuidados comunitarios',
         'Triple jornada de las trabajadoras de cuidados comunitarios. Ausencia de políticas de apoyo. Reconocimiento salarial de las cocineras y otras trabajadoras comunitarias. Crisis en la sostenibilidad de los espacios comunitarios. Condiciones en la infraestructura y los servicios de los espacios de cuidado comunitario. ¿Quién cuida a les trabajadores comunitaries? Impactos en la salud y en la salud mental.',
-        { lugar: places['IPET248'] }),
+        { lugar: places['IPET66'] }),
       t('65 - Maternar en tiempos de avance de las ultraderechas',
         'Hogares monomarentales. Feminización de la pobreza. Endeudamiento para poder criar y maternar. Sobrecarga, cansancio e impactos en la salud mental. Ausencia de políticas públicas que acompañen los trabajos de cuidado. Redes y apoyos para maternar, estrategias colectivas y comunitarias. Maternidades de hijes con discapacidad. Recortes en las políticas de discapacidad. Sobrecarga e impotencia, discursos de odio.',
-        { lugar: places['IPET248'] }),
+        { lugar: places['IPET66'] }),
       t('66 - Familias diversas',
         'Maternidades y xaternidades. Crianzas colectivas, crianzas comunitarias. Formas no hegemónicas de criar/cuidar/vivir con otres. Reconocimiento social y legal de otros tipos de familias y arreglos de convivencia/vinculares/afectivos. Desafíos y estrategias para colectivizar los cuidados. Redes de apoyo.',
-        { lugar: places['IPET248'] }),
+        { lugar: places['IPET66'] }),
     ],
   },
   {
@@ -317,28 +322,28 @@ export const TALLERES_EJES = [
     titulo: 'Derechos y disputas: Salud, Educación, Trabajo, Cultura, Deportes, Ciencia y Técnica',
     talleres: [
       // ---- Salud ----
-      t('67 - Acceso a la salud',
+      t('67 - Acceso a la salud: La salud como derecho humano y desmantelamiento de la salud pública',
         'La salud como derecho humano y desmantelamiento de la salud pública. Modelo patriarcal en el campo de la salud. El derecho a la salud de mujeres, lesbianas, travestis, trans, bisexuales, intersexuales y no binaries: disponibilidad y accesibilidad en el contexto actual. Salud Colectiva. Salud pública, prepagas, sistema de obras sociales. Producción pública de medicamentos. Ley de VIH e ITS. Métodos de prevención y acceso a la salud integral. Buen vivir y buen morir.',
-        { grupo: 'Salud', lugar: places['IPET247'] }),
+        { grupo: 'Salud', lugar: places['IPEM268'] }),
       t('68 - Salud mental desde una mirada integral, social y comunitaria',
         'Estigmatización/psicopatologización de problemáticas habituales. Mercantilización y medicalización de la vida cotidiana. Hegemonía médica. Automedicación y abuso de psicofármacos. Padecimientos de salud mental en tiempos de crueldad y precarización de la vida y endeudamiento. Ley de salud mental Ley N° 26.657. Ley de emergencia en salud mental. La salud mental en contextos de encierro. Trabajo interinstitucional, interministerial e intersectorial. Implicancias de los padecimientos mentales en el ámbito laboral, social y familiar. Redes de cuidado. Prevención y prevención de suicidios en el contexto sociopolítico. Limitación de la capacidad jurídica con apoyos de personas con discapacidad. Consumos problemáticos y adicciones.',
-        { grupo: 'Salud', lugar: places['IPET247'] }),
+        { grupo: 'Salud', lugar: places['IPEM268'] }),
       t('69 - VIH salud integral y activismo',
         'Intercambio de experiencias y del diálogo entre activismo, evidencia científica y saberes comunitarios, abordaremos temas como maternidad y lactancia, trabajo sexual, menstruación y VIH, el consenso Indetectable = Intransmisible (I=I), el derecho a recibir información basada en evidencia y el acceso a una atención integral de la salud. También analizaremos el impacto de los recortes presupuestarios sobre las políticas públicas de VIH, el acceso a testeos, tratamientos y medicación, y la importancia de garantizar la plena implementación de la Ley 27.675 de respuesta integral al VIH, las hepatitis virales, otras ITS y la tuberculosis.',
-        { grupo: 'Salud', lugar: places['IPET247'] }),
+        { grupo: 'Salud', lugar: places['IPEM268'] }),
       t('70 - Derechos sexuales y (no) reproductivos',
         'Cuerpos e identidades diversas y decisiones sobre nuestros cuerpos. Métodos anticonceptivos. ESI, IVE e ILE. Respuesta integral al VIH y otras ITS. Acceso seguro, gratuito e igualitario en centros de salud pública. Políticas de ajuste a nivel nacional y de jurisdicciones provinciales. Desmantelamiento del Programa Nacional de Salud Sexual y Procreación Responsable. Cobertura de las obras sociales y prepagas. Ley 26.130: Anticoncepción Quirúrgica. Consentimiento informado. Violencia en consultorios ginecológicos. Fertilidad e infertilidad con perspectiva de género. Tabúes, mandatos y deseos. Ley 26.862 de Reproducción médicamente asistida: su implementación al interior del sistema de salud público y privado. Tratamientos de Fertilidad: acceso y disponibilidad igualitaria. Estrategias para el acompañamiento intercultural, con apoyos y accesibilidad.',
-        { grupo: 'Salud', lugar: places['IPET247'] }),
+        { grupo: 'Salud', lugar: places['IPEM268'] }),
       t('71 - La nueva longevidad',
         'Vejeces: Derecho al envejecimiento activo y saludable. Sexualidades. Soledad no deseada. Inserción en el mercado de trabajo. Derecho a la independencia y autonomía. Garantía de la capacidad jurídica. Amistad. Viviendas Colectivas.',
-        { grupo: 'Salud', lugar: places['IPET247'] }),
+        { grupo: 'Salud', lugar: places['IPEM38'] }),
       t('72 - Cannabis y salud integral',
         'Tipos de consumo: medicinal, cosmético, terapéutico y recreativo. Experiencias de luchas por la despenalización, [Ley 23737] legalización y regulación del cultivo, uso y consumo medicinal. Autocultivo, cultivo solidario y cooperativismo. Les cannabicultores, las asociaciones cannábicas y los clubes de cultivo. Manipulación genética y patentamiento de semillas. Cannabis medicinal. Sistema endocannabinoide. Extracción y producción de aceite. Ley de Uso Medicinal de la Planta de Cannabis y sus derivados N°27.350. Usos del cáñamo. Accesibilidad al Registro REPROCANN. Estigma, discriminación y persecución a terapeutas. Colegios profesionales. Formación del personal de salud. Articulación con el sistema de salud público y privado. Experiencias: Ley de Salud Integral. Logros en Córdoba. Derecho a la investigación y al trabajo con cáñamo industrial. Visibilización de los derechos de les trabajadores y productores de cannabis y cáñamo. Problemáticas de jefas de hogar por la producción, persecución y criminalización. Conformación de gremio.',
-        { grupo: 'Salud', lugar: places['IPET247'] }),
+        { grupo: 'Salud', lugar: places['IPEM268'] }),
       t('73 - Sistema de salud y terapias alternativas',
         'Fitoterapia. Hongos medicinales. Adaptógenos. Biocentrismo y sistema de Biodanza. Medicina Tradicional China. Yoga. Pranaiama. Tai Chi Chuan. Chi Kung. Homeopatía. Terapias florales. Gemoterapia. Hidroterapia y aguas energizantes. Digitopuntura. Acupuntura. Reflexología. Reiki. Sanación chamánica. Constelaciones familiares. Terapias sonoras. Medicina cuántica. Biodecodificación. Pedagogía Curativa. Estigma, discriminación y persecución a terapeutas. Colegios profesionales. Formación del personal de salud. Su articulación con el sistema de salud público y privado. Experiencias.',
-        { grupo: 'Salud', lugar: places['IPET247'] }),
-      t('74 - ¿Cómo habitar las aulas?',
+        { grupo: 'Salud', lugar: places['IPEM268'] }),
+      t('74 - ¿Cómo habitar las aulas? Desafíos de la educación inicial, primaria y secundaria',
         'Desafíos de la educación inicial, primaria y secundaria. Por una educación inclusiva e integral. Sostenibilidad de los trayectos educativos. Convivencia en las aulas. Incidencia de las nuevas tecnologías. Modalidad jóvenes y adultes. Urgencia de gabinetes integrales e interdisciplinarios. Condiciones de infraestructura, alimentación y accesibilidad de las escuelas. Por una educación con apoyo, ajustes razonables e igualdad de condiciones y oportunidades. Desafíos transdisciplinarios de trabajadores del campo de la discapacidad, familias e instituciones educativas para generar condiciones de igual oportunidad en trayectorias escolares de niñas, niñes y adolescentes (formal - especial).',
         { grupo: 'Educación', lugar: places['IPEM268'] }),
       t('75 - Derecho a la educación universitaria pública, gratuita, laica, de calidad y feminista',
@@ -352,7 +357,7 @@ export const TALLERES_EJES = [
         { grupo: 'Trabajo', lugar: places['CARBO'] }),
       t('78 - Estrategias para el ejercicio del derecho al empleo con apoyos en situaciones de desigualdad',
         'Trabajo con apoyos para personas con discapacidad y sin discapacidad. Iguales condiciones y oportunidades de trabajo, equidad de género. Medidas de acción positivas de la norma jurídica que considera el derecho al empleo genuino. Ajustes razonables (horarios, LSA, licencias específicas, jornada reducida, etc.). Dispositivos de apoyo tecnológicos, sociales, institucionales. Trabajo registrado versus programas sociales.',
-        { grupo: 'Trabajo', lugar: places['CARBO'] }),
+        { grupo: 'Trabajo', lugar: places['LEGUIZAMON'] }),
       t('79 - Organización sindical',
         'Organización colectiva y estrategias de lucha. Estrategias comunicacionales. Disputas en el espacio público. Nuevos desafíos en la participación en la coyuntura actual. Triple o más jornadas laborales. Crisis económica y precarización en las condiciones de vida. Digitalización y vigilancia laboral. Mecanismos para garantizar la representación equitativa. Licencia por cuidados y por situaciones de violencias. Jornada laboral y salud laboral. Comisiones de mujeres y disidencias. Articulación con otras organizaciones. Poder sindical. Campañas de sindicalización. Hacia un movimiento sindical transfeminista.',
         { grupo: 'Trabajo', lugar: places['CARBO'] }),
@@ -370,10 +375,10 @@ export const TALLERES_EJES = [
         { grupo: 'Deporte', lugar: places['CANCHAFUTBOL'] }),
       t('84 - Arte, interculturalidad y prácticas comunitarias: desafíos y reivindicaciones',
         'El arte como plataforma para la interculturalidad. Rescate y visibilización de experiencias artísticas populares. Experiencias de organizaciones, gestiones de colectivos culturales y artísticos diversos. Contexto actual, presupuesto y políticas públicas. Ataque y defensa de la cultura y de las artes. Intervención, desmantelamiento y defensa de INCAA, INT, FNA, CONABIP, INAMU, SInCA. Militancia y sindicalización. Estrategias de difusión y organización en las producciones artísticas y culturales. Paridad de géneros e integralidad en las programaciones y en los escenarios. Arte callejero; disputa de sentidos y criminalización de las y les artistes. Códigos contravencionales: intervenciones y oficios artísticos en el espacio público. Ferias y soberanía artesanal. Apropiación cultural en el arte.',
-        { grupo: 'Cultura', lugar: places['IPEM86'] }),
+        { grupo: 'Cultura', lugar: places['LEGUIZAMON'] }),
       t('85 - Laboratorio corporal: exploración y experiencias integrales',
         'Performance de los cuerpos. Cruce de saberes en las producciones inter y transdisciplinarias. Arte, corporalidades y territorio. Cuerpos políticos como herramienta de transformación. Las artes escénicas como posibilitadoras de liberación emocional, creatividad y trabajo. La improvisación como entrenamiento corporal. Educación y prácticas somáticas. La palabra y la escritura para profundizar lo creativo. Autonomía y goce de la relación con nosotres y nosotras mismas y con otras/otres. Recreación, derecho al juego, al disfrute, como práctica política transformadora.',
-        { grupo: 'Cultura', lugar: places['IPEM86'] }),
+        { grupo: 'Cultura', lugar: places['LEGUIZAMON'] }),
 
       // ---- Ciencia y técnica ----
       t('86 - Por una ciencia y técnica feminista',
@@ -414,7 +419,7 @@ export const TALLERES_EJES = [
       t('93 - Palestina como causa transfeminista',
         'Genocidio reproductivo. Infanticidio. Terricidio. Palestina como laboratorio colonial, imperial y genocida. Sionismo en Palestina y Latinoamérica. Pinkwashing. Movimientos de solidaridad mundial: desde Abya Yala a Palestina, Flotilla, Convoy Sumud, movilizaciones. Memoria y resistencia dentro de Palestina. Genocidio en Gaza. al sionismo. BDS: boicot, desinversión y sanciones.',
         { lugar: places['ESCSAENZPEÑA'] }),
-      t('94 - Abya Yala',
+      t('94 - Abya Yala. Antiiperialismo, solidaridad e integración latinoamericana',
         'Antiimperialismo, solidaridad e integración latinoamericana. Venezuela y Cuba. Intervención de potencias (EEUU, Israel, etc). Ocupaciones e invasiones imperialistas. Movimientos de liberación y emancipación del Abya Yala. Feminismos territoriales y comunitarios. Defensa del territorio. Asesinato, persecución y agresiones a defensoras. Colonización e injerencia económica en el continente. Grandes capitales. Extractivismos de los bienes comunes, urbanos, gentrificación, etc. Paramilitarismo, cárteles. Disputas territoriales. Leyes antiterroristas. Criminalización a organizaciones. Catástrofes naturales, procesos golpistas. Bases y ejercicios militares.',
         { lugar: places['ESCSAENZPEÑA'] }),
       t('95 - Imaginación de nuevos futuros', '', { lugar: places['ESCSAENZPEÑA'] }),
@@ -427,16 +432,16 @@ export const TALLERES_EJES = [
     talleres: [
       t('96 - Derecho a la vivienda, derecho a la ciudad, producción social del hábitat',
         'Hábitat digno y políticas urbanas. Acceso a servicios básicos, internet, espacios de recreación y culturales. Alquileres y endeudamiento. Conflictos, tomas de tierras y desalojos. Políticas de vivienda y desmantelamiento de las políticas. Cierre de la SISU. Situación de los barrios RENABAP. Experiencias de autogestión y de articulación entre organizaciones sociales y con el estado. Producción social del hábitat y el protagonismo de mujeres y disidencias. Extractivismo urbano, desarrollistas y disputas por el uso del suelo. Rol de las mujeres y disidencias en la construcción.',
-        { lugar: places['IPET66'] }),
-      t('97 - Economía social y popular',
+        { lugar: places['IPET247'] }),
+      t('97 - Economía social, solidaria y popular',
         'Trabajo informal y dificultades para el acceso a derechos laborales. Feminización de la economía popular. Ferias. Trabajar en el espacio público, persecución estatal y violencias sexuales. Sobrecarga y triple jornada. Salario social y desmantelamiento de las políticas públicas. Cooperativas y movimiento cooperativo. Economía circular. Tensiones entre el trabajo sin patrón y la autoexplotación. Discursos individualistas sobre el emprendedurismo, impactos sobre la subjetividad.',
-        { lugar: places['IPET66'] }),
+        { lugar: places['IPET247'] }),
       t('98 - Organización barrial, grupos de mujeres, feminismos populares',
         'Protagonismo y participación de las mujeres, feminismos y disidencias en las organizaciones barriales. Luchas contra el hambre, la desocupación, las adicciones y la violencia. Defensa de la salud integral, la educación, la tierra y la vivienda. Triple jornada y sostenimiento de la vida en los barrios populares. Acompañamientos a mujeres en situación de violencia. Actividades culturales, educativas y de contención de la crisis. Redes barriales y de cuidado, acompañamiento y sostén comunitario. Impactos de la participación en la vida de las mujeres y disidencias. Feminismos y transfeminismos populares, feminismos y transfeminismos villeros. Diversas formas y estrategias de organización.',
-        { lugar: places['IPET66'] }),
+        { lugar: places['IPET247'] }),
       t('99 - Emergencia alimentaria',
         'Profundización de la crisis económica y dificultades para el acceso a los alimentos. Políticas de hambre. Recorte en los apoyos a comedores y merenderos. Impactos en la salud. Desnutrición. Ausencia de propuestas y perspectivas para superar la emergencia alimentaria por parte del Estado. Propuestas e iniciativas de movimientos y organizaciones sociales. Estrategias para afrontar la emergencia. Solidaridad y autogestión. Sobrecarga de trabajo de las cocineras y trabajadoras comunitarias. Impotencia y afectaciones, impactos en la subjetividad de las trabajadoras comunitarias.',
-        { lugar: places['IPET66'] }),
+        { lugar: places['IPET247'] }),
     ],
   },
 ];

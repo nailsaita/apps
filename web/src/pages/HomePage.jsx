@@ -8,13 +8,13 @@ import EJES from '@/data/ejes.js';
 import FAQ from '@/data/faq.jsx';
 import ACTIVIDADES_CULTURALES from '@/data/actividadesCulturales.js';
 import CARTELERA_ESCENARIOS from '@/data/carteleraEscenarios.js';
-
 import CRONOGRAMA from '@/data/cronograma.js';
 import CANCIONES from '@/data/canciones.js';
 import { Rainbow, Mountain, Accessibility } from 'lucide-react';
 import InstallPwaButton from '@/components/InstallPwaButton.jsx';
 
 // ─── DATOS PLACEHOLDER ───────────────────────────────────────────────────────
+
 
 const EVENTO = {
   nombre: '39° Encuentro Plurinacional de Mujeres, Lesbianas, Trans, Travestis, Bisexuales, Intersex y No Binaries',
@@ -1103,6 +1103,40 @@ function ConsignaSection() {
     </section>
   );
 }
+function CuidadosBanner() {
+  return (
+    <section id="cuidados" className="py-12 px-4 bg-[#f6faf7]">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="max-w-5xl mx-auto relative overflow-hidden rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center gap-6 md:gap-10"
+        style={{ background: 'linear-gradient(90deg, #184b22, #2a823c)' }}
+      >
+        <div className="absolute -top-16 -right-10 w-64 h-64 bg-[#fdb10c]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="bg-[#fdb10c] text-[#4a2055] w-16 h-16 rounded-full flex items-center justify-center shrink-0 relative z-10">
+          <ShieldCheck size={30} />
+        </div>
+        <div className="flex-1 text-center md:text-left relative z-10">
+          <span className="inline-block bg-white/15 text-white text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3">
+            Activemos red
+          </span>
+          <h3 className="text-white text-2xl font-black mb-2">Red de Cuidados Colectivos</h3>
+          <p className="text-white/80 text-sm leading-relaxed">
+            Instructivo de la Comisión de Cuidados Colectivos para conocer cómo cuidarnos entre todes.
+          </p>
+        </div>
+        <Link
+          to="/Cuidados"
+          className="relative z-10 shrink-0 inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold px-6 py-3 rounded-full hover:bg-[#fec449] transition-colors"
+        >
+          Ver herramientas <ArrowRight size={16} />
+        </Link>
+      </motion.div>
+    </section>
+  );
+}
 
 function EncuentroSection() {
   const timelineRef = useRef(null);
@@ -1296,22 +1330,14 @@ function EncuentroSection() {
     </div>
   </section>;
 }
-function IlustracionSticker({ src, size = 'w-24', height, rotate = -4, className = '' }) {
-  return (
-    <img
-      src={src}
-      alt=""
-      aria-hidden="true"
-      className={`${height ? height : size} w-auto object-contain opacity-90 drop-shadow-lg select-none pointer-events-none ${className}`}
-      style={{ transform: `rotate(${rotate}deg)` }}
-    />
-  );
+function IlustracionSticker() {
+  return null;
 }
 
 
 function EjesSection() {
   const [ejeAbierto, setEjeAbierto] = useState(null);
-  return <section id="ejes" className="py-24 px-4 bg-[#FFF1E3]">
+  return <section id="ejes" className="pt-24 pb-6 px-4 bg-[#FFF1E3]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-2">
         <h2 className="text-[#343230] mb-4 text-4xl md:text-5xl">Ejes temáticos y talleres</h2>
@@ -1696,6 +1722,38 @@ function CarteleraEscenarios() {
 }
 
 function CulturalSection() {
+  const dias = [
+    {
+      id: 'sabado',
+      titulo: 'Sábado 10',
+      actividades: [
+        { hora: '12 a 14:30', actividad: 'Asamblea de Identidades Lésbicas' },
+        { hora: '13 a 15', actividad: 'Actividades e Intervenciones Culturales' },
+        { hora: '14:30 a 18:30', actividad: 'Radio Abierta Radialistas Transfeministas' },
+        { hora: '17:30 a 18', actividad: 'Campaña por el Derecho al Aborto. Pañuelazo' },
+        { hora: '20:00 hs', actividad: 'Arribo de la ¡Marcha contra los travesticidios, transfemicidios y transhomicidios!' },
+        { hora: '22 a 03', actividad: 'FestiTorta' }
+      ]
+    },
+    {
+      id: 'domingo',
+      titulo: 'Domingo 11',
+      actividades: [
+        { hora: '10 a 12', actividad: 'Radio Abierta Radialistas Transfeministas' },
+        { hora: '12 a 16', actividad: 'Asamblea internacionalista de Feministas del Abya Yala' },
+        { hora: '16 a 18', actividad: 'Cierre de la transmisión con la Comisión Organizadora' }
+      ]
+    }
+  ];
+
+  const todoElFinde = [
+    'Feria Ecotransfeminista',
+    'Corredor Gastronómico',
+    'Stands de Organizaciones',
+    'Ollazo punillazo. Acampe interventivo de memorias y resistencias',
+    'Mural Colectivo del 39° Encuentro Pluri'
+  ];
+
   return <section id="cultural" className="py-24 px-4 bg-[#2f1435]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12 relative">
@@ -1705,160 +1763,132 @@ function CulturalSection() {
           rotate={4}
           className="hidden md:block absolute left-0 md:left-20 lg:right-3 -top-10"
         />
-        <h2 className="text-white mb-4">Grilla Cultural</h2>
-        <p className="text-white/70 max-w-xl mx-auto mb-4">
-          Arte, música, teatro y más. El Encuentro también es fiesta y celebración colectiva.
-        </p>
-        <p className="text-white/70 max-w-xl mx-auto mb-4 font-bold">
-          Pronto vamos a tener la grilla completa de actividades culturales.
-        </p>
+        <h2 className="text-white mb-2">Grilla Cultural</h2>
+        <h3 className="text-[#fdb10c] text-xl sm:text-2xl font-black uppercase tracking-wide mb-6">
+          Cronograma Plaza Político Cultural
+
+
+        </h3>
+
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-6 items-stretch">
+        {/* Sábado y Domingo */}
+        {dias.map((dia, i) => (
+          <motion.div
+            key={dia.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+            className="bg-white/5 rounded-2xl overflow-hidden border border-white/10"
+          >
+            <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
+              <h3 className="text-lg font-black m-0">{dia.titulo}</h3>
+            </div>
+            <div className="p-4">
+              {dia.actividades.map((item, idx) => (
+                <div key={idx} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
+                  <span className="text-[#fdb10c] text-sm font-mono font-bold w-24 shrink-0">{item.hora}</span>
+                  <span className="text-white/80 text-sm">{item.actividad}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+
+        {/* Durante los dos días */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-white/5 rounded-2xl overflow-hidden border border-white/10"
+        >
+          <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
+            <h3 className="text-lg font-black m-0">Durante los dos días</h3>
+          </div>
+          <div className="p-4">
+            {todoElFinde.map((item, idx) => (
+              <div key={idx} className="flex gap-3 py-3 border-b border-white/10 last:border-0">
+                <Check size={14} className="text-[#fdb10c] mt-1 shrink-0" />
+                <span className="text-white/80 text-sm">{item}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
 
       {/* <CarteleraEscenarios /> */}
     </div>
   </section>;
 }
-function QueLlevarSection() {
-  const [categoriaAbierta, setCategoriaAbierta] = useState(null);
+function MapaEmbed() {
+  const [activo, setActivo] = useState(false);
 
-  const categorias = [
-    {
-      id: 'documentacion',
-      icono: <FileText size={24} />,
-      titulo: 'Documentación y Dinero',
-      color: 'bg-[#faf7fb] border-[#d5bddb]',
-      iconColor: 'text-[#662c74]',
-      items: [
-        'DNI físico y una fotocopia (guardar la fotocopia en otra parte de la mochila o en bolsa hermética).',
-        'Carnet de obra social / prepaga (si tenés).',
-        'Dinero en efectivo (útil en zonas con poca señal o puestos) y tarjetas guardadas por separado.',
-        'Anotador en papel con números de contacto clave (por si te quedás sin batería).'
-      ]
-    },
-    {
-      id: 'hidratacion',
-      icono: <Droplet size={24} />,
-      titulo: 'Hidratación y Nutrición',
-      color: 'bg-[#f6faf7] border-[#b8d5be]',
-      iconColor: 'text-[#21662f]',
-      items: [
-        'Botella de agua.',
-        'Snacks de marcha: frutos secos, barras de cereal, fruta o galletitas para los talleres y movilizaciones.',
-        'Vasos/cubiertos reutilizables.'
-      ]
-    },
-    {
-      id: 'seguridad',
-      icono: <ShieldCheck size={24} />,
-      titulo: 'Seguridad y Cuidado Personal',
-      color: 'bg-[#fffcf5] border-[#fed886]',
-      iconColor: 'text-[#916607]',
-      items: [
-        'Silbato (para alertas o emergencias en la marcha o traslados).',
-        'Batería portátil y cable cargador.',
-        'Botiquín básico: ibuprofeno/paracetamol, curitas, antiséptico, antialérgicos, gasas y tu medicación personal habitual.',
-        'Mochila chica o riñonera cruzada que puedas cerrar bien para llevar lo imprescindible a los talleres.',
-        'Kit de autocuidado grupal: acordar previamente puntos de encuentro con compañeres, referentes con tu delegación o grupo.'
-      ]
-    },
-    {
-      id: 'descanso',
-      icono: <Moon size={24} />,
-      titulo: 'Comodidad y Descanso',
-      color: 'bg-[#faf7fb] border-[#d5bddb]',
-      iconColor: 'text-[#662c74]',
-      items: [
-        'Calzado muy cómodo/zapatillas usadas (evitá estrenar calzado).',
-        'Ropa en capas: remeras livianas para el día y abrigo (campera/buzo) para la noche.',
-        'Protección solar: protector solar, gorro/sombrero y lentes de sol.',
-        'Piloto o capa impermeable (por si llueve).',
-        'Para el hospedaje/escuela: bolsa de dormir, aislante o colchoneta, manta y tapones para oídos/antifaz.'
-      ]
-    },
-    {
-      id: 'higiene',
-      icono: <Sparkles size={24} />,
-      titulo: 'Higiene Personal',
-      color: 'bg-[#f6faf7] border-[#b8d5be]',
-      iconColor: 'text-[#21662f]',
-      items: [
-        'Alcohol en gel o sanitizante.',
-        'Papel higiénico y pañuelos desechables.',
-        'Toallitas, tampones o copa menstrual.',
-        'Toalla de secado rápido y elementos básicos de aseo (cepillo de dientes, pasta, desodorante).'
-      ]
-    }
-  ];
+  const MID = '1ACKW_W7BXV8_jr2GrRomUidKBy07W2E';
+  const LAT = '-31.412816087492487';
+  const LNG = '-64.18676439869117';
+  const ZOOM = 16;
+
+  const src = `https://www.google.com/maps/d/embed?mid=${MID}&ll=${LAT}%2C${LNG}&z=${ZOOM}&ehbc=2E312F`;
+  const linkCompleto = `https://www.google.com/maps/d/viewer?mid=${MID}&ll=${LAT}%2C${LNG}&z=${ZOOM}`;
 
   return (
-    <section id="que-llevar" className="py-24 px-4 bg-[#f6faf7]">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12 relative">
-          <IlustracionSticker
-            src="/images/ilustraciones/activista-casco.svg"
-            size="w-16 md:w-24"
-            rotate={-5}
-            className="hidden lg:block absolute right-4 lg:right-10 -top-8"
-          />
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <h2 className="text-[#343230] mb-0">Qué traer al Encuentro</h2>
-          </div>
-          <p className="text-gray-500 max-w-xl mx-auto">
-            Una guía práctica para armar tu mochila y vivir el Encuentro con comodidad y cuidado colectivo.
-          </p>
-        </div>
+    <div className="mb-10 px-3 sm:px-8 md:px-12">
+      <div className="relative rounded-3xl overflow-hidden border-2 border-[#eadeed] bg-[#faf7fb]">
+        <iframe
+          src={src}
+          title="Mapa del 39° Encuentro Plurinacional en Córdoba"
+          loading="lazy"
+          allowFullScreen
+          referrerPolicy="no-referrer-when-downgrade"
+          className="block w-full h-[22rem] sm:h-[28rem] md:h-[34rem] border-0"
+        />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
-          {categorias.map((cat, i) => (
-            <motion.div
-              key={cat.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className={`${cat.color} border-2 rounded-2xl overflow-hidden flex flex-col`}
-            >
-              <button
-                onClick={() => setCategoriaAbierta(categoriaAbierta === cat.id ? null : cat.id)}
-                className="p-6 flex flex-col items-start text-left w-full"
-              >
-                <div className={`${cat.iconColor} mb-4`}>{cat.icono}</div>
-                <div className="flex items-center justify-between w-full gap-3">
-                  <h4 className="font-bold text-[#343230]">{cat.titulo}</h4>
-                  <ChevronDown
-                    size={16}
-                    className={`${cat.iconColor} shrink-0 transition-transform`}
-                    style={{ transform: categoriaAbierta === cat.id ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                  />
-                </div>
-              </button>
+        {/* Capa que deja pasar el scroll hasta que la persona decide usar el mapa */}
+        {!activo && (
+          <button
+            type="button"
+            onClick={() => setActivo(true)}
+            aria-label="Activar el mapa para moverlo"
+            className="absolute inset-0 w-full h-full flex items-end justify-center pb-6 bg-transparent cursor-pointer"
+          >
+            <span className="inline-flex items-center gap-2 bg-[#813893] text-white text-sm font-bold px-5 py-2.5 rounded-full shadow-lg">
+              <MapPin size={16} />
+              Tocá para mover el mapa
+            </span>
+          </button>
+        )}
 
-              <AnimatePresence>
-                {categoriaAbierta === cat.id && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    className="overflow-hidden border-t border-black/5"
-                  >
-                    <ul className="p-6 pt-4 space-y-3">
-                      {cat.items.map((item, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-[#343230]/80 leading-relaxed">
-                          <Check size={14} className={`${cat.iconColor} mt-1 shrink-0`} />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
-        </div>
+        {/* Botón para volver a poder scrollear la página */}
+        {activo && (
+          <button
+            type="button"
+            onClick={() => setActivo(false)}
+            className="absolute bottom-4 left-1/2 -translate-x-1/2 inline-flex items-center gap-2 bg-[#2f1435]/90 text-white text-sm font-bold px-5 py-2.5 rounded-full shadow-lg hover:bg-[#2f1435] transition-colors"
+          >
+            <X size={16} />
+            Dejar de mover el mapa
+          </button>
+        )}
       </div>
-    </section>
+
+      <div className="text-center mt-4">
+        <a
+          href={linkCompleto}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-2 text-[#662c74] font-bold text-sm border-2 border-[#d5bddb] px-5 py-2.5 rounded-full hover:bg-[#faf7fb] transition-colors"
+        >
+          <ExternalLink size={16} />
+          Abrir el mapa en pantalla completa
+        </a>
+      </div>
+    </div>
   );
 }
+
 function MapaEncuentro() {
   const zonas = [
     {
@@ -2014,26 +2044,18 @@ function SedeSection() {
     expandible: true,
     contenido: '👉🏽 Estamos trabajando para ofrecer opciones de la economía popular, accesibles y con propuestas sin TACC y veganas para habitar el encuentro entre todxs.'
   }];
-  return <section id="sede" className="py-24 px-4 bg-[#FFF1E3]">
+  return <section id="sede" className="pt-6 pb-24 px-4 bg-[#FFF1E3]">
     <div className="max-w-6xl mx-auto">
-      <div className="text-center mb-12 relative">
+            <div className="text-center mb-12 relative">
         <IlustracionSticker
-          src="/images/ilustraciones/ramas-doradas.svg"
-          size="w-32 md:w-40"
-          rotate={0}
-          className="hidden lg:block absolute left-10 md:left-20 lg:right-3 -top-10"
+          src="/images/ilustraciones/retratos.svg"
+          size="w-32 md:w-44"
+          rotate={4}
+          className="hidden md:block absolute left-0 md:left-20 lg:right-3 -top-10"
         />
-        <h2 className="text-[#343230] mb-4">Sede y Logística</h2>
-        <p className="text-gray-500 max-w-xl mx-auto">
-          Todo lo que necesitás saber para llegar, quedarte y moverte durante el Encuentro.
-        </p>
       </div>
-
-      {/* Mapa placeholder */}
-      <div>
-        <MapaEncuentro />
-        {/* <iframe src="https://www.google.com/maps/d/embed?mid=1ACKW_W7BXV8_jr2GrRomUidKBy07W2E&ehbc=2E312F"  style={{ width: '100%', height: '28rem', border: 'none', marginTop: '56px', borderRadius: '1.5rem', marginBottom: '2.5rem'}}></iframe> */}
-      </div>
+             
+      <MapaEmbed />
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 items-start">
         {cards.map((card, i) => card.expandible ? <motion.div key={i} initial={{
@@ -2269,16 +2291,17 @@ export default function HomePage() {
     <Navbar />
     <BackToTop />
     <HeroSection />
-    <SedeSection />
     <CronogramaSection />
     <EjesSection />
+    <SedeSection />
+    <CuidadosBanner />
     <CulturalSection />
     <ApoyoSection />
-    <ConsignaSection />
-    <EncuentroSection />
-    <CancioneroSection />
     <PrensaSection />
+    <EncuentroSection />
+    <ConsignaSection />
     <SubcomisionesSection />
+    <CancioneroSection />
     <FaqSection />
     <FooterSection />
   </div>;

@@ -18,6 +18,7 @@ import PueblosPreexistentesPage from './pages/PueblosPreexistentes';
 import MaxyLulen from './pages/MaxyLulen';
 import FlaviaPage from '@/pages/FlaviaPage.jsx';
 import MapaPage from '@/pages/MapaPage.jsx';
+import Cuidados from '@/pages/Cuidados.jsx';
 
 function ScrollToHash() {
   const location = useLocation();
@@ -61,11 +62,9 @@ function App() {
         <Route path="/Delicia" element={<DeliciaPage />} />
         <Route path="/MaxyLulen" element={<MaxyLulen />} />
         <Route path="/Flavia" element={<FlaviaPage />} />
+        <Route path="/Cuidados" element={<Cuidados />} />
         <Route path="/PueblosPreexistentes" element={<PueblosPreexistentesPage />} />
-        {/* <Route path="/carteleraEscenarios" element={<carteleraEscenarios />} /> */}
-        {/* <Route path="/Mapa" element={<MapaPage />} /> */}
 
-        {/* Catch-all route for 404s */}
         <Route path="*" element={
           <div className="min-h-screen flex flex-col items-center justify-center bg-background text-center px-4">
             <h1 className="text-primary mb-4">404</h1>
