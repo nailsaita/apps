@@ -10,7 +10,7 @@ const HERRAMIENTAS = [
     icono: <Smartphone size={24} />,
     titulo: 'Celular e información',
     items: [
-      'Asegurate de tener batería y datos. En la plaza político-cultural habrá puntos de wifi.',
+      'Asegurate de tener batería. En la plaza político-cultural habrá puntos de wifi.',
       'Configurá el bloqueo del celu con patrón, PIN, contraseña o biometría. Si lo perdés sin esa protección, el acceso a tu información y a la de tus contactos es extremadamente fácil.',
       'Ubicá dónde se hace cada actividad en la Plaza Político Cultural y en la web. Entrá a 39encuentropluri.com y descargá la app para tener toda la información.'
     ]

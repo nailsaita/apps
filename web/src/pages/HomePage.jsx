@@ -1441,6 +1441,108 @@ function CronogramaSection() {
     </section>
   );
 }
+
+function CulturalSection() {
+  const dias = [
+    {
+      id: 'sabado',
+      titulo: 'Sábado 10',
+      actividades: [
+        { hora: '12 a 14:30', actividad: 'Asamblea de Identidades Lésbicas' },
+        { hora: '13 a 15', actividad: 'Actividades e Intervenciones Culturales' },
+        { hora: '14:30 a 18:30', actividad: 'Radio Abierta Radialistas Transfeministas' },
+        { hora: '17:30 a 18', actividad: 'Campaña por el Derecho al Aborto. Pañuelazo' },
+        { hora: '20:00 hs', actividad: 'Arribo de la ¡Marcha contra los travesticidios, transfemicidios y transhomicidios!' },
+        { hora: '22 a 03', actividad: 'FestiTorta' }
+      ]
+    },
+    {
+      id: 'domingo',
+      titulo: 'Domingo 11',
+      actividades: [
+        { hora: '10 a 12', actividad: 'Radio Abierta Radialistas Transfeministas' },
+        { hora: '12 a 16', actividad: 'Asamblea internacionalista de Feministas del Abya Yala' },
+        { hora: '16 a 18', actividad: 'Cierre de la transmisión con la Comisión Organizadora' }
+      ]
+    }
+  ];
+
+  const todoElFinde = [
+    'Feria Ecotransfeminista',
+    'Corredor Gastronómico',
+    'Stands de Organizaciones',
+    'Ollazo punillazo. Acampe interventivo de memorias y resistencias',
+    'Mural Colectivo del 39° Encuentro Pluri'
+  ];
+
+  return <section id="cultural" className="py-24 px-4 bg-[#2f1435]">
+    <div className="max-w-6xl mx-auto">
+      <div className="text-center mb-12 relative">
+        <IlustracionSticker
+          src="/images/ilustraciones/retratos.svg"
+          size="w-32 md:w-44"
+          rotate={4}
+          className="hidden md:block absolute left-0 md:left-20 lg:right-3 -top-10"
+        />
+        <h2 className="text-white mb-2">Grilla Cultural</h2>
+        <h3 className="text-[#fdb10c] text-xl sm:text-2xl font-black uppercase tracking-wide mb-6">
+          Cronograma Plaza Político Cultural
+        </h3>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-6 items-stretch">
+        {/* Sábado y Domingo */}
+        {dias.map((dia, i) => (
+          <motion.div
+            key={dia.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+            className="bg-white/5 rounded-2xl overflow-hidden border border-white/10"
+          >
+            <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
+              <h3 className="text-lg font-black m-0">{dia.titulo}</h3>
+            </div>
+            <div className="p-4">
+              {dia.actividades.map((item, idx) => (
+                <div key={idx} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
+                  <span className="text-[#fdb10c] text-sm font-mono font-bold w-24 shrink-0">{item.hora}</span>
+                  <span className="text-white/80 text-sm">{item.actividad}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+
+        {/* Durante los dos días */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-white/5 rounded-2xl overflow-hidden border border-white/10"
+        >
+          <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
+            <h3 className="text-lg font-black m-0">Durante los dos días</h3>
+          </div>
+          <div className="p-4">
+            {todoElFinde.map((item, idx) => (
+              <div key={idx} className="flex gap-3 py-3 border-b border-white/10 last:border-0">
+                <Check size={14} className="text-[#fdb10c] mt-1 shrink-0" />
+                <span className="text-white/80 text-sm">{item}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Cartelera artística por escenario, debajo de la Grilla Cultural */}
+      <CarteleraEscenarios />
+    </div>
+  </section>;
+}
+
 function SubcomisionesSection() {
   const [tarjetaAbierta, setTarjetaAbierta] = useState(null);
 
@@ -1655,7 +1757,7 @@ function CancioneroSection() {
 // ─── CARTELERA DE ARTISTAS POR ESCENARIO (dentro de la Grilla Cultural) ───────
 
 function CarteleraEscenarios() {
-  const [escenarioAbierto, setEscenarioAbierto] = useState(CARTELERA_ESCENARIOS[0]?.id ?? null);
+  const [escenarioAbierto, setEscenarioAbierto] = useState(null);
 
   return (
     <div className="mt-16">
@@ -1721,108 +1823,7 @@ function CarteleraEscenarios() {
   );
 }
 
-function CulturalSection() {
-  const dias = [
-    {
-      id: 'sabado',
-      titulo: 'Sábado 10',
-      actividades: [
-        { hora: '12 a 14:30', actividad: 'Asamblea de Identidades Lésbicas' },
-        { hora: '13 a 15', actividad: 'Actividades e Intervenciones Culturales' },
-        { hora: '14:30 a 18:30', actividad: 'Radio Abierta Radialistas Transfeministas' },
-        { hora: '17:30 a 18', actividad: 'Campaña por el Derecho al Aborto. Pañuelazo' },
-        { hora: '20:00 hs', actividad: 'Arribo de la ¡Marcha contra los travesticidios, transfemicidios y transhomicidios!' },
-        { hora: '22 a 03', actividad: 'FestiTorta' }
-      ]
-    },
-    {
-      id: 'domingo',
-      titulo: 'Domingo 11',
-      actividades: [
-        { hora: '10 a 12', actividad: 'Radio Abierta Radialistas Transfeministas' },
-        { hora: '12 a 16', actividad: 'Asamblea internacionalista de Feministas del Abya Yala' },
-        { hora: '16 a 18', actividad: 'Cierre de la transmisión con la Comisión Organizadora' }
-      ]
-    }
-  ];
 
-  const todoElFinde = [
-    'Feria Ecotransfeminista',
-    'Corredor Gastronómico',
-    'Stands de Organizaciones',
-    'Ollazo punillazo. Acampe interventivo de memorias y resistencias',
-    'Mural Colectivo del 39° Encuentro Pluri'
-  ];
-
-  return <section id="cultural" className="py-24 px-4 bg-[#2f1435]">
-    <div className="max-w-6xl mx-auto">
-      <div className="text-center mb-12 relative">
-        <IlustracionSticker
-          src="/images/ilustraciones/retratos.svg"
-          size="w-32 md:w-44"
-          rotate={4}
-          className="hidden md:block absolute left-0 md:left-20 lg:right-3 -top-10"
-        />
-        <h2 className="text-white mb-2">Grilla Cultural</h2>
-        <h3 className="text-[#fdb10c] text-xl sm:text-2xl font-black uppercase tracking-wide mb-6">
-          Cronograma Plaza Político Cultural
-
-
-        </h3>
-
-      </div>
-
-      <div className="grid md:grid-cols-3 gap-6 items-stretch">
-        {/* Sábado y Domingo */}
-        {dias.map((dia, i) => (
-          <motion.div
-            key={dia.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="bg-white/5 rounded-2xl overflow-hidden border border-white/10"
-          >
-            <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
-              <h3 className="text-lg font-black m-0">{dia.titulo}</h3>
-            </div>
-            <div className="p-4">
-              {dia.actividades.map((item, idx) => (
-                <div key={idx} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
-                  <span className="text-[#fdb10c] text-sm font-mono font-bold w-24 shrink-0">{item.hora}</span>
-                  <span className="text-white/80 text-sm">{item.actividad}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        ))}
-
-        {/* Durante los dos días */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-white/5 rounded-2xl overflow-hidden border border-white/10"
-        >
-          <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
-            <h3 className="text-lg font-black m-0">Durante los dos días</h3>
-          </div>
-          <div className="p-4">
-            {todoElFinde.map((item, idx) => (
-              <div key={idx} className="flex gap-3 py-3 border-b border-white/10 last:border-0">
-                <Check size={14} className="text-[#fdb10c] mt-1 shrink-0" />
-                <span className="text-white/80 text-sm">{item}</span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-
-      {/* <CarteleraEscenarios /> */}
-    </div>
-  </section>;
-}
 function MapaEmbed() {
   const [activo, setActivo] = useState(false);
 
@@ -2294,8 +2295,8 @@ export default function HomePage() {
     <CronogramaSection />
     <EjesSection />
     <SedeSection />
-    <CuidadosBanner />
     <CulturalSection />
+    <CuidadosBanner />
     <ApoyoSection />
     <PrensaSection />
     <EncuentroSection />
