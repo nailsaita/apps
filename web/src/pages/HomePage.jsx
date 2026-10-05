@@ -1432,7 +1432,7 @@ function CulturalSection() {
         { hora: '14:30 a 18:30', actividad: 'Radio Abierta Radialistas Transfeministas' },
         { hora: '17:30 a 18', actividad: 'Campaña por el Derecho al Aborto. Pañuelazo' },
         { hora: '20:00 hs', actividad: 'Arribo de la ¡Marcha contra los travesticidios, transfemicidios y transhomicidios!' },
-        { hora: '22 a 03', actividad: 'FestiTorta' }
+        { hora: '21:30 a 03', actividad: 'FestiTorta' }
       ]
     },
     {

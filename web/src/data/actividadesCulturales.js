@@ -157,7 +157,7 @@ const CARTELERA_ESCENARIOS = [
         nombre: 'Fe de Fénix',
         tipo: 'Escénicas',
         procedencia: '',
-        descripcion: 'Propuesta NB-T para la marcha del sábado / festi torta.'
+        descripcion: 'Propuesta NB-T para la marcha del sábado / FestiTorta.'
       },
       {
         nombre: 'Mariana Ortega en vivo',
@@ -169,12 +169,12 @@ const CARTELERA_ESCENARIOS = [
   },
   {
     id: 'festi-torta',
-    escenario: 'Festi-Torta',
-    horario: '21:30 a 3 hs',
+    escenario: 'FestiTorta',
+    horario: '21:30 a 03 hs',
     estado: '',
     actividades: [
       {
-        nombre: 'DJ Cacho de Trolo - Festival Negro (transición a Festi Torta)',
+        nombre: 'DJ Cacho de Trolo - Festival Negro (transición a FestiTorta)',
         tipo: 'Música',
         procedencia: 'Córdoba',
         descripcion: ''

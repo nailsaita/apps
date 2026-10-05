@@ -22,7 +22,7 @@ const CRONOGRAMA = {
     actividad: 'Marcha contra los travesticidios, transfemicidios y transhomicidios'
   }, {
     hora: '21:30 hs',
-    actividad: 'Fiesta torta'
+    actividad: 'FestiTorta'
   }],
   'Domingo 11': [{
     hora: '09 a 12',
