@@ -1517,7 +1517,7 @@ function CulturalSection() {
       </div>
 
       {/* Cartelera artística por escenario, debajo de la Grilla Cultural */}
-      <CarteleraEscenarios />
+      {/* <CarteleraEscenarios /> */}
     </div>
   </section>;
 }

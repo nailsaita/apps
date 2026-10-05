@@ -15,11 +15,11 @@ const CRONOGRAMA = {
     hora: '15 a 18',
     actividad: 'Talleres'
   }, {
+    hora: '18:00 hs',
+    actividad: 'Marcha contra los travesticidios, transfemicidios y transhomicidios'
+  }, {
     hora: '18:30 hs',
     actividad: 'Pañuelazo por el aborto legal'
-  }, {
-    hora: '19:00 hs',
-    actividad: 'Marcha contra los travesticidios, transfemicidios y transhomicidios'
   }, {
     hora: '21:30 hs',
     actividad: 'FestiTorta'
