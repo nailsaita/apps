@@ -304,7 +304,7 @@ export default function TalleresPage() {
                 autoComplete="off"
                 className="w-full rounded-full border-2 border-[#eadeed] bg-white py-3 pl-12 pr-12 text-base text-[#343230] placeholder:text-gray-400 focus:border-[#813893] focus:outline-none"
               />
-              {query && (
+              {/* {query && (
                 <button
                   type="button"
                   onClick={() => setQuery('')}
@@ -313,7 +313,7 @@ export default function TalleresPage() {
                 >
                   <X size={18} />
                 </button>
-              )}
+              )} */}
             </div>
 
             {/* Filtro por eje */}

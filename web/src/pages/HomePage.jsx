@@ -4,10 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Lottie from 'lottie-react';
 import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag, FileText, Droplet, ShieldCheck, Moon, Sparkles, Backpack, Smartphone, PersonStanding, Youtube } from 'lucide-react';
 import { HiddenMail } from '@/components/HiddenMail';
-import EJES from '@/data/ejes.js';
 import FAQ from '@/data/faq.jsx';
 import ACTIVIDADES_CULTURALES from '@/data/actividadesCulturales.js';
-import CARTELERA_ESCENARIOS from '@/data/carteleraEscenarios.js';
 import CRONOGRAMA from '@/data/cronograma.js';
 import CANCIONES from '@/data/canciones.js';
 import { Rainbow, Mountain, Accessibility } from 'lucide-react';
@@ -181,24 +179,6 @@ function BackToTop() {
 // ─── ÍNDICE DE BÚSQUEDA GLOBAL ────────────────────────────────────────────────
 
 const INDICE_BUSQUEDA = [
-  // Ejes y talleres
-  ...EJES.flatMap(eje => [{
-    id: `eje-${eje.id}`,
-    titulo: eje.titulo,
-    subtitulo: 'Eje temático',
-    tipo: 'Taller',
-    href: '/#ejes',
-    color: eje.color,
-    emoji: '📋'
-  }, ...eje.talleres.map((t, i) => ({
-    id: `taller-${eje.id}-${i}`,
-    titulo: t,
-    subtitulo: eje.titulo,
-    tipo: 'Taller',
-    href: '/#ejes',
-    color: eje.color,
-    emoji: '✏️'
-  }))]),
   // Actividades culturales
   ...ACTIVIDADES_CULTURALES.map(act => ({
     id: `cultural-${act.id}`,
@@ -412,13 +392,12 @@ export function Navbar({hasTopSpace = true}) {
 
   const links = [
     { href: '/#', id: '', label: 'Inicio' },
-    { href: '/#sede', id: 'sede', label: 'Sede' },
     { href: '/#cronograma', id: 'cronograma', label: 'Cronograma' },
     { href: '/Talleres', id: 'ejes', label: 'Talleres' },
-    { href: '/#encuentro', id: 'encuentro', label: '¿Qué es?' },
+    { href: '/#sede', id: 'sede', label: 'Sede' },
     { href: '/#cultural', id: 'cultural', label: 'Cultura' },
     { href: '/KitPrensa', id: 'prensa', label: 'Prensa' },
-    // { href: '/Mapa', id: 'mapa', label: 'Mapa' },
+    { href: '/#encuentro', id: 'encuentro', label: '¿Qué es?' },
   ];
 
   return <>
@@ -1761,9 +1740,9 @@ function CarteleraEscenarios() {
 
   return (
     <div className="mt-16">
-      <h3 className="text-center text-[#343230] mb-8">Cartelera de artística por escenario</h3>
+      <h3 className="text-center text-white mb-8">Cartelera de artística por escenario</h3>
       <div className="space-y-4 max-w-4xl mx-auto">
-        {CARTELERA_ESCENARIOS.map(bloque => (
+        {ACTIVIDADES_CULTURALES.map(bloque => (
           <div key={bloque.id} className="bg-[#faf7fb] rounded-2xl border-2 border-[#eadeed] overflow-hidden">
             <button
               onClick={() => setEscenarioAbierto(escenarioAbierto === bloque.id ? null : bloque.id)}

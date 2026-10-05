@@ -170,7 +170,7 @@ const CARTELERA_ESCENARIOS = [
   {
     id: 'festi-torta',
     escenario: 'Festi-Torta',
-    horario: '22 a 3 hs',
+    horario: '21:30 a 3 hs',
     estado: '',
     actividades: [
       {
