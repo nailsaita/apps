@@ -8,8 +8,8 @@ import FAQ from '@/data/faq.jsx';
 import ACTIVIDADES_CULTURALES from '@/data/actividadesCulturales.js';
 import CRONOGRAMA from '@/data/cronograma.js';
 import CANCIONES from '@/data/canciones.js';
-import { Rainbow, Mountain, Accessibility } from 'lucide-react';
-import InstallPwaButton from '@/components/InstallPwaButton.jsx';
+import InstallPwfaButton from '@/components/InstallPwaButton.jsx';
+import { Rainbow, Mountain, Accessibility, BookOpen } from 'lucide-react';
 
 // ─── DATOS PLACEHOLDER ───────────────────────────────────────────────────────
 
@@ -1324,35 +1324,117 @@ function EjesSection() {
           Los talleres son espacios de diálogo y debate que funcionan durante el Encuentro, reuniendo a sus participantes alrededor de una temática. Son abiertos y horizontales, sin inscripción obligatoria.
         </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mt-10"
+       <motion.div
+  initial={{ opacity: 0, y: 12 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.5 }}
+  className="mt-12 flex flex-col items-center"
+>
+  {/* Botón principal con halo que respira */}
+  <div className="relative">
+    <motion.div
+      animate={{ opacity: [0.25, 0.5, 0.25], scale: [1, 1.04, 1] }}
+      transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+      className="absolute -inset-3 bg-[#fdb10c]/40 rounded-full blur-2xl pointer-events-none"
+    />
+    <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }} className="relative">
+      <Link
+        to="/Talleres"
+        className="inline-flex items-center justify-center gap-3 bg-[#813893] text-white font-black px-8 sm:px-14 py-6 rounded-full hover:bg-[#662c74] transition-colors shadow-xl shadow-[#4a2055]/40 ring-2 ring-[#fdb10c] text-lg sm:text-2xl"
+      >
+        <MapPin size={28} className="text-[#fdb10c] shrink-0" />
+        <span>Ver Ejes Temáticos, Talleres y Escuelas donde se ubican</span>
+        <motion.span
+          animate={{ x: [0, 5, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+          className="shrink-0 flex"
         >
-          <Link
-            to="/Talleres"
-            className="group inline-flex items-center justify-center gap-3 bg-[#813893] text-white font-black px-8 sm:px-12 py-5 rounded-full hover:bg-[#662c74] hover:scale-105 transition-all shadow-xl shadow-[#4a2055]/40 ring-2 ring-[#fdb10c] text-lg sm:text-xl"
-          >
-            <MapPin size={24} className="text-[#fdb10c] shrink-0" />
-            <span>Ver Ejes Temáticos, Talleres y Escuelas donde se ubican</span>
-            <ArrowRight size={24} className="shrink-0 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </motion.div>
+          <ArrowRight size={28} />
+        </motion.span>
+      </Link>
+    </motion.div>
+  </div>
+
+  {/* Botón secundario */}
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay: 0.35 }}
+    whileHover={{ y: -3 }}
+    whileTap={{ scale: 0.98 }}
+    className="mt-10"
+  >
+    <Link
+      to="/GuiaTalleres"
+      className="group inline-flex items-center gap-3 bg-[#f6faf7] border-2 border-[#b8d5be] pl-2 pr-5 py-2 rounded-full hover:bg-[#dceade] hover:border-[#2a823c] transition-colors shadow-md shadow-[#184b22]/10"
+    >
+      <span className="bg-[#2a823c] text-white w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110">
+        <BookOpen size={18} />
+      </span>
+      <span className="flex flex-col text-left leading-tight">
+        <span className="text-[10px] font-black uppercase tracking-widest text-[#2a823c]">
+          Para coordinadoras
+        </span>
+        <span className="text-sm sm:text-base font-bold text-[#21662f]">
+          ¿Cómo funcionan los talleres? Leé la guía
+        </span>
+      </span>
+      <ArrowRight size={16} className="text-[#2a823c] shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+    </Link>
+  </motion.div>
+</motion.div>
       </div>
     </div>
   </section>;
 }
+
+
 function CronogramaSection() {
   const dias = Object.keys(CRONOGRAMA);
-  const [diaActivo, setDiaActivo] = useState(dias[0]);
+  const [diaActivo, setDiaActivo] = useState(0);
+  const [direccion, setDireccion] = useState(1);
+
+  const cambiarDia = (nuevo) => {
+    if (nuevo === diaActivo || nuevo < 0 || nuevo >= dias.length) return;
+    setDireccion(nuevo > diaActivo ? 1 : -1);
+    setDiaActivo(nuevo);
+  };
+
+  const onDragEnd = (_, info) => {
+    const umbral = 60;
+    if (info.offset.x < -umbral || info.velocity.x < -400) cambiarDia(diaActivo + 1);
+    else if (info.offset.x > umbral || info.velocity.x > 400) cambiarDia(diaActivo - 1);
+  };
+
+  const variantes = {
+    entra: (dir) => ({ x: dir > 0 ? 60 : -60, opacity: 0 }),
+    centro: { x: 0, opacity: 1 },
+    sale: (dir) => ({ x: dir > 0 ? -60 : 60, opacity: 0 })
+  };
+
+  const renderDia = (dia) => (
+    <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 h-full">
+      <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
+        <h3 className="text-lg font-black m-0">{dia}</h3>
+      </div>
+      <div className="p-4">
+        {CRONOGRAMA[dia]?.map((item, i) => (
+          <div key={i} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
+            <span className="text-[#fdb10c] text-sm font-mono font-bold w-16 shrink-0">{item.hora}</span>
+            <span className="text-white/80 text-sm">{item.actividad}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <section id="cronograma" className="py-24 px-4 bg-[#2f1435] text-white">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-4 md:gap-6 mb-4">
+          <div className="flex items-center justify-center gap-4 md:gap-6">
             <h2 className="text-white mb-0">Cronograma</h2>
             <IlustracionSticker
               src="/images/ilustraciones/activista-casco.svg"
@@ -1361,37 +1443,24 @@ function CronogramaSection() {
               className="hidden md:block"
             />
           </div>
-          <p className="text-white/60">Quedá atentx para ver las actividades que iremos sumando</p>
         </div>
 
-        {/* Grid 3 columnas - desktop */}
+        {/* Desktop: 3 columnas */}
         <div className="hidden md:grid md:grid-cols-3 gap-6">
           {dias.map(dia => (
-            <div key={dia} className="bg-white/5 rounded-2xl overflow-hidden border border-white/10">
-              <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
-                <h3 className="text-lg font-black m-0">{dia}</h3>
-              </div>
-              <div className="p-4">
-                {CRONOGRAMA[dia]?.map((item, i) => (
-                  <div key={i} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
-                    <span className="text-[#fdb10c] text-sm font-mono font-bold w-16 shrink-0">{item.hora}</span>
-                    <span className="text-white/80 text-sm">{item.actividad}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <div key={dia}>{renderDia(dia)}</div>
           ))}
         </div>
 
-        {/* Vista mobile */}
+        {/* Mobile: carrusel por días */}
         <div className="md:hidden">
-          {/* Selector de días para mobile */}
-          <div className="flex gap-2 mb-4 overflow-x-auto pb-2">
-            {dias.map(dia => (
+          {/* Selector de días */}
+          <div className="flex gap-2 mb-4">
+            {dias.map((dia, i) => (
               <button
                 key={dia}
-                onClick={() => setDiaActivo(dia)}
-                className={`flex-1 py-2 px-4 rounded-xl text-sm font-bold transition-colors whitespace-nowrap ${diaActivo === dia
+                onClick={() => cambiarDia(i)}
+                className={`flex-1 py-2 px-4 rounded-xl text-sm font-bold transition-colors whitespace-nowrap ${diaActivo === i
                   ? 'bg-[#fdb10c] text-[#2f1435]'
                   : 'bg-white/10 text-white/70 hover:bg-white/20'
                   }`}
@@ -1401,19 +1470,39 @@ function CronogramaSection() {
             ))}
           </div>
 
-          {/* Tarjeta del día activo */}
-          <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10">
-            <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
-              <h3 className="text-lg font-black m-0">{diaActivo}</h3>
-            </div>
-            <div className="p-4">
-              {CRONOGRAMA[diaActivo]?.map((item, i) => (
-                <div key={i} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
-                  <span className="text-[#fdb10c] text-sm font-mono font-bold w-16 shrink-0">{item.hora}</span>
-                  <span className="text-white/80 text-sm">{item.actividad}</span>
-                </div>
+          {/* Tarjeta deslizable */}
+          <div className="overflow-hidden">
+            <AnimatePresence mode="wait" custom={direccion} initial={false}>
+              <motion.div
+                key={dias[diaActivo]}
+                custom={direccion}
+                variants={variantes}
+                initial="entra"
+                animate="centro"
+                exit="sale"
+                transition={{ duration: 0.22, ease: 'easeOut' }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.25}
+                onDragEnd={onDragEnd}
+                style={{ touchAction: 'pan-y' }}
+              >
+                {renderDia(dias[diaActivo])}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Puntitos + pista */}
+          <div className="flex flex-col items-center gap-2 mt-4">
+            <div className="flex gap-2">
+              {dias.map((dia, i) => (
+                <span
+                  key={dia}
+                  className={`h-1.5 rounded-full transition-all ${diaActivo === i ? 'w-6 bg-[#fdb10c]' : 'w-1.5 bg-white/30'}`}
+                />
               ))}
             </div>
+            <p className="text-white/40 text-xs m-0">Deslizá para cambiar de día</p>
           </div>
         </div>
       </div>
@@ -1454,6 +1543,60 @@ function CulturalSection() {
     'Mural Colectivo del 39° Encuentro Pluri'
   ];
 
+  // Estado del carrusel mobile
+  const [diaActivo, setDiaActivo] = useState(0);
+  const [direccion, setDireccion] = useState(1);
+
+  const cambiarDia = (nuevo) => {
+    if (nuevo === diaActivo || nuevo < 0 || nuevo >= dias.length) return;
+    setDireccion(nuevo > diaActivo ? 1 : -1);
+    setDiaActivo(nuevo);
+  };
+
+  const onDragEnd = (_, info) => {
+    const umbral = 60;
+    if (info.offset.x < -umbral || info.velocity.x < -400) cambiarDia(diaActivo + 1);
+    else if (info.offset.x > umbral || info.velocity.x > 400) cambiarDia(diaActivo - 1);
+  };
+
+  const variantes = {
+    entra: (dir) => ({ x: dir > 0 ? 60 : -60, opacity: 0 }),
+    centro: { x: 0, opacity: 1 },
+    sale: (dir) => ({ x: dir > 0 ? -60 : 60, opacity: 0 })
+  };
+
+  const renderDia = (dia) => (
+    <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10">
+      <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
+        <h3 className="text-lg font-black m-0">{dia.titulo}</h3>
+      </div>
+      <div className="p-4">
+        {dia.actividades.map((item, idx) => (
+          <div key={idx} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
+            <span className="text-[#fdb10c] text-sm font-mono font-bold w-24 shrink-0">{item.hora}</span>
+            <span className="text-white/80 text-sm">{item.actividad}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  const renderTodoElFinde = () => (
+    <div className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 h-full">
+      <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
+        <h3 className="text-lg font-black m-0">Durante los dos días</h3>
+      </div>
+      <div className="p-4">
+        {todoElFinde.map((item, idx) => (
+          <div key={idx} className="flex gap-3 py-3 border-b border-white/10 last:border-0">
+            <Check size={14} className="text-[#fdb10c] mt-1 shrink-0" />
+            <span className="text-white/80 text-sm">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
   return <section id="cultural" className="py-24 px-4 bg-[#2f1435]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12 relative">
@@ -1469,8 +1612,8 @@ function CulturalSection() {
         </h3>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6 items-stretch">
-        {/* Sábado y Domingo */}
+      {/* Desktop: 3 columnas */}
+      <div className="hidden md:grid md:grid-cols-3 gap-6 items-stretch">
         {dias.map((dia, i) => (
           <motion.div
             key={dia.id}
@@ -1478,46 +1621,78 @@ function CulturalSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="bg-white/5 rounded-2xl overflow-hidden border border-white/10"
           >
-            <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
-              <h3 className="text-lg font-black m-0">{dia.titulo}</h3>
-            </div>
-            <div className="p-4">
-              {dia.actividades.map((item, idx) => (
-                <div key={idx} className="flex gap-4 py-3 border-b border-white/10 last:border-0">
-                  <span className="text-[#fdb10c] text-sm font-mono font-bold w-24 shrink-0">{item.hora}</span>
-                  <span className="text-white/80 text-sm">{item.actividad}</span>
-                </div>
-              ))}
-            </div>
+            {renderDia(dia)}
           </motion.div>
         ))}
-
-        {/* Durante los dos días */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-white/5 rounded-2xl overflow-hidden border border-white/10"
         >
-          <div className="bg-[#fdb10c] text-[#2f1435] px-5 py-3">
-            <h3 className="text-lg font-black m-0">Durante los dos días</h3>
-          </div>
-          <div className="p-4">
-            {todoElFinde.map((item, idx) => (
-              <div key={idx} className="flex gap-3 py-3 border-b border-white/10 last:border-0">
-                <Check size={14} className="text-[#fdb10c] mt-1 shrink-0" />
-                <span className="text-white/80 text-sm">{item}</span>
-              </div>
-            ))}
-          </div>
+          {renderTodoElFinde()}
         </motion.div>
       </div>
 
-      {/* Cartelera artística por escenario, debajo de la Grilla Cultural */}
-      {/* <CarteleraEscenarios /> */}
+      {/* Mobile: carrusel por días + bloque fijo */}
+      <div className="md:hidden">
+        {/* Selector de días */}
+        <div className="flex gap-2 mb-4">
+          {dias.map((dia, i) => (
+            <button
+              key={dia.id}
+              onClick={() => cambiarDia(i)}
+              className={`flex-1 py-2 px-4 rounded-xl text-sm font-bold transition-colors whitespace-nowrap ${diaActivo === i
+                ? 'bg-[#fdb10c] text-[#2f1435]'
+                : 'bg-white/10 text-white/70 hover:bg-white/20'
+                }`}
+            >
+              {dia.titulo}
+            </button>
+          ))}
+        </div>
+
+        {/* Tarjeta deslizable */}
+        <div className="overflow-hidden">
+          <AnimatePresence mode="wait" custom={direccion} initial={false}>
+            <motion.div
+              key={dias[diaActivo].id}
+              custom={direccion}
+              variants={variantes}
+              initial="entra"
+              animate="centro"
+              exit="sale"
+              transition={{ duration: 0.22, ease: 'easeOut' }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.25}
+              onDragEnd={onDragEnd}
+              style={{ touchAction: 'pan-y' }}
+            >
+              {renderDia(dias[diaActivo])}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Puntitos + pista */}
+        <div className="flex flex-col items-center gap-2 mt-4">
+          <div className="flex gap-2">
+            {dias.map((dia, i) => (
+              <span
+                key={dia.id}
+                className={`h-1.5 rounded-full transition-all ${diaActivo === i ? 'w-6 bg-[#fdb10c]' : 'w-1.5 bg-white/30'}`}
+              />
+            ))}
+          </div>
+          <p className="text-white/40 text-xs m-0">Deslizá para cambiar de día</p>
+        </div>
+
+        {/* Bloque fijo */}
+        <div className="mt-6">
+          {renderTodoElFinde()}
+        </div>
+      </div>
     </div>
   </section>;
 }

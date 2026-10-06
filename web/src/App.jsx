@@ -19,6 +19,8 @@ import MaxyLulen from './pages/MaxyLulen';
 import FlaviaPage from '@/pages/FlaviaPage.jsx';
 import MapaPage from '@/pages/MapaPage.jsx';
 import Cuidados from '@/pages/Cuidados.jsx';
+import GuiaTalleresPage from '@/pages/GuiaTalleresPage.jsx';
+
 
 function ScrollToHash() {
   const location = useLocation();
@@ -64,6 +66,7 @@ function App() {
         <Route path="/Flavia" element={<FlaviaPage />} />
         <Route path="/Cuidados" element={<Cuidados />} />
         <Route path="/PueblosPreexistentes" element={<PueblosPreexistentesPage />} />
+        <Route path="/GuiaTalleres" element={<GuiaTalleresPage />} />
 
         <Route path="*" element={
           <div className="min-h-screen flex flex-col items-center justify-center bg-background text-center px-4">
