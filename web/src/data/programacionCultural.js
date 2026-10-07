@@ -22,6 +22,12 @@ const LUGARES = {
   garat: ['Centro de Documentación “Juan C. Garat” (Círculo Sindical de la Prensa y la Comunicación de Córdoba)', 'Obispo Trejo 365'],
   cronopio: ['Cronopio. Microcosmos Cultural', 'Pasaje Agustín Pérez 46'],
   escuelaTotal: ['Escuela Total', 'General Alvear 351'],
+  escAlvarez: ['Escuela Gobernador Álvarez', 'Wenceslao Paunero y Concepción Arenal'],
+  escBelgrano: ['Escuela Superior de Comercio Manuel Belgrano (UNC)', 'La Rioja 1450'],
+  escSaenzPena: ['Escuela Roque Sáenz Peña', 'Vélez Sarsfield y Pueyrredón'],
+  escAlberdi: ['Escuela Juan B. Alberdi', 'General Paz 488'],
+  escSarmiento: ['Escuela Sarmiento', 'Av. Colón y Santa Fe'],
+  escBalseiro: ['Escuela Balseiro', 'Hipólito Yrigoyen 258'],
   cirulaxia: ['Espacio Cirulaxia', 'Pasaje Pérez 12, zona ex Abasto'],
   museoMujeres: ['Espacio Cultural Museo de las Mujeres', 'Rivera Indarte 49'],
   sanMartin: ['Espacio Cultural San Martín', 'Amado Nervo 601, B° San Martín'],
@@ -52,10 +58,19 @@ const LUGARES = {
   plaza: ['Plaza Político Cultural', '']
 };
 
+// Link de búsqueda en Google Maps a partir de la dirección (sin el texto entre paréntesis).
+// Si el lugar no tiene dirección, no se genera link.
+const mapsUrl = (direccion) => {
+  if (!direccion) return '';
+  const limpia = direccion.replace(/\s*\(.*?\)\s*/g, ' ').trim();
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${limpia}, Córdoba, Argentina`)}`;
+};
+
 const e = (dia, inicio, fin, titulo, disciplina, lugar = null, espacio = '', nota = '') => ({
   dia, inicio, fin, titulo, disciplina,
   lugar: lugar ? LUGARES[lugar][0] : '',
   direccion: lugar ? LUGARES[lugar][1] : '',
+  mapsUrl: lugar ? mapsUrl(LUGARES[lugar][1]) : '',
   espacio, nota
 });
 
@@ -81,7 +96,7 @@ export const PROGRAMACION = [
   e('sabado', '21:00', '', 'Dame el fuego de tu amor', ESC, 'laLuna'),
   e('sabado', '13:00', '', '“Magdalena, su propia voz”', ESC, 'teatroReal'),
   e('sabado', '14:00', '', '“Tibio sacrificios”', ESC, 'teatroReal'),
-  e('sabado', '17:30', '', '“Una misión fabulosa” (infancias), en el recreo', ESC),
+  e('sabado', '17:30', '', '“Una misión fabulosa” (infancias), en el recreo', ESC, 'escBelgrano'),
 
   // ── Formativas ──
   e('sabado', '13:00', '15:00', 'Taller de poesía y voces performáticas, por Proyecto Thénon', FOR, 'alberdi'),
@@ -114,7 +129,7 @@ export const PROGRAMACION = [
   e('domingo', '13:00', '15:00', 'Taller de expresión vocal', FOR, 'merlina'),
   e('domingo', '13:00', '15:00', 'Narrativas discas para construir autonomía y ranchar en las calles', FOR, 'caraffa'),
   e('sabado', '13:00', '15:00', 'Taller “¿Menopáusica yo?”', FOR, 'quintoDeva'),
-  e('domingo', '', '', 'Taller de visibilización de derechos laborales de trabajadoras de casas particulares', FOR, 'sivialco'),
+  e('domingo', '13:00', '15:00', 'Taller de visibilización de derechos laborales de trabajadoras de casas particulares', FOR, 'sivialco'),
   e('sabado', '13:00', '15:00', 'Visibilización de derechos laborales de trabajadoras de casas particulares', FOR, 'laLuna'),
   e('domingo', '13:00', '15:00', 'Tango, fundiendo los roles', FOR, 'laLuna'),
   e('sabado', '18:00', '20:00', 'Avivar las brasas: laboratorio de escritura y creación colectiva', FOR, 'volcan'),
@@ -131,9 +146,9 @@ export const PROGRAMACION = [
   e('sabado', '21:00', '01:00', 'Peña folklore: Tekove Katu, Fuerza y Pezón, Dos Folk, Dani García, Folklore Andante, Camaleónicas, Gata Flora, Coronadas en Venus, Negrita Kamba y les Kuyis, Canción-eras, Gaia Delfini y Color Lavanda', MUS, 'penero'),
   e('domingo', '12:30', '15:00', 'Festival “Hip hop femenino y disidente”', MUS, 'penero'),
   e('sabado', '20:00', '21:30', 'Fermenta, Karmenn (música rota) y Queerfonia Coral', MUS, 'mundoFeliz'),
-  e('sabado', '14:40', '', 'Batuque Disidente', MUS),
-  e('sabado', '14:40', '', 'Talleres Batuka', MUS),
-  e('sabado', '14:40', '', 'Rondita de percusión Oniria', MUS),
+  e('sabado', '14:40', '', 'Batuque Disidente', MUS, 'escAlberdi'),
+  e('sabado', '14:40', '', 'Talleres Batuka', MUS, 'escSarmiento'),
+  e('sabado', '14:40', '', 'Rondita de percusión Oniria', MUS, 'escBalseiro'),
 
   // ── Cine / Audiovisual ──
   e('sabado', '20:00', '', 'Proyección “La Yegua de Troya (existimos les guste o no)”', CINE, 'caracol', '', 'Duración: 63 minutos'),
@@ -149,7 +164,10 @@ export const PROGRAMACION = [
   e('sabado', '13:00', '13:40', '“Puerperio” (Córdoba)', CINE, 'evita', 'Auditorio', '30 min de proyección + 20 min de debate'),
   e('sabado', '13:40', '15:00', '“Mala Madre” (Córdoba)', CINE, 'evita', 'Auditorio', '60 min de proyección + 20 min de debate'),
   e('domingo', '13:30', '15:00', '“22 veces Paola Tacacho”', CINE, 'evita', 'Auditorio'),
-  e('domingo', '', '', 'Ciclo de cortos: “Rizomas”, “Todo lo demás se borra”, “Lo que el fuego nos dejó” y “Jamás volveremos”', CINE, 'sobremonte'),
+  e('domingo', '12:30', '12:45', '“Rizomas” (Córdoba)', CINE, 'sobremonte', '', 'Ciclo de cortos · 15 min'),
+  e('domingo', '13:10', '13:25', '“Todo lo demás se borra” (Córdoba)', CINE, 'sobremonte', '', 'Ciclo de cortos · 15 min'),
+  e('domingo', '13:45', '13:56', '“Lo que el fuego nos dejó” (Córdoba)', CINE, 'sobremonte', '', 'Ciclo de cortos · 11 min'),
+  e('domingo', '14:20', '14:40', '“Jamás volveremos” (Córdoba)', CINE, 'sobremonte', '', 'Ciclo de cortos · 20 min'),
   e('sabado', '19:00', '20:00', '“Cuerpas reales, hinchas reales”', CINE, 'mundoFeliz'),
 
   // ── Literatura ──
@@ -174,8 +192,8 @@ export const PROGRAMACION = [
   e('sabado', '13:00', '15:00', 'Conversatorio: mujeres y personas LGTB migrantes y refugiadas en la era de Milei', OTR, 'caraffa'),
   e('sabado', '13:00', '15:00', '“Desobediencia de vida”: proyección + conversatorio + presentación del libro', OTR, 'naturales'),
   e('sabado', '13:00', '', 'Punto en fuga (intervención)', OTR, 'buenPastor'),
-  e('domingo', '14:30', '15:00', 'Mesa: Justicia por Carolina Montero', OTR),
-  e('sabado', '14:40', '', 'Ollas Vacías (Palestina)', OTR),
+  e('domingo', '14:30', '15:00', 'Mesa: Justicia por Carolina Montero', OTR, 'escAlvarez'),
+  e('sabado', '14:40', '', 'Ollas Vacías (Palestina)', OTR, 'escSaenzPena'),
 
   // ── Murales ──
   e('finde', '', '', 'Murales', MUR, 'plaza')

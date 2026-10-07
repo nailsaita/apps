@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, MotionConfig, useReducedMotion } from 'framer-motion';
 import Lottie from 'lottie-react';
 import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag, FileText, Droplet, ShieldCheck, Moon, Sparkles, Backpack, Smartphone, PersonStanding, Youtube } from 'lucide-react';
 import { HiddenMail } from '@/components/HiddenMail';
@@ -9,7 +9,7 @@ import ACTIVIDADES_CULTURALES from '@/data/actividadesCulturales.js';
 import CRONOGRAMA from '@/data/cronograma.js';
 import CANCIONES from '@/data/canciones.js';
 import InstallPwfaButton from '@/components/InstallPwaButton.jsx';
-import { Rainbow, Mountain, Accessibility, BookOpen } from 'lucide-react';
+import { Rainbow, Mountain, Accessibility, BookOpen, Hand } from 'lucide-react';
 
 // ─── DATOS PLACEHOLDER ───────────────────────────────────────────────────────
 
@@ -33,6 +33,61 @@ const DATOS_DONACION = [{
   label: 'Titular',
   valor: 'CORDOBA - 39 PLURINACIONAL DE CORDOBA - 39 PLURINACIONAL DE'
 }];
+
+// ─── ACCESIBILIDAD: AUXILIARES ────────────────────────────────────────────────
+
+// Texto solo para lectores de pantalla en enlaces que abren otra pestaña
+const NuevaPestana = () => <span className="sr-only"> (se abre en otra pestaña)</span>;
+
+// Comportamiento de diálogo modal: Escape cierra, Tab queda dentro del modal
+// y al cerrar el foco vuelve al elemento que lo abrió.
+function useDialogo(onClose) {
+  const ref = useRef(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
+  useEffect(() => {
+    const anterior = document.activeElement;
+    const onKey = e => {
+      if (e.key === 'Escape') {
+        onCloseRef.current();
+        return;
+      }
+      if (e.key !== 'Tab' || !ref.current) return;
+      const enfocables = Array.from(ref.current.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      ));
+      if (!enfocables.length) return;
+      const primero = enfocables[0];
+      const ultimo = enfocables[enfocables.length - 1];
+      if (e.shiftKey && document.activeElement === primero) {
+        e.preventDefault();
+        ultimo.focus();
+      } else if (!e.shiftKey && document.activeElement === ultimo) {
+        e.preventDefault();
+        primero.focus();
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      if (anterior && typeof anterior.focus === 'function') anterior.focus();
+    };
+  }, []);
+
+  return ref;
+}
+
+// Halo decorativo que "respira"; queda quieto si la persona pidió reducir movimiento
+function HaloRespira({ className, scale = 1.03 }) {
+  const reducir = useReducedMotion();
+  return <motion.div
+    aria-hidden="true"
+    animate={reducir ? { opacity: 0.35 } : { opacity: [0.25, 0.5, 0.25], scale: [1, scale, 1] }}
+    transition={reducir ? { duration: 0 } : { duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+    className={className}
+  />;
+}
 
 // ─── COMPONENTES AUXILIARES ───────────────────────────────────────────────────
 
@@ -142,7 +197,7 @@ function useScrolled(threshold = 60) {
 
 function ScrollProgressBar() {
   const progress = useScrollProgress();
-  return <div className="fixed top-0 left-0 right-0 z-[60] h-[3px] bg-transparent pointer-events-none">
+  return <div aria-hidden="true" className="fixed top-0 left-0 right-0 z-[60] h-[3px] bg-transparent pointer-events-none">
     <motion.div className="h-full origin-left" style={{
       width: `${progress}%`,
       background: 'linear-gradient(90deg, #813893, #2a823c, #fdb10c)'
@@ -170,7 +225,7 @@ function BackToTop() {
     }} onClick={() => window.scrollTo({
       top: 0,
       behavior: 'smooth'
-    })} className="fixed bottom-24 left-6 z-50 bg-[#813893] text-white w-11 h-11 rounded-full shadow-lg flex items-center justify-center hover:bg-[#662c74] transition-colors" title="Volver arriba">
+    })} className="fixed bottom-24 left-6 z-50 bg-[#813893] text-white w-11 h-11 rounded-full shadow-lg flex items-center justify-center hover:bg-[#662c74] transition-colors" title="Volver arriba" aria-label="Volver arriba">
       <ChevronDown size={20} className="rotate-180" />
     </motion.button>}
   </AnimatePresence>;
@@ -185,7 +240,7 @@ const INDICE_BUSQUEDA = [
     titulo: act.nombre,
     subtitulo: act.descripcion,
     tipo: act.tipo,
-    href1: '/#cultural',
+    href: '/#cultural',
     color: '#fdb10c',
     emoji: act.emoji
   })),
@@ -275,14 +330,10 @@ const INDICE_BUSQUEDA = [
 function BuscadorGlobal({ onClose }) {
   const [query, setQuery] = useState('');
   const inputRef = useRef(null);
+  const dialogoRef = useDialogo(onClose);
   useEffect(() => {
     inputRef.current?.focus();
-    const onKey = e => {
-      if (e.key === 'x') onClose();
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [onClose]);
+  }, []);
   const resultados = query.trim().length < 2 ? [] : INDICE_BUSQUEDA.filter(item => [item.titulo, item.subtitulo, item.tipo].join(' ').toLowerCase().includes(query.toLowerCase())).slice(0, 8);
   const tiposColor = {
     'Taller': 'bg-[#eadeed] text-[#662c74]',
@@ -303,7 +354,7 @@ function BuscadorGlobal({ onClose }) {
   }} exit={{
     opacity: 0
   }} className="fixed inset-0 z-[120] bg-black/50 backdrop-blur-sm flex items-start justify-center pt-20 px-4" onClick={onClose}>
-    <motion.div initial={{
+    <motion.div ref={dialogoRef} role="dialog" aria-modal="true" aria-label="Buscador del sitio" initial={{
       opacity: 0,
       y: -20,
       scale: 0.97
@@ -321,19 +372,19 @@ function BuscadorGlobal({ onClose }) {
       {/* Input */}
       <div className="flex items-center gap-3 px-4 py-4 border-b border-[#eadeed]">
         <Search size={20} className="text-[#ab7ab7] shrink-0" />
-        <input ref={inputRef} type="text" value={query} onChange={e => setQuery(e.target.value)} placeholder="Buscá talleres, actividades, logística..." className="flex-1 text-[#343230] text-base outline-none placeholder-gray-400 bg-transparent" style={{ fontFamily: "'degular', sans-serif" }} />
-        {query && <button onClick={() => setQuery('')} className="text-gray-400 hover:text-gray-600">
+        <input ref={inputRef} type="text" value={query} onChange={e => setQuery(e.target.value)} aria-label="Buscar en el sitio" placeholder="Buscá talleres, actividades, logística..." className="flex-1 text-[#343230] text-base outline-none placeholder-gray-400 bg-transparent" style={{ fontFamily: "'degular', sans-serif" }} />
+        {query && <button onClick={() => setQuery('')} aria-label="Borrar búsqueda" className="text-gray-400 hover:text-gray-600">
           <X size={18} />
         </button>}
       </div>
 
       {/* Resultados */}
-      <div className="max-h-[60vh] overflow-y-auto">
+      <div className="max-h-[60vh] overflow-y-auto" aria-live="polite">
         {query.trim().length < 2 ? <div className="px-4 py-8 text-center text-gray-400 text-sm">
           <Search size={32} className="mx-auto mb-3 opacity-30" />
           Escribí al menos 2 letras para buscar
         </div> : resultados.length === 0 ? <div className="px-4 py-8 text-center text-gray-400 text-sm">
-          <span className="text-2xl block mb-2">🔍</span>
+          <span className="text-2xl block mb-2" aria-hidden="true">🔍</span>
           Sin resultados para <strong className="text-gray-600">"{query}"</strong>
         </div> : <ul className="py-2">
           {resultados.map((item, i) => <motion.li key={item.id} initial={{
@@ -346,7 +397,7 @@ function BuscadorGlobal({ onClose }) {
             delay: i * 0.04
           }}>
             <a href={item.href} onClick={onClose} className="flex items-center gap-4 px-4 py-3 hover:bg-[#faf7fb] transition-colors group">
-              <span className="text-2xl w-8 text-center shrink-0">{item.emoji}</span>
+              <span className="text-2xl w-8 text-center shrink-0" aria-hidden="true">{item.emoji}</span>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-semibold text-[#343230] truncate group-hover:text-[#662c74] transition-colors">
                   {item.titulo}
@@ -364,7 +415,7 @@ function BuscadorGlobal({ onClose }) {
       {/* Footer del buscador */}
       {resultados.length > 0 && <div className="px-4 py-2 border-t border-[#eadeed] text-xs text-gray-400 flex justify-between">
         <span>{resultados.length} resultado{resultados.length !== 1 ? 's' : ''}</span>
-        <span>↵ para ir a la sección</span>
+        <span aria-hidden="true">↵ para ir a la sección</span>
       </div>}
     </motion.div>
   </motion.div>;
@@ -378,6 +429,7 @@ export function Navbar({ hasTopSpace = true }) {
   const scrolled = useScrolled(80);
   const sectionIds = ['encuentro', 'ejes', 'cronograma', 'cultural', 'sede', 'prensa'];
   const activeSection = useActiveSection(sectionIds);
+  const menuBtnRef = useRef(null);
 
   useEffect(() => {
     const onKey = e => {
@@ -389,6 +441,19 @@ export function Navbar({ hasTopSpace = true }) {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);
+
+  // Escape cierra el menú mobile y devuelve el foco al botón
+  useEffect(() => {
+    if (!open) return;
+    const onKey = e => {
+      if (e.key === 'Escape') {
+        setOpen(false);
+        menuBtnRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
 
   const links = [
     { href: '/#', id: '', label: 'Inicio' },
@@ -405,7 +470,7 @@ export function Navbar({ hasTopSpace = true }) {
       {buscadorAbierto && <BuscadorGlobal onClose={() => setBuscadorAbierto(false)} />}
     </AnimatePresence>
 
-    <motion.nav animate={{
+    <motion.nav aria-label="Principal" animate={{
       top: (scrolled || !hasTopSpace) ? 0 : 44,
       boxShadow: scrolled ? '0 2px 16px rgba(154,52,18,0.25)' : '0 1px 0 rgba(154,52,18,0.15)'
     }} transition={{
@@ -419,7 +484,7 @@ export function Navbar({ hasTopSpace = true }) {
         <div className="hidden md:flex flex-1 items-center justify-center gap-1">
           {links.map(l => {
             const isActive = activeSection === l.id;
-            return <a key={l.href} href={l.href} className="relative text-sm font-medium px-3 py-1.5 rounded-full transition-colors duration-200" style={{
+            return <a key={l.href} href={l.href} aria-current={isActive && l.id ? 'true' : undefined} className="relative text-sm font-medium px-3 py-1.5 rounded-full transition-colors duration-200" style={{
               color: isActive ? '#222222' : '#111111',
               fontFamily: "'degular', sans-serif"
             }}>
@@ -443,6 +508,7 @@ export function Navbar({ hasTopSpace = true }) {
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-8 py-2 rounded-full hover:bg-[#21662f] hover:scale-105 transition-all flex items-center justify-center gap-2 shadow-xl shadow-[#184b22]/50 ring-2 ring-white/20 text-lg">
             <Users size={20} />
             Inscripción
+            <NuevaPestana />
           </a>
         </div>
 
@@ -451,19 +517,19 @@ export function Navbar({ hasTopSpace = true }) {
           {/* <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="text-gray-700">
             <Search size={20} />
           </button> */}
-          <div style={{ width: "10px" }}></div>
+          <div style={{ width: "10px" }} aria-hidden="true"></div>
           <a href="/#" className="text-gray-800 font-bold">
-            <img src="/images/logoblanco.png" alt="Logo" className="h-7 inline mb-1" style={{ "filter": "brightness(0) saturate(100%) invert(11%) sepia(36%) saturate(675%) hue-rotate(175deg) brightness(96%) contrast(88%)" }} />
+            <img src="/images/logoblanco.png" alt="" className="h-7 inline mb-1" style={{ "filter": "brightness(0) saturate(100%) invert(11%) sepia(36%) saturate(675%) hue-rotate(175deg) brightness(96%) contrast(88%)" }} />
             <span className="text-lg">39 Encuentro Pluri</span>
           </a>
-          <button onClick={() => setOpen(!open)} aria-label="Menú">
+          <button ref={menuBtnRef} onClick={() => setOpen(!open)} aria-label="Menú" aria-expanded={open} aria-controls="menu-mobile">
             <Menu size={24} className="text-gray-700" />
           </button>
         </div>
       </div>
 
       <AnimatePresence>
-        {open && <motion.div initial={{
+        {open && <motion.div id="menu-mobile" initial={{
           height: 0,
           opacity: 0
         }} animate={{
@@ -473,11 +539,12 @@ export function Navbar({ hasTopSpace = true }) {
           height: 0,
           opacity: 0
         }} className="md:hidden bg-[#FFF1E3] border-t border-[#fed886] px-4 pb-4 overflow-hidden">
-          {links.map(l => <a key={l.href} href={l.href} onClick={() => setOpen(false)} className={`block py-2 text-sm font-medium transition-colors ${activeSection === l.id ? 'text-[#916607] font-bold' : 'text-gray-700 hover:text-[#916607]'}`} style={{ fontFamily: "'degular', sans-serif" }}>
+          {links.map(l => <a key={l.href} href={l.href} onClick={() => setOpen(false)} aria-current={activeSection === l.id && l.id ? 'true' : undefined} className={`block py-2 text-sm font-medium transition-colors ${activeSection === l.id ? 'text-[#916607] font-bold' : 'text-gray-700 hover:text-[#916607]'}`} style={{ fontFamily: "'degular', sans-serif" }}>
             {l.label}
           </a>)}
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="block mt-2 bg-[#2a823c] text-white text-sm font-bold px-4 py-2 rounded-full text-center">
             Inscribirse
+            <NuevaPestana />
           </a>
         </motion.div>}
       </AnimatePresence>
@@ -528,12 +595,13 @@ function InstalarAppSection() {
 
 
   return (
-    <section className="w-screen w-full pt-6 pb-6 px-4 bg-[#2a823c]">
+    <section aria-label="Instalar la app" className="w-screen w-full pt-6 pb-6 px-4 bg-[#2a823c]">
       <div className="max-w-5xl mx-auto flex flex-row flex-nowrap items-center gap-3 sm:gap-5">
         <div className="flex-1 min-w-0 relative z-10">
-          <h3 className="font-bold text-white text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">
+          {/* Mismo aspecto que antes; no es un título para que la página empiece por el h1 */}
+          <p className="font-bold text-white text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">
             Instalá la App para llevarte el Encuentro en tu celu
-          </h3>
+          </p>
           <p className="text-[11px] sm:text-xs text-white/50">
             En iPhone: abrí este sitio en Safari, tocá "Compartir" y elegí "Agregar a pantalla de inicio".
           </p>
@@ -570,23 +638,25 @@ function TransmisionLink() {
       rel="noreferrer"
       className="group inline-flex items-center gap-3 bg-white/10 border border-white/25 hover:bg-white/20 transition-colors backdrop-blur-sm rounded-full pl-4 pr-3 py-2 text-white"
     >
-      <span className="relative flex h-2.5 w-2.5 shrink-0">
-        <span className={`absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping ${enVivo ? 'bg-red-500' : 'bg-[#fdb10c]'}`} />
+      <span className="relative flex h-2.5 w-2.5 shrink-0" aria-hidden="true">
+        <span className={`absolute inline-flex h-full w-full rounded-full opacity-75 motion-safe:animate-ping ${enVivo ? 'bg-red-500' : 'bg-[#fdb10c]'}`} />
         <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${enVivo ? 'bg-red-500' : 'bg-[#fdb10c]'}`} />
       </span>
       <span className="text-xs font-black uppercase tracking-widest text-white/80">{badge}</span>
-      <span className="w-px h-4 bg-white/25" />
+      <span className="w-px h-4 bg-white/25" aria-hidden="true" />
       <span className="text-sm font-semibold">Seguí la transmisión desde nuestro canal de YouTube</span>
       <span className="bg-white text-[#c0392b] w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform group-hover:scale-110">
         <Youtube size={16} />
       </span>
+      <NuevaPestana />
     </a>
   );
 }
 
 function HeroLottie({ className = '' }) {
-  return <div className={className}>
-    <Lottie path="/lottie/Logo.json" loop={true} autoplay style={{ width: '100%', height: '100%' }} />
+  const reducir = useReducedMotion();
+  return <div className={className} aria-hidden="true">
+    <Lottie path="/lottie/Logo.json" loop={!reducir} autoplay={!reducir} style={{ width: '100%', height: '100%' }} />
   </div>;
 }
 
@@ -594,7 +664,7 @@ function HeroSection() {
   return <section id="hero" className="min-h-[100vh] flex flex-col items-center justify-center  pt-24 pb-16 relative overflow-hidden "
     style={{ background: 'linear-gradient(180deg, #2f1435 0%, #662c74 25%, #184b22 45%, #2f1435 70%, #4a2055 100%)' }}>
     {/* Fondo decorativo */}
-    <div className="absolute inset-0 pointer-events-none">
+    <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#813893]/20 rounded-full blur-3xl" />
       <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[#2a823c]/20 rounded-full blur-3xl" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#fdb10c]/10 rounded-full blur-3xl" />
@@ -646,9 +716,10 @@ function HeroSection() {
         </div>
 
         <div className="flex flex-col items-center gap-5">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-14 py-5 rounded-full hover:bg-[#21662f] hover:scale-105 transition-all flex items-center justify-center gap-3 shadow-xl shadow-[#184b22]/50 ring-2 ring-white/20 text-xl">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" id="inscripcion-hero" className="bg-[#2a823c] text-white font-bold px-14 py-5 rounded-full hover:bg-[#21662f] hover:scale-105 transition-all flex items-center justify-center gap-3 shadow-xl shadow-[#184b22]/50 ring-2 ring-white/20 text-xl">
             <Users size={24} />
             Inscripción
+            <NuevaPestana />
           </a>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -686,7 +757,8 @@ function CampoDonacion({
   return <div className="flex items-center justify-between gap-3 bg-[#faf7fb] rounded-xl px-4 py-3 border border-[#eadeed]">
     <div className="min-w-0">
       <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">{label}</p>
-      <p className="text-sm font-semibold text-[#343230] truncate">{valor}</p>
+      {/* break-all en lugar de truncate: en pantallas angostas el CBU no se corta */}
+      <p className="text-sm font-semibold text-[#343230] break-all">{valor}</p>
     </div>
     {!esTitular && <button onClick={copiar} className="shrink-0 flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-full transition-colors" style={{
       backgroundColor: copiado ? '#dceade' : '#eadeed',
@@ -694,20 +766,20 @@ function CampoDonacion({
     }}>
       {copiado ? <Check size={14} /> : <Copy size={14} />}
       {copiado ? 'Copiado' : 'Copiar'}
+      <span className="sr-only"> {label}</span>
     </button>}
+    <span className="sr-only" aria-live="polite">{copiado ? `${label} copiado` : ''}</span>
   </div>;
 }
 
 function DonacionesModal({
   onClose
 }) {
+  const dialogoRef = useDialogo(onClose);
+  const cerrarRef = useRef(null);
   useEffect(() => {
-    const onKey = e => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [onClose]);
+    cerrarRef.current?.focus();
+  }, []);
   return <motion.div initial={{
     opacity: 0
   }} animate={{
@@ -715,7 +787,7 @@ function DonacionesModal({
   }} exit={{
     opacity: 0
   }} className="fixed inset-0 z-[120] bg-black/50 backdrop-blur-sm flex items-center justify-center px-4" onClick={onClose}>
-    <motion.div initial={{
+    <motion.div ref={dialogoRef} role="dialog" aria-modal="true" aria-labelledby="titulo-donacion" initial={{
       opacity: 0,
       y: 16,
       scale: 0.97
@@ -735,9 +807,9 @@ function DonacionesModal({
           <div className="bg-[#fdb10c] text-[#4a2055] w-10 h-10 rounded-full flex items-center justify-center shrink-0">
             <Heart size={18} fill="currentColor" />
           </div>
-          <h3 className="font-bold text-[#343230] text-lg m-0">Aportá al Encuentro</h3>
+          <h3 id="titulo-donacion" className="font-bold text-[#343230] text-lg m-0">Aportá al Encuentro</h3>
         </div>
-        <button onClick={onClose} aria-label="Cerrar búsqueda" className="shrink-0 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full p-1.5 transition-colors ml-1">
+        <button ref={cerrarRef} onClick={onClose} aria-label="Cerrar" className="shrink-0 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full p-1.5 transition-colors ml-1">
           <X size={16} />
         </button>
       </div>
@@ -760,7 +832,7 @@ function ApoyoSection() {
   const [modalAbierto, setModalAbierto] = useState(false);
   return <section className="py-24 px-4 relative overflow-hidden bg-[#184b22]">
     {/* Fondo decorativo */}
-    <div className="absolute inset-0 pointer-events-none">
+    <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
       <div className="absolute -top-20 -left-20 w-80 h-80 bg-[#fdb10c]/10 rounded-full blur-3xl" />
       <div className="absolute -bottom-24 -right-16 w-96 h-96 bg-[#fdb10c]/15 rounded-full blur-3xl" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#813893]/10 rounded-full blur-3xl" />
@@ -795,20 +867,20 @@ function ApoyoSection() {
         }} whileHover={{
           y: -4
         }} className="relative overflow-hidden rounded-2xl p-6 border-2 border-[#fed886] bg-[#fffcf5] flex flex-col">
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#fdb10c]/10 rounded-full blur-2xl" />
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#fdb10c]/10 rounded-full blur-2xl" aria-hidden="true" />
           <span className="absolute top-5 right-5 bg-[#fdb10c] text-[#4a2055] text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
             Solidario
           </span>
           <div className="bg-[#fdb10c] text-[#4a2055] w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10">
             <Heart size={26} fill="currentColor" />
           </div>
-          <h4 className="font-bold text-[#343230] text-xl mb-2 relative z-10">
-            El Encuentro se sostiene entre todes
-          </h4>
-          <p className="text-sm text-[#343230]/70 mb-6 flex-1 relative z-10">
-            Tu aporte ayuda a cubrir sede, materiales y logística.
-          </p>
-          <button onClick={() => setModalAbierto(true)} className="relative z-10 bg-[#813893] text-white font-bold px-6 py-3 rounded-full hover:bg-[#662c74] transition-colors self-start">
+          <h4 aria-level={3} className="font-bold text-[#343230] text-xl mb-2 relative z-10">
+  El Encuentro se sostiene entre todes
+</h4>
+<p className="text-sm text-[#343230]/70 mb-6 flex-1 relative z-10">
+  Tu aporte ayuda a cubrir sede, materiales y logística.
+</p>
+          <button onClick={() => setModalAbierto(true)} aria-haspopup="dialog" className="relative z-10 bg-[#813893] text-white font-bold px-6 py-3 rounded-full hover:bg-[#662c74] transition-colors self-start">
             Quiero aportar
           </button>
         </motion.div>
@@ -828,21 +900,21 @@ function ApoyoSection() {
         }} whileHover={{
           y: -4
         }} className="relative overflow-hidden rounded-2xl p-6 border-2 border-[#b8d5be] bg-[#f6faf7] flex flex-col">
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#2a823c]/10 rounded-full blur-2xl" />
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#2a823c]/10 rounded-full blur-2xl" aria-hidden="true" />
           <span className="absolute top-5 right-5 bg-[#2a823c] text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">
             Edición limitada
           </span>
           <div className="bg-[#2a823c] text-white w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10">
             <ShoppingBag size={26} />
           </div>
-          <h4 className="font-bold text-[#343230] text-xl mb-2 relative z-10">
-            Preventa: Remera oficial del 39 Encuentro
+          <h4 aria-level={3} className="font-bold text-[#343230] text-xl mb-2 relative z-10">
+            Conseguí la Remera Oficial del 39 Encuentro
           </h4>
           <p className="text-sm text-[#343230]/70 mb-6 flex-1 relative z-10">
-            Reservá la tuya.
+           Encontrá la tuya en el Centro Cultural Córdoba
           </p>
           <Link to="/Preventa" className="relative z-10 bg-[#21662f] text-white font-bold px-6 py-3 rounded-full hover:bg-[#184b22] transition-colors self-start inline-flex items-center gap-2">
-            Ver preventa <ArrowRight size={16} />
+            Ver talles y colores disponibles <ArrowRight size={16} />
           </Link>
         </motion.div>
       </div>
@@ -875,8 +947,18 @@ function AgregarCalendarioButton() {
   useEffect(() => {
     if (!abierto) return;
     const cerrarPorScroll = () => setAbierto(false);
+    const onKey = e => {
+      if (e.key === 'Escape') {
+        setAbierto(false);
+        btnRef.current?.focus();
+      }
+    };
     window.addEventListener('scroll', cerrarPorScroll, { passive: true });
-    return () => window.removeEventListener('scroll', cerrarPorScroll);
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('scroll', cerrarPorScroll);
+      window.removeEventListener('keydown', onKey);
+    };
   }, [abierto]);
 
   const ANCHO_MENU = 220;
@@ -928,6 +1010,9 @@ function AgregarCalendarioButton() {
     <button
       ref={btnRef}
       onClick={toggle}
+      aria-expanded={abierto}
+      aria-haspopup="true"
+      aria-controls="menu-calendario"
       className="bg-white/10 border-2 border-white/25 text-white font-bold px-8 py-4 rounded-full hover:bg-white/20 transition-colors flex items-center justify-center gap-2 shadow-lg backdrop-blur-sm"
     >
       <Calendar size={18} />
@@ -938,6 +1023,7 @@ function AgregarCalendarioButton() {
     <AnimatePresence>
       {abierto && <motion.div
         ref={menuRef}
+        id="menu-calendario"
         initial={{ opacity: 0, y: -8, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: -8, scale: 0.97 }}
@@ -954,6 +1040,7 @@ function AgregarCalendarioButton() {
         >
           <Calendar size={16} className="text-[#813893]" />
           Google Calendar
+          <NuevaPestana />
         </a>
         <button
           onClick={descargarICS}
@@ -972,11 +1059,7 @@ function TinDigitalBanner() {
     <section id="tin-digital" className="pt-4 pb-16 px-4 bg-[#FFF1E3]">
       <div className="max-w-5xl mx-auto relative">
         {/* Halo que respira */}
-        <motion.div
-          animate={{ opacity: [0.25, 0.5, 0.25], scale: [1, 1.03, 1] }}
-          transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute -inset-3 bg-[#fdb10c]/40 rounded-[2rem] blur-2xl pointer-events-none"
-        />
+        <HaloRespira className="absolute -inset-3 bg-[#fdb10c]/40 rounded-[2rem] blur-2xl pointer-events-none" />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -986,7 +1069,7 @@ function TinDigitalBanner() {
           className="relative overflow-hidden rounded-3xl p-8 md:p-10 md:min-h-[240px] flex flex-col md:flex-row items-center gap-6 md:gap-10 ring-2 ring-[#fdb10c] shadow-xl shadow-[#184b22]/30"
           style={{ background: 'linear-gradient(90deg, #184b22, #2a823c)' }}
         >
-          <div className="absolute -top-20 -right-10 w-72 h-72 bg-[#fdb10c]/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -top-20 -right-10 w-72 h-72 bg-[#fdb10c]/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
 
           <div className="bg-[#fdb10c] text-[#4a2055] w-16 h-16 rounded-full flex items-center justify-center shrink-0 relative z-10">
             <Bus size={30} />
@@ -996,7 +1079,7 @@ function TinDigitalBanner() {
             <span className="inline-block bg-[#fdb10c] text-[#4a2055] text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
               Dato importante · 4 viajes 100% gratis
             </span>
-            <h3 className="text-white text-2xl sm:text-3xl font-black leading-tight mb-2">
+            <h3 aria-level={2} className="text-white text-2xl sm:text-3xl font-black leading-tight mb-2">
               ¡Tenemos transporte urbano gratis para Lxs Encuentrerxs!
             </h3>
             <p className="text-white/85 text-sm sm:text-base leading-relaxed mb-4">
@@ -1065,8 +1148,8 @@ function ConsignaSection() {
     <section id="consigna" className="relative py-12 px-4 overflow-hidden"
       style={{ background: 'linear-gradient(180deg, #21662f 0%, #184b22 100%)' }}>
       {/* Blobs decorativos, mismo lenguaje visual que el resto del sitio */}
-      <div className="absolute -top-24 -left-16 w-96 h-96 bg-[#813893]/40 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -right-16 w-96 h-96 bg-[#fdb10c]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-24 -left-16 w-96 h-96 bg-[#813893]/40 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
+      <div className="absolute -bottom-24 -right-16 w-96 h-96 bg-[#fdb10c]/15 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
 
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <motion.span
@@ -1104,6 +1187,8 @@ function ConsignaSection() {
             <button
               key={caso.id}
               onClick={() => setCasoAbierto(casoAbierto === caso.id ? null : caso.id)}
+              aria-expanded={casoAbierto === caso.id}
+              aria-controls="consigna-detalle"
               className="flex items-center justify-center gap-2 bg-white/10 border-2 border-white/25 text-white font-bold px-6 py-3 rounded-full hover:bg-white/20 transition-colors backdrop-blur-sm"
             >
               {caso.nombre}
@@ -1116,32 +1201,34 @@ function ConsignaSection() {
           ))}
         </motion.div>
 
-        <AnimatePresence mode="wait">
-          {casoAbierto && (
-            <motion.div
-              key={casoAbierto}
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="overflow-hidden"
-            >
-              <div className="mt-6 bg-white/10 border border-white/20 rounded-2xl p-6 text-left backdrop-blur-sm">
-                <h4 className="text-[#fdb10c] font-bold mb-2">
-                  {casos.find(c => c.id === casoAbierto).nombre}
-                </h4>
-                <p className="text-white/85 text-sm leading-relaxed whitespace-pre-line mb-4">
-                  {casos.find(c => c.id === casoAbierto).contenido}
-                </p>
-                <Link
-                  to={casos.find(c => c.id === casoAbierto).ruta}
-                  className="inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#fec449] transition-colors"
-                >
-                  Ver más sobre el caso <ArrowRight size={14} />
-                </Link>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div id="consigna-detalle">
+          <AnimatePresence mode="wait">
+            {casoAbierto && (
+              <motion.div
+                key={casoAbierto}
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="overflow-hidden"
+              >
+                <div className="mt-6 bg-white/10 border border-white/20 rounded-2xl p-6 text-left backdrop-blur-sm">
+                  <h4 aria-level={3} className="text-[#fdb10c] font-bold mb-2">
+                    {casos.find(c => c.id === casoAbierto).nombre}
+                  </h4>
+                  <p className="text-white/85 text-sm leading-relaxed whitespace-pre-line mb-4">
+                    {casos.find(c => c.id === casoAbierto).contenido}
+                  </p>
+                  <Link
+                    to={casos.find(c => c.id === casoAbierto).ruta}
+                    className="inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold text-sm px-5 py-2.5 rounded-full hover:bg-[#fec449] transition-colors"
+                  >
+                    Ver más sobre el caso <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );
@@ -1151,11 +1238,7 @@ function CuidadosBanner() {
     <section id="cuidados" className="py-12 px-4 bg-[#FFF1E3]">
       <div className="max-w-5xl mx-auto relative">
         {/* Halo que respira */}
-        <motion.div
-          animate={{ opacity: [0.25, 0.5, 0.25], scale: [1, 1.03, 1] }}
-          transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute -inset-3 bg-[#fdb10c]/40 rounded-[2rem] blur-2xl pointer-events-none"
-        />
+        <HaloRespira className="absolute -inset-3 bg-[#fdb10c]/40 rounded-[2rem] blur-2xl pointer-events-none" />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -1165,7 +1248,7 @@ function CuidadosBanner() {
           className="relative overflow-hidden rounded-3xl p-8 md:p-10 md:min-h-[240px] flex flex-col md:flex-row items-center gap-6 md:gap-10 ring-2 ring-[#fdb10c] shadow-xl shadow-[#4a2055]/30"
           style={{ background: 'linear-gradient(90deg, #813893, #4a2055)' }}
         >
-          <div className="absolute -top-20 -right-10 w-72 h-72 bg-[#fdb10c]/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -top-20 -right-10 w-72 h-72 bg-[#fdb10c]/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
 
           <div className="bg-[#fdb10c] text-[#4a2055] w-16 h-16 rounded-full flex items-center justify-center shrink-0 relative z-10">
             <ShieldCheck size={30} />
@@ -1175,7 +1258,7 @@ function CuidadosBanner() {
             <span className="inline-block bg-[#fdb10c] text-[#4a2055] text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
               Activemos red
             </span>
-            <h3 className="text-white text-2xl sm:text-3xl font-black leading-tight mb-2">
+            <h3 aria-level={2} className="text-white text-2xl sm:text-3xl font-black leading-tight mb-2">
               Red de Cuidados Colectivos
             </h3>
             <p className="text-white/85 text-sm sm:text-base leading-relaxed">
@@ -1315,8 +1398,8 @@ function EncuentroSection() {
       <div id="linea-tiempo" className="mt-20">
         <h3 className="text-center text-[#4a2055] mb-10">Hitos del Encuentro</h3>
         <div className="relative">
-          <div className="absolute top-5 left-0 right-0 h-0.5 bg-[#eadeed]" />
-          <div ref={timelineRef} className="flex overflow-x-auto overflow-y-visible gap-8 pb-4 scroll-smooth">
+          <div className="absolute top-5 left-0 right-0 h-0.5 bg-[#eadeed]" aria-hidden="true" />
+          <div ref={timelineRef} tabIndex={0} role="region" aria-label="Línea de tiempo: hitos del Encuentro" className="flex overflow-x-auto overflow-y-visible gap-8 pb-4 scroll-smooth">
             {[{
               año: '1986',
               hito: 'Primer Encuentro Nacional de Mujeres, Buenos Aires'
@@ -1348,7 +1431,7 @@ function EncuentroSection() {
               highlight: true
             }].map((item, i) => {
               const contenido = <>
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center z-10 mb-3 relative transition-transform ${item.highlight ? 'bg-[#fdb10c] border-4 border-[#fec449]/50' : 'bg-[#d5bddb] border-4 border-[#FFF1E3]'} ${item.link ? 'group-hover:scale-110' : ''}`}>
+                <div aria-hidden="true" className={`w-10 h-10 rounded-full flex items-center justify-center z-10 mb-3 relative transition-transform ${item.highlight ? 'bg-[#fdb10c] border-4 border-[#fec449]/50' : 'bg-[#d5bddb] border-4 border-[#FFF1E3]'} ${item.link ? 'group-hover:scale-110' : ''}`}>
                   <span className="text-xs font-black text-[#4a2055]">{item.año.slice(2)}</span>
                   {item.link && <span className="absolute -top-1 -right-1 bg-[#662c74] text-white rounded-full w-4 h-4 flex items-center justify-center shadow-sm">
                     <Search size={9} strokeWidth={3} />
@@ -1371,6 +1454,7 @@ function EncuentroSection() {
             {mostrarFlecha && <>
               <motion.div
                 key="fade-timeline"
+                aria-hidden="true"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -1378,6 +1462,7 @@ function EncuentroSection() {
               />
               <motion.div
                 key="flecha-timeline"
+                aria-hidden="true"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1, x: [0, 6, 0] }}
                 exit={{ opacity: 0 }}
@@ -1418,11 +1503,7 @@ function EjesSection() {
         >
           {/* Botón principal con halo que respira */}
           <div className="relative">
-            <motion.div
-              animate={{ opacity: [0.25, 0.5, 0.25], scale: [1, 1.04, 1] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute -inset-3 bg-[#fdb10c]/40 rounded-full blur-2xl pointer-events-none"
-            />
+            <HaloRespira scale={1.04} className="absolute -inset-3 bg-[#fdb10c]/40 rounded-full blur-2xl pointer-events-none" />
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }} className="relative">
               <Link
                 to="/Talleres"
@@ -1441,7 +1522,30 @@ function EjesSection() {
             </motion.div>
           </div>
 
-          {/* Botón secundario */}
+          {/* Botones en escalera, de mayor a menor: principal → personas sordas → guía */}
+          <div className="mt-8 flex flex-col items-center gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <a
+  href="https://docs.google.com/spreadsheets/d/1KgCetbvELFyvrhKGgS-8Jw4nJXDV5U2h/edit?gid=1792101971#gid=1792101971"
+  target="_blank"
+  rel="noreferrer"
+  className="group inline-flex items-center justify-center gap-3 bg-[#faf7fb] text-[#662c74] font-black px-8 sm:px-14 py-6 rounded-full hover:bg-[#eadeed] transition-colors shadow-xl shadow-[#4a2055]/20 ring-2 ring-[#813893] text-lg sm:text-2xl"
+>
+  <Hand size={28} className="text-[#813893] shrink-0" />
+  <span>Ver los Talleres con intérprete de ILSA-E</span>
+  <ExternalLink size={28} className="text-[#813893] shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+  <NuevaPestana />
+</a>
+          </motion.div>
+
+          {/* Botón chico: guía de talleres */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1449,7 +1553,6 @@ function EjesSection() {
             transition={{ duration: 0.5, delay: 0.35 }}
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.98 }}
-            className="mt-10"
           >
             <Link
               to="/GuiaTalleres"
@@ -1469,6 +1572,7 @@ function EjesSection() {
               <ArrowRight size={16} className="text-[#2a823c] shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </motion.div>
+          </div>
         </motion.div>
       </div>
     </div>
@@ -1540,11 +1644,12 @@ function CronogramaSection() {
         {/* Mobile: carrusel por días */}
         <div className="md:hidden">
           {/* Selector de días */}
-          <div className="flex gap-2 mb-4">
+          <div className="flex gap-2 mb-4" role="group" aria-label="Elegir día del cronograma">
             {dias.map((dia, i) => (
               <button
                 key={dia}
                 onClick={() => cambiarDia(i)}
+                aria-pressed={diaActivo === i}
                 className={`flex-1 py-2 px-4 rounded-xl text-sm font-bold transition-colors whitespace-nowrap ${diaActivo === i
                   ? 'bg-[#fdb10c] text-[#2f1435]'
                   : 'bg-white/10 text-white/70 hover:bg-white/20'
@@ -1556,7 +1661,7 @@ function CronogramaSection() {
           </div>
 
           {/* Tarjeta deslizable */}
-          <div className="overflow-hidden">
+          <div className="overflow-hidden" aria-live="polite">
             <AnimatePresence mode="wait" custom={direccion} initial={false}>
               <motion.div
                 key={dias[diaActivo]}
@@ -1579,7 +1684,7 @@ function CronogramaSection() {
 
           {/* Puntitos + pista */}
           <div className="flex flex-col items-center gap-2 mt-4">
-            <div className="flex gap-2">
+            <div className="flex gap-2" aria-hidden="true">
               {dias.map((dia, i) => (
                 <span
                   key={dia}
@@ -1598,11 +1703,7 @@ function ProgramacionBanner() {
   return (
     <div className="mt-14 relative max-w-5xl mx-auto">
       {/* Halo que respira */}
-      <motion.div
-        animate={{ opacity: [0.25, 0.5, 0.25], scale: [1, 1.03, 1] }}
-        transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -inset-3 bg-[#fdb10c]/40 rounded-[2rem] blur-2xl pointer-events-none"
-      />
+      <HaloRespira className="absolute -inset-3 bg-[#fdb10c]/40 rounded-[2rem] blur-2xl pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -1615,7 +1716,7 @@ function ProgramacionBanner() {
           className="relative overflow-hidden rounded-3xl p-8 md:p-10 md:min-h-[240px] flex flex-col md:flex-row items-center gap-6 md:gap-10 ring-2 ring-[#fdb10c] shadow-xl shadow-black/40"
           style={{ background: 'linear-gradient(90deg, #184b22, #2a823c)' }}
         >
-          <div className="absolute -top-20 -right-10 w-72 h-72 bg-[#fdb10c]/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -top-20 -right-10 w-72 h-72 bg-[#fdb10c]/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
 
           <div className="bg-[#fdb10c] text-[#4a2055] w-16 h-16 rounded-full flex items-center justify-center shrink-0 relative z-10">
             <MapPin size={30} />
@@ -1778,11 +1879,12 @@ function CulturalSection() {
 
       {/* Mobile: carrusel por días + bloque fijo */}
       <div className="md:hidden">
-        <div className="flex gap-2 mb-4">
+        <div className="flex gap-2 mb-4" role="group" aria-label="Elegir día de la grilla cultural">
           {dias.map((dia, i) => (
             <button
               key={dia.id}
               onClick={() => cambiarDia(i)}
+              aria-pressed={diaActivo === i}
               className={`flex-1 py-2 px-4 rounded-xl text-sm font-bold transition-colors whitespace-nowrap ${diaActivo === i
                 ? 'bg-[#fdb10c] text-[#2f1435]'
                 : 'bg-white/10 text-white/70 hover:bg-white/20'
@@ -1793,7 +1895,7 @@ function CulturalSection() {
           ))}
         </div>
 
-        <div className="overflow-hidden">
+        <div className="overflow-hidden" aria-live="polite">
           <AnimatePresence mode="wait" custom={direccion} initial={false}>
             <motion.div
               key={dias[diaActivo].id}
@@ -1815,7 +1917,7 @@ function CulturalSection() {
         </div>
 
         <div className="flex flex-col items-center gap-2 mt-4">
-          <div className="flex gap-2">
+          <div className="flex gap-2" aria-hidden="true">
             {dias.map((dia, i) => (
               <span
                 key={dia.id}
@@ -1830,10 +1932,10 @@ function CulturalSection() {
           {renderTodoElFinde()}
         </div>
       </div>
-      <ProgramacionBanner />      
-     <CarteleraEscenarios />
-      
-      
+      <ProgramacionBanner />
+      <CarteleraEscenarios />
+
+
     </div>
   </section>;
 }
@@ -1850,6 +1952,8 @@ function CarteleraEscenarios() {
           <div key={bloque.id} className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
             <button
               onClick={() => setEscenarioAbierto(escenarioAbierto === bloque.id ? null : bloque.id)}
+              aria-expanded={escenarioAbierto === bloque.id}
+              aria-controls={`escenario-${bloque.id}`}
               className="w-full text-left p-6 flex justify-between items-start gap-4 hover:bg-white/10 transition-colors"
             >
               <div>
@@ -1869,6 +1973,7 @@ function CarteleraEscenarios() {
             <AnimatePresence>
               {escenarioAbierto === bloque.id && (
                 <motion.div
+                  id={`escenario-${bloque.id}`}
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
@@ -1986,7 +2091,7 @@ Súmate a ocupar espacios que son para todas, todes. Este Encuentro es de TODAS,
               <div className={`${sub.iconBg} w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10`}>
                 {sub.icono}
               </div>
-              <h4 className="font-bold text-white text-xl mb-2 relative z-10">
+              <h4 aria-level={3} className="font-bold text-white text-xl mb-2 relative z-10">
                 {sub.titulo}
               </h4>
               <p className="text-sm text-white/70 relative z-10 flex-1">
@@ -1996,6 +2101,7 @@ Súmate a ocupar espacios que son para todas, todes. Este Encuentro es de TODAS,
               {sub.link && (
                 <Link
                   to={sub.link}
+                  aria-label={`Ver más sobre la ${sub.titulo}`}
                   className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10"
                 >
                   Ver más
@@ -2006,9 +2112,12 @@ Súmate a ocupar espacios que son para todas, todes. Este Encuentro es de TODAS,
               {sub.contenido && (
                 <button
                   onClick={() => setTarjetaAbierta(tarjetaAbierta === sub.id ? null : sub.id)}
+                  aria-expanded={tarjetaAbierta === sub.id}
+                  aria-controls={`subcomision-${sub.id}`}
                   className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10"
                 >
                   {tarjetaAbierta === sub.id ? 'Ver menos' : 'Ver más'}
+                  <span className="sr-only"> sobre la {sub.titulo}</span>
                   <ChevronDown
                     size={14}
                     className="transition-transform"
@@ -2022,6 +2131,7 @@ Súmate a ocupar espacios que son para todas, todes. Este Encuentro es de TODAS,
               <AnimatePresence>
                 {tarjetaAbierta === sub.id && (
                   <motion.div
+                    id={`subcomision-${sub.id}`}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
@@ -2077,7 +2187,7 @@ function CancioneroSection() {
         }} transition={{
           delay: i * 0.05
         }} className="bg-white/5 rounded-2xl border border-white/15 overflow-hidden">
-          <button onClick={() => setCancionAbierta(cancionAbierta === cancion.id ? null : cancion.id)} className="w-full text-left p-6 flex justify-between items-start gap-4 hover:bg-white/10 transition-colors">
+          <button onClick={() => setCancionAbierta(cancionAbierta === cancion.id ? null : cancion.id)} aria-expanded={cancionAbierta === cancion.id} aria-controls={`cancion-${cancion.id}`} className="w-full text-left p-6 flex justify-between items-start gap-4 hover:bg-white/10 transition-colors">
             <div className="flex-1">
               <h3 className="text-lg font-bold text-white mb-1">{cancion.titulo}</h3>
               <p className="text-sm text-white/60 italic">{cancion.artista}</p>
@@ -2088,7 +2198,7 @@ function CancioneroSection() {
           </button>
 
           <AnimatePresence>
-            {cancionAbierta === cancion.id && <motion.div initial={{
+            {cancionAbierta === cancion.id && <motion.div id={`cancion-${cancion.id}`} initial={{
               height: 0,
               opacity: 0
             }} animate={{
@@ -2183,6 +2293,7 @@ function MapaEmbed() {
         >
           <ExternalLink size={16} />
           Abrir el mapa en pantalla completa
+          <NuevaPestana />
         </a>
       </div>
     </div>
@@ -2252,7 +2363,7 @@ function MapaEncuentro() {
       <div className="absolute top-1/3 right-1/4 w-56 h-56 rounded-full bg-[#fdb10c]/10 blur-3xl pointer-events-none" />
 
       {/* Trazo tipo "río" */}
-      <svg viewBox="0 0 800 400" className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+      <svg viewBox="0 0 800 400" className="absolute inset-0 w-full h-full" preserveAspectRatio="none" aria-hidden="true">
         <motion.path
           d="M 160 100 C 260 160, 300 220, 400 200 C 500 180, 560 260, 640 320"
           fill="none"
@@ -2279,7 +2390,7 @@ function MapaEncuentro() {
             style={{ top: z.top, left: z.left }}
           >
             <span
-              className="absolute rounded-full animate-ping opacity-30"
+              className="absolute rounded-full motion-safe:animate-ping opacity-30"
               style={{
                 backgroundColor: z.color,
                 width: z.big ? '2.75rem' : '2rem',
@@ -2344,8 +2455,10 @@ function SedeSection() {
     expandible: true,
     contenido: '👉🏽 Estamos trabajando para ofrecer opciones de la economía popular, accesibles y con propuestas sin TACC y veganas para habitar el encuentro entre todxs.'
   }];
-  return <section id="sede" className="pt-6 pb-24 px-4 bg-[#FFF1E3]">
+  return <section id="sede" aria-labelledby="titulo-sede" className="pt-6 pb-24 px-4 bg-[#FFF1E3]">
     <div className="max-w-6xl mx-auto">
+      {/* Título solo para lectores de pantalla: la sección no tenía uno */}
+      <h2 id="titulo-sede" className="sr-only">Mapa del Encuentro</h2>
       <div className="text-center mb-12 relative">
         <IlustracionSticker
           src="/images/ilustraciones/retratos.svg"
@@ -2470,7 +2583,9 @@ function PrensaSection() {
           <h3 className="text-white mb-3">{item.titulo}</h3>
           <p className="text-white/70 mb-6 text-sm">{item.desc}</p>
           <Link to={item.link} className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 font-bold text-sm px-5 py-2.5 rounded-full transition-colors">
-            {item.cta} <ArrowRight size={14} />
+            {item.cta}
+            {item.cta === 'Ver más' && <span className="sr-only"> sobre el kit de prensa y acreditaciones</span>}
+            <ArrowRight size={14} />
           </Link>
         </motion.div>)}
       </div>
@@ -2486,14 +2601,14 @@ function FaqSection() {
       <div className="max-w-3xl mx-auto">
         <h2 className="text-[#4a2055] text-center mb-10">Preguntas frecuentes</h2>
         {FAQ.map((item, i) => <div key={i} className="border-b border-[#eadeed]">
-          <button onClick={() => setFaqAbierta(faqAbierta === i ? null : i)} className="w-full text-left py-5 flex justify-between items-center gap-4">
+          <button onClick={() => setFaqAbierta(faqAbierta === i ? null : i)} aria-expanded={faqAbierta === i} aria-controls={`faq-respuesta-${i}`} className="w-full text-left py-5 flex justify-between items-center gap-4">
             <span className="font-semibold text-[#343230]">{item.pregunta}</span>
             <ChevronDown size={18} className="text-[#813893] shrink-0 transition-transform" style={{
               transform: faqAbierta === i ? 'rotate(180deg)' : 'rotate(0deg)'
             }} />
           </button>
           <AnimatePresence>
-            {faqAbierta === i && <motion.div initial={{
+            {faqAbierta === i && <motion.div id={`faq-respuesta-${i}`} initial={{
               height: 0,
               opacity: 0
             }} animate={{
@@ -2513,27 +2628,29 @@ function FaqSection() {
 }
 export function FooterSection() {
   return <footer className="bg-[#2f1435] text-white">
+    {/* Título solo para lectores de pantalla */}
+    <h2 className="sr-only">Contacto e información del Encuentro</h2>
     {/* Contacto */}
     <div className="pt-16 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           <div>
-            <h4 className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">Contacto general</h4>
+            <h4 aria-level={3} className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">Contacto general</h4>
             <div className="flex items-center gap-2 text-white/70 mb-2">
               <div>
                 <HiddenMail mail="39encuentropluri.cba@proton.me" ariaLabel="Correo electrónico" className="text-white/60 hover:text-white transition-colors"><Mail size={20} /></HiddenMail>
               </div>
               <div>
-                <a href="https://www.instagram.com/39encuentropluri.cba/" aria-label="Instagram" target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors"><Instagram size={20} /></a>
+                <a href="https://www.instagram.com/39encuentropluri.cba/" aria-label="Instagram (se abre en otra pestaña)" target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors"><Instagram size={20} /></a>
               </div>
               <div>
-                <a href="https://www.facebook.com/people/39-Encuentro-Plurinacional-C%C3%B3rdoba-2026/61584355586326/#" aria-label="Facebook" target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors"><Facebook size={20} /></a>
+                <a href="https://www.facebook.com/people/39-Encuentro-Plurinacional-C%C3%B3rdoba-2026/61584355586326/#" aria-label="Facebook (se abre en otra pestaña)" target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition-colors"><Facebook size={20} /></a>
               </div>
             </div>
           </div>
 
           <div className="md:col-span-2">
-            <h4 className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">Comisiones</h4>
+            <h4 aria-level={3} className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">Comisiones</h4>
             <div className="grid grid-cols-2 gap-x-6">
               {[
                 { label: 'Organización y logística', mail: 'orgylogistica.39encuentro@gmail.com' },
@@ -2560,7 +2677,7 @@ export function FooterSection() {
           </div>
 
           <div>
-            <h4 className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">El Encuentro</h4>
+            <h4 aria-level={3} className="text-[#fec449] font-bold mb-4 uppercase tracking-wider text-sm">El Encuentro</h4>
             <p className="text-white/60 text-sm leading-relaxed">
               39° Encuentro Plurinacional de Mujeres, Lesbianas, Trans, Travestis, Bisexuales, Intersex y No Binaries.<br />
               Córdoba Capital · 10, 11 y 12 de octubre de 2026.
@@ -2585,25 +2702,38 @@ export function FooterSection() {
 // ─── PÁGINA PRINCIPAL ─────────────────────────────────────────────────────────
 
 export default function HomePage() {
-  return <div className="relative font-body">
-    <ScrollProgressBar />
-    <CountdownBanner />
-    <Navbar />
-    <BackToTop />
-    <HeroSection />
-    <CronogramaSection />
-    <EjesSection />
-    <SedeSection />
-    <TinDigitalBanner />
-    <CulturalSection />
-    <CuidadosBanner />
-    <ApoyoSection />
-    <PrensaSection />
-    <EncuentroSection />
-    <ConsignaSection />
-    <SubcomisionesSection />
-    <CancioneroSection />
-    <FaqSection />
-    <FooterSection />
-  </div>;
+  // reducedMotion="user": si la persona activó "reducir movimiento" en su
+  // dispositivo, framer-motion apaga desplazamientos y escalas. Para el resto, no cambia nada.
+  return <MotionConfig reducedMotion="user">
+    <div className="relative font-body">
+      {/* Enlace para saltar al contenido: invisible hasta que se llega con Tab */}
+      <a
+        href="#contenido"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[200] focus:bg-[#fdb10c] focus:text-[#2f1435] focus:font-bold focus:px-4 focus:py-2 focus:rounded-full"
+      >
+        Saltar al contenido
+      </a>
+      <ScrollProgressBar />
+      <CountdownBanner />
+      <Navbar />
+      <BackToTop />
+      <main id="contenido" tabIndex={-1} className="outline-none">
+        <HeroSection />
+        <CronogramaSection />
+        <EjesSection />
+        <SedeSection />
+        <TinDigitalBanner />
+        <CulturalSection />
+        <CuidadosBanner />
+        <ApoyoSection />
+        <PrensaSection />
+        <EncuentroSection />
+        <ConsignaSection />
+        <SubcomisionesSection />
+        <CancioneroSection />
+        <FaqSection />
+      </main>
+      <FooterSection />
+    </div>
+  </MotionConfig>;
 }

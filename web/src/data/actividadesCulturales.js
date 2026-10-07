@@ -31,7 +31,7 @@ const CARTELERA_ESCENARIOS = [
         procedencia: 'Córdoba',
       },
       {
-        nombre: 'Acto de Apertura - 12 a 13 hs.',
+        nombre: 'Acto de Apertura - 11 a 12 hs.',
         descripción: 'Lectura de documento',
       },
     

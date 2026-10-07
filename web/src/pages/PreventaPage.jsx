@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Copy, Check, ShoppingBag, Ruler, MessageCircle, Clock, MapPin } from 'lucide-react';
+import { ShoppingBag, Ruler, MessageCircle, MapPin } from 'lucide-react';
 import { CountdownBanner, Navbar, FooterSection } from '@/pages/HomePage.jsx';
 import TitleSection from '@/components/TitleSection.jsx';
 import TitleSectionTransparent from '@/components/TitleSectionTransparent.jsx';
@@ -15,7 +15,6 @@ const PRODUCTOS = [
         descripcion: 'Remera oficial del 39° Encuentro, algodón 100%.',
         precio: '1 por $30.000 o 2 por $50.000',
         tieneTalles: true,
-        link: 'https://forms.gle/3H8ZkRNT7kUJD11h9',
         colores: [
             { nombre: 'Negra', hex: '#111111', imagen: '/images/remeras/Negra.png' },
             { nombre: 'Violeta', hex: '#813893', imagen: '/images/remeras/Violeta.png' }
@@ -34,71 +33,11 @@ const TALLES_REMERA = [
     { talle: 'XXXL', pecho: '70 cm', largo: '92 cm' }
 ];
 
-// ─── DATOS DE PAGO ──────────────────────────────────────────────────────────
+// ─── DÓNDE CONSEGUIRLA ──────────────────────────────────────────────────────
 
-const DATOS_PAGO = [
-    { label: 'Alias', valor: 'cordoba-39encuentro' },
-    { label: 'CBU', valor: '0000003100098523074578' },
-    { label: 'Titular', valor: 'CORDOBA - 39 PLURINACIONAL DE CORDOBA' }
-];
-
-// ─── PASOS PARA RESERVAR ────────────────────────────────────────────────────
-
-const PASOS_RESERVA = [
-    {
-        titulo: 'Elegí tu producto y talle',
-        desc: 'Completá los datos solicitados en el form y elegí la cantidad de remeras, el color y talle de cada una.'
-    },
-    {
-        titulo: 'Transferí el pago',
-        desc: 'Hacé la transferencia por el monto total al alias o cbu que figuran en el form.'
-    },
-    {
-        titulo: 'Enviá tu comprobante',
-        desc: 'Adjuntá el comprobante.'
-    },
-    {
-        titulo: 'Retirá tu pedido',
-        desc: 'El retiro se hace en un punto habilitado durante el Encuentro (a confirmar).'
-    }
-];
+const PUNTO_DE_VENTA = 'Conseguí tu remera en el Centro Cultural Córdoba, al lado del punto de acreditaciones.';
 
 // ─── COMPONENTES AUXILIARES ─────────────────────────────────────────────────
-
-function CampoPago({ label, valor }) {
-    const [copiado, setCopiado] = useState(false);
-    const copiar = async () => {
-        try {
-            await navigator.clipboard.writeText(valor);
-            setCopiado(true);
-            setTimeout(() => setCopiado(false), 1800);
-        } catch (e) {
-            // Si el navegador bloquea el clipboard, no rompemos nada
-        }
-    };
-    const esTitular = label === 'Titular';
-    return (
-        <div className="flex items-center justify-between gap-3 bg-[#faf7fb] rounded-xl px-4 py-3 border border-[#eadeed]">
-            <div className="min-w-0">
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">{label}</p>
-                <p className="text-sm font-semibold text-[#343230] truncate">{valor}</p>
-            </div>
-            {!esTitular && (
-                <button
-                    onClick={copiar}
-                    className="shrink-0 flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-full transition-colors"
-                    style={{
-                        backgroundColor: copiado ? '#dceade' : '#eadeed',
-                        color: copiado ? '#21662f' : '#662c74'
-                    }}
-                >
-                    {copiado ? <Check size={14} /> : <Copy size={14} />}
-                    {copiado ? 'Copiado' : 'Copiar'}
-                </button>
-            )}
-        </div>
-    );
-}
 
 function ProductoCard({ producto, index }) {
     const [colorActivo, setColorActivo] = useState(0);
@@ -129,11 +68,12 @@ function ProductoCard({ producto, index }) {
             </div>
 
             {tieneColores && (
-                <div className="flex items-center gap-2 px-6 pt-5">
+                <div className="flex items-center gap-2 px-6 pt-5" role="group" aria-label="Elegir color de la remera">
                     {producto.colores.map((color, i) => (
                         <button
                             key={color.nombre}
                             onClick={() => setColorActivo(i)}
+                            aria-pressed={colorActivo === i}
                             className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-full border-2 transition-colors"
                             style={{
                                 borderColor: colorActivo === i ? '#813893' : '#eadeed',
@@ -142,6 +82,7 @@ function ProductoCard({ producto, index }) {
                             }}
                         >
                             <span
+                                aria-hidden="true"
                                 className="w-3 h-3 rounded-full border border-black/10 shrink-0"
                                 style={{ backgroundColor: color.hex }}
                             />
@@ -155,14 +96,27 @@ function ProductoCard({ producto, index }) {
                 <h3 className="text-[#343230] mb-1">{producto.nombre}</h3>
                 <p className="text-sm text-gray-500 mb-3">{producto.descripcion}</p>
                 <p className="text-sm font-bold text-gray-800">{producto.precio}</p>
-                <a
-                    href={producto.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-bold text-[#662c74] hover:underline"
-                >
-                    Para reservar, llená este formulario de Google <ExternalLink size={14} style={{ display: 'inline' }} />
-                </a>
+            </div>
+        </motion.div>
+    );
+}
+
+// Bloque chico: ícono a la izquierda, título y texto a la derecha
+function InfoChica({ icono, fondoIcono, titulo, texto, delay = 0 }) {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay }}
+            className="bg-[#faf7fb] border border-[#eadeed] rounded-3xl p-6 flex items-start gap-4"
+        >
+            <div className={`${fondoIcono} w-12 h-12 rounded-full flex items-center justify-center shrink-0`}>
+                {icono}
+            </div>
+            <div>
+                <h3 className="text-[#343230] text-lg font-bold mb-1">{titulo}</h3>
+                <p className="text-sm text-gray-500">{texto}</p>
             </div>
         </motion.div>
     );
@@ -174,32 +128,27 @@ export default function PreventaPage() {
     return (
         <div className="relative min-h-screen bg-[#FFF1E3] text-[#343230]">
             <Helmet>
-                <title>Preventa: Remeras 39 Encuentro</title>
+                <title>Remeras 39° Encuentro</title>
             </Helmet>
             <CountdownBanner />
             <Navbar />
 
-            <TitleSection title="Preventa: Remeras 39° Encuentro" />
+            <TitleSection title="Remeras 39° Encuentro" />
 
             <main className="relative z-10 mx-auto max-w-6xl px-4 pb-24 pt-8 sm:px-6 lg:px-8">
 
-                {/* Productos */}
-                <section className="mb-10">
-                    <div className="grid sm:grid-cols-2 gap-6">
-                        {PRODUCTOS.map((producto, i) => (
-                            <ProductoCard key={producto.id} producto={producto} index={i} />
-                        ))}
-                    </div>
-                </section>
-
+                {/* Fila 1: remera + tabla de talles */}
                 <div className="grid md:grid-cols-2 gap-6">
+                    {PRODUCTOS.map((producto, i) => (
+                        <ProductoCard key={producto.id} producto={producto} index={i} />
+                    ))}
 
                     {/* Tabla de talles */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
                         className="bg-[#faf7fb] border border-[#eadeed] rounded-3xl p-7"
                     >
                         <div className="bg-[#813893] text-white w-12 h-12 rounded-full flex items-center justify-center mb-4">
@@ -227,103 +176,28 @@ export default function PreventaPage() {
                             </table>
                         </div>
                         <p className="text-xs text-gray-400 mt-3">
-                            Medidas tomadas de prenda extendida. 
+                            Medidas tomadas de prenda extendida.
                         </p>
-                    </motion.div>
-
-                    {/* Datos de pago */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
-                        className="bg-[#faf7fb] border border-[#eadeed] rounded-3xl p-7"
-                    >
-                        <div className="bg-[#fdb10c] text-[#4a2055] w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                            <Copy size={22} />
-                        </div>
-                        <h3 className="text-[#343230] mb-4">Datos para transferir</h3>
-                        <div className="space-y-3">
-                            {DATOS_PAGO.map(campo => (
-                                <CampoPago key={campo.label} label={campo.label} valor={campo.valor} />
-                            ))}
-                        </div>
-                    </motion.div>
-
-                    {/* Cómo reservar */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                        className="bg-[#faf7fb] border border-[#eadeed] rounded-3xl p-7 md:col-span-2"
-                    >
-                        <div className="bg-[#2a823c] text-white w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                            <ShoppingBag size={22} />
-                        </div>
-                        <h3 className="text-[#343230] mb-5">Cómo reservar</h3>
-                        <div className="grid sm:grid-cols-2 gap-5">
-                            {PASOS_RESERVA.map((paso, i) => (
-                                <div key={i} className="flex gap-4">
-                                    <div className="shrink-0 w-8 h-8 rounded-full bg-[#eadeed] text-[#662c74] font-bold flex items-center justify-center text-sm">
-                                        {i + 1}
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-[#343230]">{paso.titulo}</p>
-                                        <p className="text-sm text-gray-500">{paso.desc}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </motion.div>
-
-                    {/* Fecha límite */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
-                        className="bg-[#faf7fb] border border-[#eadeed] rounded-3xl p-7 flex flex-col"
-                    >
-                        <div className="bg-[#813893] text-white w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                            <Clock size={22} />
-                        </div>
-                        <h4 className="text-[#343230] mb-1">Fecha límite para pedir tu remera</h4>
-                        <p className="text-sm text-gray-500">A confirmar.</p>
-                    </motion.div>
-
-                    {/* Retiro */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.4 }}
-                        className="bg-[#faf7fb] border border-[#eadeed] rounded-3xl p-7 flex flex-col"
-                    >
-                        <div className="bg-[#fdb10c] text-[#4a2055] w-12 h-12 rounded-full flex items-center justify-center mb-4">
-                            <MapPin size={22} />
-                        </div>
-                        <h4 className="text-[#343230] mb-1">Retiro</h4>
-                        <p className="text-sm text-gray-500">Durante el Encuentro, en un punto a confirmar.</p>
                     </motion.div>
                 </div>
 
-                {/* Contacto */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                    className="mt-10 bg-[#faf7fb] border-2 border-[#813893]/25 rounded-3xl p-8 text-center"
-                >
-                    <div className="bg-[#813893] text-white w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <MessageCircle size={24} />
-                    </div>
-                    <h3 className="text-[#343230] mb-2">¿Tenés dudas sobre la preventa?</h3>
-                    <p className="text-gray-500 text-sm">
-                        Escribinos por MP de Instagram.
-                    </p>
-                </motion.div>
+                {/* Fila 2: dos bloques chicos iguales */}
+                <div className="grid md:grid-cols-2 gap-6 mt-6">
+                    <InfoChica
+                        icono={<MapPin size={22} />}
+                        fondoIcono="bg-[#fdb10c] text-[#4a2055]"
+                        titulo="Dónde conseguirla"
+                        texto={PUNTO_DE_VENTA}
+                        delay={0.2}
+                    />
+                    <InfoChica
+                        icono={<MessageCircle size={22} />}
+                        fondoIcono="bg-[#813893] text-white"
+                        titulo="¿Tenés dudas sobre las remeras?"
+                        texto="Escribinos por MP de Instagram."
+                        delay={0.3}
+                    />
+                </div>
             </main>
 
             <FooterSection />
