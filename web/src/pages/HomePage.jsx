@@ -758,7 +758,7 @@ function DonacionesModal({
 
 function ApoyoSection() {
   const [modalAbierto, setModalAbierto] = useState(false);
-  return <section className="py-24 px-4 relative overflow-hidden bg-[#FFF1E3]">
+  return <section className="py-24 px-4 relative overflow-hidden bg-[#184b22]">
     {/* Fondo decorativo */}
     <div className="absolute inset-0 pointer-events-none">
       <div className="absolute -top-20 -left-20 w-80 h-80 bg-[#fdb10c]/10 rounded-full blur-3xl" />
@@ -774,8 +774,8 @@ function ApoyoSection() {
           rotate={5}
           className="hidden md:block absolute left-0 md:right-8 lg:right-10 -top-6"
         />
-        <h2 className="text-[#4a2055] mb-3">Sumate a sostener el Encuentro</h2>
-        <p className="text-[#343230]/70 max-w-xl mx-auto">
+        <h2 className="text-white mb-3">Sumate a sostener el Encuentro</h2>
+        <p className="text-white/75 max-w-xl mx-auto">
           Dos formas de aportar a la organización colectiva, sin sponsors ni financiamiento estatal.
         </p>
       </div>
@@ -1063,10 +1063,10 @@ function ConsignaSection() {
 
   return (
     <section id="consigna" className="relative py-12 px-4 overflow-hidden"
-      style={{ background: 'linear-gradient(90deg, #813893, #2a823c)' }}>
+      style={{ background: 'linear-gradient(180deg, #21662f 0%, #184b22 100%)' }}>
       {/* Blobs decorativos, mismo lenguaje visual que el resto del sitio */}
-      <div className="absolute -top-24 -left-16 w-80 h-80 bg-[#fdb10c]/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -right-16 w-96 h-96 bg-[#2a823c]/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-24 -left-16 w-96 h-96 bg-[#813893]/40 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-24 -right-16 w-96 h-96 bg-[#fdb10c]/15 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <motion.span
@@ -1148,7 +1148,7 @@ function ConsignaSection() {
 }
 function CuidadosBanner() {
   return (
-    <section id="cuidados" className="py-12 px-4 bg-[#f6faf7]">
+    <section id="cuidados" className="py-12 px-4 bg-[#FFF1E3]">
       <div className="max-w-5xl mx-auto relative">
         {/* Halo que respira */}
         <motion.div
@@ -1162,8 +1162,8 @@ function CuidadosBanner() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="relative overflow-hidden rounded-3xl p-8 md:p-10 md:min-h-[240px] flex flex-col md:flex-row items-center gap-6 md:gap-10 ring-2 ring-[#fdb10c] shadow-xl shadow-[#184b22]/30"
-          style={{ background: 'linear-gradient(90deg, #184b22, #2a823c)' }}
+          className="relative overflow-hidden rounded-3xl p-8 md:p-10 md:min-h-[240px] flex flex-col md:flex-row items-center gap-6 md:gap-10 ring-2 ring-[#fdb10c] shadow-xl shadow-[#4a2055]/30"
+          style={{ background: 'linear-gradient(90deg, #813893, #4a2055)' }}
         >
           <div className="absolute -top-20 -right-10 w-72 h-72 bg-[#fdb10c]/20 rounded-full blur-3xl pointer-events-none" />
 
@@ -1185,7 +1185,7 @@ function CuidadosBanner() {
 
           <Link
             to="/Cuidados"
-            className="relative z-10 shrink-0 inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-black text-base px-6 py-3 rounded-full hover:bg-[#fec449] transition-colors shadow-xl shadow-[#184b22]/50"
+            className="relative z-10 shrink-0 inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-black text-base px-6 py-3 rounded-full hover:bg-[#fec449] transition-colors shadow-xl shadow-[#4a2055]/50"
           >
             Ver herramientas
             <motion.span
@@ -1516,7 +1516,7 @@ function CronogramaSection() {
   );
 
   return (
-    <section id="cronograma" className="py-24 px-4 bg-[#2f1435] text-white">
+    <section id="cronograma" className="py-24 px-4 bg-[#184b22] text-white">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-4 md:gap-6">
@@ -1613,7 +1613,7 @@ function ProgramacionBanner() {
       >
         <div
           className="relative overflow-hidden rounded-3xl p-8 md:p-10 md:min-h-[240px] flex flex-col md:flex-row items-center gap-6 md:gap-10 ring-2 ring-[#fdb10c] shadow-xl shadow-black/40"
-          style={{ background: 'linear-gradient(90deg, #813893, #4a2055)' }}
+          style={{ background: 'linear-gradient(90deg, #184b22, #2a823c)' }}
         >
           <div className="absolute -top-20 -right-10 w-72 h-72 bg-[#fdb10c]/20 rounded-full blur-3xl pointer-events-none" />
 
@@ -2043,7 +2043,7 @@ Súmate a ocupar espacios que son para todas, todes. Este Encuentro es de TODAS,
 
 function CancioneroSection() {
   const [cancionAbierta, setCancionAbierta] = useState(null);
-  return <section id="cancionero" className="py-24 px-4 bg-[#2f1435]">
+  return <section id="cancionero" className="py-24 px-4 bg-[#184b22]">
     <div className="max-w-4xl mx-auto">
       <div className="text-center mb-12 relative">
         <IlustracionSticker
@@ -2427,10 +2427,10 @@ function SedeSection() {
   </section>;
 }
 function PrensaSection() {
-  return <section id="prensa" className="py-24 px-4 bg-[#FFF1E3]">
+  return <section id="prensa" className="py-24 px-4 bg-[#2f1435]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-12">
-        <h2 className="text-[#343230] mb-4">Prensa y Comunicación</h2>
+        <h2 className="text-white mb-4">Prensa y Comunicación</h2>
       </div>
 
       <div className="grid md:grid-cols-3 gap-6">
@@ -2482,13 +2482,13 @@ function FaqSection() {
   const [faqAbierta, setFaqAbierta] = useState(null);
   return <>
     {/* FAQ */}
-    <div id="faq" className="py-12 px-4 border-b border-white/10 bg-[#2f1435] text-white">
+    <div id="faq" className="py-12 px-4 border-b border-[#eadeed] bg-[#FFF1E3] text-[#343230]">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-white text-center mb-10">Preguntas frecuentes</h2>
-        {FAQ.map((item, i) => <div key={i} className="border-b border-white/10">
+        <h2 className="text-[#4a2055] text-center mb-10">Preguntas frecuentes</h2>
+        {FAQ.map((item, i) => <div key={i} className="border-b border-[#eadeed]">
           <button onClick={() => setFaqAbierta(faqAbierta === i ? null : i)} className="w-full text-left py-5 flex justify-between items-center gap-4">
-            <span className="font-semibold text-white/90">{item.pregunta}</span>
-            <ChevronDown size={18} className="text-[#fdb10c] shrink-0 transition-transform" style={{
+            <span className="font-semibold text-[#343230]">{item.pregunta}</span>
+            <ChevronDown size={18} className="text-[#813893] shrink-0 transition-transform" style={{
               transform: faqAbierta === i ? 'rotate(180deg)' : 'rotate(0deg)'
             }} />
           </button>
@@ -2503,7 +2503,7 @@ function FaqSection() {
               height: 0,
               opacity: 0
             }} className="overflow-hidden">
-              <div className="text-white/60 pb-5 text-sm leading-relaxed">{item.respuesta}</div>
+              <div className="text-[#343230]/75 pb-5 text-sm leading-relaxed">{item.respuesta}</div>
             </motion.div>}
           </AnimatePresence>
         </div>)}
