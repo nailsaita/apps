@@ -48,7 +48,7 @@ const CRONOGRAMA = {
     actividad: 'Acto de cierre, elección de la próxima sede y lectura de conclusiones'
   }, {
     hora: '17:00 hs',
-    actividad: 'Ceremonia ancestral de cierre'
+    actividad: 'Ceremonia espiritual de cierre'
   }]
 };
 export default CRONOGRAMA;
