@@ -1830,9 +1830,9 @@ function CulturalSection() {
           {renderTodoElFinde()}
         </div>
       </div>
-
+      <ProgramacionBanner />      
      <CarteleraEscenarios />
-      <ProgramacionBanner />
+      
       
     </div>
   </section>;
