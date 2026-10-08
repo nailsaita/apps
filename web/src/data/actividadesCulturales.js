@@ -15,6 +15,10 @@ const CARTELERA_ESCENARIOS = [
         procedencia: 'Córdoba',
       },
       {
+        nombre: 'Acto de Apertura - 11 a 12 hs.',
+        descripción: 'Lectura de documento',
+      },
+      {
         nombre: 'Le Tupak',
         procedencia: 'Córdoba',
       },
@@ -30,10 +34,7 @@ const CARTELERA_ESCENARIOS = [
         nombre: 'Cancionero Feminista',
         procedencia: 'Córdoba',
       },
-      {
-        nombre: 'Acto de Apertura - 11 a 12 hs.',
-        descripción: 'Lectura de documento',
-      },
+      
     
       {
         nombre: 'Batucada Emergente y Yaraí Danza',
@@ -61,8 +62,13 @@ const CARTELERA_ESCENARIOS = [
         procedencia: 'Córdoba',
       },
       {
-        nombre: 'Beija Dloe',
+        nombre: 'Beija Flor',
         procedencia: 'Buenos Aires',
+      },
+      {
+        nombre: 'Corazón Idiota, concierto cómico',
+        procedencia: 'Córdoba',
+        descripcion: ''
       },
       {
         nombre: 'La Pícara Folk',
@@ -70,14 +76,15 @@ const CARTELERA_ESCENARIOS = [
         descripcion: ''
       },
       {
-        nombre: 'Río Jarana, batucada',
-        procedencia: 'Neuquén',
-      },
-      {
         nombre: 'GiseVe',
         procedencia: 'Neuquén',
         descripcion: ''
       },
+      {
+        nombre: 'Río Jarana, batucada',
+        procedencia: 'Neuquén',
+      },
+      
     ]
   },
   {
@@ -132,7 +139,7 @@ const CARTELERA_ESCENARIOS = [
         procedencia: 'Córdoba',
       },
       {
-        nombre: 'Perfo de ATTA',
+        nombre: 'Perfo de ATTTA, Íconos trans de Córdoba',
         procedencia: 'Córdoba',
       },
       {
@@ -151,10 +158,16 @@ const CARTELERA_ESCENARIOS = [
     horario: '21:30 a 03 hs',
     estado: '',
     actividades: [
+      
 
       {
         nombre: 'Norma Salica - Poema visibilidad lésbica',
         procedencia: 'Tucumán',
+        descripcion: ''
+      },
+       {
+        nombre: 'Club Chantilli',
+        procedencia: 'Córdoba',
         descripcion: ''
       },
       {
@@ -162,18 +175,9 @@ const CARTELERA_ESCENARIOS = [
         procedencia: 'Córdoba',
         descripcion: ''
       },
-      {
-        nombre: 'Club Chantilli',
-        procedencia: 'Córdoba',
-        descripcion: ''
-      },
+     
       {
         nombre: 'Tranki Punki',
-        procedencia: 'Córdoba',
-        descripcion: ''
-      },
-      {
-        nombre: 'Pequeño Bambi',
         procedencia: 'Córdoba',
         descripcion: ''
       },

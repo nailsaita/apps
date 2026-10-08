@@ -1,9 +1,4 @@
-// Reemplazá la función CulturalSection existente en HomePage.jsx por este código,
-// y agregá el import de CARTELERA_ESCENARIOS junto al de ACTIVIDADES_CULTURALES:
-//
-//   import CARTELERA_ESCENARIOS from '@/data/carteleraEscenarios.js';
-//
-// (ACTIVIDADES_CULTURALES ya se importa en el archivo original)
+
 
 function CarteleraEscenarios() {
   const [escenarioAbierto, setEscenarioAbierto] = useState(CARTELERA_ESCENARIOS[0]?.id ?? null);

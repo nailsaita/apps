@@ -9,8 +9,12 @@ export const DISCIPLINAS = [
 
 // [nombre, dirección]
 const LUGARES = {
+  penero: ['Sábado peñero del Pluri', 'Rodríguez Peña 454'],
+  plaza: ['Plaza Político Cultural', ''],
+  plazaColon: ['Plaza Colón', ''],
   archivo: ['Archivo Provincial de la Memoria (D2)', 'Pje. Sta. Catalina 66'],
   alberdi: ['Biblioteca Popular Casa del Pueblo Alberdi', 'El Chaco 74, Alberdi'],
+  bosquecito: ['Bosquecito Nativo (UNC)', 'Av. Medina Allende, Ciudad Universitaria'],
   caracol: ['Casa Caracol', 'Ovidio Lagos 24'],
   caseron: ['Caserón', 'Lima 390, barrio Centro'],
   dada: ['Casona Dada', 'Juan Rodríguez 1463'],
@@ -43,7 +47,7 @@ const LUGARES = {
   caraffa: ['Museo Caraffa', 'Av. Poeta Lugones 408'],
   antropologia: ['Museo de Antropología (FFyH-UNC)', 'Av. Hipólito Yrigoyen 174'],
   naturales: ['Museo de Ciencias Naturales', 'Av. Poeta Leopoldo Lugones 395'],
-  evita: ['Museo Evita Palacio Ferreyra', 'Av. Hipólito Yrigoyen 508'],
+  evita: ['Museo Evita Palacio Ferreyra', 'Av. Hipólito Yrigoyen 511'],
   sobremonte: ['Museo Sobremonte', 'Rosario de Sta. Fe 218'],
   buenPastor: ['Paseo del Buen Pastor', 'Av. Hipólito Yrigoyen 325'],
   quintoDeva: ['Quinto Deva', 'Pje. Agustín Pérez 10'],
@@ -58,8 +62,6 @@ const LUGARES = {
   plaza: ['Plaza Político Cultural', '']
 };
 
-// Link de búsqueda en Google Maps a partir de la dirección (sin el texto entre paréntesis).
-// Si el lugar no tiene dirección, no se genera link.
 const mapsUrl = (direccion) => {
   if (!direccion) return '';
   const limpia = direccion.replace(/\s*\(.*?\)\s*/g, ' ').trim();
@@ -79,6 +81,8 @@ const LIT = 'Literatura', VIS = 'Visuales', ESCU = 'Escultura', OTR = 'Otras pro
 
 export const PROGRAMACION = [
   // ── Escénicas ──
+    e('sabado', '13:30', '', '“Kill el mandato gil” + “Mujeres cautivas, mujeres salvajes”', ESC, 'buenPastor'),
+  e('sabado', '14:00', '', '“La Rota Virtud”: biodrama de mujeres evangélicas', ESC, 'buenPastor'),
   e('domingo', '14:00', '', 'Desde el altillo', ESC, 'archivo'),
   e('domingo', '13:00', '', 'Co-Apg kuña kuña Pim Pim: escena compartida con los monólogos teatrales “La Paraguaya” y “Despojo de mi identidad blanqueada”', ESC, 'museoMujeres', 'Patio'),
   e('sabado', '19:20', '20:20', 'Tempo di Donna (Córdoba): espectáculo poético teatral', ESC, 'unc', 'Patio'),
@@ -97,8 +101,11 @@ export const PROGRAMACION = [
   e('sabado', '13:00', '', '“Magdalena, su propia voz”', ESC, 'teatroReal'),
   e('sabado', '14:00', '', '“Tibio sacrificios”', ESC, 'teatroReal'),
   e('sabado', '17:30', '', '“Una misión fabulosa” (infancias), en el recreo', ESC, 'escBelgrano'),
+  e('domingo', '12:30', '13:30', 'Intervención performativa al aire libre “¡Vamos por el fuego!”', ESC, 'evita', 'Patio'),
+  e('domingo', '13:00', '15:00', 'Usted… ¿está aquí?', ESC, 'escuelaTotal'),
 
   // ── Formativas ──
+  e('sabado', '12:30', '15:00', 'Taller “Imaginando Futuros Colectivos”: ¿cómo se ve el futuro cuando nos encontramos a imaginarlo juntas?', FOR, 'bosquecito', '', 'Traé tu mat o lona, una botellita de agua y un elemento para el altar. Organiza: Fuegas, Brigadistas Organizadas Córdoba'),
   e('sabado', '13:00', '15:00', 'Taller de poesía y voces performáticas, por Proyecto Thénon', FOR, 'alberdi'),
   e('sabado', '13:00', '15:00', 'Fotografía y ESI: la construcción de la mirada', FOR, 'alberdi'),
   e('sabado', '18:00', '19:30', 'El Territorio de mi Voz…', FOR, 'alberdi'),
@@ -114,14 +121,15 @@ export const PROGRAMACION = [
   e('domingo', '13:00', '15:00', 'Territorio en ronda (danza)', FOR, 'casona', 'Sala Roja'),
   e('domingo', '12:30', '15:00', 'Hacer red, abrir caminos: 10 años de bibliotecas con perspectiva de género. Encuentro de la red de bibliotecas', FOR, 'garat'),
   e('domingo', '13:00', '15:00', 'Taller “Rap y expresión”', FOR, 'cronopio'),
-  e('sabado', '13:00', '15:00', 'Taller de Biodanza', FOR, 'escuelaTotal'),
-  e('domingo', '13:00', '15:00', 'La Revolución de las Hijas, del Buen Pastor al Cuento de la Criada: ronda intergeneracional', FOR, 'escuelaTotal'),
+  e('sabado', '18:00', '20:00', 'Cannabis, cuerpo y territorio: nido en común', FOR, 'escuelaTotal'),
+  e('sabado', '18:00', '20:00', 'Conversatorio de la salud con cannabis', FOR, 'escuelaTotal'),
+  e('sabado', '18:00', '20:00', 'El carnaval que habitamos y construimos', FOR, 'escuelaTotal'),
+  e('domingo', '13:00', '15:00', 'La Revolución de las Hijas, del Buen Pastor al Cuento de la Criada: ronda intergeneracional sobre derechos humanos, feminismos y memorias', FOR, 'escuelaTotal'),
   e('domingo', '13:00', '15:00', '20 años de la ley de Educación Sexual Integral: tejiendo redes y resistencias', FOR, 'museoMujeres', 'Auditorio'),
   e('sabado', '18:00', '20:00', 'Falsas denuncias: no van a silenciarnos. Conversatorio de la Casa de la Mujer María Conti', FOR, 'museoMujeres', 'Patio'),
   e('sabado', '13:00', '15:00', 'Territorios lúdicos de cuidado colectivo', FOR, 'museoMujeres', 'Patio'),
   e('sabado', '18:00', '20:00', 'Podría haber sido yo', FOR, 'sanMartin'),
-  e('domingo', '12:00', '14:30', 'Dicha de Alberdi: recorrido por el barrio + charla', FOR, 'cerveceria', '', 'Duración: 1 h 30 min'),
-  e('sabado', '13:00', '15:00', 'Las negras también hacemos historia: taller de danzas de matriz afro', FOR, 'galpon'),
+  e('domingo', '12:00', '14:30', 'Dicha de Alberdi: recorrido por el barrio + charla', FOR, 'plazaColon', 'Punto de partida', 'Duración: 1 h 30 min'),  e('sabado', '13:00', '15:00', 'Las negras también hacemos historia: taller de danzas de matriz afro', FOR, 'galpon'),
   e('domingo', '13:00', '15:00', 'Taller de Capoeira Angola', FOR, 'galpon'),
   e('sabado', '13:00', '15:00', 'Genealogía travesti trans en los encuentros', FOR, 'bastarda'),
   e('sabado', '12:00', '15:00', 'Corporalidades en juego: prácticas de circo', FOR, 'burbuja'),
@@ -138,8 +146,7 @@ export const PROGRAMACION = [
   e('sabado', '18:30', '19:00', 'Flores calladas', MUS, 'pepino', 'Sala'),
   e('sabado', '13:00', '13:30', 'Sol Gomez + Chika Repiká: candombe canción', MUS, 'unc'),
   e('sabado', '20:15', '21:30', 'Amanecer en violeta: contar para transmutar (música y cuentos)', MUS, 'unc'),
-  e('domingo', '13:00', '', 'Presentación del Observatorio de la Música en vivo y grabada de la comunidad LGBTQIAPN+ de Córdoba', MUS, 'unc'),
-  e('domingo', '13:00', '14:00', 'Bren Coll (folk rock) y Celeste Martín', MUS, 'unc'),
+  e('domingo', '12:30', '', 'Presentación del Observatorio de la Música en vivo y grabada de la comunidad LGBTQIAPN+ de Córdoba', MUS, 'unc'),  e('domingo', '13:00', '14:00', 'Bren Coll (folk rock) y Celeste Martín', MUS, 'unc'),
   e('sabado', '21:00', '00:00', 'Silvina Fernandez, Giyo Franco, Tysem, Eluney Sposato, Marina Pacheco (música de la Patagonia) y Morenilla', MUS, 'lupulus'),
   e('sabado', '14:30', '15:00', 'Pilar Medina y Luci Delahye: “De Atahualpa a Piaf”', MUS, 'evita', 'Bar'),
   e('domingo', '14:30', '15:00', 'Alta Manija Jem y concierto de Flor Straub', MUS, 'evita', 'Bar'),

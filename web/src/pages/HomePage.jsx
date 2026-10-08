@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence, MotionConfig, useReducedMotion } from 'framer-motion';
+import { motion, AnimatePresence, MotionConfig, useReducedMotion, useInView, animate } from 'framer-motion';
 import Lottie from 'lottie-react';
 import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag, FileText, Droplet, ShieldCheck, Moon, Sparkles, Backpack, Smartphone, PersonStanding, Youtube } from 'lucide-react';
 import { HiddenMail } from '@/components/HiddenMail';
@@ -39,8 +39,31 @@ const DATOS_DONACION = [{
 // Texto solo para lectores de pantalla en enlaces que abren otra pestaña
 const NuevaPestana = () => <span className="sr-only"> (se abre en otra pestaña)</span>;
 
-// Comportamiento de diálogo modal: Escape cierra, Tab queda dentro del modal
-// y al cerrar el foco vuelve al elemento que lo abrió.
+// Logo Internacional de Accesibilidad (ONU): figura con brazos abiertos en un círculo
+function LogoAccesibilidad({ size = 28, className = '' }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+      className={className}
+    >
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="6.6" r="1.4" fill="currentColor" stroke="none" />
+      <path d="M6.5 9.3 L12 10.4 L17.5 9.3" />
+      <path d="M12 10.4 V14" />
+      <path d="M9.6 18.3 L12 14 L14.4 18.3" />
+    </svg>
+  );
+}
+
 function useDialogo(onClose) {
   const ref = useRef(null);
   const onCloseRef = useRef(onClose);
@@ -838,7 +861,7 @@ function ApoyoSection() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#813893]/10 rounded-full blur-3xl" />
     </div>
 
-    <div className="max-w-5xl mx-auto relative z-10">
+        <div className="max-w-6xl mx-auto relative z-10">
       <div className="text-center mb-12 relative">
         <IlustracionSticker
           src="/images/ilustraciones/solidaria.svg"
@@ -1233,6 +1256,191 @@ function ConsignaSection() {
     </section>
   );
 }
+// ─── VIANDAS ──────────────────────────────────────────────────────────────────
+// Número que cuenta hasta el valor final al aparecer en pantalla
+function ContadorPorcentaje({ hasta = 90, sufijo = '%' }) {
+  const ref = useRef(null);
+  const enVista = useInView(ref, { once: true, margin: '-40px' });
+  const reducir = useReducedMotion();
+  const [valor, setValor] = useState(0);
+
+  useEffect(() => {
+    if (!enVista) return;
+    if (reducir) {
+      setValor(hasta);
+      return;
+    }
+    const controles = animate(0, hasta, {
+      duration: 1.6,
+      ease: 'easeOut',
+      onUpdate: v => setValor(Math.round(v))
+    });
+    return () => controles.stop();
+  }, [enVista, reducir, hasta]);
+
+  return (
+    <span ref={ref}>
+      {/* El lector escucha el número final, no la cuenta */}
+      <span aria-hidden="true">{valor}{sufijo}</span>
+      <span className="sr-only">{hasta}{sufijo}</span>
+    </span>
+  );
+}
+function ViandasSection() {
+  const MAPA_CARAFFA = 'https://www.google.com/maps/search/?api=1&query=' +
+    encodeURIComponent('Museo Emilio Caraffa, Av. Poeta Lugones 411, Córdoba, Argentina');
+
+  return (
+    <section id="viandas" aria-labelledby="titulo-viandas" className="w-full bg-[#fdb10c] py-16 px-4 relative overflow-hidden">
+      {/* Fondo decorativo */}
+      
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="max-w-5xl mx-auto relative z-10"
+      >
+        {/* Encabezado */}
+        <div className="text-center mb-10">
+          <span className="inline-flex items-center gap-2 bg-[#2f1435] text-[#fdb10c] text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
+            <span aria-hidden="true">🍲</span> Info viandas
+          </span>
+          <h2 id="titulo-viandas" className="text-[#2f1435] mb-3">Viandas del Encuentro</h2>
+        </div>
+
+                {/* Cuándo y dónde, en una sola tarjeta */}
+        <div className="bg-[#FFF1E3] rounded-2xl p-6 md:p-8 mb-8 grid md:grid-cols-2 gap-6 md:gap-0 md:divide-x-2 md:divide-[#2f1435]/15">
+          <div className="flex items-start gap-4 md:pr-8">
+            <div className="bg-[#2f1435] text-[#fdb10c] w-12 h-12 rounded-full flex items-center justify-center shrink-0">
+              <Calendar size={22} aria-hidden="true" />
+            </div>
+            <div>
+              <h3 className="text-[#2f1435] text-lg font-black mb-1">Cuándo</h3>
+              <p className="text-[#343230] text-base m-0">
+                <strong>Sábado y domingo</strong><br />
+                de <strong>11 a 15 hs</strong>
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4 pt-6 border-t-2 border-[#2f1435]/15 md:pt-0 md:border-t-0 md:pl-8">
+            <div className="bg-[#2f1435] text-[#fdb10c] w-12 h-12 rounded-full flex items-center justify-center shrink-0">
+              <MapPin size={22} aria-hidden="true" />
+            </div>
+            <div>
+              <h3 className="text-[#2f1435] text-lg font-black mb-1">Dónde</h3>
+              <p className="text-[#343230] text-base m-0">
+                <strong>Museo Emilio Caraffa</strong><br />
+                Av. Poeta Lugones 411, Barrio Nueva Córdoba
+              </p>
+              <a
+                href={MAPA_CARAFFA}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 mt-3 text-sm font-bold text-[#662c74] underline underline-offset-2 hover:text-[#813893] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#2f1435]"
+              >
+                <MapPin size={14} aria-hidden="true" />
+                Cómo llegar
+                <span className="sr-only"> al Museo Emilio Caraffa</span>
+                <NuevaPestana />
+              </a>
+            </div>
+          </div>
+        </div>
+                {/* Datos destacados */}
+        <ul className="grid md:grid-cols-2 gap-5 m-0 p-0 list-none">
+                    {/* Dato destacado: cuenta hasta +20 al aparecer y reacciona al pasar el mouse */}
+          <li className="relative">
+            <motion.div
+              aria-hidden="true"
+              className="absolute -inset-2 rounded-3xl bg-white/60 blur-xl pointer-events-none"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: [0, 0.9, 0.35, 0.9, 0.5] }}
+              viewport={{ once: true }}
+              transition={{ duration: 4, ease: 'easeInOut' }}
+            />
+            <motion.div
+              tabIndex={0}
+              initial={{ opacity: 0, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              whileHover="activo"
+              whileFocus="activo"
+              viewport={{ once: true }}
+              variants={{ activo: { y: -4, boxShadow: '0 12px 28px rgba(47,20,53,0.25)' } }}
+              transition={{ duration: 0.3 }}
+              className="relative h-full flex items-start gap-4 bg-[#FFF1E3] border-l-8 border-[#2f1435] rounded-2xl p-5 cursor-default focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#2f1435]"
+            >
+              <motion.span
+                aria-hidden="true"
+                className="text-4xl leading-none shrink-0 inline-block"
+                style={{ transformOrigin: '50% 100%' }}
+                initial={{ rotate: 0 }}
+                whileInView={{ rotate: [0, -10, 8, -6, 4, 0] }}
+                viewport={{ once: true }}
+                variants={{ activo: { rotate: [0, -12, 10, -6, 0], transition: { duration: 1 } } }}
+                transition={{ duration: 3, ease: 'easeInOut', delay: 0.4 }}
+              >
+                🌽
+              </motion.span>
+              <p className="text-[#343230] text-sm sm:text-base leading-relaxed m-0">
+                <span className="block text-4xl sm:text-5xl font-black text-[#662c74] leading-none mb-1">
+                  +<ContadorPorcentaje hasta={20} sufijo="" />
+                </span>
+                <strong>espacios de cocina</strong> donde trabajadorxs de la economía popular presentaron menús diversos, sabrosos y nutritivos.
+              </p>
+            </motion.div>
+          </li>
+
+          {/* Dato destacado: brillo suave y brote que se mece unos segundos al aparecer */}
+            <li className="relative">
+            <motion.div
+              aria-hidden="true"
+              className="absolute -inset-2 rounded-3xl bg-white/60 blur-xl pointer-events-none"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: [0, 0.9, 0.35, 0.9, 0.5] }}
+              viewport={{ once: true }}
+              transition={{ duration: 4, ease: 'easeInOut' }}
+            />
+            <motion.div
+              tabIndex={0}
+              initial={{ opacity: 0, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              whileHover="activo"
+              whileFocus="activo"
+              viewport={{ once: true }}
+              variants={{ activo: { y: -4, boxShadow: '0 12px 28px rgba(47,20,53,0.25)' } }}
+              transition={{ duration: 0.3 }}
+              className="relative h-full flex items-start gap-4 bg-[#FFF1E3] border-l-8 border-[#2a823c] rounded-2xl p-5 cursor-default focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#2f1435]"
+            >
+              <motion.span
+                aria-hidden="true"
+                className="text-4xl leading-none shrink-0 inline-block"
+                style={{ transformOrigin: '50% 100%' }}
+                initial={{ rotate: 0 }}
+                whileInView={{ rotate: [0, -10, 8, -6, 4, 0] }}
+                viewport={{ once: true }}
+                variants={{ activo: { rotate: [0, -12, 10, -6, 0], transition: { duration: 1 } } }}
+                transition={{ duration: 3, ease: 'easeInOut', delay: 0.4 }}
+              >
+                🌱
+              </motion.span>
+              <p className="text-[#343230] text-sm sm:text-base leading-relaxed m-0">
+                <span className="block text-4xl sm:text-5xl font-black text-[#21662f] leading-none mb-1">
+                  +<ContadorPorcentaje hasta={90} />
+                </span>
+                <strong>de las viandas</strong> entregadas serán libres de violencia animal.
+              </p>
+            </motion.div>
+          </li>
+        </ul>
+
+        
+      </motion.div>
+    </section>
+  );
+}
+
 function CuidadosBanner() {
   return (
     <section id="cuidados" className="py-12 px-4 bg-[#FFF1E3]">
@@ -1485,7 +1693,6 @@ function IlustracionSticker() {
 
 
 function EjesSection() {
-  const [ejeAbierto, setEjeAbierto] = useState(null);
   return <section id="ejes" className="pt-24 pb-6 px-4 bg-[#FFF1E3]">
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-2">
@@ -1507,7 +1714,7 @@ function EjesSection() {
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }} className="relative">
               <Link
                 to="/Talleres"
-                className="inline-flex items-center justify-center gap-3 bg-[#813893] text-white font-black px-8 sm:px-14 py-6 rounded-full hover:bg-[#662c74] transition-colors shadow-xl shadow-[#4a2055]/40 ring-2 ring-[#fdb10c] text-lg sm:text-2xl"
+                className="inline-flex items-center justify-center gap-3 bg-[#813893] text-white font-black px-8 sm:px-14 py-6 rounded-full hover:bg-[#662c74] transition-colors shadow-xl shadow-[#4a2055]/40 ring-2 ring-[#fdb10c] text-lg sm:text-2xl focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#fdb10c]"
               >
                 <MapPin size={28} className="text-[#fdb10c] shrink-0" />
                 <span>Ver Ejes Temáticos, Talleres y Escuelas donde se ubican</span>
@@ -1522,63 +1729,87 @@ function EjesSection() {
             </motion.div>
           </div>
 
-          {/* Botones en escalera, de mayor a menor: principal → personas sordas → guía */}
-          <div className="mt-8 flex flex-col items-center gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            whileHover={{ y: -3 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <a
-  href="https://docs.google.com/spreadsheets/d/1KgCetbvELFyvrhKGgS-8Jw4nJXDV5U2h/edit?gid=1792101971#gid=1792101971"
-  target="_blank"
-  rel="noreferrer"
-  className="group inline-flex items-center justify-center gap-3 bg-[#faf7fb] text-[#662c74] font-black px-8 sm:px-14 py-6 rounded-full hover:bg-[#eadeed] transition-colors shadow-xl shadow-[#4a2055]/20 ring-2 ring-[#813893] text-lg sm:text-2xl"
->
-  <Hand size={28} className="text-[#813893] shrink-0" />
-  <span>Ver los Talleres con intérprete de ILSA-E</span>
-  <ExternalLink size={28} className="text-[#813893] shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
-  <NuevaPestana />
-</a>
-          </motion.div>
+          {/* Botones en escalera: principal → baja visión → personas sordas → guía */}
+          <div className="mt-10 flex flex-col items-center gap-6">
 
-          {/* Botón chico: guía de talleres */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.35 }}
-            whileHover={{ y: -3 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <Link
-              to="/GuiaTalleres"
-              className="group inline-flex items-center gap-3 bg-[#f6faf7] border-2 border-[#b8d5be] pl-2 pr-5 py-2 rounded-full hover:bg-[#dceade] hover:border-[#2a823c] transition-colors shadow-md shadow-[#184b22]/10"
+            {/* Botón: listado accesible para baja visión y lectores de pantalla */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              whileHover={{ y: -3 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <span className="bg-[#2a823c] text-white w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110">
-                <BookOpen size={18} />
-              </span>
-              <span className="flex flex-col text-left leading-tight">
-                <span className="text-[10px] font-black uppercase tracking-widest text-[#2a823c]">
-                  Para coordinadorss
+              <a
+                href="https://docs.google.com/spreadsheets/d/1ASAcSjrem4xK5hijhDoYg7kHQHLyQNnVjppzsOxCEMc/edit?pli=1&gid=1530527522#gid=1530527522"
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center justify-center gap-3 bg-[#faf7fb] text-[#662c74] font-black px-8 sm:px-14 py-6 rounded-full hover:bg-[#eadeed] transition-colors shadow-xl shadow-[#4a2055]/20 ring-2 ring-[#813893] text-lg sm:text-2xl focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#fdb10c]"
+              >
+                <LogoAccesibilidad size={32} className="text-[#813893] shrink-0" />
+                <span>Listado de talleres para personas con baja visión, apto para lectores de pantalla</span>
+                <ExternalLink size={28} className="text-[#813893] shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+                <span className="sr-only">, planilla de cálculo</span>
+                <NuevaPestana />
+              </a>
+            </motion.div>
+
+            {/* Botón: talleres con intérprete de lengua de señas */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              whileHover={{ y: -3 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <a
+                href="https://docs.google.com/spreadsheets/d/1KgCetbvELFyvrhKGgS-8Jw4nJXDV5U2h/edit?gid=1792101971#gid=1792101971"
+                target="_blank"
+                rel="noreferrer"
+                className="group inline-flex items-center justify-center gap-3 bg-[#faf7fb] text-[#662c74] font-black px-8 sm:px-14 py-6 rounded-full hover:bg-[#eadeed] transition-colors shadow-xl shadow-[#4a2055]/20 ring-2 ring-[#813893] text-lg sm:text-2xl focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#fdb10c]"
+              >
+                <Hand size={28} className="text-[#813893] shrink-0" />
+                <span>Ver los Talleres con intérprete de ILSA-E</span>
+                <ExternalLink size={28} className="text-[#813893] shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+                <NuevaPestana />
+              </a>
+            </motion.div>
+
+            {/* Botón chico: guía de talleres */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              whileHover={{ y: -3 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Link
+                to="/GuiaTalleres"
+                className="group inline-flex items-center gap-3 bg-[#f6faf7] border-2 border-[#b8d5be] pl-2 pr-5 py-2 rounded-full hover:bg-[#dceade] hover:border-[#2a823c] transition-colors shadow-md shadow-[#184b22]/10 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#fdb10c]"
+              >
+                <span className="bg-[#2a823c] text-white w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110">
+                  <BookOpen size={18} />
                 </span>
-                <span className="text-sm sm:text-base font-bold text-[#21662f]">
-                  ¿Cómo funcionan los talleres? Leé la guía
+                <span className="flex flex-col text-left leading-tight">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-[#2a823c]">
+                    Para coordinadorxs
+                  </span>
+                  <span className="text-sm sm:text-base font-bold text-[#21662f]">
+                    ¿Cómo funcionan los talleres? Leé la guía
+                  </span>
                 </span>
-              </span>
-              <ArrowRight size={16} className="text-[#2a823c] shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </motion.div>
+                <ArrowRight size={16} className="text-[#2a823c] shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
       </div>
     </div>
   </section>;
 }
-
 
 function CronogramaSection() {
   const dias = Object.keys(CRONOGRAMA);
@@ -1940,76 +2171,134 @@ function CulturalSection() {
   </section>;
 }
 
+const COLORES_ESCENARIO = [
+  { base: '#813893', claro: '#e0c8e6' }, // violeta
+  { base: '#2a823c', claro: '#a9d3b2' }, // verde
+  { base: '#fdb10c', claro: '#fec449' }, // naranja
+  { base: '#c0392b', claro: '#f5b7b1' }, // rojo (el del botón de YouTube)
+  { base: '#662c74', claro: '#d5bddb' }, // violeta oscuro
+  { base: '#21662f', claro: '#94c09e' }  // verde oscuro
+];
 
 function CarteleraEscenarios() {
   const [escenarioAbierto, setEscenarioAbierto] = useState(null);
 
   return (
-    <div className="mt-16">
-      <h3 className="text-center text-white mb-8">Cartelera artística por escenario</h3>
-      <div className="space-y-4 max-w-4xl mx-auto">
-        {ACTIVIDADES_CULTURALES.map(bloque => (
-          <div key={bloque.id} className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
-            <button
-              onClick={() => setEscenarioAbierto(escenarioAbierto === bloque.id ? null : bloque.id)}
-              aria-expanded={escenarioAbierto === bloque.id}
-              aria-controls={`escenario-${bloque.id}`}
-              className="w-full text-left p-6 flex justify-between items-start gap-4 hover:bg-white/10 transition-colors"
+        <div className="mt-10 sm:mt-16">
+      <h3 className="text-center text-white mb-5 sm:mb-8">Cartelera artística por escenario</h3>
+      <ul className="space-y-2.5 sm:space-y-4 max-w-4xl mx-auto m-0 p-0 list-none">
+        {ACTIVIDADES_CULTURALES.map((bloque, i) => {
+          const color = COLORES_ESCENARIO[i % COLORES_ESCENARIO.length];
+          const abierto = escenarioAbierto === bloque.id;
+          return (
+            <motion.li
+              key={bloque.id}
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.45, delay: i * 0.07, ease: 'easeOut' }}
+              whileHover={{ x: 4 }}
+                            className="rounded-xl sm:rounded-2xl overflow-hidden border-2 transition-colors"
+              style={{
+                borderColor: abierto ? color.base : `${color.base}55`,
+                background: `linear-gradient(90deg, ${color.base}45 0%, ${color.base}12 45%, rgba(255,255,255,0.04) 100%)`
+              }}
             >
-              <div>
-                <h4 className="text-lg font-bold text-white mb-1">{bloque.escenario}</h4>
-                {bloque.horario && <p className="text-sm text-white/60">{bloque.horario}</p>}
-                {bloque.conduccion && (
-                  <p className="text-xs text-white/40 mt-1">Conducción sugerida: {bloque.conduccion}</p>
-                )}
-              </div>
-              <ChevronDown
-                size={20}
-                className="text-[#fdb10c] shrink-0 transition-transform mt-1"
-                style={{ transform: escenarioAbierto === bloque.id ? 'rotate(180deg)' : 'rotate(0deg)' }}
-              />
-            </button>
-
-            <AnimatePresence>
-              {escenarioAbierto === bloque.id && (
-                <motion.div
-                  id={`escenario-${bloque.id}`}
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  className="overflow-hidden border-t border-white/10"
+              <button
+                type="button"
+                onClick={() => setEscenarioAbierto(abierto ? null : bloque.id)}
+                aria-expanded={abierto}
+                aria-controls={`escenario-${bloque.id}`}
+                className="w-full text-left px-3 py-2.5 sm:p-6 flex items-center gap-3 sm:gap-4 hover:bg-white/5 transition-colors focus-visible:outline focus-visible:outline-4 focus-visible:-outline-offset-4 focus-visible:outline-[#fdb10c]"
+              >
+                {/* Barra de color a la izquierda */}
+                <span
+                  aria-hidden="true"
+                  className="self-stretch w-1.5 rounded-full shrink-0"
+                  style={{ backgroundColor: color.base }}
+                />
+                {/* Ícono que "salta" al abrir */}
+                <motion.span
+                  aria-hidden="true"
+                  animate={abierto ? { scale: [1, 1.18, 1], rotate: [0, -8, 0] } : { scale: 1, rotate: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-11 h-11 rounded-full flex items-center justify-center shrink-0"
+                  style={{ backgroundColor: color.base, color: color.base === '#fdb10c' ? '#2f1435' : '#ffffff' }}
                 >
-                  <div className="p-6 pt-4 space-y-3">
-                    {bloque.actividades?.map((act, i) => (
-                      <div
-                        key={i}
-                        className="flex flex-nowrap items-center gap-4 py-2 border-b border-white/10 last:border-0 overflow-x-auto"
-                      >
-                        <span className="font-bold text-white whitespace-nowrap shrink-0">{act.nombre}</span>
-                        <span className="text-xs font-bold text-[#fdb10c] uppercase tracking-wide whitespace-nowrap shrink-0">
-                          {act.tipo}
-                        </span>
-                        {act.procedencia && (
-                          <span className="text-xs text-white/50 whitespace-nowrap shrink-0">{act.procedencia}</span>
-                        )}
-                        {act.duracion && (
-                          <span className="text-xs text-white/50 whitespace-nowrap shrink-0">{act.duracion}</span>
-                        )}
-                        {act.descripcion && (
-                          <span className="text-sm text-white/70 whitespace-nowrap">{act.descripcion}</span>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        ))}
-      </div>
+                  <Music size={20} />
+                </motion.span>
+
+                <span className="flex-1 min-w-0">
+                  <span className="block text-lg font-bold text-white mb-0.5">{bloque.escenario}</span>
+                  {bloque.horario && (
+                    <span className="block text-sm font-semibold" style={{ color: color.claro }}>
+                      {bloque.horario}
+                    </span>
+                  )}
+                  {bloque.conduccion && (
+                    <span className="block text-xs text-white/75 mt-1">Conducción sugerida: {bloque.conduccion}</span>
+                  )}
+                </span>
+
+                <ChevronDown
+                  size={22}
+                  aria-hidden="true"
+                  className="shrink-0 transition-transform duration-300"
+                  style={{ color: color.claro, transform: abierto ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                />
+              </button>
+
+              <div id={`escenario-${bloque.id}`}>
+                <AnimatePresence initial={false}>
+                  {abierto && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden border-t"
+                      style={{ borderColor: `${color.base}55` }}
+                    >
+                      <ul className="p-5 sm:p-6 pt-4 space-y-1 m-0 list-none bg-black/15">
+                        {bloque.actividades?.map((act, j) => (
+                          <motion.li
+                            key={j}
+                            initial={{ opacity: 0, y: 6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: Math.min(j * 0.04, 0.4) }}
+                            className="py-3 border-b border-white/10 last:border-0"
+                          >
+                            {/* En el celular baja de línea en lugar de deslizar de costado */}
+                            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                              <span className="font-bold text-white">{act.nombre}</span>
+                              {act.tipo && (
+                                <span
+                                  className="text-xs font-bold uppercase tracking-wide px-2 py-0.5 rounded-full"
+                                  style={{ backgroundColor: `${color.base}40`, color: color.claro }}
+                                >
+                                  {act.tipo}
+                                </span>
+                              )}
+                              {act.procedencia && <span className="text-xs text-white/75">{act.procedencia}</span>}
+                              {act.duracion && <span className="text-xs text-white/75">{act.duracion}</span>}
+                            </div>
+                            {act.descripcion && (
+                              <p className="text-sm text-white/80 mt-1 m-0">{act.descripcion}</p>
+                            )}
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
+
 function SubcomisionesSection() {
   const [tarjetaAbierta, setTarjetaAbierta] = useState(null);
 
@@ -2043,6 +2332,16 @@ Convocamos a todas las personas travestis, trans, no binaries y a las identidade
       iconBg: 'bg-[#fdb10c] text-[#4a2055]',
       icono: <Mountain size={24} />,
       link: '/PueblosPreexistentes'
+    },
+        {
+      id: 'alimentacion-soberana',
+      titulo: 'Comisión de Alimentación Soberana',
+      desc: 'Este año, en el 39° Encuentro, se conformó por primera vez la Comisión de Alimentación Soberana: activistas antiespecistas, emprendedorxs, cooperativas, asociaciones civiles y organizaciones veganas y no veganas de diversos territorios de toda la provincia de Córdoba.',
+      border: 'border-[#2a823c]/40',
+      badgeColor: 'bg-[#2a823c] text-white',
+      iconBg: 'bg-[#2a823c] text-white',
+      icono: <Utensils size={24} />,
+      contenido: `Nos encontramos en el diálogo sobre la importancia de la alimentación desde una mirada política que contempla la soberanía alimentaria, la socialización de saberes, recursos y experiencias, y desde la reflexión sobre distintas maneras de consumo, producción y los vínculos que sostenemos en el día a día con lo que comemos.`
     }
     /*,
     {
@@ -2065,87 +2364,96 @@ Súmate a ocupar espacios que son para todas, todes. Este Encuentro es de TODAS,
     */
   ];
 
-  return <section className="py-12 px-4 relative overflow-hidden bg-[#2f1435]">
-    <div className="max-w-5xl mx-auto relative z-10">
+    return <section className="py-12 px-4 relative overflow-hidden bg-[#2f1435]">
+    <div className="max-w-6xl mx-auto relative z-10">
       <div className="text-center mb-12">
         <h2 className="text-white mb-3">Nuevas subcomisiones del Encuentro</h2>
         <p className="text-white/60 max-w-xl mx-auto">
-          Este 39° Encuentro suma estos dos espacios a la Comisión Organizadora.
+          Este 39° Encuentro suma estos tres espacios a la Comisión Organizadora.
         </p>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-6 items-start">
-        {subcomisiones.map((sub, i) => (
-          <motion.div
-            key={sub.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            className={`relative overflow-hidden rounded-3xl border-2 ${sub.border} bg-white/5 flex flex-col w-full md:w-[calc(50%-0.75rem)]`}
-          >
-            <div className="p-8 flex flex-col flex-1">
-              <span className={`absolute top-5 right-5 ${sub.badgeColor} text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide`}>
-                Por primera vez
-              </span>
-              <div className={`${sub.iconBg} w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10`}>
-                {sub.icono}
-              </div>
-              <h4 aria-level={3} className="font-bold text-white text-xl mb-2 relative z-10">
-                {sub.titulo}
-              </h4>
-              <p className="text-sm text-white/70 relative z-10 flex-1">
-                {sub.desc}
-              </p>
+      {/* items-start: al abrir una tarjeta crece solo esa */}
+      <div className="grid gap-6 md:grid-cols-3 items-start">
+        {subcomisiones.map((sub, i) => {
+          const estaAbierta = tarjetaAbierta === sub.id;
+          const idDetalle = `subcomision-${sub.id}`;
+          return (
+            <motion.div
+              key={sub.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className={`relative overflow-hidden rounded-3xl border-2 bg-white/5 flex flex-col transition-colors ${estaAbierta ? 'border-[#fdb10c]' : sub.border}`}
+            >
+              <div className="p-6 lg:p-8 flex flex-col">
+                <span className={`absolute top-5 right-5 ${sub.badgeColor} text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide`}>
+                  Por primera vez
+                </span>
+                <div className={`${sub.iconBg} w-14 h-14 rounded-full flex items-center justify-center mb-5 relative z-10`} aria-hidden="true">
+                  {sub.icono}
+                </div>
+                {/* Alturas mínimas: con títulos de 1 o 2 líneas, las tarjetas cerradas quedan iguales */}
+                <h4 aria-level={3} className="font-bold text-white text-xl leading-snug mb-2 relative z-10 md:min-h-[3.5rem]">
+                  {sub.titulo}
+                </h4>
+                                <p className="text-sm text-white/70 leading-6 relative z-10 md:h-24 md:line-clamp-4 m-0">
+                  {sub.desc}
+                </p>
 
-              {sub.link && (
-                <Link
-                  to={sub.link}
-                  aria-label={`Ver más sobre la ${sub.titulo}`}
-                  className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10"
-                >
-                  Ver más
-                  <ChevronDown size={14} className="-rotate-90" />
-                </Link>
-              )}
+                {sub.link && (
+                  <Link
+                    to={sub.link}
+                    className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#fdb10c]"
+                  >
+                    Ver más
+                    <span className="sr-only"> sobre la {sub.titulo}</span>
+                    <ChevronDown size={14} className="-rotate-90" aria-hidden="true" />
+                  </Link>
+                )}
+
+                {sub.contenido && (
+                  <button
+                    type="button"
+                    onClick={() => setTarjetaAbierta(estaAbierta ? null : sub.id)}
+                    aria-expanded={estaAbierta}
+                    aria-controls={idDetalle}
+                    className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#fdb10c]"
+                  >
+                    {estaAbierta ? 'Ver menos' : 'Ver más'}
+                    <span className="sr-only"> sobre la {sub.titulo}</span>
+                    <ChevronDown
+                      size={14}
+                      aria-hidden="true"
+                      className="transition-transform"
+                      style={{ transform: estaAbierta ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                    />
+                  </button>
+                )}
+              </div>
 
               {sub.contenido && (
-                <button
-                  onClick={() => setTarjetaAbierta(tarjetaAbierta === sub.id ? null : sub.id)}
-                  aria-expanded={tarjetaAbierta === sub.id}
-                  aria-controls={`subcomision-${sub.id}`}
-                  className="inline-flex items-center gap-1 text-white text-sm font-bold mt-4 self-start hover:underline relative z-10"
-                >
-                  {tarjetaAbierta === sub.id ? 'Ver menos' : 'Ver más'}
-                  <span className="sr-only"> sobre la {sub.titulo}</span>
-                  <ChevronDown
-                    size={14}
-                    className="transition-transform"
-                    style={{ transform: tarjetaAbierta === sub.id ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                  />
-                </button>
+                <div id={idDetalle}>
+                  <AnimatePresence initial={false}>
+                    {estaAbierta && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden border-t border-white/10"
+                      >
+                        <div className="p-6 lg:p-8 pt-5 text-sm text-white/85 leading-relaxed whitespace-pre-line">
+                          {sub.contenido.trim()}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               )}
-            </div>
-
-            {sub.contenido && (
-              <AnimatePresence>
-                {tarjetaAbierta === sub.id && (
-                  <motion.div
-                    id={`subcomision-${sub.id}`}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    className="overflow-hidden border-t border-white/10"
-                  >
-                    <div className="p-8 pt-6 text-sm text-white/80 leading-relaxed whitespace-pre-line">
-                      {sub.contenido}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            )}
-          </motion.div>
-        ))}
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   </section>;
@@ -2724,7 +3032,7 @@ export default function HomePage() {
         <SedeSection />
         <TinDigitalBanner />
         <CulturalSection />
-        <CuidadosBanner />
+        <ViandasSection />
         <ApoyoSection />
         <PrensaSection />
         <EncuentroSection />
