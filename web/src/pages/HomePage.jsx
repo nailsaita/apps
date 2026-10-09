@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, MotionConfig, useReducedMotion, useInView, animate } from 'framer-motion';
 import Lottie from 'lottie-react';
-import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag, FileText, Droplet, ShieldCheck, Moon, Sparkles, Backpack, Smartphone, PersonStanding, Youtube } from 'lucide-react';
+import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag, FileText, Droplet, ShieldCheck, Moon, Sparkles, Backpack, Smartphone, PersonStanding,Car, MessageCircle, Youtube } from 'lucide-react';
 import { HiddenMail } from '@/components/HiddenMail';
 import FAQ from '@/data/faq.jsx';
 import ACTIVIDADES_CULTURALES from '@/data/actividadesCulturales.js';
@@ -1075,6 +1075,57 @@ function AgregarCalendarioButton() {
       </motion.div>}
     </AnimatePresence>
   </>;
+}
+
+// ─── TAXI CON COMPAÑERAS ──────────────────────────────────────────────────────
+// Asociación de Mujeres Taxistas de Córdoba: 351 290-2121
+const TAXI_WHATSAPP = '5493512902121';
+const TAXI_MENSAJE = 'Hola compañera, soy del 39° Encuentro Plurinacional y quiero pedir un taxi. Estoy en: ';
+const TAXI_LINK = `https://wa.me/${TAXI_WHATSAPP}?text=${encodeURIComponent(TAXI_MENSAJE)}`;
+
+function TaxiCompanerasBanner() {
+  return (
+    <section id="taxi-companeras" aria-labelledby="titulo-taxi" className="pb-16 px-4 bg-[#FFF1E3]">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="max-w-5xl mx-auto relative overflow-hidden rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-5 md:gap-8 ring-2 ring-[#fdb10c] shadow-xl shadow-[#4a2055]/25"
+        style={{ background: 'linear-gradient(90deg, #4a2055, #813893)' }}
+      >
+        <div className="absolute -bottom-20 -left-10 w-72 h-72 bg-[#fdb10c]/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
+
+        <div className="bg-[#fdb10c] text-[#4a2055] w-16 h-16 rounded-full flex items-center justify-center shrink-0 relative z-10" aria-hidden="true">
+          <Car size={30} />
+        </div>
+
+        <div className="flex-1 text-center md:text-left relative z-10">
+          <span className="inline-block bg-[#fdb10c] text-[#4a2055] text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
+            Exclusivo para lxs compañerxs del Encuentro
+          </span>
+          <h2 id="titulo-taxi" className="text-white text-2xl sm:text-3xl font-black leading-tight mb-2">
+            Pedí un taxi manejado por una compañera
+          </h2>
+          <p className="text-white/85 text-sm sm:text-base leading-relaxed m-0">
+            Escribile directo a la <strong className="text-white">Asociación de Mujeres Taxistas de Córdoba</strong> contando que sos del Encuentro y desde dónde salís, y una compañera te pasa a buscar.
+          </p>
+        </div>
+
+        <a
+          href={TAXI_LINK}
+          target="_blank"
+          rel="noreferrer"
+          className="relative z-10 shrink-0 inline-flex items-center gap-2 bg-[#25D366] text-[#0b3d1f] font-black text-base px-6 py-3 rounded-full hover:bg-[#3ee07a] transition-colors shadow-xl shadow-black/30 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#fdb10c]"
+        >
+          <MessageCircle size={20} aria-hidden="true" />
+          Pedir taxi por WhatsApp
+          <span className="sr-only">, al 351 290-2121</span>
+          <NuevaPestana />
+        </a>
+      </motion.div>
+    </section>
+  );
 }
 
 function TinDigitalBanner() {
@@ -2459,82 +2510,129 @@ Súmate a ocupar espacios que son para todas, todes. Este Encuentro es de TODAS,
   </section>;
 }
 
+const COLORES_CANCION = [
+  { base: '#813893', claro: '#e0c8e6', texto: '#ffffff' }, // violeta
+  { base: '#fdb10c', claro: '#fec449', texto: '#2f1435' }, // naranja
+  { base: '#2a823c', claro: '#a9d3b2', texto: '#ffffff' }, // verde
+  { base: '#ab7ab7', claro: '#eadeed', texto: '#2f1435' }, // lila
+  { base: '#c0392b', claro: '#f5b7b1', texto: '#ffffff' }  // rojo
+];
+
 function CancioneroSection() {
   const [cancionAbierta, setCancionAbierta] = useState(null);
-  return <section id="cancionero" className="py-24 px-4 bg-[#184b22]">
-    <div className="max-w-4xl mx-auto">
-      <div className="text-center mb-12 relative">
-        <IlustracionSticker
-          src="/images/ilustraciones/abrazo-1.svg"
-          size="w-40 md:w-60"
-          rotate={-0}
-          className="hidden md:block absolute left-1/2 md:right-auto md:-right-4 lg:left-4 -top20"
-        />
-        <h2 className="text-white mb-4">Cancionero</h2>
-        <p className="text-white/70 max-w-xl mx-auto mb-6">
-          Canciones sugeridas para este 39 encuentro en Córdoba
-        </p>
 
-        <Link
-          to="/Cancionero"
-          className="inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold px-6 py-3 rounded-full hover:bg-[#fec449] transition-colors"
-        >
-          Ver el cancionero sugerido
-        </Link>
+  return (
+    <section id="cancionero" aria-labelledby="titulo-cancionero" className="py-20 px-4 bg-[#184b22] relative overflow-hidden">
+      {/* Fondo decorativo, mismo lenguaje que el resto de la home */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div className="absolute -top-24 -right-20 w-96 h-96 bg-[#813893]/25 rounded-full blur-3xl" />
+        <div className="absolute -bottom-24 -left-16 w-80 h-80 bg-[#fdb10c]/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="space-y-4">
-        {CANCIONES.map((cancion, i) => <motion.div key={cancion.id} initial={{
-          opacity: 0,
-          y: 10
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          delay: i * 0.05
-        }} className="bg-white/5 rounded-2xl border border-white/15 overflow-hidden">
-          <button onClick={() => setCancionAbierta(cancionAbierta === cancion.id ? null : cancion.id)} aria-expanded={cancionAbierta === cancion.id} aria-controls={`cancion-${cancion.id}`} className="w-full text-left p-6 flex justify-between items-start gap-4 hover:bg-white/10 transition-colors">
-            <div className="flex-1">
-              <h3 className="text-lg font-bold text-white mb-1">{cancion.titulo}</h3>
-              <p className="text-sm text-white/60 italic">{cancion.artista}</p>
-            </div>
-            <ChevronDown size={20} className="text-[#fdb10c] shrink-0 transition-transform" style={{
-              transform: cancionAbierta === cancion.id ? 'rotate(180deg)' : 'rotate(0deg)'
-            }} />
-          </button>
+      <div className="max-w-4xl mx-auto relative z-10">
+        {/* Encabezado */}
+        <div className="text-center mb-8">
+          <span className="inline-flex items-center gap-2 bg-[#fdb10c] text-[#4a2055] text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
+            <Music size={14} aria-hidden="true" /> Para cantar juntes
+          </span>
+          <h2 id="titulo-cancionero" className="text-white mb-3">Cancionero</h2>
+          <p className="text-white/70 max-w-xl mx-auto m-0">
+            Canciones sugeridas para este 39° Encuentro en Córdoba
+          </p>
+        </div>
 
-          <AnimatePresence>
-            {cancionAbierta === cancion.id && <motion.div id={`cancion-${cancion.id}`} initial={{
-              height: 0,
-              opacity: 0
-            }} animate={{
-              height: 'auto',
-              opacity: 1
-            }} exit={{
-              height: 0,
-              opacity: 0
-            }} className="overflow-hidden border-t border-white/10">
-              <div className="p-6 bg-black/20">
-                <pre className="text-sm text-white/85 leading-relaxed font-sans whitespace-pre-wrap break-words">
-                  {cancion.letra}
-                </pre>
-              </div>
-            </motion.div>}
-          </AnimatePresence>
-        </motion.div>)}
-      </div>
+        {/* Panel tipo cuaderno */}
+        <div className="rounded-3xl bg-[#2f1435] ring-1 ring-white/10 shadow-xl shadow-black/30 p-3 sm:p-4">
+          <ul className="space-y-2 m-0 p-0 list-none">
+            {CANCIONES.map((cancion, i) => {
+              const color = COLORES_CANCION[i % COLORES_CANCION.length];
+              const abierta = cancionAbierta === cancion.id;
+              return (
+                <motion.li
+                  key={cancion.id}
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.04 }}
+                  className="rounded-xl overflow-hidden border transition-colors"
+                  style={{
+                    borderColor: abierta ? color.base : `${color.base}40`,
+                    background: `linear-gradient(90deg, ${color.base}45 0%, ${color.base}12 60%, transparent 100%)`
+                  }}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setCancionAbierta(abierta ? null : cancion.id)}
+                    aria-expanded={abierta}
+                    aria-controls={`cancion-${cancion.id}`}
+                    className="w-full text-left px-3 py-2.5 flex items-center gap-3 hover:bg-white/5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#fdb10c]"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs font-black tabular-nums"
+                      style={{ backgroundColor: color.base, color: color.texto }}
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span className="flex-1 min-w-0">
+                      <span className="block text-base font-bold text-white leading-snug">{cancion.titulo}</span>
+                      {cancion.artista && (
+                        <span className="block text-xs italic" style={{ color: color.claro }}>{cancion.artista}</span>
+                      )}
+                    </span>
+                    <ChevronDown
+                      size={18}
+                      aria-hidden="true"
+                      className="shrink-0 transition-transform duration-300"
+                      style={{ color: color.claro, transform: abierta ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                    />
+                  </button>
 
-      <div className="mt-8 bg-white/5 rounded-2xl border-2 border-[#fdb10c]/40 px-6 py-4 flex flex-col sm:flex-row items-center justify-center gap-x-4 gap-y-1 text-center sm:text-left">
-        <Music size={22} className="text-[#fdb10c] shrink-0" />
-        <h3 className="text-white font-bold text-base m-0">¿Tenés una canción para agregar?</h3>
-        <p className="text-white/70 text-sm m-0">
-          Enviala a <strong className="text-white"><HiddenMail mail="39encuentropluri.cba@proton.me" className="text-white underline" /></strong>
-        </p>
+                  <div id={`cancion-${cancion.id}`}>
+                    <AnimatePresence initial={false}>
+                      {abierta && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden border-t"
+                          style={{ borderColor: `${color.base}40` }}
+                        >
+                          <pre className="m-0 pl-14 pr-5 py-4 bg-black/20 text-sm text-white/85 leading-relaxed font-sans whitespace-pre-wrap break-words">
+                            {cancion.letra}
+                          </pre>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </motion.li>
+              );
+            })}
+          </ul>
+
+          {/* Botón al pie del cuaderno */}
+          <Link
+            to="/Cancionero"
+            className="mt-4 flex w-full items-center justify-center gap-2 bg-[#fdb10c] text-[#4a2055] font-bold px-6 py-3 rounded-xl hover:bg-[#fec449] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#fdb10c]"
+          >
+            Ver el cancionero sugerido
+            <ArrowRight size={18} aria-hidden="true" />
+          </Link>
+        </div>
+
+        {/* Invitación, separada del cuaderno */}
+        <div className="mt-6 rounded-xl border-2 border-dashed border-[#d5bddb] bg-[#FFF1E3] px-4 py-2.5 flex items-center gap-3">
+          <span aria-hidden="true" className="bg-[#813893] text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0">
+            <Music size={16} />
+          </span>
+          <p className="flex-1 min-w-0 m-0 text-sm text-[#343230] leading-snug">
+            <strong className="text-[#4a2055] font-bold">¿Tenés una canción para agregar?</strong>{' '}
+            Enviala a <HiddenMail mail="39encuentropluri.cba@proton.me" className="text-[#662c74] font-semibold underline break-all hover:text-[#813893]" />
+          </p>
+        </div>
       </div>
-    </div>
-  </section>;
+    </section>
+  );
 }
 // ─── CARTELERA DE ARTISTAS POR ESCENARIO (dentro de la Grilla Cultural) ───────
 
@@ -3030,6 +3128,7 @@ export default function HomePage() {
         <CronogramaSection />
         <EjesSection />
         <SedeSection />
+        <TaxiCompanerasBanner />
         <TinDigitalBanner />
         <CulturalSection />
         <ViandasSection />

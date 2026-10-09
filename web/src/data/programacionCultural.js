@@ -51,15 +51,14 @@ const LUGARES = {
   sobremonte: ['Museo Sobremonte', 'Rosario de Sta. Fe 218'],
   buenPastor: ['Paseo del Buen Pastor', 'Av. Hipólito Yrigoyen 325'],
   quintoDeva: ['Quinto Deva', 'Pje. Agustín Pérez 10'],
-  penero: ['Sábado peñero del Pluri', 'Rodríguez Peña 454'],
   sivialco: ['Sindicato Vial Córdoba (SIVIALCO)', '27 de Abril 884'],
   libertador: ['Teatro del Libertador San Martín', 'Av. Vélez Sarsfield 365'],
   laLuna: ['Teatro La Luna', 'Pasaje Escuti 915, Güemes'],
+  orilleros: ['Teatro Comunitario Orilleros de la Cañada', 'Julio A. Roca 1644'],
   teatroReal: ['Teatro Real', 'San Jerónimo 66'],
   mundoFeliz: ['Un Mundo Feliz', 'Caseros 382'],
   upc: ['UPC – Ciudad de las Artes', 'Av. Pablo Ricchieri 1955 (ingreso por cochera)'],
-  volcan: ['Volcán Azul Libros', 'Independencia 1247'],
-  plaza: ['Plaza Político Cultural', '']
+  volcan: ['Volcán Azul Libros', 'Independencia 1247']
 };
 
 const mapsUrl = (direccion) => {
@@ -81,7 +80,7 @@ const LIT = 'Literatura', VIS = 'Visuales', ESCU = 'Escultura', OTR = 'Otras pro
 
 export const PROGRAMACION = [
   // ── Escénicas ──
-    e('sabado', '13:30', '', '“Kill el mandato gil” + “Mujeres cautivas, mujeres salvajes”', ESC, 'buenPastor'),
+  e('sabado', '13:30', '', '“Kill el mandato gil” + “Mujeres cautivas, mujeres salvajes”', ESC, 'buenPastor'),
   e('sabado', '14:00', '', '“La Rota Virtud”: biodrama de mujeres evangélicas', ESC, 'buenPastor'),
   e('domingo', '14:00', '', 'Desde el altillo', ESC, 'archivo'),
   e('domingo', '13:00', '', 'Co-Apg kuña kuña Pim Pim: escena compartida con los monólogos teatrales “La Paraguaya” y “Despojo de mi identidad blanqueada”', ESC, 'museoMujeres', 'Patio'),
@@ -92,9 +91,7 @@ export const PROGRAMACION = [
   e('domingo', '14:30', '15:00', 'Comunidad folclórica de mujeres y disidencias “Madre Tierra”', ESC, 'tablada'),
   e('domingo', '13:00', '', 'Cabaret Azul', ESC, 'bastarda'),
   e('sabado', '20:30', '', 'Partes de Mí', ESC, 'mucho'),
-  e('sabado', '14:00', '', '“La Rota Virtud”: biodrama de mujeres evangélicas', ESC, 'buenPastor'),
   e('domingo', '12:30', '', 'Despertares', ESC, 'buenPastor'),
-  e('sabado', '13:30', '', '“Kill el mandato gil” + “Mujeres cautivas, mujeres salvajes”', ESC, 'buenPastor'),
   e('sabado', '21:00', '', 'Un punto azul pálido en la oscuridad: una distopía cercana', ESC, 'quintoDeva'),
   e('sabado', '14:00', '', 'Pluri encontradas: escenas cortas con Enemigas Públicas Kilomba y Novia Pálida Nati Hot', ESC, 'libertador', 'Sala Luis de Tejeda'),
   e('sabado', '21:00', '', 'Dame el fuego de tu amor', ESC, 'laLuna'),
@@ -129,7 +126,10 @@ export const PROGRAMACION = [
   e('sabado', '18:00', '20:00', 'Falsas denuncias: no van a silenciarnos. Conversatorio de la Casa de la Mujer María Conti', FOR, 'museoMujeres', 'Patio'),
   e('sabado', '13:00', '15:00', 'Territorios lúdicos de cuidado colectivo', FOR, 'museoMujeres', 'Patio'),
   e('sabado', '18:00', '20:00', 'Podría haber sido yo', FOR, 'sanMartin'),
-  e('domingo', '12:00', '14:30', 'Dicha de Alberdi: recorrido por el barrio + charla', FOR, 'plazaColon', 'Punto de partida', 'Duración: 1 h 30 min'),  e('sabado', '13:00', '15:00', 'Las negras también hacemos historia: taller de danzas de matriz afro', FOR, 'galpon'),
+  // Dicha de Alberdi: sale de La Piojera y termina con charla en el Espacio de la Cervecería Córdoba
+  e('domingo', '12:00', '', 'Concentración para el recorrido “Dicha de Alberdi”', FOR, 'piojera', 'Punto de encuentro', 'Desde acá sale el recorrido por el barrio, que termina con una charla en el Espacio de la Cervecería Córdoba'),
+  e('domingo', '12:00', '14:30', 'Dicha de Alberdi: recorrido por el barrio + charla', FOR, 'tablada', '', 'Concentración a las 12 hs en el Centro Cultural La Piojera (Av. Colón 1559). Recorrido: 1 h 30 min'),
+  e('sabado', '13:00', '15:00', 'Las negras también hacemos historia: taller de danzas de matriz afro', FOR, 'galpon'),
   e('domingo', '13:00', '15:00', 'Taller de Capoeira Angola', FOR, 'galpon'),
   e('sabado', '13:00', '15:00', 'Genealogía travesti trans en los encuentros', FOR, 'bastarda'),
   e('sabado', '12:00', '15:00', 'Corporalidades en juego: prácticas de circo', FOR, 'burbuja'),
@@ -146,7 +146,9 @@ export const PROGRAMACION = [
   e('sabado', '18:30', '19:00', 'Flores calladas', MUS, 'pepino', 'Sala'),
   e('sabado', '13:00', '13:30', 'Sol Gomez + Chika Repiká: candombe canción', MUS, 'unc'),
   e('sabado', '20:15', '21:30', 'Amanecer en violeta: contar para transmutar (música y cuentos)', MUS, 'unc'),
-  e('domingo', '12:30', '', 'Presentación del Observatorio de la Música en vivo y grabada de la comunidad LGBTQIAPN+ de Córdoba', MUS, 'unc'),  e('domingo', '13:00', '14:00', 'Bren Coll (folk rock) y Celeste Martín', MUS, 'unc'),
+  e('domingo', '12:30', '', 'Presentación del Observatorio de la Música en vivo y grabada de la comunidad LGBTQIAPN+ de Córdoba', MUS, 'unc'),
+  e('domingo', '13:00', '14:00', 'Bren Coll (folk rock) e Ile Pez', MUS, 'unc'),
+  e('sabado', '13:00', '15:00', '“Leguereale”, “Las Marias Van”, “Priscila Weth – Oráculo Musical” y "Celeste Gonzalez"', MUS, 'orilleros'),
   e('sabado', '21:00', '00:00', 'Silvina Fernandez, Giyo Franco, Tysem, Eluney Sposato, Marina Pacheco (música de la Patagonia) y Morenilla', MUS, 'lupulus'),
   e('sabado', '14:30', '15:00', 'Pilar Medina y Luci Delahye: “De Atahualpa a Piaf”', MUS, 'evita', 'Bar'),
   e('domingo', '14:30', '15:00', 'Alta Manija Jem y concierto de Flor Straub', MUS, 'evita', 'Bar'),
@@ -161,7 +163,7 @@ export const PROGRAMACION = [
   e('sabado', '20:00', '', 'Proyección “La Yegua de Troya (existimos les guste o no)”', CINE, 'caracol', '', 'Duración: 63 minutos'),
   e('sabado', '21:00', '23:00', '“Socorristas – le film” (Córdoba / Francia)', CINE, 'piojera'),
   e('domingo', '13:00', '15:00', 'Referentas Comunitarias Matanceras, Bs. As. (proyección + debate)', CINE, 'piojera'),
-  e('sabado', '13:30', '14:30', 'No es la espera: presentación, proyección de librofotos e intercambio', CINE, 'unc'),
+  e('sabado', '14:00', '15:00', 'No es la espera: presentación, proyección de librofotos e intercambio', CINE, 'unc'),
   e('sabado', '18:30', '20:00', '“Brujas por el Cordobazo” (proyección)', CINE, 'unc', 'Auditorio'),
   e('domingo', '14:00', '15:00', 'Antro Tortillero: un convite de proyectos lésbicos. Intercambios, conversación y podcast', CINE, 'unc'),
   e('sabado', '12:30', '15:00', '¿Cuándo dejamos de pedir permiso? (Córdoba)', CINE, 'museoMujeres', 'Auditorio'),
