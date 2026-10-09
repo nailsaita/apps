@@ -214,7 +214,10 @@ if (window.navigation && window.self !== window.top) {
 const pwaPlugin = VitePWA({
 	disable: isDev,
 	registerType: 'autoUpdate',
-	injectRegister: 'inline',
+	// CAMBIO: antes era 'inline'. El registro inline solo instala el service worker:
+	// no busca versiones nuevas ni recarga la página cuando llega una.
+	// Ahora el registro se hace a mano en src/main.jsx (con chequeo periódico y recarga).
+	injectRegister: null,
 	includeAssets: ['favicon.ico', 'favicon-96x96.png', 'launchericon-512x512.png', '512.png'],
 	manifest: {
 		name: 'Encuentro 39',
@@ -310,6 +313,10 @@ logger.error = (msg, options) => {
 }
 
 export default defineConfig({
+	// NUEVO: fecha y hora del build, para mostrar la versión en el footer
+	define: {
+		__BUILD__: JSON.stringify(new Date().toISOString()),
+	},
 	optimizeDeps: {
 		include: allDeps,
 	},
