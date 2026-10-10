@@ -22,6 +22,7 @@ import Cuidados from '@/pages/Cuidados.jsx';
 import GuiaTalleresPage from '@/pages/GuiaTalleresPage.jsx';
 import TinDigitalPage from '@/pages/TinDigitalPage.jsx';
 import ProgramacionCulturalPage from '@/pages/ProgramacionCulturalPage.jsx';
+import DeclaracionMarchaPage from '@/pages/DeclaracionMarchaPage.jsx';
 
 
 function ScrollToHash() {
@@ -71,6 +72,8 @@ function App() {
         <Route path="/GuiaTalleres" element={<GuiaTalleresPage />} />
         <Route path="/TinDigital" element={<TinDigitalPage />} />
         <Route path="/ProgramacionCultural" element={<ProgramacionCulturalPage />} />
+        <Route path="/DeclaracionMarcha" element={<DeclaracionMarchaPage />} />
+        
 
         <Route path="*" element={
           <div className="min-h-screen flex flex-col items-center justify-center bg-background text-center px-4">

@@ -1127,6 +1127,69 @@ function TaxiCompanerasBanner() {
     </section>
   );
 }
+// ─── CONSIGNAS DE LA MARCHA ───────────────────────────────────────────────────
+function CartelConsigna({ children, rotar = 0, delay = 0, className = '' }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12, rotate: 0 }}
+      whileInView={{ opacity: 1, y: 0, rotate: rotar }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.45, delay }}
+      className={`bg-[#FFF1E3] text-[#662c74] rounded-2xl px-5 py-3 shadow-lg shadow-[#4a2055]/20 text-center ${className}`}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function MarchaConsignasBanner() {
+  return (
+    <section
+      id="marcha"
+      aria-labelledby="titulo-marcha"
+      className="py-14 px-4 relative overflow-hidden"
+      style={{ background: 'linear-gradient(180deg, #f5a9b8 0%, #d5bddb 50%, #5bcefa 100%)' }}
+    >
+      <div className="max-w-2xl mx-auto flex flex-col items-center gap-4 relative z-10">
+        <span className="inline-flex items-center gap-2 bg-[#4a2055] text-white text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full">
+          <span aria-hidden="true">🏳️‍⚧️</span> Sábado 10 
+        </span>
+
+        <CartelConsigna rotar={-1.5} delay={0}>
+          <p className="m-0 italic font-bold text-xl sm:text-2xl leading-tight">
+            ¡Basta de discursos de odio <span className="block text-base sm:text-lg font-semibold">y biologicistas!</span>
+          </p>
+        </CartelConsigna>
+
+        <CartelConsigna rotar={1} delay={0.1}>
+          <h2 id="titulo-marcha" className="m-0 italic text-[#662c74] text-lg sm:text-xl font-semibold leading-snug">
+            Marchamos contra los{' '}
+            <strong className="font-black text-xl sm:text-2xl">travesticidios, transfemicidios</strong> y{' '}
+            <strong className="font-black text-xl sm:text-2xl">transhomicidios.</strong>
+          </h2>
+        </CartelConsigna>
+ <CartelConsigna rotar={1.5} delay={0.3} className="mt-2">
+          <p className="m-0 italic font-black text-xl sm:text-2xl">¡Basta de Lesbicidios!</p>
+        </CartelConsigna>
+        <CartelConsigna rotar={-1} delay={0.2}>
+          <p className="m-0 italic font-black text-2xl sm:text-3xl leading-tight">El Estado es Responsable</p>
+          <p className="m-0 italic text-base sm:text-lg text-[#343230] leading-snug">
+            Existimos porque hay memoria,<br className="hidden sm:block" /> resistimos porque hay lucha.
+          </p>
+        </CartelConsigna>
+        <Link
+  to="/DeclaracionMarcha"
+  className="mt-4 inline-flex items-center gap-2 bg-[#4a2055] text-white font-bold px-6 py-3 rounded-full hover:bg-[#662c74] transition-colors shadow-lg shadow-[#4a2055]/30 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#FFF1E3]"
+>
+  Leé la declaración de la Comisión Organizadora
+  <ArrowRight size={18} aria-hidden="true" />
+</Link>
+
+       
+      </div>
+    </section>
+  );
+}
 
 function TinDigitalBanner() {
   return (
@@ -3132,10 +3195,11 @@ export default function HomePage() {
         <TinDigitalBanner />
         <CulturalSection />
         <ViandasSection />
+        <ConsignaSection />
+        <MarchaConsignasBanner />
         <ApoyoSection />
         <PrensaSection />
         <EncuentroSection />
-        <ConsignaSection />
         <SubcomisionesSection />
         <CancioneroSection />
         <FaqSection />
