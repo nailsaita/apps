@@ -3195,6 +3195,7 @@ export default function HomePage() {
         <TinDigitalBanner />
         <CulturalSection />
         <ViandasSection />
+        <CuidadosBanner />
         <ConsignaSection />
         <MarchaConsignasBanner />
         <ApoyoSection />
