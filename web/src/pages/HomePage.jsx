@@ -559,76 +559,6 @@ export function Navbar({ hasTopSpace = true }) {
     </motion.nav>
   </>;
 }
-// ─── INSTALAR APP ────────────────────────────────────────────────────────────────
-function InstalarAppSection() {
-  //movemos la lógica de esconder acá, para esconder el banner entero
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
-  const [instalado, setInstalado] = useState(false);
-
-  useEffect(() => {
-    // Si ya está corriendo como app instalada, no mostramos el botón
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-      setInstalado(true);
-    }
-
-    const onBeforeInstallPrompt = (e) => {
-      e.preventDefault();
-      setDeferredPrompt(e);
-    };
-
-    const onAppInstalled = () => {
-      setInstalado(true);
-      setDeferredPrompt(null);
-    };
-
-    window.addEventListener('beforeinstallprompt', onBeforeInstallPrompt);
-    window.addEventListener('appinstalled', onAppInstalled);
-
-    return () => {
-      window.removeEventListener('beforeinstallprompt', onBeforeInstallPrompt);
-      window.removeEventListener('appinstalled', onAppInstalled);
-    };
-  }, []);
-
-  const handleInstalar = async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    // outcome es 'accepted' o 'dismissed'
-    setDeferredPrompt(null);
-  };
-
-  // No mostramos nada si ya está instalada o el navegador no ofreció el prompt todavía
-  if (instalado || !deferredPrompt) return null;
-
-
-  return (
-    <section aria-label="Instalar la app" className="w-screen w-full pt-6 pb-6 px-4 bg-[#2a823c]">
-      <div className="max-w-5xl mx-auto flex flex-row flex-nowrap items-center gap-3 sm:gap-5">
-        <div className="flex-1 min-w-0 relative z-10">
-          {/* Mismo aspecto que antes; no es un título para que la página empiece por el h1 */}
-          <p className="font-bold text-white text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2">
-            Instalá la App para llevarte el Encuentro en tu celu
-          </p>
-          <p className="text-[11px] sm:text-xs text-white/50">
-            En iPhone: abrí este sitio en Safari, tocá "Compartir" y elegí "Agregar a pantalla de inicio".
-          </p>
-        </div>
-
-        <div className="relative z-10 shrink-0">
-          <button
-            onClick={handleInstalar}
-            className="inline-flex items-center gap-2 bg-[#813893] text-white font-bold px-3 sm:px-4 py-2 rounded-full whitespace-nowrap hover:bg-[#662c74] transition-colors"
-          >
-            <Download size={16} />
-            Instalar app
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-}
-// ─── SECCIONES ────────────────────────────────────────────────────────────────
 
 // ─── TRANSMISIÓN EN YOUTUBE ───────────────────────────────────────────────────
 
@@ -677,7 +607,7 @@ function HeroSection() {
       <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[#2a823c]/20 rounded-full blur-3xl" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#fdb10c]/10 rounded-full blur-3xl" />
     </div>
-    <InstalarAppSection />
+  
 
     <motion.div initial={{
       opacity: 0,
