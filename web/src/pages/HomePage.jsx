@@ -521,19 +521,7 @@ export function Navbar({ hasTopSpace = true }) {
           })}
         </div>
 
-        {/* Derecha: lupa + inscribirse — desktop */}
-        <div className="hidden md:flex items-center gap-2">
-          {/* <button onClick={() => setBuscadorAbierto(true)} aria-label="Buscar" className="flex items-center gap-2 text-sm text-gray-400 border border-gray-200 rounded-full px-3 py-1.5 hover:border-[#fdb10c] hover:text-[#916607] transition-colors bg-gray-50" title="Buscar (Ctrl+K)">
-            <Search size={14} />
-            <span className="text-xs">Buscar</span>
-            <span className="text-xs bg-gray-200 text-gray-500 rounded px-1.5 py-0.5 ml-1 font-mono">⌘K</span>
-          </button> */}
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" id="inscripcion" className="bg-[#2a823c] text-white font-bold px-8 py-2 rounded-full hover:bg-[#21662f] hover:scale-105 transition-all flex items-center justify-center gap-2 shadow-xl shadow-[#184b22]/50 ring-2 ring-white/20 text-lg">
-            <Users size={20} />
-            Inscripción
-            <NuevaPestana />
-          </a>
-        </div>
+
 
         {/* Mobile: lupa + hamburguesa */}
         <div className="md:hidden flex items-center gap-2 w-full justify-between">
@@ -565,10 +553,7 @@ export function Navbar({ hasTopSpace = true }) {
           {links.map(l => <a key={l.href} href={l.href} onClick={() => setOpen(false)} aria-current={activeSection === l.id && l.id ? 'true' : undefined} className={`block py-2 text-sm font-medium transition-colors ${activeSection === l.id ? 'text-[#916607] font-bold' : 'text-gray-700 hover:text-[#916607]'}`} style={{ fontFamily: "'degular', sans-serif" }}>
             {l.label}
           </a>)}
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="block mt-2 bg-[#2a823c] text-white text-sm font-bold px-4 py-2 rounded-full text-center">
-            Inscribirse
-            <NuevaPestana />
-          </a>
+          
         </motion.div>}
       </AnimatePresence>
     </motion.nav>
@@ -739,11 +724,7 @@ function HeroSection() {
         </div>
 
         <div className="flex flex-col items-center gap-5">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyeUOyM_tG81LQEtq8nNxGTDwybu2STt6DItaCjtFrGAXgSA/viewform?pli=1" target="_blank" rel="noreferrer" id="inscripcion-hero" className="bg-[#2a823c] text-white font-bold px-14 py-5 rounded-full hover:bg-[#21662f] hover:scale-105 transition-all flex items-center justify-center gap-3 shadow-xl shadow-[#184b22]/50 ring-2 ring-white/20 text-xl">
-            <Users size={24} />
-            Inscripción
-            <NuevaPestana />
-          </a>
+          
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/#cronograma" className="bg-[#FFF1E3] text-[#4a2055] font-bold px-8 py-4 rounded-full hover:bg-[#fec449] transition-colors flex items-center justify-center gap-2 shadow-lg">
@@ -1075,6 +1056,74 @@ function AgregarCalendarioButton() {
       </motion.div>}
     </AnimatePresence>
   </>;
+}
+// ─── PRÓXIMA SEDE ─────────────────────────────────────────────────────────────
+function ProximaSedeBanner() {
+  const reducir = useReducedMotion();
+
+  return (
+    <section
+  id="proxima-sede"
+  aria-labelledby="titulo-proxima-sede"
+  className="relative overflow-hidden pt-[124px] pb-10 px-4"
+  style={{ background: 'linear-gradient(90deg, #fdb10c 0%, #fec449 50%, #fdb10c 100%)' }}
+>
+      {/* Brillo que cruza la franja */}
+      {!reducir && (
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-y-0 w-1/3 pointer-events-none"
+          style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent)', skewX: '-20deg' }}
+          initial={{ left: '-40%' }}
+          animate={{ left: '120%' }}
+          transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 3, ease: 'easeInOut' }}
+        />
+      )}
+
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="relative z-10 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-5 md:gap-8 text-center md:text-left"
+      >
+        {/* Pin que rebota con onda */}
+        <div className="relative shrink-0 w-16 h-16" aria-hidden="true">
+          <span className="absolute inset-0 rounded-full bg-[#4a2055]/40 motion-safe:animate-ping" />
+          <motion.div
+            className="relative bg-[#4a2055] text-[#fdb10c] w-16 h-16 rounded-full flex items-center justify-center shadow-lg shadow-[#4a2055]/30"
+            animate={reducir ? {} : { y: [0, -6, 0] }}
+            transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <MapPin size={30} />
+          </motion.div>
+        </div>
+
+        <div className="flex-1">
+          <span className="inline-block bg-[#4a2055] text-[#fdb10c] text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">
+            Próxima sede · 2027
+          </span>
+          <h2 id="titulo-proxima-sede" className="text-[#2f1435] text-2xl sm:text-3xl md:text-4xl font-black leading-tight m-0">
+            El 40° Encuentro Plurinacional será en{' '}
+            <span className="relative inline-block text-[#662c74]">
+              la Ciudad de Buenos Aires
+              <motion.span
+                aria-hidden="true"
+                className="absolute left-0 right-0 -bottom-1 h-1.5 rounded-full bg-[#662c74] origin-left"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
+              />
+            </span>
+          </h2>
+          <p className="text-[#2f1435]/80 text-sm sm:text-base font-semibold mt-3 mb-0">
+            ¡Nos vemos el año que viene en CABA!
+          </p>
+        </div>
+      </motion.div>
+    </section>
+  );
 }
 
 // ─── TAXI CON COMPAÑERAS ──────────────────────────────────────────────────────
@@ -3187,8 +3236,10 @@ export default function HomePage() {
       <Navbar />
       <BackToTop />
       <main id="contenido" tabIndex={-1} className="outline-none">
+        <ProximaSedeBanner />
         <HeroSection />
-        <CronogramaSection />
+
+<CronogramaSection />
         <EjesSection />
         <SedeSection />
         <TaxiCompanerasBanner />
