@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, MotionConfig, useReducedMotion, useInView, animate } from 'framer-motion';
 import Lottie from 'lottie-react';
-import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag, FileText, Droplet, ShieldCheck, Moon, Sparkles, Backpack, Smartphone, PersonStanding,Car, MessageCircle, Youtube } from 'lucide-react';
+import { Calendar, MapPin, ChevronDown, Download, ExternalLink, Mail, Instagram, Facebook, Music, Utensils, Bus, Home, AlertCircle, X, ArrowRight, Users, Star, Menu, Phone, Search, Heart, Copy, Check, ShoppingBag, FileText, Droplet, ShieldCheck, Moon, Sparkles, Backpack, Smartphone, PersonStanding, Car, MessageCircle, Youtube, Camera, Video } from 'lucide-react';
 import { HiddenMail } from '@/components/HiddenMail';
 import FAQ from '@/data/faq.jsx';
 import ACTIVIDADES_CULTURALES from '@/data/actividadesCulturales.js';
@@ -567,7 +567,7 @@ function TransmisionLink() {
   hoy.setHours(0, 0, 0, 0);
   const dias = Math.round((INICIO_ENCUENTRO - hoy) / (1000 * 60 * 60 * 24));
   const enVivo = dias <= 0 && dias >= -2;
-  const badge = enVivo ? 'En vivo' : dias > 0 ? 'Próximamente' : 'Transmisiones';
+  const badge = enVivo ? 'En vivo' : dias > 0 ? 'Próximamente' : 'Grabaciones';
 
   return (
     <a
@@ -582,7 +582,7 @@ function TransmisionLink() {
       </span>
       <span className="text-xs font-black uppercase tracking-widest text-white/80">{badge}</span>
       <span className="w-px h-4 bg-white/25" aria-hidden="true" />
-      <span className="text-sm font-semibold">Seguí la transmisión desde nuestro canal de YouTube</span>
+      <span className="text-sm font-semibold">Mirá el registro del encuentro en nuestro canal de YouTube</span>
       <span className="bg-white text-[#c0392b] w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform group-hover:scale-110">
         <Youtube size={16} />
       </span>
@@ -599,7 +599,7 @@ function HeroLottie({ className = '' }) {
 }
 
 function HeroSection() {
-  return <section id="hero" className="min-h-[100vh] flex flex-col items-center justify-center  pt-24 pb-16 relative overflow-hidden "
+  return <section id="hero" className="flex flex-col items-center justify-center pt-8 pb-12 relative overflow-hidden"
     style={{ background: 'linear-gradient(180deg, #2f1435 0%, #662c74 25%, #184b22 45%, #2f1435 70%, #4a2055 100%)' }}>
     {/* Fondo decorativo */}
     <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -654,21 +654,72 @@ function HeroSection() {
         </div>
 
         <div className="flex flex-col items-center gap-5">
-          
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/#cronograma" className="bg-[#FFF1E3] text-[#4a2055] font-bold px-8 py-4 rounded-full hover:bg-[#fec449] transition-colors flex items-center justify-center gap-2 shadow-lg">
-              <Calendar size={18} />
-              Ver programa completo
-            </a>
-            <AgregarCalendarioButton />
-          </div>
-
+        
           <TransmisionLink />
         </div>
       </div>
     </motion.div>
   </section>;
+}
+
+// ─── MEMORIA DEL ENCUENTRO ────────────────────────────────────────────────────
+const MEMORIA = [
+  { titulo: 'Documento de apertura', desc: 'El texto leído en el acto de apertura, organizado por temas.', icono: <FileText size={26} />, link: '/DocumentoApertura', color: '#813893' },
+  { titulo: 'Conclusiones de talleres', desc: 'Lo que debatimos y acordamos en cada eje y taller.', icono: <Users size={26} />, link: null, color: '#2a823c' },
+  { titulo: 'Registro fotográfico', desc: 'Las imágenes de los tres días del Encuentro.', icono: <Camera size={26} />, link: null, color: '#c0392b' },
+  { titulo: 'Videos', desc: 'Apertura, marcha, transmisiones y cierre.', icono: <Video size={26} />, link: null, color: '#662c74' }
+];
+
+function MemoriaEncuentroSection() {
+  return (
+    <section id="memoria" aria-labelledby="titulo-memoria" className="py-16 px-4 bg-[#FFF1E3]">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-10">
+          <span className="inline-block bg-[#2f1435] text-[#fdb10c] text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
+            Memoria del 39° Encuentro
+          </span>
+          <h2 id="titulo-memoria" className="text-[#4a2055] mb-3">Gracias por ser parte del 39 Encuentro Plurinacional</h2>
+          <p className="text-[#343230]/70 max-w-xl mx-auto m-0">Acá queda lo que construimos juntes en Córdoba.</p>
+        </div>
+
+        <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 m-0 p-0 list-none">
+          {MEMORIA.map((item, i) => {
+            const contenido = (
+              <>
+                <span className="w-14 h-14 rounded-full flex items-center justify-center text-white mb-4" style={{ backgroundColor: item.color }} aria-hidden="true">
+                  {item.icono}
+                </span>
+                <h3 className="text-[#343230] text-lg font-black mb-2">{item.titulo}</h3>
+                <p className="text-sm text-[#343230]/70 flex-1 m-0">{item.desc}</p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold" style={{ color: item.link ? item.color : '#9ca3af' }}>
+                  {item.link ? <>Leer <ArrowRight size={14} aria-hidden="true" /></> : 'Próximamente'}
+                </span>
+              </>
+            );
+            return (
+              <motion.li
+                key={item.titulo}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+              >
+                {item.link ? (
+                  <Link to={item.link} className="h-full flex flex-col bg-white/70 border-2 rounded-2xl p-6 hover:-translate-y-1 hover:shadow-lg transition-all focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#fdb10c]" style={{ borderColor: `${item.color}55` }}>
+                    {contenido}
+                  </Link>
+                ) : (
+                  <div className="h-full flex flex-col bg-white/40 border-2 border-dashed border-[#d5bddb] rounded-2xl p-6 opacity-80">
+                    {contenido}
+                  </div>
+                )}
+              </motion.li>
+            );
+          })}
+        </ul>
+      </div>
+    </section>
+  );
 }
 
 // ─── BANNER DE DONACIONES ──────────────────────────────────────────────────────
@@ -3162,14 +3213,13 @@ export default function HomePage() {
         Saltar al contenido
       </a>
       <ScrollProgressBar />
-      <CountdownBanner />
-      <Navbar />
+      <Navbar hasTopSpace={false} />
       <BackToTop />
       <main id="contenido" tabIndex={-1} className="outline-none">
         <ProximaSedeBanner />
         <HeroSection />
-
-<CronogramaSection />
+        <MemoriaEncuentroSection />
+        <CronogramaSection />
         <EjesSection />
         <SedeSection />
         <TaxiCompanerasBanner />
